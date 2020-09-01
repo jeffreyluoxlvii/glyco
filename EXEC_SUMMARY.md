@@ -10,9 +10,5 @@
 * (Delete this bullet after you're done writing) What is this project going to do?
 
 ### Technical Recommendation
-* (Delete this bullet after you're done writing) What is your rationale for the software and hardware you plan to use?
-For example, consider the following questions:
-What technology does the client want to use and why (iOS, Android, Web app, etc.)?
-What technology does the team recommend and why?
-What expenses might your recommendation incur (especially think about paying for a server, either physically or in the cloud)?
+A main talking point for this project is ease of use for people with diabetes. As we want the most amount of people to be able to use our app, a cross-platform mobile application is the clear choice of technology for this project. In terms of technology, the framework that we will be using is Flutter. Another framework that we could have chosen was React Native, but because of Flutter's great flexibility with UI components, as well as its vast amount of out-of-the-box widgets, Flutter was chosen in the end. Currently, the team is thinking of saving user data locally on their phones, and so there are no expenses that currently come to mind. A kind of expense that may prop up is during testing: we may need to aquire a Dexcom transmitter.
 
