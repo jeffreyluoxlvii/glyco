@@ -5,7 +5,8 @@
 * The overall very high level design of the project, emphasizing the priorities regarding flexibility and maintenance, rather than what classes implement what features. From this section, it should be clear: what features you view as core and integral to the app versus what can be added later, what will be easily changeable in the future and what will require programming expertise, and what changes the client will need to be responsible for in the future.
 
 ### Dependencies
-* Anything the project is dependent on, such as the resources you are expecting from the client or software libraries or frameworks you intend to use to complete the project.
+
+A library that our app will definitely use is the flutter health library. Using this library will allow our application to communicate with both GoogleFit and AppleHealthKit, giving us access to important health values stored in user phones. An API that we may use is the Dexcom API, with a specific interest in the statistics endpoint, and the egvs endpoint. As we will most likely use Firebase in our project, we will also rely on the http library to make our HTTP requests. 
 
 ### Concerns
 * At least three concerns or risks about getting the project done. To help you brainstorm possible issues, do a premortem as a team to imagine ways in which the project might not be a success (here are some common team project issues to consider).
