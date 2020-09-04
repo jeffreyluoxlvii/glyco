@@ -16,4 +16,6 @@ A library that our app will definitely use is the flutter health library. Using 
 ### Team Organization
 * The external team roles each person will take on and the internal parts of the project each person will focus on (e.g., frontend, backend, data wrangler, etc.) and who will be the backup/understudy for each role.
 
-Justin Wu - Business Analyst, Primary: Backend, Secondary: Frontend/Data Wrangler
+Justin Wu - Business Analyst, Primary: Backend, Secondary: Design/Data Wrangler
+Jeffrey Luo - Technical Lead, Primary: Backend, Secondary: Frontend
+Herleen Kaur - Project Manager, Primary: Design, Secondary: Frontend
