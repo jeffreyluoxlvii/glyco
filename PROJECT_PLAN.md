@@ -29,3 +29,28 @@
 
 ### Team Roles for each Sprint
 * Take responsibility for specific team roles during each Sprint during the rest of the semester. These roles may be fixed, but more likely will rotate among team members during the entire semester.
+Sprint 2
+* Justin - Settings and Measures back-end
+* Jeffrey - Settings and Measures front-end
+* Herleen - Challenges front-end
+* Nate - Challenges back-end
+Sprint 3
+* Justin - Setting up Firebase back-end
+* Jeffrey - Creating Firebase databases
+* Herleen - Adapting code to data from Firebase
+* Nate - Adapting code to data from Firebase
+Sprint 4
+* Justin - Integrating APIs to app
+* Jeffrey - Work on Analytics function
+* Herleen - Work on Analytics function
+* Nate - Integrating APIs to app 
+Sprint 5
+* Justin - Exporting data back-end
+* Jeffrey - Exporting data front-end
+* Herleen - Exporting data front-end
+* Nate - Exporting data back-end
+Sprint 6
+* Justin - Optimizing code-base
+* Jeffrey - Polishing front-end design
+* Herleen - Polishing front-end design
+* Nate - Optimizing code-base
