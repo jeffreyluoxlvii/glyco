@@ -11,7 +11,7 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static List<Widget> _widgetOptions = <Widget>[
     ChallengesScreen(),
     MeasuresScreen(),
@@ -27,9 +27,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Glyco'),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
