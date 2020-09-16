@@ -17,11 +17,15 @@
 
 ### Feature Deliverables for each Sprint
 
-**Sprint 2 - Prototype (Most Basic Features):** For this sprint, we plan to create the main interface. We will not worry about users for now, and will focus instead on creating the basic layout for the measures screen, challenges screen, and settings screen, using hard-coded data.
-**Sprint 3 - Baseline Prototype (Core Functionality):** In this sprint, we will bring in Firebase, and create users and make it such that the data in the apps are pulled from and set to the database. We will also begin work on creating challenges that are computer generated.
-**Sprint 4 - Alpha (Partial Full Functionality):** This sprint will focus on bringing in and integrating a selected API into our application, for example, the HealthKit, Glooco, or Dexcom APIs. We will begin working on and finishing the analytics function in the Measures page.
-**Spring 5 - Beta (Full Functionality):** This sprint will involve working on exporting the data to health care officials in a concise way. 
-**Sprint 6 - Production (Robust Full Functionality):** Additional front-end work, polishing up the code-base, and optimizing the code for efficiency.
+- **Sprint 2 - Prototype (Most Basic Features):** For this sprint, we plan to create the main interface. We will not worry about users for now, and will focus instead on creating the basic layout for the measures screen, challenges screen, and settings screen, using hard-coded data.
+
+- **Sprint 3 - Baseline Prototype (Core Functionality):** In this sprint, we will bring in Firebase, and create users and make it such that the data in the apps are pulled from and set to the database. We will also begin work on creating challenges that are computer generated.
+
+- **Sprint 4 - Alpha (Partial Full Functionality):** This sprint will focus on bringing in and integrating a selected API into our application, for example, the HealthKit, Glooco, or Dexcom APIs. We will begin working on and finishing the analytics function in the Measures page.
+
+- **Spring 5 - Beta (Full Functionality):** This sprint will involve working on exporting the data to health care officials in a concise way. 
+
+- **Sprint 6 - Production (Robust Full Functionality):** Additional front-end work, polishing up the code-base, and optimizing the code for efficiency.
 
 
 ### Data Needs
