@@ -25,7 +25,7 @@
 
 
 ### Data Needs
-* Because user data is regularly stolen, sold, or used inappropriately, it is becoming an important issue for both companies, customers, and law makers. Mozilla and other companies have started championing Lean Data practices to minimize what data is needed to run their apps. Justify your user data needs and practices (which will likely require a team discussion with your client).
+For our app, we will need to keep track of the users the users meal portion and when they eat/drink, their exercise levels, their blood sugar and A1C levels, and what medication to take and when to take it. Some data measurements, like blood sugar and A1C levels and exercise, can be linked to and pulled from conected apps like the Health app or Dexcom. Obviously, the most vital piece of data will be tracking blood sugar and A1C levels since that is the most important in terms of people with diabetes. The tracking and collection of the other data will provide beneficial to users in helping them live a more independent, controlled, and healthier life with less hassle than their current situations. 
 
 ### Team Roles for each Sprint
 * Take responsibility for specific team roles during each Sprint during the rest of the semester. These roles may be fixed, but more likely will rotate among team members during the entire semester.
