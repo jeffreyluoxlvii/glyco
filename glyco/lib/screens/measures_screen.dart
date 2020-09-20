@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/long_tile.dart';
 import '../widgets/big_tile.dart';
+import '../widgets/small_tile.dart';
 
 class MeasuresScreen extends StatelessWidget {
   @override
@@ -52,11 +53,20 @@ class MeasuresScreen extends StatelessWidget {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-        ),
-        Divider(
-          thickness: 5,
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Text(
+                "September 6th",
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(icon: Icon(Icons.date_range), onPressed: () {}),
+            ],
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -93,6 +103,62 @@ class MeasuresScreen extends StatelessWidget {
                 ),
               ],
             )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                SmallTile(
+                    icon: Icon(Icons.fastfood),
+                    data: "500",
+                    unit: "kcal",
+                    number: "1",
+                    type: "meal"),
+                SmallTile(
+                    icon: Icon(Icons.fastfood),
+                    data: "500",
+                    unit: "kcal",
+                    number: "1",
+                    type: "meal"),
+                SmallTile(
+                    icon: Icon(Icons.fastfood),
+                    data: "500",
+                    unit: "kcal",
+                    number: "1",
+                    type: "meal"),
+              ],
+            ),
+            BigTile(
+              title: "A1C Levels",
+              icon: Icon(
+                Icons.timeline,
+                size: 75,
+              ),
+              data: "11.4",
+              unit: "mmol/L",
+              updateTime: "last update 23 min",
+            )
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.arrow_downward,
+                size: 40,
+              ),
+            ),
+            Text(
+              "View Analytics",
+              style: TextStyle(
+                fontSize: 15,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
           ],
         )
       ],

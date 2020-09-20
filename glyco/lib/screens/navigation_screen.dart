@@ -30,6 +30,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       appBar: AppBar(),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 60,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.today),

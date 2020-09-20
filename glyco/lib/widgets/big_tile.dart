@@ -21,7 +21,6 @@ class BigTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(35.0),
       child: Container(
         margin: EdgeInsets.all(5),
-        padding: EdgeInsets.all(8),
         width: 160,
         height: 160,
         color: Colors.pink,
