@@ -20,9 +20,9 @@ class LongTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(25.0),
       child: Container(
         margin: EdgeInsets.all(5),
-        width: 200,
+        width: 190,
         height: 75,
-        color: Colors.lightBlue,
+        color: Theme.of(context).accentColor,
         child: FlatButton(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -44,12 +44,14 @@ class LongTile extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         Text(
                           " " + unit,
                           style: TextStyle(
                             fontSize: 15,
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -58,6 +60,7 @@ class LongTile extends StatelessWidget {
                       updateTime,
                       style: TextStyle(
                         fontSize: 10,
+                        color: Colors.white,
                       ),
                     ),
                   ],

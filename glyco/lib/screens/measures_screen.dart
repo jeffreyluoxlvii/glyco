@@ -26,27 +26,42 @@ class MeasuresScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: Icon(Icons.healing),
+                icon: Icon(
+                  Icons.healing,
+                  color: Theme.of(context).primaryColor,
+                ),
                 onPressed: null,
                 iconSize: 50,
               ),
               IconButton(
-                icon: Icon(Icons.donut_small),
+                icon: Icon(
+                  Icons.donut_small,
+                  color: Theme.of(context).primaryColor,
+                ),
                 onPressed: null,
                 iconSize: 50,
               ),
               IconButton(
-                icon: Icon(Icons.fastfood),
+                icon: Icon(
+                  Icons.fastfood,
+                  color: Theme.of(context).primaryColor,
+                ),
                 onPressed: null,
                 iconSize: 50,
               ),
               IconButton(
-                icon: Icon(Icons.local_car_wash),
+                icon: Icon(
+                  Icons.local_car_wash,
+                  color: Theme.of(context).primaryColor,
+                ),
                 onPressed: null,
                 iconSize: 50,
               ),
               IconButton(
-                icon: Icon(Icons.directions_run),
+                icon: Icon(
+                  Icons.directions_run,
+                  color: Theme.of(context).primaryColor,
+                ),
                 onPressed: null,
                 iconSize: 50,
               ),
@@ -76,6 +91,7 @@ class MeasuresScreen extends StatelessWidget {
               icon: Icon(
                 Icons.whatshot,
                 size: 75,
+                color: Colors.white,
               ),
               data: "122",
               unit: "mg/dL",
@@ -89,6 +105,7 @@ class MeasuresScreen extends StatelessWidget {
                   icon: Icon(
                     Icons.accessible_forward,
                     size: 35,
+                    color: Colors.white,
                   ),
                   updateTime: "Last update 2 hr",
                 ),
@@ -98,6 +115,7 @@ class MeasuresScreen extends StatelessWidget {
                   icon: Icon(
                     Icons.directions_run,
                     size: 35,
+                    color: Colors.white,
                   ),
                   updateTime: "Last update 2 hr",
                 ),
@@ -111,19 +129,28 @@ class MeasuresScreen extends StatelessWidget {
             Column(
               children: [
                 SmallTile(
-                    icon: Icon(Icons.fastfood),
+                    icon: Icon(
+                      Icons.fastfood,
+                      color: Colors.white,
+                    ),
                     data: "500",
                     unit: "kcal",
                     number: "1",
                     type: "meal"),
                 SmallTile(
-                    icon: Icon(Icons.fastfood),
+                    icon: Icon(
+                      Icons.fastfood,
+                      color: Colors.white,
+                    ),
                     data: "500",
                     unit: "kcal",
                     number: "1",
                     type: "meal"),
                 SmallTile(
-                    icon: Icon(Icons.fastfood),
+                    icon: Icon(
+                      Icons.fastfood,
+                      color: Colors.white,
+                    ),
                     data: "500",
                     unit: "kcal",
                     number: "1",
@@ -135,6 +162,7 @@ class MeasuresScreen extends StatelessWidget {
               icon: Icon(
                 Icons.timeline,
                 size: 75,
+                color: Colors.white,
               ),
               data: "11.4",
               unit: "mmol/L",
@@ -160,7 +188,7 @@ class MeasuresScreen extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
