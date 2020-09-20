@@ -23,7 +23,7 @@ class BigTile extends StatelessWidget {
         margin: EdgeInsets.all(5),
         width: 160,
         height: 160,
-        color: Colors.pink,
+        color: Theme.of(context).primaryColor,
         child: FlatButton(
           onPressed: () {},
           child: Column(
@@ -32,7 +32,10 @@ class BigTile extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                ),
               ),
               icon,
               Row(
@@ -44,19 +47,24 @@ class BigTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                   Text(
                     " " + unit,
                     style: TextStyle(
                       fontSize: 20,
+                      color: Colors.white,
                     ),
                   )
                 ],
               ),
               Text(
                 'Last update 23 min',
-                style: TextStyle(fontSize: 10),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),

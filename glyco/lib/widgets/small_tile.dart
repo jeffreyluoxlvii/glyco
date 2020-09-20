@@ -45,12 +45,14 @@ class SmallTile extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         Text(
                           " " + unit,
                           style: TextStyle(
                             fontSize: 15,
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -63,12 +65,14 @@ class SmallTile extends StatelessWidget {
                           number,
                           style: TextStyle(
                             fontSize: 10,
+                            color: Colors.white,
                           ),
                         ),
                         Text(
                           " " + type,
                           style: TextStyle(
                             fontSize: 10,
+                            color: Colors.white,
                           ),
                         ),
                       ],
