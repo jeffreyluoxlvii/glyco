@@ -11,11 +11,11 @@ class MeasuresScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
           child: Text(
             "Shortcuts",
             style: TextStyle(
-              fontSize: 28,
+              fontSize: 26,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -30,7 +30,7 @@ class MeasuresScreen extends StatelessWidget {
                   Icons.healing,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: null,
+                onPressed: () {},
                 iconSize: 50,
               ),
               IconButton(
@@ -38,7 +38,7 @@ class MeasuresScreen extends StatelessWidget {
                   Icons.donut_small,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: null,
+                onPressed: () {},
                 iconSize: 50,
               ),
               IconButton(
@@ -46,7 +46,7 @@ class MeasuresScreen extends StatelessWidget {
                   Icons.fastfood,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: null,
+                onPressed: () {},
                 iconSize: 50,
               ),
               IconButton(
@@ -54,7 +54,7 @@ class MeasuresScreen extends StatelessWidget {
                   Icons.local_car_wash,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: null,
+                onPressed: () {},
                 iconSize: 50,
               ),
               IconButton(
@@ -62,7 +62,7 @@ class MeasuresScreen extends StatelessWidget {
                   Icons.directions_run,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: null,
+                onPressed: () {},
                 iconSize: 50,
               ),
             ],

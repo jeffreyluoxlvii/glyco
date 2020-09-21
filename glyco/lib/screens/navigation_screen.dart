@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/appBars/measures_app_bar.dart';
+import '../widgets/appBars/challenges_app_bar.dart';
+import '../widgets/appBars/settings_app_bar.dart';
 import './challenges_screen.dart';
 import './measures_screen.dart';
 import './settings_screen.dart';
@@ -12,10 +15,16 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen> {
   int _selectedIndex = 1;
-  static List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _screens = <Widget>[
     ChallengesScreen(),
     MeasuresScreen(),
     SettingsScreen(),
+  ];
+
+  static List<Widget> _appBars = <Widget>[
+    ChallengesAppBar(),
+    MeasuresAppBar(),
+    SettingsAppBar(),
   ];
 
   void _onItemTapped(int index) {
@@ -27,15 +36,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Glyco",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      appBar: _appBars.elementAt(_selectedIndex),
+      body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 60,
         items: const <BottomNavigationBarItem>[
