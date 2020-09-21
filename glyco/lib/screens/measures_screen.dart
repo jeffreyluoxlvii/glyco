@@ -70,17 +70,12 @@ class MeasuresScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Text(
-                "September 6th",
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(icon: Icon(Icons.date_range), onPressed: () {}),
-            ],
+          child: Text(
+            "Measurements",
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         Row(
