@@ -17,31 +17,36 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: Text("Glyco")
       ),
-      body: loginScreen(),
+      body: loginScreen(context),
 
 
     );
   }
 
-  Widget loginScreen (){
+  Widget loginScreen (BuildContext context){
     return Column(
       children: [
         Icon(Icons.ac_unit),
-        TextField(
-          decoration: InputDecoration(
-            hintText: 'email',
-
+        Padding(
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'email',
+            ),
           ),
         ), 
-        TextField(
-          obscureText: true,
-          decoration: InputDecoration(
-
-            hintText: 'password'
+        Padding(
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: 'password'
+            ),
           ),
         ),
         forgotPassword(),
-        signInButton(),
+        SizedBox(height: 100),
+        signInButton(context),
         createAccount(),
       ],
     );
@@ -51,7 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return RichText(
       text: TextSpan(
         style: TextStyle(
-          fontStyle: FontStyle.italic
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[700],
         ),
         text:'Forgot Password?',
         recognizer: TapGestureRecognizer()
@@ -60,13 +66,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  ClipRRect signInButton(){
+  ClipRRect signInButton(BuildContext context){
     return ClipRRect(
       borderRadius: BorderRadius.circular(25.0),
       child: Container(
-        margin: EdgeInsets.all(5),
-        width: 190,
-        height: 75,
+        margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+        width: 300,
+        height: 50,
         color: Colors.blue[300],
         child: FlatButton(
           child:
@@ -77,7 +83,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.white,
               )
             ),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.pushNamed(context, '/NavScreen');
+            },
         ),
       ),
     );
@@ -88,7 +96,8 @@ RichText createAccount(){
     return RichText(
       text: TextSpan(
         style: TextStyle(
-          fontStyle: FontStyle.italic
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[700]
         ),
         text:'or Create an Account',
         recognizer: TapGestureRecognizer()
