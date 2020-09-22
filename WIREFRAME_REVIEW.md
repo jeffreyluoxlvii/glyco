@@ -4,6 +4,10 @@ In general, the users enjoyed the wireframe. One user stated, "I really do like 
 
 ### Positive Feedback
 
+The general feedback was quite positive. One of the biggest notes of positive feedback we got from the users was that the interface was both visually appealing and easily navigable. The users might have had specific feedback on functionality, but they reported that they had no problems interacting with the overall wireframe and that the UI of the application is "similar to what users expect from an app."
+
+These notes were of extreme importance to our team because one of our main focuses in the design was having a user friendly and clean design. They particularly liked the way that the Measures section was displayed, with a grid that particularly drew your eyes to the glucose and A1C levels because of the pink color. The users also gave good feedback about the Shortcuts functionality, as it increased user friendliness and increased efficiency of the input process.
+
 ### Improvements
 
 One of the improvements that was brought up had to do mainly with settings. Instead of choosing which units to use for certain measurements, one of our users suggested that we let users choose their preferred measurements. For instance, A1C levels could be either mmol/L or %, time could be 12-hour or 24-hour, etc. 
