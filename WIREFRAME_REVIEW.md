@@ -5,3 +5,9 @@ In general, the users enjoyed the wireframe. One user stated, "I really do like 
 ### Positive Feedback
 
 ### Improvements
+
+One of the improvements that was brought up had to do mainly with settings. Instead of choosing which units to use for certain measurements, one of our users suggested that we let users choose their preferred measurements. For instance, A1C levels could be either mmol/L or %, time could be 12-hour or 24-hour, etc. 
+
+Another improvement that was brought up by our other user was better visualization in the challenges section. What he meant by this was adding visuals to the graph shown in the challenges, such as a line on the glucose graph that represented the glucose goal, or a line on the exercise graph that represented the exercise goal.
+
+One last improvement that both users recommended was related to privacy. Since the information stored in this app can be considered private by some users, they would want to have the option of logging out every time they close the app, or have the app lock itself when they leave it and want to go into it again, and have it be unlockable by Face ID or the phone's password. 
