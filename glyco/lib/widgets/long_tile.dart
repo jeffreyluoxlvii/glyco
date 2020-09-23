@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class LongTile extends StatelessWidget {
   final Icon icon;
   final String data;
   final String unit;
   // TODO: convert to DateTime
-  final String updateTime;
+  final DateTime updateTime;
 
   const LongTile({
     @required this.icon,
@@ -42,7 +43,7 @@ class LongTile extends StatelessWidget {
                         Text(
                           data,
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -57,7 +58,7 @@ class LongTile extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      updateTime,
+                      'Last update ${DateFormat('K:mm a').format(updateTime)}',
                       style: TextStyle(
                         fontSize: 10,
                         color: Colors.white,

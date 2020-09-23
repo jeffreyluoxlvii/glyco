@@ -4,7 +4,7 @@ class SmallTile extends StatelessWidget {
   final Icon icon;
   final String data;
   final String unit;
-  final String number;
+  final int number;
   final String type;
 
   const SmallTile({
@@ -62,7 +62,7 @@ class SmallTile extends StatelessWidget {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          number,
+                          number.toString(),
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.white,

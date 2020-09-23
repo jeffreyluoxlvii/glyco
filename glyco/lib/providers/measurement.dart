@@ -3,9 +3,8 @@
 // each measurmeent will be for one day
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-class Measurement {
+class Measurement with ChangeNotifier {
   final int id;
   final DateTime timestamp;
   double avgGlucoseLevel; // average level of the day
@@ -34,25 +33,32 @@ class Measurement {
 
   void _addCalories(int cal) {
     calories += cal;
+    notifyListeners();
   }
 
   // TODO: make these Future (so that they can interact with database)
   void addMeal(int calories) {
     _addCalories(calories);
     numMeals++;
+    print("added meal");
+    print(numMeals);
+    notifyListeners();
   }
 
   void addSnack(int calories) {
     _addCalories(calories);
     numSnacks++;
+    notifyListeners();
   }
 
   void addDrink(int calories) {
     _addCalories(calories);
     numDrinks++;
+    notifyListeners();
   }
 
   void addExercise(int minutes) {
     exerciseTime += minutes;
+    notifyListeners();
   }
 }

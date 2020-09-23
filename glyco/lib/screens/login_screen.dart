@@ -6,24 +6,18 @@ class LoginScreen extends StatefulWidget {
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   @override
-  Widget build (BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Glyco")
-      ),
+      appBar: AppBar(title: Text("Glyco")),
       body: loginScreen(context),
-
-
     );
   }
 
-  Widget loginScreen (BuildContext context){
+  Widget loginScreen(BuildContext context) {
     return Column(
       children: [
         Icon(Icons.ac_unit),
@@ -34,14 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'email',
             ),
           ),
-        ), 
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
           child: TextField(
             obscureText: true,
-            decoration: InputDecoration(
-              hintText: 'password'
-            ),
+            decoration: InputDecoration(hintText: 'password'),
           ),
         ),
         forgotPassword(),
@@ -52,21 +44,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  RichText forgotPassword(){
+  RichText forgotPassword() {
     return RichText(
-      text: TextSpan(
-        style: TextStyle(
-          fontStyle: FontStyle.italic,
-          color: Colors.grey[700],
-        ),
-        text:'Forgot Password?',
-        recognizer: TapGestureRecognizer()
-          ..onTap = (){}
-      )
-    );
+        text: TextSpan(
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.grey[700],
+            ),
+            text: 'Forgot Password?',
+            recognizer: TapGestureRecognizer()..onTap = () {}));
   }
 
-  ClipRRect signInButton(BuildContext context){
+  ClipRRect signInButton(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(25.0),
       child: Container(
@@ -75,33 +64,26 @@ class _LoginScreenState extends State<LoginScreen> {
         height: 50,
         color: Colors.blue[300],
         child: FlatButton(
-          child:
-            Text(
-              "Sign in",
+          child: Text("Sign in",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
-              )
-            ),
-            onPressed: (){
-              Navigator.pushNamed(context, '/NavScreen');
-            },
+              )),
+          onPressed: () {
+            Navigator.pushNamed(context, '/NavScreen');
+          },
         ),
       ),
     );
   }
 }
 
-RichText createAccount(){
-    return RichText(
-      text: TextSpan(
-        style: TextStyle(
-          fontStyle: FontStyle.italic,
-          color: Colors.grey[700]
-        ),
-        text:'or Create an Account',
-        recognizer: TapGestureRecognizer()
-          ..onTap = (){}
-      )
-    );
-  }
+RichText createAccount() {
+  return RichText(
+    text: TextSpan(
+      style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[700]),
+      text: 'or Create an Account',
+      recognizer: TapGestureRecognizer()..onTap = () {},
+    ),
+  );
+}

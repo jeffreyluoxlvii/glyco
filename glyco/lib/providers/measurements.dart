@@ -15,7 +15,7 @@ class Measurements with ChangeNotifier {
       numMeals: 1,
       numSnacks: 2,
       steps: 3835,
-      timestamp: DateTime.utc(2020, 9, 21),
+      timestamp: DateTime.utc(2020, 9, 21, 12, 33),
     ),
     Measurement(
       id: 2,
@@ -28,7 +28,7 @@ class Measurements with ChangeNotifier {
       numMeals: 1,
       numSnacks: 2,
       steps: 1400,
-      timestamp: DateTime.utc(2020, 9, 22),
+      timestamp: DateTime.utc(2020, 9, 22, 13, 20),
     ),
   ];
 
@@ -37,6 +37,12 @@ class Measurements with ChangeNotifier {
   }
 
   Measurement get latestMeasurement {
+    return _measurements.last;
+  }
+
+  Measurement findByDate(DateTime date) {
+    // find same day (don't worry about time)
+    // TODO: Implement this.
     return _measurements.last;
   }
 }

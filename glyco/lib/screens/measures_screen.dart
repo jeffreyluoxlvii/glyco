@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import '../widgets/long_tile.dart';
-import '../widgets/big_tile.dart';
-import '../widgets/small_tile.dart';
+import '../providers/measurements.dart';
+import 'package:provider/provider.dart';
+import '../widgets/measurement_grid.dart';
 
 class MeasuresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // TODO: make it so that the measurement depends on the day
+    final measurementsData = Provider.of<Measurements>(context);
+    final selectedMeasurement = measurementsData.latestMeasurement;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +50,9 @@ class MeasuresScreen extends StatelessWidget {
                   Icons.fastfood,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  selectedMeasurement.addMeal(500);
+                },
                 iconSize: 50,
               ),
               IconButton(
@@ -78,111 +84,9 @@ class MeasuresScreen extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BigTile(
-              title: "GLUCOSE LEVELS",
-              icon: Icon(
-                Icons.whatshot,
-                size: 75,
-                color: Colors.white,
-              ),
-              data: "122",
-              unit: "mg/dL",
-              updateTime: "Last update 23 min",
-            ),
-            Column(
-              children: [
-                LongTile(
-                  data: "10,835",
-                  unit: "steps",
-                  icon: Icon(
-                    Icons.accessible_forward,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                  updateTime: "Last update 2 hr",
-                ),
-                LongTile(
-                  data: "50",
-                  unit: "min",
-                  icon: Icon(
-                    Icons.directions_run,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                  updateTime: "Last update 2 hr",
-                ),
-              ],
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                SmallTile(
-                    icon: Icon(
-                      Icons.fastfood,
-                      color: Colors.white,
-                    ),
-                    data: "500",
-                    unit: "kcal",
-                    number: "1",
-                    type: "meal"),
-                SmallTile(
-                    icon: Icon(
-                      Icons.fastfood,
-                      color: Colors.white,
-                    ),
-                    data: "500",
-                    unit: "kcal",
-                    number: "1",
-                    type: "meal"),
-                SmallTile(
-                    icon: Icon(
-                      Icons.fastfood,
-                      color: Colors.white,
-                    ),
-                    data: "500",
-                    unit: "kcal",
-                    number: "1",
-                    type: "meal"),
-              ],
-            ),
-            BigTile(
-              title: "A1C Levels",
-              icon: Icon(
-                Icons.timeline,
-                size: 75,
-                color: Colors.white,
-              ),
-              data: "11.4",
-              unit: "mmol/L",
-              updateTime: "last update 23 min",
-            )
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.arrow_downward,
-                size: 40,
-              ),
-            ),
-            Text(
-              "View Analytics",
-              style: TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ],
+        ChangeNotifierProvider(
+          child: MeasurementGrid(),
+          create: (_) => selectedMeasurement,
         ),
       ],
     );
