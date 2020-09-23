@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BigTile extends StatelessWidget {
   final String title;
   final Icon icon;
   final String data;
   final String unit;
-  final String updateTime;
+  final DateTime updateTime;
 
   const BigTile({
     @required this.title,
@@ -50,17 +51,18 @@ class BigTile extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    " " + unit,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
+                  FittedBox(
+                    child: Text(
+                      " " + unit,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   )
                 ],
               ),
               Text(
-                'Last update 23 min',
+                'Last update ${DateFormat('K:mm a').format(updateTime)}',
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.white,
