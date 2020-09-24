@@ -84,9 +84,9 @@ class MeasuresScreen extends StatelessWidget {
             ),
           ),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider.value(
           child: MeasurementGrid(),
-          create: (_) => selectedMeasurement,
+          value: selectedMeasurement,
         ),
       ],
     );
