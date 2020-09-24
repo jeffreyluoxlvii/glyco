@@ -15,6 +15,24 @@ class SettingsAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _SettingsAppBarState extends State<SettingsAppBar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(title: Text("Settings"));
+    return AppBar(
+      title: Text(
+        "Settings",
+        style: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),),
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.settings,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/ChangeSettings');
+          },
+        ),
+      ],);
   }
 }

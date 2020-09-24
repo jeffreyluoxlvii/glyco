@@ -3,6 +3,7 @@ import 'screens/navigation_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/measurements.dart';
 import 'screens/login_screen.dart';
+import 'screens/change_settings_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: LoginScreen(),
         routes: <String, WidgetBuilder>{
-          '/NavScreen': (context) => NavigationScreen()
+          '/NavScreen': (context) => NavigationScreen(),
+          '/ChangeSettings': (context) => ChangeSettingsScreen(),
         },
         theme: ThemeData(
           primaryColor: Colors.pink[300],
