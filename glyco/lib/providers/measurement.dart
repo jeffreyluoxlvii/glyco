@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 
+// TODO: Use the provider from setting to grab the shortcut settings
+
 class Measurement with ChangeNotifier {
   final int id;
   final DateTime timestamp;
@@ -12,10 +14,8 @@ class Measurement with ChangeNotifier {
   int steps;
   int exerciseTime;
   int calories;
+  int carbs;
   double a1cLevel;
-  int numMeals;
-  int numSnacks;
-  int numDrinks;
 
   Measurement({
     @required this.id,
@@ -25,35 +25,36 @@ class Measurement with ChangeNotifier {
     @required this.steps,
     @required this.exerciseTime,
     @required this.calories,
+    @required this.carbs,
     @required this.a1cLevel,
-    @required this.numMeals,
-    @required this.numSnacks,
-    @required this.numDrinks,
   });
 
-  void _addCalories(int cal) {
-    calories += cal;
+  void _addCalories(int calories) {
+    this.calories += calories;
+    notifyListeners();
+  }
+
+  void _addCarbs(int carbs) {
+    this.carbs += carbs;
     notifyListeners();
   }
 
   // TODO: make these Future (so that they can interact with database)
-  void addMeal(int calories) {
+  void addMeal(int calories, int carbs) {
     _addCalories(calories);
-    numMeals++;
-    print("added meal");
-    print(numMeals);
+    _addCarbs(carbs);
     notifyListeners();
   }
 
-  void addSnack(int calories) {
+  void addSnack(int calories, int carbs) {
     _addCalories(calories);
-    numSnacks++;
+    _addCarbs(carbs);
     notifyListeners();
   }
 
-  void addDrink(int calories) {
+  void addDrink(int calories, int carbs) {
     _addCalories(calories);
-    numDrinks++;
+    _addCarbs(carbs);
     notifyListeners();
   }
 

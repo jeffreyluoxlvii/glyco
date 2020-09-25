@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/widgets/a1c_tile.dart';
+import 'package:glyco/widgets/glucose_tile.dart';
+import '../widgets/calories_tile.dart';
 import '../providers/measurement.dart';
 import 'package:provider/provider.dart';
-import './big_tile.dart';
-import './small_tile.dart';
 import './long_tile.dart';
 
 class MeasurementGrid extends StatelessWidget {
@@ -14,17 +15,7 @@ class MeasurementGrid extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BigTile(
-              title: "GLUCOSE LEVELS",
-              icon: Icon(
-                Icons.whatshot,
-                size: 75,
-                color: Colors.white,
-              ),
-              data: measurement.avgGlucoseLevel.toString(),
-              unit: "mg/dL",
-              updateTime: DateTime.now(),
-            ),
+            GlucoseTile(),
             Column(
               children: [
                 LongTile(
@@ -54,48 +45,8 @@ class MeasurementGrid extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                SmallTile(
-                    icon: Icon(
-                      Icons.fastfood,
-                      color: Colors.white,
-                    ),
-                    data: "500",
-                    unit: "kcal",
-                    number: measurement.numMeals,
-                    type: "meal"),
-                SmallTile(
-                    icon: Icon(
-                      Icons.fastfood,
-                      color: Colors.white,
-                    ),
-                    data: "500",
-                    unit: "kcal",
-                    number: measurement.numSnacks,
-                    type: "snack"),
-                SmallTile(
-                    icon: Icon(
-                      Icons.fastfood,
-                      color: Colors.white,
-                    ),
-                    data: "500",
-                    unit: "kcal",
-                    number: measurement.numDrinks,
-                    type: "drink"),
-              ],
-            ),
-            BigTile(
-              title: "A1C Levels",
-              icon: Icon(
-                Icons.timeline,
-                size: 75,
-                color: Colors.white,
-              ),
-              data: measurement.a1cLevel.toString(),
-              unit: "mmol/L",
-              updateTime: DateTime.now(),
-            ),
+            CaloriesTile(),
+            A1CTile(),
           ],
         ),
         Row(

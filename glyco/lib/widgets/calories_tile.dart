@@ -1,35 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/measurement.dart';
 
-class SmallTile extends StatelessWidget {
-  final Icon icon;
-  final String data;
-  final String unit;
-  final int number;
-  final String type;
-
-  const SmallTile({
-    @required this.icon,
-    @required this.data,
-    @required this.unit,
-    @required this.number,
-    @required this.type,
-  });
-
+class CaloriesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final measurement = Provider.of<Measurement>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(25.0),
       child: Container(
         margin: EdgeInsets.all(5),
         width: 180,
-        height: 50,
+        height: 160,
         color: Colors.grey,
         child: FlatButton(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              icon,
+              Icon(Icons.fastfood),
               Container(
                 width: 120,
                 child: Column(
@@ -41,18 +30,20 @@ class SmallTile extends StatelessWidget {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          data,
+                          measurement.calories.toString(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        Text(
-                          " " + unit,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
+                        FittedBox(
+                          child: Text(
+                            " kCal",
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -62,14 +53,14 @@ class SmallTile extends StatelessWidget {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          number.toString(),
+                          measurement.carbs.toString(),
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.white,
                           ),
                         ),
                         Text(
-                          " " + type,
+                          " g carbs",
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.white,
