@@ -40,19 +40,7 @@ class Measurement with ChangeNotifier {
   }
 
   // TODO: make these Future (so that they can interact with database)
-  void addMeal(int calories, int carbs) {
-    _addCalories(calories);
-    _addCarbs(carbs);
-    notifyListeners();
-  }
-
-  void addSnack(int calories, int carbs) {
-    _addCalories(calories);
-    _addCarbs(carbs);
-    notifyListeners();
-  }
-
-  void addDrink(int calories, int carbs) {
+  void addNutrition(int calories, int carbs) {
     _addCalories(calories);
     _addCarbs(carbs);
     notifyListeners();
