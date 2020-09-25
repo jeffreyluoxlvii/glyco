@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/widgets/drink_shortcut.dart';
-import 'package:glyco/widgets/exercise_shortcut.dart';
-import 'package:glyco/widgets/glucose_shortcut.dart';
-import 'package:glyco/widgets/snack_shortcut.dart';
-import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
+import '../providers/measurements.dart';
+
 import '../widgets/measurement_grid.dart';
-import '../widgets/meal_shortcut.dart';
+import '../widgets/shortcuts/meal_shortcut.dart';
+import '../widgets/shortcuts/glucose_shortcut.dart';
+import '../widgets/shortcuts/snack_shortcut.dart';
+import '../widgets/shortcuts/drink_shortcut.dart';
+import '../widgets/shortcuts/exercise_shortcut.dart';
 
 class MeasuresScreen extends StatelessWidget {
   @override
