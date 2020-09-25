@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
-  
+
   ClipRRect exportData(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(25.0),
@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
                 color: Colors.white,
               )),
           onPressed: () {
-            Navigator.pushNamed(context, '/NavScreen');
+           
           },
         ),
       ),
