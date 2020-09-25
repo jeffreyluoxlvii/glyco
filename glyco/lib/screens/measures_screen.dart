@@ -51,7 +51,7 @@ class MeasuresScreen extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
-                  selectedMeasurement.addMeal(500);
+                  selectedMeasurement.addMeal(500, 15);
                 },
                 iconSize: 50,
               ),
