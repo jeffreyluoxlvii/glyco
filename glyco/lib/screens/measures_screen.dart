@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
+import '../providers/measurements.dart';
+
 import '../widgets/measurement_grid.dart';
+import '../widgets/shortcuts/meal_shortcut.dart';
+import '../widgets/shortcuts/glucose_shortcut.dart';
+import '../widgets/shortcuts/snack_shortcut.dart';
+import '../widgets/shortcuts/drink_shortcut.dart';
+import '../widgets/shortcuts/exercise_shortcut.dart';
 
 class MeasuresScreen extends StatelessWidget {
   @override
@@ -10,89 +16,66 @@ class MeasuresScreen extends StatelessWidget {
     final measurementsData = Provider.of<Measurements>(context);
     final selectedMeasurement = measurementsData.latestMeasurement;
 
-    return Container(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-            child: Text(
-              "Shortcuts",
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+          child: Text(
+            "Shortcuts",
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: ChangeNotifierProvider.value(
+            value: selectedMeasurement,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.healing,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {},
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.donut_small,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {},
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.fastfood,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    selectedMeasurement.addMeal(500, 15);
-                  },
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.local_car_wash,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {},
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.directions_run,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {},
-                  iconSize: 50,
-                ),
+                GlucoseShortcut(),
+                MealShortcut(),
+                SnackShortcut(),
+                DrinkShortcut(),
+                ExerciseShortcut(),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Measurements",
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Measurements",
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          ChangeNotifierProvider.value(
-            child: MeasurementGrid(),
-            value: selectedMeasurement,
-          ),
-        ],
-      ),
+        ),
+        ChangeNotifierProvider.value(
+          child: MeasurementGrid(),
+          value: selectedMeasurement,
+        ),
+        Row(
+          children: [
+            Spacer(),
+            RaisedButton(
+              onPressed: () {},
+              child: Text(
+                "View Analytics",
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
+            ),
+            Spacer(),
+          ],
+        ),
+      ],
     );
   }
 }
