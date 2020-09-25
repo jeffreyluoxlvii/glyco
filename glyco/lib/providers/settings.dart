@@ -39,5 +39,6 @@ class Settings with ChangeNotifier {
 
   void setExerciseTime(int minutes) {
     exerciseTime = minutes;
+    notifyListeners();
   }
 }
