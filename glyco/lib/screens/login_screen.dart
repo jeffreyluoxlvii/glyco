@@ -14,33 +14,40 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(title: Text("Glyco")),
       body: loginScreen(context),
+      resizeToAvoidBottomPadding: false,
     );
   }
 
   Widget loginScreen(BuildContext context) {
-    return Column(
-      children: [
-        Icon(Icons.ac_unit),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'email',
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/images/pepe.jpg',
+            height: 250,
+            width: 250,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'email',
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
-          child: TextField(
-            obscureText: true,
-            decoration: InputDecoration(hintText: 'password'),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
+            child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(hintText: 'password'),
+            ),
           ),
-        ),
-        forgotPassword(),
-        SizedBox(height: 100),
-        signInButton(context),
-        createAccount(),
-      ],
+          forgotPassword(),
+          SizedBox(height: 100),
+          signInButton(context),
+          createAccount(),
+        ],
+      ),
     );
   }
 
