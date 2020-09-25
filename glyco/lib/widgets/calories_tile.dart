@@ -53,7 +53,7 @@ class CaloriesTile extends StatelessWidget {
                           ),
                           FittedBox(
                             child: Text(
-                              " kCal",
+                              " kcal",
                               style: TextStyle(
                                 fontSize: 10,
                                 color: Colors.white,

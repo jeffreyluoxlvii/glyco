@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/measurement.dart';
+import '../../providers/options.dart';
 
 class ExerciseShortcut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final measurement = Provider.of<Measurement>(context, listen: false);
+    final settings = Provider.of<Options>(context).settings;
     return Container(
       child: GestureDetector(
         child: InkWell(
@@ -19,7 +21,7 @@ class ExerciseShortcut extends StatelessWidget {
             ),
           ),
           onTap: () {
-            measurement.addExercise(30);
+            measurement.addExercise(settings.exerciseTime);
           },
           onLongPress: () {},
         ),
