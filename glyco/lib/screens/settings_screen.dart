@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/providers/options.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -27,6 +29,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+    final settings = Provider.of<Options>(context).settings;
     return Container(
         padding: const EdgeInsets.all(30),
         width: double.infinity,
@@ -88,7 +91,7 @@ class SettingsScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                           size: 45,
                         ),
-                        Text(" 500 kcal\n 35g carbs"),
+                        Text(" ${settings.mealCalories} kcal\n ${settings.mealCarbs}g carbs"),
                       ],
                     ),
                     SizedBox(height:15),
@@ -99,14 +102,14 @@ class SettingsScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                           size: 45,
                         ),
-                        Text(" 250 kcal\n 15g carbs"),
+                        Text(" ${settings.snackCalories} kcal\n ${settings.snackCarbs}g carbs"),
                         Spacer(),
                         Icon(
                           Icons.free_breakfast,
                           color: Theme.of(context).primaryColor,
                           size: 45,
                         ),
-                        Text(" 100 kcal\n 15g carbs"),
+                        Text(" ${settings.drinkCalories} kcal\n ${settings.drinkCarbs} carbs"),
                       ],
                     ),
                     SizedBox(height:15),
@@ -117,7 +120,7 @@ class SettingsScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                           size: 45,
                         ),
-                        Text("30 min activity"),
+                        Text("${settings.exerciseTime} min activity"),
                       ],
                     ),
                   ],
