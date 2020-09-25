@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
+import '../providers/measurements.dart';
+
 import '../widgets/measurement_grid.dart';
+import '../widgets/shortcuts/meal_shortcut.dart';
+import '../widgets/shortcuts/glucose_shortcut.dart';
+import '../widgets/shortcuts/snack_shortcut.dart';
+import '../widgets/shortcuts/drink_shortcut.dart';
+import '../widgets/shortcuts/exercise_shortcut.dart';
 
 class MeasuresScreen extends StatelessWidget {
   @override
@@ -26,52 +32,18 @@ class MeasuresScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.healing,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: () {},
-                iconSize: 50,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.donut_small,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: () {},
-                iconSize: 50,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.fastfood,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: () {
-                  selectedMeasurement.addMeal(500);
-                },
-                iconSize: 50,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.local_car_wash,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: () {},
-                iconSize: 50,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.directions_run,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onPressed: () {},
-                iconSize: 50,
-              ),
-            ],
+          child: ChangeNotifierProvider.value(
+            value: selectedMeasurement,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GlucoseShortcut(),
+                MealShortcut(),
+                SnackShortcut(),
+                DrinkShortcut(),
+                ExerciseShortcut(),
+              ],
+            ),
           ),
         ),
         Padding(
@@ -84,9 +56,24 @@ class MeasuresScreen extends StatelessWidget {
             ),
           ),
         ),
-        ChangeNotifierProvider(
+        ChangeNotifierProvider.value(
           child: MeasurementGrid(),
-          create: (_) => selectedMeasurement,
+          value: selectedMeasurement,
+        ),
+        Row(
+          children: [
+            Spacer(),
+            RaisedButton(
+              onPressed: () {},
+              child: Text(
+                "View Analytics",
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
+            ),
+            Spacer(),
+          ],
         ),
       ],
     );

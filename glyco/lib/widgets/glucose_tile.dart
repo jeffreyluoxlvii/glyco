@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import '../providers/measurement.dart';
 
-class BigTile extends StatelessWidget {
-  final String title;
-  final Icon icon;
-  final String data;
-  final String unit;
-  final DateTime updateTime;
-
-  const BigTile({
-    @required this.title,
-    @required this.icon,
-    @required this.data,
-    @required this.unit,
-    @required this.updateTime,
-  });
-
+class GlucoseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final measurement = Provider.of<Measurement>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(35.0),
       child: Container(
@@ -32,19 +21,34 @@ class BigTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                "GLUCOSE LEVELS",
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white,
                 ),
               ),
-              icon,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5.0,
+                ),
+                child: Row(
+                  children: [
+                    Spacer(),
+                    Icon(
+                      Icons.whatshot,
+                      size: 70,
+                      color: Colors.white,
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    data,
+                    measurement.currGlucoseLevel.toString(),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -53,7 +57,7 @@ class BigTile extends StatelessWidget {
                   ),
                   FittedBox(
                     child: Text(
-                      " " + unit,
+                      " mg/dL",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -62,7 +66,7 @@ class BigTile extends StatelessWidget {
                 ],
               ),
               Text(
-                'Last update ${DateFormat('K:mm a').format(updateTime)}',
+                'Last update ${DateFormat('K:mm a').format(measurement.timestamp)}',
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.white,
