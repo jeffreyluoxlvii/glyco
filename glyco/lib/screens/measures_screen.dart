@@ -60,6 +60,21 @@ class MeasuresScreen extends StatelessWidget {
           child: MeasurementGrid(),
           value: selectedMeasurement,
         ),
+        Row(
+          children: [
+            Spacer(),
+            RaisedButton(
+              onPressed: () {},
+              child: Text(
+                "View Analytics",
+                style: TextStyle(
+                  fontSize: 13,
+                ),
+              ),
+            ),
+            Spacer(),
+          ],
+        ),
       ],
     );
   }

@@ -49,25 +49,6 @@ class MeasurementGrid extends StatelessWidget {
             A1CTile(),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.arrow_downward,
-                size: 40,
-              ),
-            ),
-            Text(
-              "View Analytics",
-              style: TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ],
-        ),
       ],
     );
   }
