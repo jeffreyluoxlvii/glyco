@@ -26,7 +26,7 @@ class MeasurementGrid extends StatelessWidget {
                     size: 35,
                     color: Colors.white,
                   ),
-                  updateTime: DateTime.now(),
+                  updateTime: measurement.timestamp,
                 ),
                 LongTile(
                   data: measurement.exerciseTime.toString(),
@@ -36,7 +36,7 @@ class MeasurementGrid extends StatelessWidget {
                     size: 35,
                     color: Colors.white,
                   ),
-                  updateTime: DateTime.now(),
+                  updateTime: measurement.timestamp,
                 ),
               ],
             )
@@ -47,25 +47,6 @@ class MeasurementGrid extends StatelessWidget {
           children: [
             CaloriesTile(),
             A1CTile(),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.arrow_downward,
-                size: 40,
-              ),
-            ),
-            Text(
-              "View Analytics",
-              style: TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
           ],
         ),
       ],
