@@ -51,15 +51,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  RichText forgotPassword() {
-    return RichText(
-        text: TextSpan(
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: Colors.grey[700],
-            ),
-            text: 'Forgot Password?',
-            recognizer: TapGestureRecognizer()..onTap = () {}));
+  GestureDetector forgotPassword() {
+    return GestureDetector(
+      onTap: () {
+        print("Forgot password");
+      },
+      child: new Text(
+        "Forgot Password?",
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[700],
+        ),
+      ),
+    );
   }
 
   ClipRRect signInButton(BuildContext context) {
@@ -85,12 +89,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-RichText createAccount() {
-  return RichText(
-    text: TextSpan(
-      style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[700]),
-      text: 'or Create an Account',
-      recognizer: TapGestureRecognizer()..onTap = () {},
+GestureDetector createAccount() {
+  return GestureDetector(
+    onTap: () {
+      print("Create account");
+    },
+    child: new Text(
+      "or Create an Account",
+      style: TextStyle(
+        fontStyle: FontStyle.italic,
+        color: Colors.grey[700],
+      ),
     ),
   );
 }
