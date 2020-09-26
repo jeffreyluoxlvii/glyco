@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/screens/change_settings_screen.dart';
 
 class SettingsAppBar extends StatefulWidget implements PreferredSizeWidget {
   SettingsAppBar({Key key})
@@ -31,7 +32,15 @@ class _SettingsAppBarState extends State<SettingsAppBar> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/ChangeSettings');
+            Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChangeSettingsScreen()))
+                .then((value) {
+              setState(() {
+                // refresh state of Page1
+              });
+            });
           },
         ),
       ],

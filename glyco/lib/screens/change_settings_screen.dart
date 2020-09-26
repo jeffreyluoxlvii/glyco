@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/screens/edit_shortcuts_screen.dart';
+import '../providers/options.dart';
+import 'package:provider/provider.dart';
 
 //Widgets
 
@@ -13,6 +15,7 @@ class ChangeSettingsScreen extends StatefulWidget {
 class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
   @override
   Widget build(BuildContext context) {
+    final settings = Provider.of<Options>(context).settings;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -106,7 +109,10 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
               ),
             ),
             SizedBox(height: 15),
-            ShortcutsSummary(),
+            ChangeNotifierProvider.value(
+              value: settings,
+              child: ShortcutsSummary(),
+            ),
             SizedBox(height: 15),
             GestureDetector(
               onTap: () {

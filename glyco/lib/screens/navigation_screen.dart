@@ -20,12 +20,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
     SettingsScreen(),
   ];
 
-  static List<Widget> _appBars = <Widget>[
-    ChallengesAppBar(),
-    MeasuresAppBar(),
-    SettingsAppBar(),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -41,7 +35,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBars.elementAt(_selectedIndex),
       body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 60,
