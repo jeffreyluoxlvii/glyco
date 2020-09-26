@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
+
+//Widgets
+
+import 'package:glyco/widgets/shortcuts/shortcuts_summary.dart';
 
 class ChangeSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Glyco")),
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+        "Glyco",
+        style: TextStyle(color: Colors.black),
+      )),
       body: changeSettings(context),
     );
   }
@@ -24,6 +32,7 @@ class ChangeSettingsScreen extends StatelessWidget {
                 saveAndExit(context),
               ],
             ),
+            SizedBox(height: 15),
             Row(
               children: [
                 Container(
@@ -71,9 +80,10 @@ class ChangeSettingsScreen extends StatelessWidget {
                 ),
               ),
             ]),
+            SizedBox(height: 15),
             GestureDetector(
               onTap: () {
-                print("Edit Shortcuts");
+                Navigator.pushNamed(context, "/EditShortcuts");
               },
               child: new Text(
                 "Click to Edit Shortcuts",
@@ -84,7 +94,9 @@ class ChangeSettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 100),
+            SizedBox(height: 15),
+            shortcutsSummary(),
+            SizedBox(height: 15),
             GestureDetector(
               onTap: () {
                 print("Edit Integrations");
@@ -117,7 +129,7 @@ class ChangeSettingsScreen extends StatelessWidget {
                 color: Colors.white,
               )),
           onPressed: () {
-            print("Save and Exit");
+            Navigator.pop(context);
           },
         ),
       ),
@@ -139,7 +151,7 @@ class ChangeSettingsScreen extends StatelessWidget {
                 color: Colors.white,
               )),
           onPressed: () {
-            print("Cancel");
+            Navigator.pop(context);
           },
         ),
       ),
