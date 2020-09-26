@@ -3,10 +3,17 @@
 // each measurmeent will be for one day
 
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:health/health.dart';
 
 // TODO: Use the provider from setting to grab the shortcut settings
 
 class Measurement with ChangeNotifier {
+  List<HealthDataType> _types = [
+    HealthDataType.BLOOD_GLUCOSE,
+    HealthDataType.STEPS,
+  ];
+  List<HealthDataPoint> healthData;
   final int id;
   final DateTime timestamp;
   double avgGlucoseLevel; // average level of the day
@@ -49,5 +56,18 @@ class Measurement with ChangeNotifier {
   void addExercise(int minutes) {
     exerciseTime += minutes;
     notifyListeners();
+  }
+
+  Future<void> fetchHealthData() async {
+    print("fetching data");
+    List<HealthDataPoint> _healthDataList = [];
+    HealthFactory health = HealthFactory();
+    DateTime endDate = DateTime.now();
+    DateTime startDate = DateTime(2020, 01, 01);
+    healthData =
+        await health.getHealthDataFromTypes(startDate, endDate, _types);
+    _healthDataList.addAll(healthData);
+    _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
+    _healthDataList.forEach((x) => print("Data point: $x"));
   }
 }
