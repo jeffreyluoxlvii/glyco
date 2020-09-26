@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/providers/options.dart';
+import 'package:glyco/providers/settings.dart';
 import 'package:provider/provider.dart';
 
-class shortcutsSummary extends StatelessWidget {
+class ShortcutsSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final settings = Provider.of<Options>(context).settings;
+    final settings = Provider.of<Settings>(context);
     return Column(
       children: [
         Row(

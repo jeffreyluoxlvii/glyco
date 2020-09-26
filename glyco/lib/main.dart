@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/NavScreen': (context) => NavigationScreen(),
           '/ChangeSettings': (context) => ChangeSettingsScreen(),
-          '/MainSettings': (context) => SettingsScreen(),
           '/EditShortcuts': (context) => EditShortcuts(),
         },
         theme: ThemeData(

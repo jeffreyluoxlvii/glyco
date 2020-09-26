@@ -7,24 +7,17 @@ import './measures_screen.dart';
 import './settings_screen.dart';
 
 class NavigationScreen extends StatefulWidget {
-  NavigationScreen({Key key}) : super(key: key);
-
   @override
   _NavigationScreenState createState() => _NavigationScreenState();
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
   int _selectedIndex = 1;
+
   static List<Widget> _screens = <Widget>[
     ChallengesScreen(),
     MeasuresScreen(),
     SettingsScreen(),
-  ];
-
-  static List<Widget> _appBars = <Widget>[
-    ChallengesAppBar(),
-    MeasuresAppBar(),
-    SettingsAppBar(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,10 +26,15 @@ class _NavigationScreenState extends State<NavigationScreen> {
     });
   }
 
+  void showSettings() {
+    setState(() {
+      _selectedIndex = 2;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBars.elementAt(_selectedIndex),
       body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         iconSize: 60,
