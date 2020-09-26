@@ -9,34 +9,17 @@ import 'package:glyco/widgets/mainSettings/editShortcuts/glucose_row.dart';
 import 'package:glyco/widgets/mainSettings/editShortcuts/exercise_row.dart';
 
 class EditShortcuts extends StatelessWidget {
-  ExerciseRow exerciseRow;
-  FoodRow mealRow;
-  FoodRow snackRow;
-  FoodRow drinkRow;
-  var settings;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            "Glyco",
-            style: TextStyle(color: Colors.black),
-          )),
-      body: changeSettings(context),
-    );
-  }
-
-  Container changeSettings(context) {
-    settings = Provider.of<Options>(context).settings;
-    exerciseRow = ExerciseRow(
+    final settings = Provider.of<Options>(context).settings;
+    ExerciseRow exerciseRow = ExerciseRow(
         icon: Icon(
           Icons.directions_run,
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
         minutes: '${settings.exerciseTime}');
-    mealRow = FoodRow(
+    FoodRow mealRow = FoodRow(
         icon: Icon(
           Icons.fastfood,
           color: Theme.of(context).primaryColor,
@@ -44,7 +27,7 @@ class EditShortcuts extends StatelessWidget {
         ),
         kcal: '${settings.mealCalories}',
         carbs: '${settings.mealCarbs}');
-    snackRow = FoodRow(
+    FoodRow snackRow = FoodRow(
         icon: Icon(
           Icons.donut_small,
           color: Theme.of(context).primaryColor,
@@ -52,7 +35,7 @@ class EditShortcuts extends StatelessWidget {
         ),
         kcal: '${settings.snackCalories}',
         carbs: '${settings.snackCarbs}');
-    drinkRow = FoodRow(
+    FoodRow drinkRow = FoodRow(
         icon: Icon(
           Icons.free_breakfast,
           color: Theme.of(context).primaryColor,
@@ -60,7 +43,14 @@ class EditShortcuts extends StatelessWidget {
         ),
         kcal: '${settings.drinkCalories}',
         carbs: '${settings.drinkCarbs}');
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            "Glyco",
+            style: TextStyle(color: Colors.black),
+          )),
+      body: Container(
         padding: const EdgeInsets.all(30),
         width: double.infinity,
         child: Column(
@@ -91,57 +81,61 @@ class EditShortcuts extends StatelessWidget {
             SizedBox(height: 30),
             Row(
               children: [
-                cancel(context),
+                CancelButton(),
                 Spacer(),
-                saveAndExit(context),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50.0),
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    width: 150,
+                    height: 40,
+                    color: Colors.blue[300],
+                    child: FlatButton(
+                      child: Text("SAVE & EXIT",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          )),
+                      onPressed: () {
+                        if (mealRow.kcalController.text.length > 0 &&
+                            mealRow.carbController.text.length > 0) {
+                          settings.setMealSettings(
+                              int.parse(mealRow.kcalController.text),
+                              int.parse(mealRow.carbController.text));
+                        }
+                        if (snackRow.kcalController.text.length > 0 &&
+                            snackRow.carbController.text.length > 0) {
+                          settings.setSnackSettings(
+                              int.parse(snackRow.kcalController.text),
+                              int.parse(snackRow.carbController.text));
+                        }
+                        if (drinkRow.kcalController.text.length > 0 &&
+                            drinkRow.carbController.text.length > 0) {
+                          settings.setDrinkSettings(
+                              int.parse(drinkRow.kcalController.text),
+                              int.parse(drinkRow.carbController.text));
+                        }
+                        if (exerciseRow.exerciseController.text.length > 0) {
+                          settings.setExerciseTime(
+                              int.parse(exerciseRow.exerciseController.text));
+                        }
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
-        ));
-  }
-
-  ClipRRect saveAndExit(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50.0),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        width: 150,
-        height: 40,
-        color: Colors.blue[300],
-        child: FlatButton(
-          child: Text("SAVE & EXIT",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              )),
-          onPressed: () {
-            if (mealRow.kcalController.text.length > 0 &&
-                mealRow.carbController.text.length > 0) {
-              settings.setMealSettings(int.parse(mealRow.kcalController.text),
-                  int.parse(mealRow.carbController.text));
-            }
-            if (snackRow.kcalController.text.length > 0 &&
-                snackRow.carbController.text.length > 0) {
-              settings.setMealSettings(int.parse(snackRow.kcalController.text),
-                  int.parse(snackRow.carbController.text));
-            }
-            if (drinkRow.kcalController.text.length > 0 &&
-                drinkRow.carbController.text.length > 0) {
-              settings.setMealSettings(int.parse(drinkRow.kcalController.text),
-                  int.parse(drinkRow.carbController.text));
-            }
-            if (exerciseRow.exerciseController.text.length > 0) {
-              settings.setExerciseTime(
-                  int.parse(exerciseRow.exerciseController.text));
-            }
-            Navigator.pop(context);
-          },
         ),
       ),
     );
   }
+}
 
-  ClipRRect cancel(BuildContext context) {
+class CancelButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(50.0),
       child: Container(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class exportData extends StatelessWidget {
+class ExportDataButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -11,12 +11,14 @@ class exportData extends StatelessWidget {
         height: 40,
         color: Colors.blue[300],
         child: FlatButton(
-          child: Text("EXPORT DATA",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              )),
+          child: Text(
+            "EXPORT DATA",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
           onPressed: () {},
         ),
       ),
