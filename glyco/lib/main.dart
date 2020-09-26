@@ -33,11 +33,20 @@ class MyApp extends StatelessWidget {
           '/EditShortcuts': (context) => EditShortcuts(),
         },
         theme: ThemeData(
+          fontFamily: 'Lato',
+
           primaryColor: Colors.pink[300],
-          accentColor: Colors.blue[450],
+          accentColor: Colors.cyanAccent[400],
           appBarTheme: AppBarTheme(
             color: Colors.grey[200],
           ),
+
+          textTheme: TextTheme(
+            headline1: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            bodyText1: TextStyle(fontSize: 24.0),
+            bodyText2: TextStyle(fontSize: 16.0),
+          )
         ),
       ),
     );
