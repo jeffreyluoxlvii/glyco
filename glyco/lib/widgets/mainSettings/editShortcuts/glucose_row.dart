@@ -24,7 +24,9 @@ class GlucoseRow extends StatelessWidget {
           ),
         ),
         Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 0), child: Text('mg/dL')),
+          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: Text('mg/dL'),
+        ),
       ],
     );
   }

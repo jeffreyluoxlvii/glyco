@@ -26,7 +26,9 @@ class ExerciseRow extends StatelessWidget {
           ),
         ),
         Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 0), child: Text('minutes')),
+          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+          child: Text('minutes'),
+        ),
       ],
     );
   }

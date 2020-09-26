@@ -22,7 +22,8 @@ class _SettingsAppBarState extends State<SettingsAppBar> {
           color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 20,
-        ),),
+        ),
+      ),
       actions: [
         IconButton(
           icon: Icon(
@@ -33,6 +34,7 @@ class _SettingsAppBarState extends State<SettingsAppBar> {
             Navigator.pushNamed(context, '/ChangeSettings');
           },
         ),
-      ],);
+      ],
+    );
   }
 }

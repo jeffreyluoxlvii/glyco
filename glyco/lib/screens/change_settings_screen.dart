@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/screens/edit_shortcuts_screen.dart';
 
 //Widgets
 
-import 'package:glyco/widgets/shortcuts/shortcuts_summary.dart';
+import '../widgets/shortcuts/shortcuts_summary.dart';
 
-class ChangeSettingsScreen extends StatelessWidget {
+class ChangeSettingsScreen extends StatefulWidget {
+  @override
+  _ChangeSettingsScreenState createState() => _ChangeSettingsScreenState();
+}
+
+class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-        "Glyco",
-        style: TextStyle(color: Colors.black),
-      )),
-      body: changeSettings(context),
-    );
-  }
-
-  Container changeSettings(context) {
-    return Container(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Glyco",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: Container(
         padding: const EdgeInsets.all(30),
         width: double.infinity,
         child: Column(
@@ -27,9 +29,9 @@ class ChangeSettingsScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                cancel(context),
+                CancelButton(),
                 Spacer(),
-                saveAndExit(context),
+                SaveAndExitButton(),
               ],
             ),
             SizedBox(height: 15),
@@ -65,25 +67,34 @@ class ChangeSettingsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 15),
-            Row(children: [
-              Spacer(),
-              GestureDetector(
-                onTap: () {
-                  print("Change password");
-                },
-                child: new Text(
-                  "Change Password",
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                    color: Colors.grey[700],
+            Row(
+              children: [
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    print("Change password");
+                  },
+                  child: new Text(
+                    "Change Password",
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: Colors.grey[700],
+                    ),
                   ),
                 ),
-              ),
-            ]),
+              ],
+            ),
             SizedBox(height: 15),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/EditShortcuts");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditShortcuts())).then((value) {
+                  setState(() {
+                    // refresh state of Page1
+                  });
+                });
               },
               child: new Text(
                 "Click to Edit Shortcuts",
@@ -95,7 +106,7 @@ class ChangeSettingsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 15),
-            shortcutsSummary(),
+            ShortcutsSummary(),
             SizedBox(height: 15),
             GestureDetector(
               onTap: () {
@@ -111,19 +122,24 @@ class ChangeSettingsScreen extends StatelessWidget {
               ),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
+}
 
-  ClipRRect saveAndExit(BuildContext context) {
+class CancelButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(50.0),
       child: Container(
         padding: EdgeInsets.all(5),
         width: 150,
         height: 40,
-        color: Colors.blue[300],
+        color: Colors.grey,
         child: FlatButton(
-          child: Text("SAVE & EXIT",
+          child: Text("CANCEL",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
@@ -135,17 +151,20 @@ class ChangeSettingsScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  ClipRRect cancel(BuildContext context) {
+class SaveAndExitButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(50.0),
       child: Container(
         padding: EdgeInsets.all(5),
         width: 150,
         height: 40,
-        color: Colors.grey,
+        color: Colors.blue[300],
         child: FlatButton(
-          child: Text("CANCEL",
+          child: Text("SAVE & EXIT",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
