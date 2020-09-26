@@ -81,7 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.white,
               )),
           onPressed: () {
-            Navigator.pushNamed(context, '/NavScreen');
+            //Navigator.pushNamed(context, '/NavScreen');
+            Navigator.pushReplacementNamed(context, '/NavScreen');
           },
         ),
       ),

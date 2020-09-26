@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
+//Screens
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
+import 'screens/settings_screen.dart';
+import 'screens/edit_shortcuts_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,6 +29,8 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           '/NavScreen': (context) => NavigationScreen(),
           '/ChangeSettings': (context) => ChangeSettingsScreen(),
+          '/MainSettings': (context) => SettingsScreen(),
+          '/EditShortcuts': (context) => EditShortcuts(),
         },
         theme: ThemeData(
           primaryColor: Colors.pink[300],
