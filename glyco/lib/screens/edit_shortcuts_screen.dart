@@ -122,12 +122,12 @@ class EditShortcuts extends StatelessWidget {
             }
             if (snackRow.kcalController.text.length > 0 &&
                 snackRow.carbController.text.length > 0) {
-              settings.setMealSettings(int.parse(snackRow.kcalController.text),
+              settings.setSnackSettings(int.parse(snackRow.kcalController.text),
                   int.parse(snackRow.carbController.text));
             }
             if (drinkRow.kcalController.text.length > 0 &&
                 drinkRow.carbController.text.length > 0) {
-              settings.setMealSettings(int.parse(drinkRow.kcalController.text),
+              settings.setDrinkSettings(int.parse(drinkRow.kcalController.text),
                   int.parse(drinkRow.carbController.text));
             }
             if (exerciseRow.exerciseController.text.length > 0) {
