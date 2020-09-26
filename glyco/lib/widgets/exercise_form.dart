@@ -3,19 +3,18 @@ import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 
 // Define a custom Form widget.
-class NutritionForm extends StatefulWidget {
+class ExerciseForm extends StatefulWidget {
   @override
-  NutritionFormState createState() {
-    return NutritionFormState();
+  ExerciseFormState createState() {
+    return ExerciseFormState();
   }
 }
 
-class NutritionFormState extends State<NutritionForm> {
+class ExerciseFormState extends State<ExerciseForm> {
   final _carbsFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
 
-  var _calories;
-  var _carbs;
+  var _minutes;
 
   @override
   void dispose() {
@@ -29,8 +28,7 @@ class NutritionFormState extends State<NutritionForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false)
-        .addNutrition(_calories, _carbs);
+    Provider.of<Measurement>(context, listen: false).addExercise(_minutes);
     Navigator.of(context).pop();
   }
 
@@ -40,13 +38,13 @@ class NutritionFormState extends State<NutritionForm> {
     return Form(
       key: _form,
       child: Container(
-        height: 270,
+        height: 200,
         child: SingleChildScrollView(
           child: Column(
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                Icons.fastfood,
+                Icons.directions_run,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),
@@ -67,7 +65,7 @@ class NutritionFormState extends State<NutritionForm> {
                   return null;
                 },
                 onSaved: (value) {
-                  _calories = int.parse(value);
+                  _minutes = int.parse(value);
                 },
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
@@ -75,41 +73,9 @@ class NutritionFormState extends State<NutritionForm> {
                   FocusScope.of(context).requestFocus(_carbsFocusNode);
                 },
                 decoration: InputDecoration(
-                  labelText: 'Enter calories',
+                  labelText: 'Enter minutes of exercise',
                   suffix: Text(
-                    'kcal',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              TextFormField(
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a value';
-                  }
-                  if (int.tryParse(value) == null) {
-                    return 'Please enter a valid number.';
-                  }
-                  if (int.parse(value) <= 0) {
-                    return 'Please enter a value greater than 0.';
-                  }
-                  if (int.parse(value) > 9999) {
-                    return 'Please enter a value less than 10000.';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _carbs = int.parse(value);
-                },
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.number,
-                focusNode: _carbsFocusNode,
-                decoration: InputDecoration(
-                  labelText: 'Enter carbs',
-                  suffix: Text(
-                    'g',
+                    'minutes',
                     style: TextStyle(
                       color: Colors.black,
                     ),

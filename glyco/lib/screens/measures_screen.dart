@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/widgets/nutrition_form.dart';
+import '../widgets/exercise_form.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurements.dart';
 import '../providers/options.dart';
@@ -66,7 +67,7 @@ class MeasuresScreen extends StatelessWidget {
                     () => selectedMeasurement.addExercise(
                       settings.exerciseTime,
                     ),
-                    Text('EXERCISE FORM'),
+                    ExerciseForm(),
                   ),
                 ],
               ),
