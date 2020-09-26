@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/widgets/nutrition_form.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurements.dart';
 import '../providers/options.dart';
@@ -40,31 +41,32 @@ class MeasuresScreen extends StatelessWidget {
                 children: [
                   GlucoseShortcut(),
                   Shortcut(
-                    Icons.fastfood,
-                    () => selectedMeasurement.addNutrition(
-                      settings.mealCalories,
-                      settings.mealCarbs,
-                    ),
-                  ),
+                      Icons.fastfood,
+                      () => selectedMeasurement.addNutrition(
+                            settings.mealCalories,
+                            settings.mealCarbs,
+                          ),
+                      NutritionForm()),
                   Shortcut(
-                    Icons.donut_small,
-                    () => selectedMeasurement.addNutrition(
-                      settings.snackCalories,
-                      settings.snackCarbs,
-                    ),
-                  ),
+                      Icons.donut_small,
+                      () => selectedMeasurement.addNutrition(
+                            settings.snackCalories,
+                            settings.snackCarbs,
+                          ),
+                      NutritionForm()),
                   Shortcut(
-                    Icons.free_breakfast,
-                    () => selectedMeasurement.addNutrition(
-                      settings.drinkCalories,
-                      settings.drinkCarbs,
-                    ),
-                  ),
+                      Icons.free_breakfast,
+                      () => selectedMeasurement.addNutrition(
+                            settings.drinkCalories,
+                            settings.drinkCarbs,
+                          ),
+                      NutritionForm()),
                   Shortcut(
                     Icons.directions_run,
                     () => selectedMeasurement.addExercise(
                       settings.exerciseTime,
                     ),
+                    Text('EXERCISE FORM'),
                   ),
                 ],
               ),

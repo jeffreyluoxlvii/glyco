@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/measurement.dart';
 
 // Define a custom Form widget.
 class NutritionForm extends StatefulWidget {
@@ -8,45 +10,134 @@ class NutritionForm extends StatefulWidget {
   }
 }
 
-// Define a corresponding State class.
-// This class holds data related to the form.
 class NutritionFormState extends State<NutritionForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
+  final _carbsFocusNode = FocusNode();
+  final _form = GlobalKey<FormState>();
+
+  var _calories;
+  var _carbs;
+
+  @override
+  void dispose() {
+    _carbsFocusNode.dispose();
+    super.dispose();
+  }
+
+  void _submitForm() {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
+    _form.currentState.save();
+    Provider.of<Measurement>(context, listen: false)
+        .addNutrition(_calories, _carbs);
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
-      key: _formKey,
+      key: _form,
       child: Container(
-        height: 200,
-        child: Column(
-          children: [
-            // Add TextFormFields and RaisedButton here.
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter a value';
-                }
-                return null;
-              },
-            ),
-            RaisedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, otherwise false.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ],
+        height: 270,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Add TextFormFields and RaisedButton here.
+              Icon(
+                Icons.fastfood,
+                size: 50,
+                color: Theme.of(context).primaryColor,
+              ),
+              TextFormField(
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a value';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid number.';
+                  }
+                  if (int.parse(value) <= 0) {
+                    return 'Please enter a value greater than 0.';
+                  }
+                  if (int.parse(value) > 9999) {
+                    return 'Please enter a value less than 10000.';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _calories = int.parse(value);
+                },
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.number,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_carbsFocusNode);
+                },
+                decoration: InputDecoration(
+                  labelText: 'Enter calories',
+                  suffix: Text(
+                    'kcal',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              TextFormField(
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a value';
+                  }
+                  if (int.tryParse(value) == null) {
+                    return 'Please enter a valid number.';
+                  }
+                  if (int.parse(value) <= 0) {
+                    return 'Please enter a value greater than 0.';
+                  }
+                  if (int.parse(value) > 9999) {
+                    return 'Please enter a value less than 10000.';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  _carbs = int.parse(value);
+                },
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.number,
+                focusNode: _carbsFocusNode,
+                decoration: InputDecoration(
+                  labelText: 'Enter carbs',
+                  suffix: Text(
+                    'g',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 15, 5, 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('Cancel'),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        _submitForm();
+                      },
+                      child: Text('Submit'),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

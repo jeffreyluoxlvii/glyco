@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/widgets/nutrition_form.dart';
+import 'package:provider/provider.dart';
+import '../../providers/measurement.dart';
 
 class Shortcut extends StatelessWidget {
   final IconData icon;
   final Function onTap;
+  final Widget form;
 
-  Shortcut(this.icon, this.onTap);
+  Shortcut(this.icon, this.onTap, this.form);
 
   @override
   Widget build(BuildContext context) {
+    final measurement = Provider.of<Measurement>(context);
     return Container(
       child: GestureDetector(
         child: InkWell(
@@ -27,7 +31,10 @@ class Shortcut extends StatelessWidget {
               builder: (BuildContext context) {
                 return AlertDialog(
                   content: SingleChildScrollView(
-                    child: NutritionForm(),
+                    child: ChangeNotifierProvider.value(
+                      child: form,
+                      value: measurement,
+                    ),
                   ),
                 );
               },
