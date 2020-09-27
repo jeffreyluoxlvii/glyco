@@ -15,7 +15,8 @@ class ChallengesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 14.0),
                 child: Text(
                   "Good day, Jessica!",
                   style: TextStyle(
@@ -25,7 +26,8 @@ class ChallengesScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
                   "Here are today's goals:",
                   style: TextStyle(
@@ -36,15 +38,13 @@ class ChallengesScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: ChallengeContainer(),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ChallengeContainer(),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
                   "Your progress:",
                   style: TextStyle(
