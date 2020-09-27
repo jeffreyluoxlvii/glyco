@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
                 children: [
                   Spacer(),
                   Image.asset(
-                    'assets/images/pepe.jpg',
+                    'assets/images/glyco_vector.jpg',
                     height: 250,
                     width: 250,
                   ),

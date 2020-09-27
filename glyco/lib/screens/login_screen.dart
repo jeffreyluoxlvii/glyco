@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         children: [
           Image.asset(
-            'assets/images/pepe.jpg',
+            'assets/images/glyco_vector.jpg',
             height: 250,
             width: 250,
           ),
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
         "Forgot Password?",
         style: TextStyle(
           fontStyle: FontStyle.italic,
-          color: Colors.grey[700],
+          color: Colors.grey[400],
         ),
       ),
     );
@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
         margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
         width: 300,
         height: 50,
-        color: Colors.blue[300],
+        color: Colors.cyanAccent[400],
         child: FlatButton(
           child: Text("Sign in",
               style: TextStyle(
@@ -99,7 +99,7 @@ GestureDetector createAccount() {
       "or Create an Account",
       style: TextStyle(
         fontStyle: FontStyle.italic,
-        color: Colors.grey[700],
+        color: Colors.grey[400],
       ),
     ),
   );

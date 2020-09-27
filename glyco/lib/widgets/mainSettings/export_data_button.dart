@@ -9,7 +9,7 @@ class ExportDataButton extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
         width: 250,
         height: 40,
-        color: Colors.blue[300],
+        color: Colors.cyanAccent[400],
         child: FlatButton(
           child: Text(
             "EXPORT DATA",

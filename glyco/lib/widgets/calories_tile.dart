@@ -12,7 +12,7 @@ class CaloriesTile extends StatelessWidget {
         margin: EdgeInsets.all(5),
         width: 180,
         height: 140,
-        color: Colors.grey,
+        color: Colors.grey[400],
         child: FlatButton(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,6 +33,7 @@ class CaloriesTile extends StatelessWidget {
                     child: Icon(
                       Icons.fastfood,
                       size: 50,
+                      color: Colors.white,
                     ),
                   ),
                   Column(

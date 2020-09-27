@@ -89,7 +89,7 @@ class EditShortcuts extends StatelessWidget {
                     padding: EdgeInsets.all(5),
                     width: 150,
                     height: 40,
-                    color: Colors.blue[300],
+                    color: Colors.cyanAccent[400],
                     child: FlatButton(
                       child: Text("SAVE & EXIT",
                           style: TextStyle(
@@ -142,7 +142,7 @@ class CancelButton extends StatelessWidget {
         padding: EdgeInsets.all(5),
         width: 150,
         height: 40,
-        color: Colors.grey,
+        color: Colors.grey[400],
         child: FlatButton(
           child: Text("CANCEL",
               style: TextStyle(

@@ -15,6 +15,14 @@ class ChallengesAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _ChallengesAppBarState extends State<ChallengesAppBar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(title: Text("Challenges"));
+    return AppBar(title: Text(
+      "Challenges",
+      style: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      )
+    );
   }
 }

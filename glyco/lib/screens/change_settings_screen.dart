@@ -81,7 +81,7 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
                     "Change Password",
                     style: TextStyle(
                       fontStyle: FontStyle.italic,
-                      color: Colors.grey[700],
+                      color: Colors.grey[400],
                     ),
                   ),
                 ),
@@ -143,7 +143,7 @@ class CancelButton extends StatelessWidget {
         padding: EdgeInsets.all(5),
         width: 150,
         height: 40,
-        color: Colors.grey,
+        color: Colors.grey[400],
         child: FlatButton(
           child: Text("CANCEL",
               style: TextStyle(
@@ -168,7 +168,7 @@ class SaveAndExitButton extends StatelessWidget {
         padding: EdgeInsets.all(5),
         width: 150,
         height: 40,
-        color: Colors.blue[300],
+        color: Colors.cyanAccent[400],
         child: FlatButton(
           child: Text("SAVE & EXIT",
               style: TextStyle(
