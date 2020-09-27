@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Define a custom Form widget.
 class NutritionForm extends StatefulWidget {
+  final IconData icon;
+
+  NutritionForm(this.icon);
+
   @override
   NutritionFormState createState() {
     return NutritionFormState();
@@ -47,7 +50,7 @@ class NutritionFormState extends State<NutritionForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                FontAwesomeIcons.hamburger,
+                widget.icon,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),

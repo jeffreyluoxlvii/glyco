@@ -16,15 +16,21 @@ class ShortcutsSummary extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
-            Text("Manual Input"),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text("Manual Input"),
+            ),
             Spacer(),
             Icon(
               FontAwesomeIcons.hamburger,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
-            Text(
-                " ${settings.mealCalories} kcal\n ${settings.mealCarbs}g carbs"),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                  " ${settings.mealCalories} kcal\n ${settings.mealCarbs}g carbs"),
+            ),
           ],
         ),
         SizedBox(height: 15),
@@ -35,16 +41,23 @@ class ShortcutsSummary extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
-            Text(
-                " ${settings.snackCalories} kcal\n ${settings.snackCarbs}g carbs"),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                  " ${settings.snackCalories} kcal\n ${settings.snackCarbs}g carbs"),
+            ),
             Spacer(),
             Icon(
-              FontAwesomeIcons.coffee,
+              FontAwesomeIcons.mugHot,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
-            Text(
-                " ${settings.drinkCalories} kcal\n ${settings.drinkCarbs} carbs"),
+            Padding(
+              // TODO: figure out what's going on with the padding (make these into containers?)
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                  " ${settings.drinkCalories} kcal\n ${settings.drinkCarbs} carbs"),
+            ),
           ],
         ),
         SizedBox(height: 15),
@@ -55,7 +68,10 @@ class ShortcutsSummary extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
-            Text("${settings.exerciseTime} min activity"),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text("${settings.exerciseTime} min activity"),
+            ),
           ],
         ),
       ],

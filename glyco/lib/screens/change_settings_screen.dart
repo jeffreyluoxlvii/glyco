@@ -170,11 +170,13 @@ class SaveAndExitButton extends StatelessWidget {
         height: 40,
         color: Colors.cyanAccent[400],
         child: FlatButton(
-          child: Text("SAVE & EXIT",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              )),
+          child: FittedBox(
+            child: Text("SAVE & EXIT",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                )),
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

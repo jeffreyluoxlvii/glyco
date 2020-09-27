@@ -30,41 +30,44 @@ class LongTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               icon,
-              Container(
-                width: 120,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          data,
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                child: Container(
+                  width: 120,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            data,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        Text(
-                          " " + unit,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
+                          Text(
+                            " " + unit,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'Last update ${DateFormat('K:mm a').format(updateTime)}',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
+                        ],
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Last update ${DateFormat('K:mm a').format(updateTime)}',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
