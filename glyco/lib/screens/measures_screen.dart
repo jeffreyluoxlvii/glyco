@@ -95,7 +95,9 @@ class MeasuresScreen extends StatelessWidget {
                 children: [
                   Spacer(),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      selectedMeasurement.fetchHealthData();
+                    },
                     child: Text(
                       "View Analytics",
                       style: TextStyle(
