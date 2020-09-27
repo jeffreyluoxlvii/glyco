@@ -16,7 +16,7 @@ class GlucoseRow extends StatelessWidget {
         icon,
         Container(
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-          width: 255,
+          width: 250,
           child: TextField(
             decoration: InputDecoration(
               hintText: measurement,

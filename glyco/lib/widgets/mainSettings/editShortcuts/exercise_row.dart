@@ -17,7 +17,7 @@ class ExerciseRow extends StatelessWidget {
         icon,
         Container(
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-          width: 250,
+          width: 235,
           child: TextField(
             controller: exerciseController,
             decoration: InputDecoration(

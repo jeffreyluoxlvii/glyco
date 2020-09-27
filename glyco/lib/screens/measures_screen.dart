@@ -21,15 +21,17 @@ class MeasuresScreen extends StatelessWidget {
     final settings = Provider.of<Options>(context).settings;
 
     return Scaffold(
-      body: Scaffold(
-        appBar: MeasuresAppBar(),
-        body: SingleChildScrollView(
+      appBar: MeasuresAppBar(),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          height: 600,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 14.0),
                 child: Text(
                   "Shortcuts",
                   style: TextStyle(
@@ -47,26 +49,29 @@ class MeasuresScreen extends StatelessWidget {
                     children: [
                       GlucoseShortcut(),
                       Shortcut(
-                          FontAwesomeIcons.hamburger,
-                          () => selectedMeasurement.addNutrition(
-                                settings.mealCalories,
-                                settings.mealCarbs,
-                              ),
-                          NutritionForm()),
+                        FontAwesomeIcons.hamburger,
+                        () => selectedMeasurement.addNutrition(
+                          settings.mealCalories,
+                          settings.mealCarbs,
+                        ),
+                        NutritionForm(FontAwesomeIcons.hamburger),
+                      ),
                       Shortcut(
-                          FontAwesomeIcons.cookie,
-                          () => selectedMeasurement.addNutrition(
-                                settings.snackCalories,
-                                settings.snackCarbs,
-                              ),
-                          NutritionForm()),
+                        FontAwesomeIcons.cookie,
+                        () => selectedMeasurement.addNutrition(
+                          settings.snackCalories,
+                          settings.snackCarbs,
+                        ),
+                        NutritionForm(FontAwesomeIcons.cookie),
+                      ),
                       Shortcut(
-                          FontAwesomeIcons.coffee,
-                          () => selectedMeasurement.addNutrition(
-                                settings.drinkCalories,
-                                settings.drinkCarbs,
-                              ),
-                          NutritionForm()),
+                        FontAwesomeIcons.mugHot,
+                        () => selectedMeasurement.addNutrition(
+                          settings.drinkCalories,
+                          settings.drinkCarbs,
+                        ),
+                        NutritionForm(FontAwesomeIcons.mugHot),
+                      ),
                       Shortcut(
                         FontAwesomeIcons.running,
                         () => selectedMeasurement.addExercise(
@@ -92,6 +97,7 @@ class MeasuresScreen extends StatelessWidget {
                 child: MeasurementGrid(),
                 value: selectedMeasurement,
               ),
+              Spacer(),
               Row(
                 children: [
                   Spacer(),
@@ -100,7 +106,7 @@ class MeasuresScreen extends StatelessWidget {
                     child: Text(
                       "View Analytics",
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 16,
                       ),
                     ),
                   ),

@@ -15,7 +15,7 @@ class CaloriesTile extends StatelessWidget {
         margin: EdgeInsets.all(5),
         width: 180,
         height: 140,
-        color: Colors.grey[400],
+        color: Theme.of(context).accentColor,
         child: FlatButton(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
