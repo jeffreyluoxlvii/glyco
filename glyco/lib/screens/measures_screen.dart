@@ -10,6 +10,8 @@ import '../widgets/measurement_grid.dart';
 import '../widgets/shortcuts/glucose_shortcut.dart';
 import '../widgets/shortcuts/shortcut.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class MeasuresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,28 +47,28 @@ class MeasuresScreen extends StatelessWidget {
                     children: [
                       GlucoseShortcut(),
                       Shortcut(
-                          Icons.fastfood,
+                          FontAwesomeIcons.hamburger,
                           () => selectedMeasurement.addNutrition(
                                 settings.mealCalories,
                                 settings.mealCarbs,
                               ),
                           NutritionForm()),
                       Shortcut(
-                          Icons.donut_small,
+                          FontAwesomeIcons.cookie,
                           () => selectedMeasurement.addNutrition(
                                 settings.snackCalories,
                                 settings.snackCarbs,
                               ),
                           NutritionForm()),
                       Shortcut(
-                          Icons.free_breakfast,
+                          FontAwesomeIcons.coffee,
                           () => selectedMeasurement.addNutrition(
                                 settings.drinkCalories,
                                 settings.drinkCarbs,
                               ),
                           NutritionForm()),
                       Shortcut(
-                        Icons.directions_run,
+                        FontAwesomeIcons.running,
                         () => selectedMeasurement.addExercise(
                           settings.exerciseTime,
                         ),

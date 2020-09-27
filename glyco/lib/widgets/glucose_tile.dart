@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class GlucoseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,8 +37,8 @@ class GlucoseTile extends StatelessWidget {
                   children: [
                     Spacer(),
                     Icon(
-                      Icons.whatshot,
-                      size: 70,
+                      FontAwesomeIcons.heartbeat,
+                      size: 60,
                       color: Colors.white,
                     ),
                     Spacer(),

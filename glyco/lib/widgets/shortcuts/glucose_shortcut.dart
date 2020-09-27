@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/measurement.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GlucoseShortcut extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class GlucoseShortcut extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Icon(
-              Icons.favorite,
+              FontAwesomeIcons.heartbeat,
               color: Theme.of(context).primaryColor,
               size: 50,
             ),

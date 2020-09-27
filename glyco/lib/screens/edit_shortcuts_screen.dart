@@ -8,20 +8,22 @@ import 'package:glyco/widgets/mainSettings/editShortcuts/food_rows.dart';
 import 'package:glyco/widgets/mainSettings/editShortcuts/glucose_row.dart';
 import 'package:glyco/widgets/mainSettings/editShortcuts/exercise_row.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class EditShortcuts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = Provider.of<Options>(context).settings;
     ExerciseRow exerciseRow = ExerciseRow(
         icon: Icon(
-          Icons.directions_run,
+          FontAwesomeIcons.running,
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
         minutes: '${settings.exerciseTime}');
     FoodRow mealRow = FoodRow(
         icon: Icon(
-          Icons.fastfood,
+          FontAwesomeIcons.hamburger,
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
@@ -29,7 +31,7 @@ class EditShortcuts extends StatelessWidget {
         carbs: '${settings.mealCarbs}');
     FoodRow snackRow = FoodRow(
         icon: Icon(
-          Icons.donut_small,
+          FontAwesomeIcons.cookie,
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
@@ -37,7 +39,7 @@ class EditShortcuts extends StatelessWidget {
         carbs: '${settings.snackCarbs}');
     FoodRow drinkRow = FoodRow(
         icon: Icon(
-          Icons.free_breakfast,
+          FontAwesomeIcons.coffee,
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
@@ -65,7 +67,7 @@ class EditShortcuts extends StatelessWidget {
             SizedBox(height: 30),
             GlucoseRow(
                 icon: Icon(
-                  Icons.favorite,
+                  FontAwesomeIcons.heartbeat,
                   color: Theme.of(context).primaryColor,
                   size: 45,
                 ),

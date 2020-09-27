@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 import 'package:intl/intl.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class A1CTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,8 +37,8 @@ class A1CTile extends StatelessWidget {
                   children: [
                     Spacer(),
                     Icon(
-                      Icons.timeline,
-                      size: 70,
+                      FontAwesomeIcons.signal,
+                      size: 60,
                       color: Colors.white,
                     ),
                     Spacer(),

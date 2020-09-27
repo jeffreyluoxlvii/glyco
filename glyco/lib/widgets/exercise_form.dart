@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Define a custom Form widget.
 class ExerciseForm extends StatefulWidget {
@@ -44,7 +45,7 @@ class ExerciseFormState extends State<ExerciseForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                Icons.directions_run,
+                FontAwesomeIcons.running,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/screens/change_settings_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsAppBar extends StatefulWidget implements PreferredSizeWidget {
   SettingsAppBar({Key key})
@@ -28,7 +29,7 @@ class _SettingsAppBarState extends State<SettingsAppBar> {
       actions: [
         IconButton(
           icon: Icon(
-            Icons.settings,
+            FontAwesomeIcons.edit,
             color: Colors.black,
           ),
           onPressed: () {

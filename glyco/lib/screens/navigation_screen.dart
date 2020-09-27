@@ -6,6 +6,8 @@ import './challenges_screen.dart';
 import './measures_screen.dart';
 import './settings_screen.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class NavigationScreen extends StatefulWidget {
   @override
   _NavigationScreenState createState() => _NavigationScreenState();
@@ -37,23 +39,23 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return Scaffold(
       body: _screens.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 60,
+        iconSize: 45,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.today),
+            icon: Icon(FontAwesomeIcons.bars),
             title: Text('Challenges'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.table_chart),
+            icon: Icon(FontAwesomeIcons.table),
             title: Text('Measures'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(FontAwesomeIcons.cog),
             title: Text('Settings'),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.grey[400],
         onTap: _onItemTapped,
       ),
     );

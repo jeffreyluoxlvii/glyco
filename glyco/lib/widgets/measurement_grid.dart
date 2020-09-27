@@ -5,6 +5,7 @@ import '../widgets/calories_tile.dart';
 import '../providers/measurement.dart';
 import 'package:provider/provider.dart';
 import './long_tile.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MeasurementGrid extends StatelessWidget {
   @override
@@ -22,8 +23,8 @@ class MeasurementGrid extends StatelessWidget {
                   data: measurement.steps.toString(),
                   unit: "steps",
                   icon: Icon(
-                    Icons.accessible_forward,
-                    size: 35,
+                    FontAwesomeIcons.shoePrints,
+                    size: 25,
                     color: Colors.white,
                   ),
                   updateTime: measurement.timestamp,
@@ -32,7 +33,7 @@ class MeasurementGrid extends StatelessWidget {
                   data: measurement.exerciseTime.toString(),
                   unit: "min",
                   icon: Icon(
-                    Icons.directions_run,
+                    FontAwesomeIcons.running,
                     size: 35,
                     color: Colors.white,
                   ),

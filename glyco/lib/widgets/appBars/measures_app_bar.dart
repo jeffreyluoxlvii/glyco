@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MeasuresAppBar extends StatefulWidget implements PreferredSizeWidget {
   MeasuresAppBar({Key key})
@@ -27,7 +28,7 @@ class _MeasuresAppBarState extends State<MeasuresAppBar> {
       actions: [
         IconButton(
           icon: Icon(
-            Icons.date_range,
+            FontAwesomeIcons.calendar,
             color: Colors.black,
           ),
           onPressed: () {},

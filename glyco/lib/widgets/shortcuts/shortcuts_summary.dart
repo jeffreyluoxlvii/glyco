@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/providers/settings.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ShortcutsSummary extends StatelessWidget {
   @override
@@ -11,14 +12,14 @@ class ShortcutsSummary extends StatelessWidget {
         Row(
           children: [
             Icon(
-              Icons.favorite,
+              FontAwesomeIcons.heartbeat,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
             Text("Manual Input"),
             Spacer(),
             Icon(
-              Icons.fastfood,
+              FontAwesomeIcons.hamburger,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
@@ -30,7 +31,7 @@ class ShortcutsSummary extends StatelessWidget {
         Row(
           children: [
             Icon(
-              Icons.donut_small,
+              FontAwesomeIcons.cookie,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
@@ -38,7 +39,7 @@ class ShortcutsSummary extends StatelessWidget {
                 " ${settings.snackCalories} kcal\n ${settings.snackCarbs}g carbs"),
             Spacer(),
             Icon(
-              Icons.free_breakfast,
+              FontAwesomeIcons.coffee,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
@@ -50,7 +51,7 @@ class ShortcutsSummary extends StatelessWidget {
         Row(
           children: [
             Icon(
-              Icons.directions_run,
+              FontAwesomeIcons.running,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),

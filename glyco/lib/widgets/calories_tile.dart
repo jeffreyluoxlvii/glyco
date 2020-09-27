@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
+
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CaloriesTile extends StatelessWidget {
   @override
@@ -31,8 +34,8 @@ class CaloriesTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 18),
                     child: Icon(
-                      Icons.fastfood,
-                      size: 50,
+                      FontAwesomeIcons.hamburger,
+                      size: 45,
                       color: Colors.white,
                     ),
                   ),
