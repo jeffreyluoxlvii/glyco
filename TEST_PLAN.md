@@ -22,10 +22,25 @@
 **Then** User's account information should be updated with the new values that were inputted in the form.
 **Post-conditions:** Account information on any of the screens that use these values, and database, should hold the correct updated values.
 
+##### Test Scenario #3:
+**Feature:** Integrating HealthKit into the app so data can be pulled from users health app on phone to be displayed and used within Glyco.
+**Purpose:** This feature is vital in grabbing the data we need from the users health app from both iOS and Android. The main data we would need is the users blood glucose levels and if possible their steps as well in order to be displayed on the measurements screen and be used in setting challenges for the user. 
+**Preconditions:** Test uses a specific dummy user with data in their respective health app. 
+**Scenario:** When a user signs into the app their blood glucose levels and their steps should automatically be fetched from the data provided from their helath app. In turn, the values displayed should be correct and their challenges should reflect their progress thusfar. 
+**Given** User gives permission for Glyco to incorporate data from their Helath app
+**When** User opens their Glyco app
+**Then** User's measurements and challenges , specifically blood glucose and steps, should be displayed and reflect the correct information from the user's health app. 
+**Post-conditions:** The data displayed in the app should accurately eately correlate to the data collected in the user's health app. 
 
 ### Definition of Done
 
 * How will you verify features are complete and working in a replicable manner? Note, strategies may differ across features (e.g., some may be automated using different tools, but some may need to be manual)?
+
+We will make sure to exhaustively test each specific feauture to make sure they work in a variety of conditions and output reliable results everytime we test. We will also make sure to cross examine the results outputted by that feature with the expected results and make sure each exhaustive test yields not only reliable results but correct results as well. 
+
+For example, we can run automated tests for the feature on the Measurements screen where tapping the the shortcut icons will update the appropriate values for that measurement. This updated value should be displayed in its respective widget and should be updated in the database as well. We will make sure that the widget updating by the correct value and that the data is also being updated in the database. This can be done for the feature on being able to update user settings from the settings screen. We can run an automated test that runs through ans changes the acount info and make sure that the changes are being reflected in the database for that user as well. 
+
+We can use manual testing to ensure the HealthKit integration is working correctly by looking at the values in the respective platforms health app and looking at the data being pulled into our app and stored in the database. This way we can double check we are scraping the correct data and that when we pull from it, our database is correctly handling it and storing it as well. 
 
 ### Resources
 
