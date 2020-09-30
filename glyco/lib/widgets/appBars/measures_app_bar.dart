@@ -31,7 +31,14 @@ class _MeasuresAppBarState extends State<MeasuresAppBar> {
             FontAwesomeIcons.calendar,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(2001),
+              lastDate: DateTime.now(),
+            ).then((date) {});
+          },
         )
       ],
     );
