@@ -32,6 +32,16 @@
 **Then** User's measurements and challenges , specifically blood glucose and steps, should be displayed and reflect the correct information from the user's health app. 
 **Post-conditions:** The data displayed in the app should accurately eately correlate to the data collected in the user's health app. 
 
+##### Test Scenario #4:
+**Feature:** Testing our internal challenge-generating function that is customized, displayed to the user, and progress-tracked.
+**Purpose:** This function is vital and unique to our application, as it provides users with challenges that serve to improve user retention rate but also to motivate our users in response to their diabetic condition. Testing this feature will be essential to the application's success because it encompasses a major portion of our overall functionality and uniqueness.
+**Preconditions:** Test uses a specific dummy user and its values in the database
+**Scenario:** When a user navigates to the Challenges screen of the application, they will see a customized challenge generated for them based on the previous data the application has collected about their condition. For example, if they have had reduced steps in the last week compared to their usual steps average, Glyco will challenge them to increase the amount of daily steps the user takes this week.
+**Given** User is on the Challenges screen on Glyco and has previous data stored in the applicatiion
+**When** User navigates to the Challenges screen 
+**Then** User should see a custom challenge generated for them that will improve their condition. This challenge will display the previous data that informed this challenge and suggest how to achieve improvement
+**Post-conditions:** The data shown in the progress towards that challenge should be accurately updated as according to the measurements found in the Measures screen 
+
 ### Definition of Done
 
 * How will you verify features are complete and working in a replicable manner? Note, strategies may differ across features (e.g., some may be automated using different tools, but some may need to be manual)?
@@ -45,7 +55,6 @@ We can use manual testing to ensure the HealthKit integration is working correct
 ### Resources
 
 * What do you need to support your tests (i.e., data files, scripts, mock databases, etc.)?
-
 
 We will need test users in our Firebase database, as well as authentication database. Unit tests will need to be written to make sure our Providers are working properly, and we will use Flutter Driver (Flutter's version of Selenium WebDriver)to perform automated tests.
 
