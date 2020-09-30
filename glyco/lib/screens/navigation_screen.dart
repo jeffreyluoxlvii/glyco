@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/appBars/measures_app_bar.dart';
-import '../widgets/appBars/challenges_app_bar.dart';
-import '../widgets/appBars/settings_app_bar.dart';
 import './challenges_screen.dart';
 import './measures_screen.dart';
 import './settings_screen.dart';
