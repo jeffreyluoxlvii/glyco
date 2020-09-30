@@ -24,110 +24,112 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CancelButton(),
-                Spacer(),
-                SaveAndExitButton(),
-              ],
-            ),
-            SizedBox(height: 15),
-            Row(
-              children: [
-                Container(
-                  width: 150,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'First Name',
-                    ),
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  width: 150,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Last Name',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'email',
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(30),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CancelButton(),
+                  Spacer(),
+                  SaveAndExitButton(),
+                ],
               ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'password',
-              ),
-            ),
-            SizedBox(height: 15),
-            Row(
-              children: [
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    print("Change password");
-                  },
-                  child: new Text(
-                    "Change Password",
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      color: Colors.grey[400],
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  Container(
+                    width: 150,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'First Name',
+                      ),
                     ),
                   ),
+                  Spacer(),
+                  Container(
+                    width: 150,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Last Name',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'email',
                 ),
-              ],
-            ),
-            SizedBox(height: 15),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EditShortcuts())).then((value) {
-                  setState(() {
-                    // refresh state of Page1
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'password',
+                ),
+              ),
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      print("Change password");
+                    },
+                    child: new Text(
+                      "Change Password",
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditShortcuts())).then((value) {
+                    setState(() {
+                      // refresh state of Page1
+                    });
                   });
-                });
-              },
-              child: new Text(
-                "Click to Edit Shortcuts",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                },
+                child: new Text(
+                  "Click to Edit Shortcuts",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 15),
-            ChangeNotifierProvider.value(
-              value: settings,
-              child: ShortcutsSummary(),
-            ),
-            SizedBox(height: 15),
-            GestureDetector(
-              onTap: () {
-                print("Edit Integrations");
-              },
-              child: new Text(
-                "Click to Edit Integrations",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+              SizedBox(height: 15),
+              ChangeNotifierProvider.value(
+                value: settings,
+                child: ShortcutsSummary(),
+              ),
+              SizedBox(height: 15),
+              GestureDetector(
+                onTap: () {
+                  print("Edit Integrations");
+                },
+                child: new Text(
+                  "Click to Edit Integrations",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
