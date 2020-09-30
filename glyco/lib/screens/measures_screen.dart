@@ -67,9 +67,11 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                 firstDate: DateTime(2010),
                 lastDate: DateTime.now(),
               ).then((date) {
-                setState(() {
-                  _dateTime = date;
-                });
+                if (date != null) {
+                  setState(() {
+                    _dateTime = date;
+                  });
+                }
               });
             },
           )
