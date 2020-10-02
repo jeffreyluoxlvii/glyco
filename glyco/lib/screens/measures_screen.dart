@@ -20,21 +20,24 @@ class MeasuresScreen extends StatefulWidget {
 
 class _MeasuresScreenState extends State<MeasuresScreen> {
   DateTime _dateTime;
+  var _isLoading = false;
+
   @override
   void initState() {
     setState(() {
       _dateTime = DateTime.now();
+      _isLoading = true;
     });
 
     // Code below will be useful later
 
-    // Provider.of<Products>(context, listen: false)
-    //     .fetchAndSetProducts()
-    //     .then((_) {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // });
+    Provider.of<Measurements>(context, listen: false)
+        .fetchAndSetMeasurements()
+        .then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
     super.initState();
   }
 
