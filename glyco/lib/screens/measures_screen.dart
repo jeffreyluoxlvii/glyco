@@ -41,7 +41,7 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
   @override
   Widget build(BuildContext context) {
     final measurementsData = Provider.of<Measurements>(context);
-    final selectedMeasurement = measurementsData.latestMeasurement;
+    final selectedMeasurement = measurementsData.findByDate(_dateTime);
     final settings = Provider.of<Options>(context).settings;
 
     return Scaffold(
@@ -157,7 +157,9 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                 children: [
                   Spacer(),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      measurementsData.addMeasurement(selectedMeasurement);
+                    },
                     child: Text(
                       "View Analytics",
                       style: TextStyle(
