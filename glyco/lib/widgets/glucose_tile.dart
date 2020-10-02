@@ -68,7 +68,7 @@ class GlucoseTile extends StatelessWidget {
                 ],
               ),
               Text(
-                'Last update ${DateFormat('K:mm a').format(measurement.timestamp)}',
+                'Last update ${DateFormat('K:mm a').format(measurement.lastUpdate)}',
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.white,

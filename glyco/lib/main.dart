@@ -6,7 +6,6 @@ import 'providers/options.dart';
 //Screens
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
-import 'screens/settings_screen.dart';
 import 'screens/edit_shortcuts_screen.dart';
 
 void main() => runApp(MyApp());
