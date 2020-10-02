@@ -27,7 +27,7 @@ class MeasurementGrid extends StatelessWidget {
                     size: 25,
                     color: Colors.white,
                   ),
-                  updateTime: measurement.timestamp,
+                  updateTime: measurement.lastUpdate,
                 ),
                 LongTile(
                   data: measurement.exerciseTime.toString(),
@@ -37,7 +37,7 @@ class MeasurementGrid extends StatelessWidget {
                     size: 35,
                     color: Colors.white,
                   ),
-                  updateTime: measurement.timestamp,
+                  updateTime: measurement.lastUpdate,
                 ),
               ],
             )

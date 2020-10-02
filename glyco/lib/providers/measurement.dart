@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 // TODO: Use the provider from setting to grab the shortcut settings
 
 class Measurement with ChangeNotifier {
-  final int id;
-  final DateTime timestamp;
+  final DateTime date;
+  final DateTime lastUpdate;
   double avgGlucoseLevel; // average level of the day
   double currGlucoseLevel; // current level at the time of reading
   int steps;
@@ -18,8 +18,8 @@ class Measurement with ChangeNotifier {
   double a1cLevel;
 
   Measurement({
-    @required this.id,
-    @required this.timestamp,
+    @required this.date,
+    @required this.lastUpdate,
     @required this.avgGlucoseLevel,
     @required this.currGlucoseLevel,
     @required this.steps,
