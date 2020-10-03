@@ -1,10 +1,10 @@
 ### Release Environments 
 
-* List all the places you expect the app to be deployed (e.g., app and server, app on multiple platforms, web or mobile app, etc.) and your ideal production environment for each (note, include in your planning the minimal version of the software you can use, i.e., deploying only to the latest version of iOS or Android limits your app to only those users that have upgraded recently). How do you plan to separate the production environment(s) from the test environment(s) (i.e., there should always be a current stable version of your app available to demo)?
+The plan for Glyco is a mobile app on both Android and iOS. As we are using Flutter to build the app, there will be both minimum hardware requirements, as well as OS requirements. In terms of hardware, Flutter requires iPhone 4S or newer and ARM Android devices. The minimum specs for mobile operating systems will be Android Jelly Bean, v16, 4.1.x or newer, and iOS 8 or newer. As these minimum specs are quite low, we expect almost everyone to be able to use our app. In terms of a plan for separating the production environment from the test environment, as soon as we release our alpha build, the master branch will stay as the alpha build until long term support is achieved for the beta build (which will be built on a different branch). At that point, the master branch will become the beta build. 
 
 ### Release Packaging 
 
-* List the current and expected project dependencies. How do you plan to make them known and easily gettable for future maintainers (e.g., Docker container, maven or package-info file or other dependency manager, VM, etc.)?
+The dependencies of our project can all be found in the pubspec.yaml file of the project. Current and expected dependencies are: Provider, Intl, Http, FontAwesome, and Health. Since these dependencies are listed in the pubspect.yaml, future mantainers simply need to run 'flutter pub get' to fetch all dependencies needed for the project.
 
 ### Release Build Management 
 
