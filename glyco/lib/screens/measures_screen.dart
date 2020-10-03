@@ -20,28 +20,31 @@ class MeasuresScreen extends StatefulWidget {
 
 class _MeasuresScreenState extends State<MeasuresScreen> {
   DateTime _dateTime;
+  var _isLoading = false;
+
   @override
   void initState() {
     setState(() {
       _dateTime = DateTime.now();
+      _isLoading = true;
     });
 
     // Code below will be useful later
 
-    // Provider.of<Products>(context, listen: false)
-    //     .fetchAndSetProducts()
-    //     .then((_) {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
-    // });
+    Provider.of<Measurements>(context, listen: false)
+        .fetchAndSetMeasurements()
+        .then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final measurementsData = Provider.of<Measurements>(context);
-    final selectedMeasurement = measurementsData.latestMeasurement;
+    final selectedMeasurement = measurementsData.findByDate(_dateTime);
     final settings = Provider.of<Options>(context).settings;
 
     return Scaffold(
@@ -67,9 +70,11 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                 firstDate: DateTime(2010),
                 lastDate: DateTime.now(),
               ).then((date) {
-                setState(() {
-                  _dateTime = date;
-                });
+                if (date != null) {
+                  setState(() {
+                    _dateTime = date;
+                  });
+                }
               });
             },
           )
@@ -155,7 +160,9 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                 children: [
                   Spacer(),
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      measurementsData.addMeasurement(selectedMeasurement);
+                    },
                     child: Text(
                       "View Analytics",
                       style: TextStyle(

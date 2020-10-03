@@ -56,8 +56,33 @@ class ChallengesScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ProgressContainer(),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Center(
+                    child: Container(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                              Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: ProgressContainer(),
+                            ),
+                          ]),
+                      width: 350,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
               ),
             ],
           ),
