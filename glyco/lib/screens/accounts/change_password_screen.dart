@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CreateAccount extends StatelessWidget {
+class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,22 +23,15 @@ class CreateAccount extends StatelessWidget {
             children: [
               SizedBox(height: 60),
               Text(
-                "Welcome to Glyco",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              Text(
-                "Let's get started!",
+                "Change password",
                 style: TextStyle(
                   fontSize: 28,
+                  fontWeight: FontWeight.bold,
                   color: Theme.of(context).primaryColor,
                 ),
               ),
               SizedBox(height: 30),
-              InfoForm(),
+              ChangePassForm(),
               SizedBox(height: 30),
             ],
           ),
@@ -48,55 +41,24 @@ class CreateAccount extends StatelessWidget {
   }
 }
 
-class InfoForm extends StatefulWidget {
+class ChangePassForm extends StatefulWidget {
   @override
-  InfoFormState createState() {
-    return InfoFormState();
+  ChangePassFormState createState() {
+    return ChangePassFormState();
   }
 }
 
-class InfoFormState extends State<InfoForm> {
+class ChangePassFormState extends State<ChangePassForm> {
   final _formKey = GlobalKey<FormState>();
   var enteredPassword;
-  bool accountCreated = false;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: TextFormField(
-                      decoration: formDecorator("First Name"),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Please enter your first name";
-                        }
-                        return null;
-                      }),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: TextFormField(
-                      decoration: formDecorator("Last Name"),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Please enter your last name";
-                        }
-                        return null;
-                      }),
-                ),
-              ),
-            ],
-          ),
           TextFormField(
-              decoration: formDecorator("Email"),
+              decoration: formDecorator("enter old password"),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";
@@ -105,7 +67,7 @@ class InfoFormState extends State<InfoForm> {
               }),
           TextFormField(
               obscureText: true,
-              decoration: formDecorator("Password"),
+              decoration: formDecorator("enter new password"),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter a password";
@@ -116,7 +78,7 @@ class InfoFormState extends State<InfoForm> {
               }),
           TextFormField(
               obscureText: true,
-              decoration: formDecorator("Re-enter Password"),
+              decoration: formDecorator("re-enter new password"),
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter your password';
@@ -137,16 +99,16 @@ class InfoFormState extends State<InfoForm> {
                 color: Colors.cyanAccent[400],
                 child: FlatButton(
                   child: Text(
-                    "CREATE AN ACCOUNT",
+                    "CHANGE PASSWORD",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                     ),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      setState(() => accountCreated = true);
-                    }
+                    // if (_formKey.currentState.validate()) {
+                    //   setState(() => accountCreated = true);
+                    // }
                   },
                 ),
               ),
@@ -154,15 +116,15 @@ class InfoFormState extends State<InfoForm> {
             Spacer(),
           ]),
           SizedBox(height: 30),
-          accountCreated
-              ? Text(
-                  "Account created, please verify your email!",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                )
-              : Text(""),
+          // accountCreated
+          //     ? Text(
+          //         "Account created, please verify your email!",
+          //         style: TextStyle(
+          //           fontSize: 18,
+          //           color: Theme.of(context).primaryColor,
+          //         ),
+          //       )
+          //     : Text(""),
         ],
       ),
     );

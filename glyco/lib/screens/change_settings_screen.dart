@@ -38,7 +38,7 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      print("Change password");
+                      Navigator.pushNamed(context, '/ChangePassword');
                     },
                     child: new Text(
                       "Change Password",
