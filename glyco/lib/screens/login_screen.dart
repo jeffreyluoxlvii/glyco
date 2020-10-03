@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
 GestureDetector createAccount(BuildContext context) {
   return GestureDetector(
     onTap: () {
-      Navigator.pushReplacementNamed(context, '/CreateAccount');
+      Navigator.pushNamed(context, '/CreateAccount');
       //print("Create account");
     },
     child: new Text(

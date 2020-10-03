@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 //Widgets
 
-import 'package:glyco/widgets/mainSettings/editShortcuts/glucose_row.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateAccount extends StatelessWidget {
@@ -11,7 +9,6 @@ class CreateAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text(
           "Glyco",
           style: TextStyle(color: Colors.black),
@@ -25,25 +22,24 @@ class CreateAccount extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 60),
-              Text("Welcome to Glyco",
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  )),
-              Text("Let's get started!",
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Theme.of(context).primaryColor,
-                  )),
+              Text(
+                "Welcome to Glyco",
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                "Let's get started!",
+                style: TextStyle(
+                  fontSize: 28,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
               SizedBox(height: 30),
               InfoForm(),
               SizedBox(height: 30),
-              Row(children: [
-                Spacer(),
-                CreateButton(),
-                Spacer(),
-              ]),
             ],
           ),
         ),
@@ -62,25 +58,33 @@ class InfoForm extends StatefulWidget {
 class InfoFormState extends State<InfoForm> {
   final _formKey = GlobalKey<FormState>();
   var enteredPassword;
+  bool accountCreated = false;
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: <Widget>[
-          Row(
-            children: [
-              TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                  ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return "Please enter your email";
-                    }
-                    return null;
-                  }),
-            ],
-          ),
+          TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'First Name',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please enter your first name";
+                }
+                return null;
+              }),
+          TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Last Name',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please enter your last name";
+                }
+                return null;
+              }),
           TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Email',
@@ -117,34 +121,43 @@ class InfoFormState extends State<InfoForm> {
                 }
                 return null;
               }),
-        ],
-      ),
-    );
-  }
-}
-
-class CreateButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50.0),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        width: 300,
-        height: 40,
-        color: Colors.cyanAccent[400],
-        child: FlatButton(
-          child: Text(
-            "CREATE ACCOUNT",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
+          SizedBox(height: 30),
+          Row(children: [
+            Spacer(),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50.0),
+              child: Container(
+                padding: EdgeInsets.all(5),
+                width: 300,
+                height: 40,
+                color: Colors.cyanAccent[400],
+                child: FlatButton(
+                  child: Text(
+                    "CREATE AN ACCOUNT",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      setState(() => accountCreated = true);
+                    }
+                  },
+                ),
+              ),
             ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+            Spacer(),
+          ]),
+          SizedBox(height: 30),
+          accountCreated ? Text(
+                "Account created, please verify your email!",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ) : Text(""),
+        ],
       ),
     );
   }
