@@ -16,8 +16,16 @@ The dependencies of our project can all be found in the pubspec.yaml file of the
 
 ### Defect Tracking 
 
-* How do you plan to track project bugs from open to close? We are not suggesting learning true bug-tracking software, but you should at least make bugs into actual Gitlab issues, using this template, that are fixed in separate commits with separate tests (ideally made before the bug is fixed to better verify the bug and the fix).
+* We would create new issues that contain what the bug is, and link them with the issues that pertain to the feature that the bug is related to, so that we can easily find bugs and see which feature they pertain to. We would also have commits that are solely dedicated to the fixing of bugs so that there is no confusion when a team member decides to work on a new feature, or on fixing bugs. There would also be commits that are dedicated solely to the creation of separate tests for these fixed bugs, as well. 
 
 ### Software Configuration/Change Management (SCM) 
 
-* How will the team collectively determine if a feature is ready to be released or a change (e.g., a bug or security fix or a feature update) should (or should not) be added to the current production release? What is the overall process for managing which features are in which releases, tracking which changes have been applied to which releases, verifying a change works in the current production release, and determining when the current release should be replaced by a new release?
+* The team will consult with every member to discuss any potential changes to a feature, but if the feature has essentially been finished as planned, the team would have no problem with releasing it. Regarding changes, each case will be reviewed individually by the team as a whole, and an action will be decided if everyone agrees with it. 
+
+* The overall process for managing which features are in which releases will be at the start of every sprint, by checking which features are to be implemented by the end of the sprint, and to what extent they would be functional in the next release of the app.
+
+* With regards to how we will track which changes have been applied, we will keep track of each release in our Gitlab, possibly as a milestone, as certain issues would be features, or related to certain features.
+
+* Regarding how we will verify if a change works in the current production release, we would test its implementation into the current production release, and if the testing results are satisfactory, we would see it as working/functional.
+
+* Regarding how we would determine when a current release should be replaced by a new release, we would analyze the number of features or changes to features that we have implemented since the last release, and the team would decide if the changes have been significant enough to warrant a new release. If the team decides that there are enough changes, then we would determine that the current release should be replaced by a new one.
