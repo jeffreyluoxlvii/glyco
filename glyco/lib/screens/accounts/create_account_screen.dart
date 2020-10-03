@@ -58,37 +58,44 @@ class InfoForm extends StatefulWidget {
 class InfoFormState extends State<InfoForm> {
   final _formKey = GlobalKey<FormState>();
   var enteredPassword;
-  bool accountCreated = false;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
-          TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'First Name',
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                  child: TextFormField(
+                      decoration: formDecorator("First Name"),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Please enter your first name";
+                        }
+                        return null;
+                      }),
+                ),
               ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter your first name";
-                }
-                return null;
-              }),
-          TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Last Name',
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: TextFormField(
+                      decoration: formDecorator("Last Name"),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Please enter your last name";
+                        }
+                        return null;
+                      }),
+                ),
               ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter your last name";
-                }
-                return null;
-              }),
+            ],
+          ),
           TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Email',
-              ),
+              decoration: formDecorator("Email"),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";
@@ -97,9 +104,7 @@ class InfoFormState extends State<InfoForm> {
               }),
           TextFormField(
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-              ),
+              decoration: formDecorator("Password"),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter a password";
@@ -110,9 +115,7 @@ class InfoFormState extends State<InfoForm> {
               }),
           TextFormField(
               obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Re-enter Password',
-              ),
+              decoration: formDecorator("Re-enter Password"),
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter your password';
@@ -140,9 +143,9 @@ class InfoFormState extends State<InfoForm> {
                     ),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      setState(() => accountCreated = true);
-                    }
+                    // if (_formKey.currentState.validate()) {
+                    //   setState(() => accountCreated = true);
+                    // }
                   },
                 ),
               ),
@@ -150,15 +153,20 @@ class InfoFormState extends State<InfoForm> {
             Spacer(),
           ]),
           SizedBox(height: 30),
-          accountCreated ? Text(
-                "Account created, please verify your email!",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ) : Text(""),
         ],
       ),
     );
   }
+}
+
+InputDecoration formDecorator(String label) {
+  return InputDecoration(
+    labelText: label,
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+  );
 }

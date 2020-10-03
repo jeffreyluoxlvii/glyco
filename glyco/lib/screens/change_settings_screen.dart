@@ -31,45 +31,7 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  CancelButton(),
-                  Spacer(),
-                  SaveAndExitButton(),
-                ],
-              ),
-              SizedBox(height: 15),
-              Row(
-                children: [
-                  Container(
-                    width: 150,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'First Name',
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 150,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Last Name',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'email',
-                ),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'password',
-                ),
-              ),
+              ChangeSettingsForm(),
               SizedBox(height: 15),
               Row(
                 children: [
@@ -136,6 +98,86 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
   }
 }
 
+class ChangeSettingsForm extends StatefulWidget {
+  @override
+  ChangeSettingsFormState createState() {
+    return ChangeSettingsFormState();
+  }
+}
+
+class ChangeSettingsFormState extends State<ChangeSettingsForm> {
+  final _formKey = GlobalKey<FormState>();
+  var enteredPassword;
+  bool accountCreated = false;
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          Row(
+            children: [
+              CancelButton(),
+              Spacer(),
+              SaveAndExitButton(),
+            ],
+          ),
+          SizedBox(height: 15),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                  child: TextFormField(
+                      decoration: formDecorator("First Name"),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Please enter your first name";
+                        }
+                        return null;
+                      }),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: TextFormField(
+                      decoration: formDecorator("Last Name"),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Please enter your last name";
+                        }
+                        return null;
+                      }),
+                ),
+              ),
+            ],
+          ),
+          TextFormField(
+              decoration: formDecorator("Email"),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please enter your email";
+                }
+                return null;
+              }),
+          TextFormField(
+              obscureText: true,
+              decoration: formDecorator("Password"),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please enter a password";
+                } else {
+                  enteredPassword = value;
+                }
+                return null;
+              }),
+        ],
+      ),
+    );
+  }
+}
+
 class CancelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -186,4 +228,16 @@ class SaveAndExitButton extends StatelessWidget {
       ),
     );
   }
+}
+
+InputDecoration formDecorator(String label) {
+  return InputDecoration(
+    labelText: label,
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+  );
 }

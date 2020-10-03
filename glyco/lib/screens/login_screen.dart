@@ -33,64 +33,12 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 250,
             width: 250,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'email',
-              ),
-            ),
+          Container(
+            padding: const EdgeInsets.all(30),
+            child: SignInForm(),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 15, 30, 10),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(hintText: 'password'),
-            ),
-          ),
-          forgotPassword(),
-          SizedBox(height: 100),
-          signInButton(context),
           createAccount(context),
         ],
-      ),
-    );
-  }
-
-  GestureDetector forgotPassword() {
-    return GestureDetector(
-      onTap: () {
-        print("Forgot password");
-      },
-      child: new Text(
-        "Forgot Password?",
-        style: TextStyle(
-          fontStyle: FontStyle.italic,
-          color: Colors.grey[400],
-        ),
-      ),
-    );
-  }
-
-  ClipRRect signInButton(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(25.0),
-      child: Container(
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        width: 300,
-        height: 50,
-        color: Colors.cyanAccent[400],
-        child: FlatButton(
-          child: Text("Sign in",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              )),
-          onPressed: () {
-            //Navigator.pushNamed(context, '/NavScreen');
-            Navigator.pushReplacementNamed(context, '/NavScreen');
-          },
-        ),
       ),
     );
   }
@@ -108,6 +56,105 @@ GestureDetector createAccount(BuildContext context) {
         fontStyle: FontStyle.italic,
         color: Colors.grey[400],
       ),
+    ),
+  );
+}
+
+class SignInForm extends StatefulWidget {
+  @override
+  SignInFormState createState() {
+    return SignInFormState();
+  }
+}
+
+class SignInFormState extends State<SignInForm> {
+  final _formKey = GlobalKey<FormState>();
+  var enteredPassword;
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+              decoration: formDecorator("Email"),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please enter your email";
+                }
+                return null;
+              }),
+          TextFormField(
+              obscureText: true,
+              decoration: formDecorator("Password"),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return "Please enter a password";
+                } else {
+                  enteredPassword = value;
+                }
+                return null;
+              }),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Spacer(),
+              forgotPassword(),
+            ],
+          ),
+          SizedBox(height: 70),
+          signInButton(context),
+        ],
+      ),
+    );
+  }
+}
+
+ClipRRect signInButton(BuildContext context) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(25.0),
+    child: Container(
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      width: 300,
+      height: 50,
+      color: Colors.cyanAccent[400],
+      child: FlatButton(
+        child: Text("Sign in",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            )),
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/NavScreen');
+        },
+      ),
+    ),
+  );
+}
+
+GestureDetector forgotPassword() {
+  return GestureDetector(
+    onTap: () {
+      print("Forgot password");
+    },
+    child: new Text(
+      "Forgot Password?",
+      style: TextStyle(
+        fontStyle: FontStyle.italic,
+        color: Colors.grey[400],
+      ),
+    ),
+  );
+}
+
+InputDecoration formDecorator(String label) {
+  return InputDecoration(
+    labelText: label,
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
     ),
   );
 }
