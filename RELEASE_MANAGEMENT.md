@@ -13,7 +13,11 @@ If we need to reference a past push or merge, we can use the appropriate tags in
 
 ### Release Deployment 
 
-* How do you plan to deploy to each release environment? What parts of the process can be automated and what cannot?
+Glyco will be deployed as an app for both Android and iOS. As discussed previously, the minimum specs for Flutter applications are quite low, so we believe our application will be widely available. Flutter takes care of a lot of the deployment process already, as it is a cross-platform framework and has streamlined the release process. We can use flutter build to automate the actual release process. However, we have a lot of manual configuring to make sure that our application is correctly deployed, and this differs for both iOS and Android applications. 
+
+* For iOS, we must create a Bundle ID through our developer account and create an application record on App Store Connect to register a new app. We must also input the necessary information in Xcode by selecting the Runner project and adding the application's display name, bundle ID, Apple Developer account, and deployment info (i.e. the minimum iOS version that the application supports, which is 8.0). The command "flutter build ios" creates a release build - then we can create a build archive and validate the application, which will make it available for release on TestFlight and, later, the App Store.
+
+* For Android, we must create a keystore so that we can release Glyco to the Play Store. Creating the keystore is automated, but we must manually create a file including all the necessary configuration information, though there is a lot of documentation on that. We can then run flutter run appbundle to build the application, but must thoroughly review the build configuration to make sure that the appid and version information are correct. After that, we can follow the rules for publishing the app to the Google Play Store.
 
 ### Defect Tracking 
 
