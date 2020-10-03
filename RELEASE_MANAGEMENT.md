@@ -8,7 +8,8 @@ The dependencies of our project can all be found in the pubspec.yaml file of the
 
 ### Release Build Management 
 
-* What is your pipeline (i.e., process and tools) used for building a development versus a production release? How are these integrated with your GIT workflow (i.e., the branches you merge and pull from and the tags you use)?
+For a development release, we use several branches in our GIT workflow in order to build and develop different features without disrupting the code or progress of another feature. While we develop in these branches, we will continuously be testing our software and testing bugs in our code until it is ready to be combined with the other features being developed. Once a feature has been thoroughly tested, we will release it and merge it with master in order to piece together the software. Once we have all final versions merged with master, we can go through some additional testing and bug fixes to ensure our code works as flawlessly as possible. Once we feel confident, we will release the product. Once we release, we can continuously add features and repeat this process in order to maintain stability and make sure there are no issues with our code.
+If we need to reference a past push or merge, we can use the appropriate tags in order to find the point where we want to access. Once a branch is merged, we will need to pull from master in order to have the code being worked on by others as well.
 
 ### Release Deployment 
 
