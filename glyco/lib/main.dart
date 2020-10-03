@@ -7,6 +7,7 @@ import 'providers/options.dart';
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
 import 'screens/edit_shortcuts_screen.dart';
+import 'screens/accounts/create_account_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           '/NavScreen': (context) => NavigationScreen(),
           '/ChangeSettings': (context) => ChangeSettingsScreen(),
           '/EditShortcuts': (context) => EditShortcuts(),
+          '/CreateAccount': (context) => CreateAccount(),
         },
         theme: ThemeData(
           fontFamily: 'Lato',

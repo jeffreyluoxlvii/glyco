@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,7 +11,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Glyco")),
+      appBar: AppBar(
+        title: Text(
+          "Glyco",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
       body: loginScreen(context),
       resizeToAvoidBottomPadding: false,
     );
@@ -45,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           forgotPassword(),
           SizedBox(height: 100),
           signInButton(context),
-          createAccount(),
+          createAccount(context),
         ],
       ),
     );
@@ -90,10 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-GestureDetector createAccount() {
+GestureDetector createAccount(BuildContext context) {
   return GestureDetector(
     onTap: () {
-      print("Create account");
+      Navigator.pushReplacementNamed(context, '/CreateAccount');
+      //print("Create account");
     },
     child: new Text(
       "or Create an Account",
