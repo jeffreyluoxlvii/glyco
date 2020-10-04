@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 //Widgets
 
 import '../widgets/shortcuts/shortcuts_summary.dart';
+import '../widgets/appBars/plain_app_bar.dart';
 
 class ChangeSettingsScreen extends StatefulWidget {
   @override
@@ -17,13 +18,7 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
   Widget build(BuildContext context) {
     final settings = Provider.of<Options>(context).settings;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          "Glyco",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
+      appBar: PlainAppBar(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(30),
@@ -130,6 +125,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: TextFormField(
                       decoration: formDecorator("First Name"),
+                      initialValue: "Jessica",
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your first name";
@@ -143,6 +139,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: TextFormField(
                       decoration: formDecorator("Last Name"),
+                      initialValue: "Woodard",
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your last name";
@@ -155,20 +152,10 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
           ),
           TextFormField(
               decoration: formDecorator("Email"),
+              initialValue: "jess.woodard@gmail.com",
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";
-                }
-                return null;
-              }),
-          TextFormField(
-              obscureText: true,
-              decoration: formDecorator("Password"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter a password";
-                } else {
-                  enteredPassword = value;
                 }
                 return null;
               }),

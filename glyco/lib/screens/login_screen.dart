@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/appBars/plain_app_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -11,14 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Glyco",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
+      appBar: PlainAppBar(),
       body: loginScreen(context),
       resizeToAvoidBottomPadding: false,
     );
@@ -34,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
             width: 250,
           ),
           Container(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
             child: SignInForm(),
           ),
           createAccount(context),
@@ -42,22 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
-
-GestureDetector createAccount(BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.pushNamed(context, '/CreateAccount');
-      //print("Create account");
-    },
-    child: new Text(
-      "or Create an Account",
-      style: TextStyle(
-        fontStyle: FontStyle.italic,
-        color: Colors.grey[400],
-      ),
-    ),
-  );
 }
 
 class SignInForm extends StatefulWidget {
@@ -77,7 +55,7 @@ class SignInFormState extends State<SignInForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
-              decoration: formDecorator("Email"),
+              decoration: formDecorator("email"),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";
@@ -86,7 +64,7 @@ class SignInFormState extends State<SignInForm> {
               }),
           TextFormField(
               obscureText: true,
-              decoration: formDecorator("Password"),
+              decoration: formDecorator("password"),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter a password";
@@ -99,7 +77,7 @@ class SignInFormState extends State<SignInForm> {
           Row(
             children: [
               Spacer(),
-              forgotPassword(),
+              forgotPassword(context),
             ],
           ),
           SizedBox(height: 70),
@@ -132,13 +110,29 @@ ClipRRect signInButton(BuildContext context) {
   );
 }
 
-GestureDetector forgotPassword() {
+GestureDetector forgotPassword(BuildContext context) {
   return GestureDetector(
     onTap: () {
-      print("Forgot password");
+      Navigator.pushNamed(context, '/ForgotPassword');
     },
     child: new Text(
       "Forgot Password?",
+      style: TextStyle(
+        fontStyle: FontStyle.italic,
+        color: Colors.grey[400],
+      ),
+    ),
+  );
+}
+
+GestureDetector createAccount(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushNamed(context, '/CreateAccount');
+      //print("Create account");
+    },
+    child: new Text(
+      "or Create an Account",
       style: TextStyle(
         fontStyle: FontStyle.italic,
         color: Colors.grey[400],

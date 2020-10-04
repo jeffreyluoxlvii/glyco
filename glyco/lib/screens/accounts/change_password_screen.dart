@@ -51,6 +51,7 @@ class ChangePassForm extends StatefulWidget {
 class ChangePassFormState extends State<ChangePassForm> {
   final _formKey = GlobalKey<FormState>();
   var enteredPassword;
+  bool passwordChanged = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -58,10 +59,11 @@ class ChangePassFormState extends State<ChangePassForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
-              decoration: formDecorator("enter old password"),
+              obscureText: true,
+              decoration: formDecorator("enter current password"),
               validator: (value) {
                 if (value.isEmpty) {
-                  return "Please enter your email";
+                  return "Please enter your current password";
                 }
                 return null;
               }),
@@ -70,7 +72,7 @@ class ChangePassFormState extends State<ChangePassForm> {
               decoration: formDecorator("enter new password"),
               validator: (value) {
                 if (value.isEmpty) {
-                  return "Please enter a password";
+                  return "Please enter a new password";
                 } else {
                   enteredPassword = value;
                 }
@@ -81,7 +83,7 @@ class ChangePassFormState extends State<ChangePassForm> {
               decoration: formDecorator("re-enter new password"),
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Please enter your password';
+                  return 'Please re-enter your new password';
                 } else if (value != enteredPassword) {
                   return "Passwords don't match";
                 }
@@ -106,9 +108,9 @@ class ChangePassFormState extends State<ChangePassForm> {
                     ),
                   ),
                   onPressed: () {
-                    // if (_formKey.currentState.validate()) {
-                    //   setState(() => accountCreated = true);
-                    // }
+                    if (_formKey.currentState.validate()) {
+                      setState(() => passwordChanged = true);
+                    }
                   },
                 ),
               ),
@@ -116,15 +118,15 @@ class ChangePassFormState extends State<ChangePassForm> {
             Spacer(),
           ]),
           SizedBox(height: 30),
-          // accountCreated
-          //     ? Text(
-          //         "Account created, please verify your email!",
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Theme.of(context).primaryColor,
-          //         ),
-          //       )
-          //     : Text(""),
+          passwordChanged
+              ? Text(
+                  "Password changed successfully!",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                )
+              : Text(""),
         ],
       ),
     );
