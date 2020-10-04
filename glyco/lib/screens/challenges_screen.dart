@@ -3,40 +3,9 @@ import 'package:glyco/widgets/appBars/challenges_app_bar.dart';
 import '../widgets/challenge_container.dart';
 import '../widgets/progress_container.dart';
 
-import 'package:provider/provider.dart';
-import '../providers/challenges.dart';
-
-class ChallengesScreen extends StatefulWidget {
-  @override
-  _ChallengesScreenState createState() => _ChallengesScreenState();
-}
-
-class _ChallengesScreenState extends State<ChallengesScreen> {
-  DateTime _dateTime;
-  var _isLoading = false;
-
-  @override
-  void initState() {
-    setState(() {
-      _dateTime = DateTime.now();
-      _isLoading = true;
-    });
-
-    Provider.of<Challenges>(context, listen: false)
-        .fetchAndSetMeasurements()
-        .then((_) {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-    super.initState();
-  }
-
+class ChallengesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final measurementsData = Provider.of<Challenges>(context);
-    final selectedMeasurement = measurementsData.findByDate(_dateTime);
-
     return Scaffold(
       body: Scaffold(
         appBar: ChallengesAppBar(),

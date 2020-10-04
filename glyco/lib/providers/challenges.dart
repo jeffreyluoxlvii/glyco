@@ -24,6 +24,15 @@ class Challenges with ChangeNotifier {
     );
   }
 
+  String generateChallenge(Measurement measurement) {
+    if (measurement.currGlucoseLevel > 115.0) {
+      return 'your glucose is kind of high lol you should work on that';
+    }
+    return 'your glucose is ' +
+        measurement.currGlucoseLevel.toString() +
+        ' so ur doing pretty ok';
+  }
+
   Future<void> fetchAndSetMeasurements() async {
     const url = 'https://glyco-6f403.firebaseio.com/measurements.json';
     try {

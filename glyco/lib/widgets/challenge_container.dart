@@ -1,8 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/challenges.dart';
 
-class ChallengeContainer extends StatelessWidget {
+class ChallengeContainer extends StatefulWidget {
+  @override
+  _ChallengeContainerState createState() => _ChallengeContainerState();
+}
+
+class _ChallengeContainerState extends State<ChallengeContainer> {
+  DateTime _dateTime;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    setState(() {
+      _dateTime = DateTime.now();
+      _isLoading = true;
+    });
+
+    Provider.of<Challenges>(context, listen: false)
+        .fetchAndSetMeasurements()
+        .then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final measurementsData = Provider.of<Challenges>(context);
+    final selectedMeasurement = measurementsData.findByDate(_dateTime);
+  
     return Center(
       child: Container(
         child: Padding(
@@ -10,7 +40,7 @@ class ChallengeContainer extends StatelessWidget {
             child: Row(children: [
               Flexible(
                 child: Text(
-                    'Your mg/dL levels this week have been 40% lower than the rest of the month. Let’s keep it less than 135!',
+                    measurementsData.generateChallenge(selectedMeasurement),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
