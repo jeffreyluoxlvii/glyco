@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
+import 'providers/challenges.dart';
+
 //Screens
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
@@ -21,6 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => Options(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Challenges(),
         )
       ],
       child: MaterialApp(
