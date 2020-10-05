@@ -4,32 +4,7 @@ import 'dart:convert';
 import './measurement.dart';
 
 class Measurements with ChangeNotifier {
-  List<Measurement> _measurements = [
-    //   Measurement(
-    //     id: 'm1',
-    //     date: DateTime(_now.year, _now.month, _now.day - 1),
-    //     calories: 2000,
-    //     carbs: 120,
-    //     exerciseTime: 30,
-    //     currGlucoseLevel: 118,
-    //     avgGlucoseLevel: 120,
-    //     a1cLevel: 11.2,
-    //     steps: 1400,
-    //     lastUpdate: DateTime.utc(2020, 9, 22, 13, 20, 12, 13),
-    //   ),
-    //   Measurement(
-    //     id: 'm2',
-    //     date: DateTime(_now.year, _now.month, _now.day),
-    //     calories: 1500,
-    //     carbs: 150,
-    //     exerciseTime: 50,
-    //     currGlucoseLevel: 122,
-    //     avgGlucoseLevel: 121,
-    //     a1cLevel: 11.4,
-    //     steps: 3835,
-    //     lastUpdate: DateTime.utc(2020, 9, 21, 12, 33, 1, 14),
-    //   ),
-  ];
+  List<Measurement> _measurements = [];
 
   List<Measurement> get measurements {
     return [..._measurements];
@@ -45,7 +20,11 @@ class Measurements with ChangeNotifier {
           measurement.date.year == date.year &&
           measurement.date.month == date.month &&
           measurement.date.day == date.day,
-      orElse: () => latestMeasurement,
+      orElse: () {
+        // TODO: handle this
+        print('no element');
+        return latestMeasurement;
+      },
     );
   }
 

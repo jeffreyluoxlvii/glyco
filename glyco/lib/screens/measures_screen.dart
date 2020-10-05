@@ -108,33 +108,104 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                       GlucoseShortcut(),
                       Shortcut(
                         FontAwesomeIcons.hamburger,
-                        () => selectedMeasurement.addNutrition(
-                          settings.mealCalories,
-                          settings.mealCarbs,
-                        ),
+                        () {
+                          selectedMeasurement.addNutrition(
+                            settings.mealCalories,
+                            settings.mealCarbs,
+                          );
+                          Scaffold.of(context).hideCurrentSnackBar();
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Added meal!'),
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                label: 'UNDO',
+                                onPressed: () {
+                                  selectedMeasurement.addNutrition(
+                                    settings.mealCalories * -1,
+                                    settings.mealCarbs * -1,
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
                         NutritionForm(FontAwesomeIcons.hamburger),
                       ),
                       Shortcut(
                         FontAwesomeIcons.cookie,
-                        () => selectedMeasurement.addNutrition(
-                          settings.snackCalories,
-                          settings.snackCarbs,
-                        ),
+                        () {
+                          selectedMeasurement.addNutrition(
+                            settings.snackCalories,
+                            settings.snackCarbs,
+                          );
+                          Scaffold.of(context).hideCurrentSnackBar();
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Added snack!'),
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                label: 'UNDO',
+                                onPressed: () {
+                                  selectedMeasurement.addNutrition(
+                                    settings.snackCalories * -1,
+                                    settings.snackCarbs * -1,
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
                         NutritionForm(FontAwesomeIcons.cookie),
                       ),
                       Shortcut(
                         FontAwesomeIcons.mugHot,
-                        () => selectedMeasurement.addNutrition(
-                          settings.drinkCalories,
-                          settings.drinkCarbs,
-                        ),
+                        () {
+                          selectedMeasurement.addNutrition(
+                            settings.drinkCalories,
+                            settings.drinkCarbs,
+                          );
+                          Scaffold.of(context).hideCurrentSnackBar();
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Added drink!'),
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                label: 'UNDO',
+                                onPressed: () {
+                                  selectedMeasurement.addNutrition(
+                                    settings.drinkCalories * -1,
+                                    settings.drinkCarbs * -1,
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
                         NutritionForm(FontAwesomeIcons.mugHot),
                       ),
                       Shortcut(
                         FontAwesomeIcons.running,
-                        () => selectedMeasurement.addExercise(
-                          settings.exerciseTime,
-                        ),
+                        () {
+                          selectedMeasurement.addExercise(
+                            settings.exerciseTime,
+                          );
+                          Scaffold.of(context).hideCurrentSnackBar();
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Added exercise!'),
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                label: 'UNDO',
+                                onPressed: () {
+                                  selectedMeasurement.addExercise(
+                                    settings.exerciseTime * -1,
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
                         ExerciseForm(),
                       ),
                     ],
