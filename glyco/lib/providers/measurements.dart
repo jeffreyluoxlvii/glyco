@@ -93,31 +93,4 @@ class Measurements with ChangeNotifier {
       throw error;
     }
   }
-
-  // Do something like this for updating settings
-
-  // Future<void> updateMeasurement(
-  //     DateTime date, Measurement newMeasurement) async {
-  //   final measurementIndex = _measurements.indexWhere((measurement) =>
-  //       measurement.date.year == date.year &&
-  //       measurement.date.month == date.month &&
-  //       measurement.date.day == date.day);
-  //   if (measurementIndex >= 0) {
-  //     final id = _measurements[measurementIndex].id;
-  //     final url = 'https://glyco-6f403.firebaseio.com/measurements/$id.json';
-  //     await http.patch(url,
-  //         body: json.encode({
-  //           'a1cLevel': newMeasurement.a1cLevel,
-  //           'avgGlucoseLevel': newMeasurement.avgGlucoseLevel,
-  //           'calories': newMeasurement.calories,
-  //           'carbs': newMeasurement.carbs,
-  //           'currGlucoseLevel': newMeasurement.currGlucoseLevel,
-  //           'exerciseTime': newMeasurement.exerciseTime,
-  //           'steps': newMeasurement.steps,
-  //           'lastUpdate': newMeasurement.lastUpdate.toIso8601String(),
-  //         }));
-  //     _measurements[measurementIndex] = newMeasurement;
-  //     notifyListeners();
-  //   }
-  // }
 }
