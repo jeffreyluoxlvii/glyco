@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/appBars/plain_app_bar.dart';
+import '../../widgets/appBars/plain_app_bar_back.dart';
 
 //Widgets
 
@@ -9,16 +9,7 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Glyco",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-      ),
+      appBar: PlainAppBarBack(),
       body: Container(
         padding: const EdgeInsets.all(30),
         width: double.infinity,

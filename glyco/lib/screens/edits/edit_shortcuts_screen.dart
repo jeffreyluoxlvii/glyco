@@ -4,10 +4,9 @@ import 'package:provider/provider.dart';
 
 //Widgets
 
-import '../widgets/mainSettings/editShortcuts/food_rows.dart';
-import '../widgets/mainSettings/editShortcuts/glucose_row.dart';
-import '../widgets/mainSettings/editShortcuts/exercise_row.dart';
-import '../widgets/appBars/plain_app_bar.dart';
+import '../../widgets/mainSettings/editShortcuts/exercise_row.dart';
+import '../../widgets/mainSettings/editShortcuts/food_rows.dart';
+import '../../widgets/appBars/plain_app_bar.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -61,14 +60,6 @@ class EditShortcuts extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor,
                   )),
-              SizedBox(height: 30),
-              GlucoseRow(
-                  icon: Icon(
-                    FontAwesomeIcons.heartbeat,
-                    color: Theme.of(context).primaryColor,
-                    size: 45,
-                  ),
-                  measurement: 'Manual Input'),
               SizedBox(height: 30),
               mealRow,
               SizedBox(height: 30),

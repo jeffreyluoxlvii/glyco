@@ -21,7 +21,7 @@ class ChangePassword extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 60),
+              SizedBox(height: 15),
               Text(
                 "Change password",
                 style: TextStyle(

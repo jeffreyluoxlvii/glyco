@@ -6,7 +6,7 @@ import 'providers/options.dart';
 //Screens
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
-import 'screens/edit_shortcuts_screen.dart';
+import 'screens/edits/edit_shortcuts_screen.dart';
 import 'screens/accounts/create_account_screen.dart';
 import 'screens/accounts/change_password_screen.dart';
 import 'screens/accounts/forgot_password_screen.dart';

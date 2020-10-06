@@ -24,6 +24,12 @@ class FoodRow extends StatelessWidget {
           child: TextField(
             controller: kcalController,
             decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+              ),
               hintText: kcal,
             ),
           ),
@@ -36,6 +42,12 @@ class FoodRow extends StatelessWidget {
           child: TextField(
             controller: carbController,
             decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+              ),
               hintText: carbs,
             ),
           ),
@@ -47,4 +59,15 @@ class FoodRow extends StatelessWidget {
       ],
     );
   }
+}
+
+InputDecoration formDecorator() {
+  return InputDecoration(
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+  );
 }
