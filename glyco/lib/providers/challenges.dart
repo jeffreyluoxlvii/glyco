@@ -24,13 +24,47 @@ class Challenges with ChangeNotifier {
     );
   }
 
-  String generateChallenge(Measurement measurement) {
-    if (measurement.currGlucoseLevel > 115.0) {
-      return 'your glucose is kind of high lol you should work on that';
+  int roundToHundred(double number) {
+    int multiple = 100;
+    int result = multiple;
+
+    if (number % multiple == 0) {
+      return number.round();
+    } else {
+      int division = ((number / multiple) + 1).round();
+      result = division * multiple;
     }
-    return 'your glucose is ' +
-        measurement.currGlucoseLevel.toString() +
-        ' so ur doing pretty ok';
+    return result;
+  }
+
+  int monthSteps() {
+    return 12487;
+  }
+
+  int weekSteps() {
+    return 9047;
+  }
+
+  String generateChallenge(Measurement measurement) {
+    double stepsReduction = 1 - (weekSteps() / monthSteps());
+    int stepsReductionPercent = (stepsReduction * 100).round();
+
+    if (weekSteps() < 4000) {
+      return 'Your steps are below the recommended daily steps. Try to get to 4,000 steps this week! ';
+    }
+
+    if (weekSteps() > 10000) {
+      return 'Congratulations! You have hit the daily recommended step intake of 10000 steps. Keep up the good work!';
+    }
+
+    if (stepsReduction >= 0.15) {
+      int stepsGoal = roundToHundred(weekSteps() * 1.25);
+      return 'Your steps for the last week have been ' +
+          stepsReductionPercent.toString() +
+          "% lower than the rest of the month. Try to get " +
+          stepsGoal.toString() +
+          " steps this week!";
+    }
   }
 
   Future<void> fetchAndSetMeasurements() async {
