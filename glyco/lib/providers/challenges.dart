@@ -24,8 +24,7 @@ class Challenges with ChangeNotifier {
     );
   }
 
-  int roundToHundred(double number) {
-    int multiple = 100;
+  int roundToMultiple(double number, int multiple) {
     int result = multiple;
 
     if (number % multiple == 0) {
@@ -37,6 +36,7 @@ class Challenges with ChangeNotifier {
     return result;
   }
 
+  // STEPS AVERAGES
   int monthSteps() {
     return 12487;
   }
@@ -45,26 +45,67 @@ class Challenges with ChangeNotifier {
     return 9047;
   }
 
+  // ACTIVITY AVERAGES
+  int monthActivity() {
+    return 36;
+  }
+
+  int weekActivity() {
+    return 25;
+  }
+
+  // CARBS AVERAGES
+  int monthCarbs() {
+    return 54;
+  }
+
+  int weekCarbs() {
+    return 78;
+  }
+
   String generateChallenge(Measurement measurement) {
     double stepsReduction = 1 - (weekSteps() / monthSteps());
     int stepsReductionPercent = (stepsReduction * 100).round();
 
+    double activityReduction = 1 - (weekActivity() / monthActivity());
+    int activityReductionPercent = (activityReduction * 100).round();
+
+    // STEPS
     if (weekSteps() < 4000) {
       return 'Your steps are below the recommended daily steps. Try to get to 4,000 steps this week! ';
     }
-
-    if (weekSteps() > 10000) {
+    if (weekSteps() >= 10000) {
       return 'Congratulations! You have hit the daily recommended step intake of 10000 steps. Keep up the good work!';
     }
-
     if (stepsReduction >= 0.15) {
-      int stepsGoal = roundToHundred(weekSteps() * 1.25);
+      int stepsGoal = roundToMultiple((weekSteps() * 1.25), 100);
       return 'Your steps for the last week have been ' +
           stepsReductionPercent.toString() +
           "% lower than the rest of the month. Try to get " +
           stepsGoal.toString() +
           " steps this week!";
     }
+
+    // ACTIVITY
+    if (weekActivity() < 20) {
+      return 'Your activity time is below the recommended daily activity. Try to get to 30 minutes a day this week! ';
+    }
+    if (weekCarbs() >= 30) {
+      return 'Congratulations! You have hit the daily recommended activity level at 30 minutes. Keep up the good work!';
+    }
+    if (activityReduction >= 0.15) {
+      int activityGoal = roundToMultiple((weekActivity() * 1.25), 10);
+      return 'Your activity time for the last week has been ' +
+          activityReductionPercent.toString() +
+          "% lower than the rest of the month. Try to get " +
+          activityGoal.toString() +
+          " minutes a day this week!";
+    }
+
+    // CARBS
+
+    
+    return 'There are currently no challenges. Come back later!';
   }
 
   Future<void> fetchAndSetMeasurements() async {
