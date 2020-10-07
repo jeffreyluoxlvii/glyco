@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
+import 'providers/auth.dart';
 //Screens
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(
+          value: Auth(),
+        ),
         ChangeNotifierProvider(
           create: (ctx) => Measurements(),
         ),

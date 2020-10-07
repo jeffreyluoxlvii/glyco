@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+//Providers
+import '../../providers/auth.dart';
 //Widgets
-
 import '../../widgets/appBars/plain_app_bar_back.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -143,6 +144,8 @@ class InfoFormState extends State<InfoForm> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       setState(() => accountCreated = true);
+                      //Provider to create account
+                      //await Provider.of<Auth>(context, listen: false).signUp(email, password);
                     }
                   },
                 ),
