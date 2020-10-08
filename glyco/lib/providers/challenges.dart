@@ -42,25 +42,25 @@ class Challenges with ChangeNotifier {
   }
 
   int weekSteps() {
-    return 9047;
+    return 9587;
   }
 
   // ACTIVITY AVERAGES
   int monthActivity() {
-    return 36;
+    return 66;
   }
 
   int weekActivity() {
-    return 25;
+    return 28;
   }
 
   // CARBS AVERAGES
   int monthCarbs() {
-    return 54;
+    return 34;
   }
 
   int weekCarbs() {
-    return 78;
+    return 72;
   }
 
   String generateChallenge(Measurement measurement) {
@@ -69,6 +69,8 @@ class Challenges with ChangeNotifier {
 
     double activityReduction = 1 - (weekActivity() / monthActivity());
     int activityReductionPercent = (activityReduction * 100).round();
+
+    double carbDifference = (weekCarbs() / monthCarbs());
 
     // STEPS
     if (weekSteps() < 4000) {
@@ -90,8 +92,8 @@ class Challenges with ChangeNotifier {
     if (weekActivity() < 20) {
       return 'Your activity time is below the recommended daily activity. Try to get to 30 minutes a day this week! ';
     }
-    if (weekCarbs() >= 30) {
-      return 'Congratulations! You have hit the daily recommended activity level at 30 minutes. Keep up the good work!';
+    if (weekActivity() >= 30) {
+      return 'Congratulations! You have hit the daily recommended activity level of 30 minutes. Keep up the good work!';
     }
     if (activityReduction >= 0.15) {
       int activityGoal = roundToMultiple((weekActivity() * 1.25), 10);
@@ -103,8 +105,26 @@ class Challenges with ChangeNotifier {
     }
 
     // CARBS
+    if (weekCarbs() > 100) {
+      return 'Your carb intake is above the recommended daily carb intake. Try to get down to 100g of carbs this week! ';
+    }
+    if (weekCarbs() <= 40) {
+      return 'Congratulations! You are around the daily recommended carb intake of 40g of carbs. Keep up the good work!';
+    }
+    if (carbDifference > 1) {
+      double carbIncrease = carbDifference - 1;
+      int carbIncreasePercent = ((carbDifference - 1) * 100).round();
 
-    
+      if (carbIncrease >= 0.15) {
+        int carbDecreaseGoal = (weekCarbs() * 0.85).round();
+        return 'Your carb intake for the last week has been ' +
+            carbIncreasePercent.toString() +
+            "% higher than the rest of the month. Try to get " +
+            carbDecreaseGoal.toString() +
+            " grams of carbs this week!";
+      }
+    }
+
     return 'There are currently no challenges. Come back later!';
   }
 
