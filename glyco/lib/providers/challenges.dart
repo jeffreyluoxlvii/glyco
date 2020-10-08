@@ -38,28 +38,118 @@ class Challenges with ChangeNotifier {
 
   // STEPS AVERAGES
   int monthSteps() {
+    // int totalSteps = 0;
+    // int numDay = 0;
+
+    // for (int i = 7; i < 31; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: 1));
+    //   if ((findByDate(day)).steps != null) {
+    //     totalSteps += (findByDate(day)).steps;
+    //     numDay++;
+    //   }
+    // }
+
+    // int avgSteps = (totalSteps / numDay).round();
+
+    // return avgSteps;
+
     return 12487;
   }
 
   int weekSteps() {
+    // int totalSteps = 0;
+    // int numDay = 0;
+
+    // for (int i = 1; i < 7; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: 1));
+    //   if ((findByDate(day)).steps != null) {
+    //     totalSteps += (findByDate(day)).steps;
+    //     numDay++;
+    //   }
+    // }
+
+    // int avgSteps = (totalSteps / numDay).round();
+
+    // return avgSteps;
+
     return 9587;
   }
 
   // ACTIVITY AVERAGES
   int monthActivity() {
+    // int totalActivity = 0;
+    // int numDay = 0;
+
+    // for (int i = 7; i < 31; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: 1));
+    //   if ((findByDate(day)).exerciseTime != null) {
+    //     totalActivity += (findByDate(day)).exerciseTime;
+    //     numDay++;
+    //   }
+    // }
+
+    // int avgActivity = (totalActivity / numDay).round();
+
+    // return avgActivity;
+
     return 66;
   }
 
   int weekActivity() {
+    // int totalActivity = 0;
+    // int numDay = 0;
+
+    // for (int i = 1; i < 7; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: 1));
+    //   if ((findByDate(day)).exerciseTime != null) {
+    //     totalActivity += (findByDate(day)).exerciseTime;
+    //     numDay++;
+    //   }
+    // }
+
+    // int avgActivity = (totalActivity / numDay).round();
+
+    // return avgActivity;
+
     return 28;
   }
 
   // CARBS AVERAGES
   int monthCarbs() {
+    // int totalCarbs = 0;
+    // int numDay = 0;
+
+    // for (int i = 7; i < 31; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: 1));
+    //   if ((findByDate(day)).carbs != null) {
+    //     totalCarbs += (findByDate(day)).carbs;
+    //     numDay++;
+    //   }
+    // }
+
+    // int avgCarbs = (totalCarbs / numDay).round();
+
+    // return avgCarbs;
+
     return 34;
   }
 
   int weekCarbs() {
+    // int totalCarbs = 0;
+    // int numDay = 0;
+
+    // for (int i = 1; i < 7; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: 1));
+    //   if ((findByDate(day)).carbs != null) {
+    //     totalCarbs += (findByDate(day)).carbs;
+    //     numDay++;
+    //   }
+    // }
+
+    // int avgCarbs = (totalCarbs / numDay).round();
+
+    // return avgCarbs;
+
     return 72;
   }
 
