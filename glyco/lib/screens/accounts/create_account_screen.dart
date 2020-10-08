@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
 //Widgets
 import '../../widgets/appBars/plain_app_bar_back.dart';
+//Models
+import '../../models/http_exception.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -60,12 +62,34 @@ class InfoFormState extends State<InfoForm> {
   var lastName;
   var email;
   var password;
+  var createdMessage = "";
   bool accountCreated = false;
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
-      await Provider.of<Auth>(context, listen: false).signUp(this.email, this.password);
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .signUp(this.email, this.password);
+        setState(() => createdMessage = "Account created, please verify your email!");
+      } 
+      on HttpException catch (error) {
+        var errorMessage = 'Authentication failed';
+        if (error.toString().contains('EMAIL_EXISTS')) {
+          errorMessage = 'This email address is already in use.';
+        } else if (error.toString().contains('INVALID_EMAIL')) {
+          errorMessage = 'This is not a valid email address';
+        } else if (error.toString().contains('WEAK_PASSWORD')) {
+          errorMessage = 'This password is too weak.';
+        }
+        setState(() => createdMessage = errorMessage);
+      } 
+      catch (error) {
+        print("Error");
+        const errorMessage = 'Could not authenticate. Try again later';
+        setState(() => createdMessage = errorMessage);
+      }
     }
+
     return Form(
       key: _formKey,
       child: Column(
@@ -172,7 +196,6 @@ class InfoFormState extends State<InfoForm> {
                     if (_formKey.currentState.validate()) {
                       setState(() => accountCreated = true);
                       _formKey.currentState.save();
-                      //Provider to create account
                       _submit();
                     }
                   },
@@ -184,7 +207,7 @@ class InfoFormState extends State<InfoForm> {
           SizedBox(height: 30),
           accountCreated
               ? Text(
-                  "Account created, please verify your email!",
+                  createdMessage,
                   style: TextStyle(
                     fontSize: 18,
                     color: Theme.of(context).primaryColor,
