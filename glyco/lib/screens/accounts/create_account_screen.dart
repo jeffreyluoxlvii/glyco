@@ -56,9 +56,16 @@ class InfoForm extends StatefulWidget {
 class InfoFormState extends State<InfoForm> {
   final _formKey = GlobalKey<FormState>();
   var enteredPassword;
+  var firstName;
+  var lastName;
+  var email;
+  var password;
   bool accountCreated = false;
   @override
   Widget build(BuildContext context) {
+    Future<void> _submit() async {
+      await Provider.of<Auth>(context, listen: false).signUp(this.email, this.password);
+    }
     return Form(
       key: _formKey,
       child: Column(
@@ -69,49 +76,69 @@ class InfoFormState extends State<InfoForm> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: TextFormField(
-                      decoration: formDecorator("first name"),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Please enter your first name";
-                        }
-                        return null;
-                      }),
+                    decoration: formDecorator("first name"),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Please enter your first name";
+                      }
+                      return null;
+                    },
+                    onSaved: (String value) {
+                      this.firstName = value;
+                      print(this.firstName);
+                    },
+                  ),
                 ),
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: TextFormField(
-                      decoration: formDecorator("last name"),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Please enter your last name";
-                        }
-                        return null;
-                      }),
+                    decoration: formDecorator("last name"),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Please enter your last name";
+                      }
+                      return null;
+                    },
+                    onSaved: (String value) {
+                      this.lastName = value;
+                      print(this.lastName);
+                    },
+                  ),
                 ),
               ),
             ],
           ),
           TextFormField(
-              decoration: formDecorator("email"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter your email";
-                }
-                return null;
-              }),
+            decoration: formDecorator("email"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter your email";
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.email = value;
+              print(this.email);
+            },
+          ),
           TextFormField(
-              obscureText: true,
-              decoration: formDecorator("password"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter a password";
-                } else {
-                  enteredPassword = value;
-                }
-                return null;
-              }),
+            obscureText: true,
+            decoration: formDecorator("password"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter a password";
+              } else {
+                enteredPassword = value;
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.password = value;
+              print(this.password);
+            },
+          ),
           TextFormField(
               obscureText: true,
               decoration: formDecorator("re-enter password"),
@@ -144,8 +171,9 @@ class InfoFormState extends State<InfoForm> {
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       setState(() => accountCreated = true);
+                      _formKey.currentState.save();
                       //Provider to create account
-                      //await Provider.of<Auth>(context, listen: false).signUp(email, password);
+                      _submit();
                     }
                   },
                 ),

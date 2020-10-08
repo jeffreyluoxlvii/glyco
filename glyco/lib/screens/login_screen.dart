@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/appBars/plain_app_bar.dart';
+import '../providers/auth.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -47,32 +49,42 @@ class SignInForm extends StatefulWidget {
 
 class SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
-  var enteredPassword;
+  var email;
+  var password;
   @override
   Widget build(BuildContext context) {
+    Future<void> _submit() async {
+      await Provider.of<Auth>(context, listen: false).signIn(this.email, this.password);
+    }
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
           TextFormField(
-              decoration: formDecorator("email"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter your email";
-                }
-                return null;
-              }),
+            decoration: formDecorator("email"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter your email";
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.email = value;
+            },
+          ),
           TextFormField(
-              obscureText: true,
-              decoration: formDecorator("password"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter a password";
-                } else {
-                  enteredPassword = value;
-                }
-                return null;
-              }),
+            obscureText: true,
+            decoration: formDecorator("password"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter a password";
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.password = value;
+            },
+          ),
           SizedBox(height: 10),
           Row(
             children: [
@@ -81,33 +93,33 @@ class SignInFormState extends State<SignInForm> {
             ],
           ),
           SizedBox(height: 70),
-          signInButton(context),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(25.0),
+            child: Container(
+              margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+              width: 300,
+              height: 50,
+              color: Colors.cyanAccent[400],
+              child: FlatButton(
+                child: Text("Sign in",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    )),
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      _submit();
+                      Navigator.pushReplacementNamed(context, '/NavScreen');
+                    }
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
-}
-
-ClipRRect signInButton(BuildContext context) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(25.0),
-    child: Container(
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-      width: 300,
-      height: 50,
-      color: Colors.cyanAccent[400],
-      child: FlatButton(
-        child: Text("Sign in",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            )),
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, '/NavScreen');
-        },
-      ),
-    ),
-  );
 }
 
 GestureDetector forgotPassword(BuildContext context) {
