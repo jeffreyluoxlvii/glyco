@@ -32,7 +32,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
   Widget build(BuildContext context) {
     final measurementsData = Provider.of<Challenges>(context);
     final selectedMeasurement = measurementsData.findByDate(_dateTime);
-  
+
     return Center(
       child: Container(
         child: Padding(
