@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/appBars/plain_app_bar.dart';
 import '../providers/auth.dart';
+import '../models/http_exception.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -51,11 +52,28 @@ class SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   var email;
   var password;
+  var createdMessage = "";
+  bool successLogin = false;
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
-      await Provider.of<Auth>(context, listen: false).signIn(this.email, this.password);
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .signIn(this.email, this.password);
+            setState(() => createdMessage = "");
+            //Navigator.pushReplacementNamed(context, '/NavScreen');
+      } on HttpException catch (error) {
+        var errorMessage = 'Authentication failed';
+        errorMessage =
+              'Invalid login credentials. Please make sure your email or password is correct!';
+        setState(() => createdMessage = errorMessage);
+      } catch (error) {
+        print("Error");
+        const errorMessage = 'Could not authenticate. Try again later';
+        setState(() => createdMessage = errorMessage);
+      }
     }
+
     return Form(
       key: _formKey,
       child: Column(
@@ -93,6 +111,22 @@ class SignInFormState extends State<SignInForm> {
             ],
           ),
           SizedBox(height: 70),
+          // successLogin
+          //     ? Text(
+          //         createdMessage,
+          //         style: TextStyle(
+          //           fontSize: 18,
+          //           color: Theme.of(context).primaryColor,
+          //         ),
+          //       )
+          //     : Text(""),
+          Text(
+            createdMessage,
+            style: TextStyle(
+              fontSize: 18,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(25.0),
             child: Container(
@@ -108,10 +142,12 @@ class SignInFormState extends State<SignInForm> {
                     )),
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      _submit();
+                    _formKey.currentState.save();
+                    _submit();
+                    if(successLogin){
                       Navigator.pushReplacementNamed(context, '/NavScreen');
                     }
+                  }
                 },
               ),
             ),

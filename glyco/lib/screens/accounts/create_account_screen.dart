@@ -70,6 +70,8 @@ class InfoFormState extends State<InfoForm> {
       try {
         await Provider.of<Auth>(context, listen: false)
             .signUp(this.email, this.password);
+        await Provider.of<Auth>(context, listen: false)
+            .updateName(this.firstName, this.lastName);
         setState(() => createdMessage = "Account created, please verify your email!");
       } 
       on HttpException catch (error) {
