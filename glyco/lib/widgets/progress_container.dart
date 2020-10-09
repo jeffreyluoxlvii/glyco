@@ -73,7 +73,7 @@ class _ProgressContainerState extends State<ProgressContainer> {
           // ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
+                const EdgeInsets.symmetric(horizontal: 0, vertical: 14.0),
             child: Row(children: [
               Flexible(
                 child: Text(
