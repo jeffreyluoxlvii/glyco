@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/appBars/plain_app_bar_back.dart';
+import '../../providers/auth.dart';
+import '../../models/http_exception.dart';
 
 //Widgets
 
@@ -46,21 +49,42 @@ class ChangePassForm extends StatefulWidget {
 
 class ChangePassFormState extends State<ChangePassForm> {
   final _formKey = GlobalKey<FormState>();
-  bool emailSent = false;
+  var createdMessage = "";
+  var email;
   @override
   Widget build(BuildContext context) {
+    Future<void> _submit() async {
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .resetPassword(this.email);
+        setState(() => createdMessage = "Please check your email for instructions!");
+      } on HttpException catch (error) {
+        var errorMessage = 'Authentication failed';
+        errorMessage =
+            'Invalid login credentials. Please make sure your email or password is correct!';
+        setState(() => createdMessage = errorMessage);
+      } catch (error) {
+        print("Error");
+        const errorMessage = 'Could not authenticate. Try again later';
+        setState(() => createdMessage = errorMessage);
+      }
+    }
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
           TextFormField(
-              decoration: formDecorator("email"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter your email";
-                }
-                return null;
-              }),
+            decoration: formDecorator("email"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter your email";
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.email = value;
+            },
+          ),
           SizedBox(height: 30),
           Row(children: [
             Spacer(),
@@ -81,7 +105,8 @@ class ChangePassFormState extends State<ChangePassForm> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      setState(() => emailSent = true);
+                      _formKey.currentState.save();
+                      _submit();
                     }
                   },
                 ),
@@ -90,15 +115,13 @@ class ChangePassFormState extends State<ChangePassForm> {
             Spacer(),
           ]),
           SizedBox(height: 30),
-          emailSent
-              ? Text(
-                  "Password changed successfully!",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                )
-              : Text(""),
+          Text(
+            createdMessage,
+            style: TextStyle(
+              fontSize: 18,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
         ],
       ),
     );

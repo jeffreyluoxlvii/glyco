@@ -9,6 +9,8 @@ class Auth with ChangeNotifier {
   String _userId;
   String _userName;
   String _userEmail;
+  String _firstName;
+  String _lastName;
 
   bool get isAuth {
     return token != null;
@@ -52,7 +54,7 @@ class Auth with ChangeNotifier {
             'returnSecureToken': true,
           }));
       final responseData = json.decode(response.body);
-      print(responseData);
+      //print(responseData);
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
@@ -76,7 +78,7 @@ class Auth with ChangeNotifier {
             'returnSecureToken': true,
           }));
       final responseData = json.decode(response.body);
-      print(responseData);
+      //print(responseData);
     } catch (error) {
       return Future.error(error);
     }
@@ -122,5 +124,24 @@ class Auth with ChangeNotifier {
     final responseData = json.decode(response.body);
     _userName = responseData['users'][0]['displayName'];
     _userEmail = responseData['users'][0]['email'];
+  }
+
+  Future<void> resetPassword(String email) async{
+    final url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'requestType': "PASSWORD_RESET",
+            'email': email,
+          }));
+      final responseData = json.decode(response.body);
+      print(responseData);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
+    } catch (error) {
+      return Future.error(error);
+    }
   }
 }

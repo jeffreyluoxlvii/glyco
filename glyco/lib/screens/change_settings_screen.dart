@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/edits/edit_shortcuts_screen.dart';
 import '../screens/edits/edit_profile_screen.dart';
 import '../providers/options.dart';
+import '../providers/auth.dart';
 import 'package:provider/provider.dart';
 
 //Widgets
@@ -112,7 +113,7 @@ class CurrentProfile extends StatelessWidget {
                       enableInteractiveSelection: false,
                       focusNode: new AlwaysDisabledFocusNode(),
                       decoration: formDecorator("First Name"),
-                      initialValue: "Jessica",
+                      initialValue: Provider.of<Auth>(context, listen: false).userName,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your first name";
@@ -128,7 +129,7 @@ class CurrentProfile extends StatelessWidget {
                       enableInteractiveSelection: false,
                       focusNode: new AlwaysDisabledFocusNode(),
                       decoration: formDecorator("Last Name"),
-                      initialValue: "Woodard",
+                      initialValue: Provider.of<Auth>(context, listen: false).userName,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your last name";
@@ -143,7 +144,7 @@ class CurrentProfile extends StatelessWidget {
               enableInteractiveSelection: false,
               focusNode: new AlwaysDisabledFocusNode(),
               decoration: formDecorator("Email"),
-              initialValue: "jess.woodard@gmail.com",
+              initialValue: Provider.of<Auth>(context, listen: false).userEmail,
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";

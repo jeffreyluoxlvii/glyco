@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth.dart';
 
 //Widgets
 
@@ -88,7 +90,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                   padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: TextFormField(
                       decoration: formDecorator("First Name"),
-                      initialValue: "Jessica",
+                      initialValue: Provider.of<Auth>(context, listen: false).userName,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your first name";
@@ -102,7 +104,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: TextFormField(
                       decoration: formDecorator("Last Name"),
-                      initialValue: "Woodard",
+                      initialValue: Provider.of<Auth>(context, listen: false).userName,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your last name";
@@ -115,7 +117,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
           ),
           TextFormField(
               decoration: formDecorator("Email"),
-              initialValue: "jess.woodard@gmail.com",
+              initialValue: Provider.of<Auth>(context, listen: false).userEmail,
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";
