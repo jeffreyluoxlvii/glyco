@@ -4,6 +4,7 @@ import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
 import 'providers/challenges.dart';
+import 'providers/healthkit.dart';
 
 //Screens
 import 'screens/login_screen.dart';

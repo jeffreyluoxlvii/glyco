@@ -28,6 +28,7 @@ dependencies:
   http: ^0.12.2
   font_awesome_flutter: ^8.8.1
   nano_healthkit_plugin: ^1.0.0
+  shared_preferences: ^0.5.12
 
 
   # The following adds the Cupertino Icons font to your application.
