@@ -1,5 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:nano_healthkit_plugin/nano_healthkit_plugin.dart';
+import 'package:nano_healthkit_plugin/healthdata.pb.dart';
+import 'package:nano_healthkit_plugin/healthdata.pbenum.dart';
+import '../providers/healthkit.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -88,19 +93,20 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-}
 
-GestureDetector createAccount() {
-  return GestureDetector(
-    onTap: () {
-      print("Create account");
-    },
-    child: new Text(
-      "or Create an Account",
-      style: TextStyle(
-        fontStyle: FontStyle.italic,
-        color: Colors.grey[400],
+  GestureDetector createAccount() {
+    return GestureDetector(
+      onTap: () {
+        print("Create account");
+        HealthKit().authorize();
+      },
+      child: new Text(
+        "or Create an Account",
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[400],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
