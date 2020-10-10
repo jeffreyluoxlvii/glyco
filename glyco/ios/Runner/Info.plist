@@ -41,5 +41,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Testing usage decription</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>testing sharing description</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>testing health records</string>
 </dict>
 </plist>

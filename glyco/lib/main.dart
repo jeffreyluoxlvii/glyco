@@ -4,6 +4,9 @@ import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
 import 'providers/auth.dart';
+import 'providers/challenges.dart';
+import 'providers/healthkit.dart';
+
 //Screens
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
@@ -29,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => Options(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Challenges(),
         )
       ],
       child: Consumer<Auth>(

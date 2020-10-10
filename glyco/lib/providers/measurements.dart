@@ -23,7 +23,19 @@ class Measurements with ChangeNotifier {
       orElse: () {
         // TODO: handle this
         print('no element');
-        return latestMeasurement;
+        Measurement newMeasurement = Measurement(
+          id: DateTime.now().toIso8601String(),
+          a1cLevel: 0,
+          avgGlucoseLevel: 0,
+          calories: 0,
+          carbs: 0,
+          currGlucoseLevel: 0,
+          exerciseTime: 0,
+          date: date,
+          steps: 0,
+          lastUpdate: date,
+        );
+        addMeasurement(newMeasurement).then((value) => print("added"));
       },
     );
   }

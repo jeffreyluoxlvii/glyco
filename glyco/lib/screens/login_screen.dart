@@ -3,6 +3,10 @@ import 'package:provider/provider.dart';
 import '../widgets/appBars/plain_app_bar.dart';
 import '../providers/auth.dart';
 import '../models/http_exception.dart';
+import 'package:nano_healthkit_plugin/nano_healthkit_plugin.dart';
+import 'package:nano_healthkit_plugin/healthdata.pb.dart';
+import 'package:nano_healthkit_plugin/healthdata.pbenum.dart';
+import '../providers/healthkit.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -60,12 +64,12 @@ class SignInFormState extends State<SignInForm> {
       try {
         await Provider.of<Auth>(context, listen: false)
             .signIn(this.email, this.password);
-            setState(() => createdMessage = "");
-            //Navigator.pushReplacementNamed(context, '/NavScreen');
+        setState(() => createdMessage = "");
+        //Navigator.pushReplacementNamed(context, '/NavScreen');
       } on HttpException catch (error) {
         var errorMessage = 'Authentication failed';
         errorMessage =
-              'Invalid login credentials. Please make sure your email or password is correct!';
+            'Invalid login credentials. Please make sure your email or password is correct!';
         setState(() => createdMessage = errorMessage);
       } catch (error) {
         print("Error");
@@ -146,36 +150,36 @@ class SignInFormState extends State<SignInForm> {
   }
 }
 
-GestureDetector forgotPassword(BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.pushNamed(context, '/ForgotPassword');
-    },
-    child: new Text(
-      "Forgot Password?",
-      style: TextStyle(
-        fontStyle: FontStyle.italic,
-        color: Colors.grey[400],
+  GestureDetector forgotPassword(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/ForgotPassword');
+      },
+      child: new Text(
+        "Forgot Password?",
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[400],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-GestureDetector createAccount(BuildContext context) {
-  return GestureDetector(
-    onTap: () {
-      Navigator.pushNamed(context, '/CreateAccount');
-      //print("Create account");
-    },
-    child: new Text(
-      "or Create an Account",
-      style: TextStyle(
-        fontStyle: FontStyle.italic,
-        color: Colors.grey[400],
+  GestureDetector createAccount(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        HealthKit().authorize();
+        Navigator.pushNamed(context, '/CreateAccount');
+      },
+      child: new Text(
+        "or Create an Account",
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[400],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
 InputDecoration formDecorator(String label) {
   return InputDecoration(
