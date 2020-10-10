@@ -78,6 +78,9 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
   bool accountCreated = false;
   @override
   Widget build(BuildContext context) {
+    var nameList = Provider.of<Auth>(context, listen: false).userName.split(" ");
+    var firstName = nameList[0];
+    var lastName = nameList[1];
     return Form(
       key: _formKey,
       child: Column(
@@ -89,8 +92,10 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                   child: TextFormField(
-                      decoration: formDecorator("First Name"),
-                      initialValue: Provider.of<Auth>(context, listen: false).userName,
+                      decoration: InputDecoration(
+                        hintText: firstName,
+                        labelText: "First Name"
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your first name";
@@ -103,8 +108,10 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: TextFormField(
-                      decoration: formDecorator("Last Name"),
-                      initialValue: Provider.of<Auth>(context, listen: false).userName,
+                      decoration: InputDecoration(
+                        hintText: lastName,
+                        labelText: "Last Name"
+                      ),
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your last name";
@@ -116,8 +123,10 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
             ],
           ),
           TextFormField(
-              decoration: formDecorator("Email"),
-              initialValue: Provider.of<Auth>(context, listen: false).userEmail,
+              decoration: InputDecoration(
+                        hintText: Provider.of<Auth>(context, listen: false).userEmail,
+                        labelText: "Email"
+                      ),
               validator: (value) {
                 if (value.isEmpty) {
                   return "Please enter your email";

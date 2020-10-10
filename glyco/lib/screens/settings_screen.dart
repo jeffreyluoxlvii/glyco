@@ -80,6 +80,35 @@ class SettingsScreen extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
+                  SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Spacer(),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25.0),
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          width: 250,
+                          height: 40,
+                          color: Colors.red,
+                          child: FlatButton(
+                            child: Text(
+                              "LOGOUT",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              Provider.of<Auth>(context, listen: false).logout();
+                            },
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  )
                 ],
               ),
             ],

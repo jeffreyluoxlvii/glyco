@@ -84,7 +84,6 @@ class InfoFormState extends State<InfoForm> {
         setState(() => createdMessage = errorMessage);
       } 
       catch (error) {
-        print("Error");
         const errorMessage = 'Could not authenticate. Try again later';
         setState(() => createdMessage = errorMessage);
       }
@@ -109,7 +108,6 @@ class InfoFormState extends State<InfoForm> {
                     },
                     onSaved: (String value) {
                       this.firstName = value;
-                      print(this.firstName);
                     },
                   ),
                 ),
@@ -127,7 +125,6 @@ class InfoFormState extends State<InfoForm> {
                     },
                     onSaved: (String value) {
                       this.lastName = value;
-                      print(this.lastName);
                     },
                   ),
                 ),
@@ -144,7 +141,6 @@ class InfoFormState extends State<InfoForm> {
             },
             onSaved: (String value) {
               this.email = value;
-              print(this.email);
             },
           ),
           TextFormField(
@@ -160,7 +156,6 @@ class InfoFormState extends State<InfoForm> {
             },
             onSaved: (String value) {
               this.password = value;
-              print(this.password);
             },
           ),
           TextFormField(

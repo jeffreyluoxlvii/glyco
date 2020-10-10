@@ -101,6 +101,9 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
 class CurrentProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var nameList = Provider.of<Auth>(context, listen: false).userName.split(" ");
+    var firstName = nameList[0];
+    var lastName = nameList[1];
     return Form(
       child: Column(
         children: [
@@ -113,7 +116,7 @@ class CurrentProfile extends StatelessWidget {
                       enableInteractiveSelection: false,
                       focusNode: new AlwaysDisabledFocusNode(),
                       decoration: formDecorator("First Name"),
-                      initialValue: Provider.of<Auth>(context, listen: false).userName,
+                      initialValue: firstName,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your first name";
@@ -129,7 +132,7 @@ class CurrentProfile extends StatelessWidget {
                       enableInteractiveSelection: false,
                       focusNode: new AlwaysDisabledFocusNode(),
                       decoration: formDecorator("Last Name"),
-                      initialValue: Provider.of<Auth>(context, listen: false).userName,
+                      initialValue: lastName,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Please enter your last name";

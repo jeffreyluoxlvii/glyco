@@ -61,7 +61,7 @@ class SignInFormState extends State<SignInForm> {
         await Provider.of<Auth>(context, listen: false)
             .signIn(this.email, this.password);
             setState(() => createdMessage = "");
-            Navigator.pushReplacementNamed(context, '/NavScreen');
+            //Navigator.pushReplacementNamed(context, '/NavScreen');
       } on HttpException catch (error) {
         var errorMessage = 'Authentication failed';
         errorMessage =
