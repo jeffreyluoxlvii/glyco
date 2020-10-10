@@ -7,6 +7,8 @@ class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
+  String _userName;
+  String _userEmail;
 
   bool get isAuth {
     return token != null;
@@ -21,37 +23,25 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  Future<void> _authenticate(
-      String email, String password, String urlSegment) async {
-    final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
-    try {
-      final response = await http.post(url,
-          body: json.encode({
-            'email': email,
-            'password': password,
-            'returnSecureToken': true,
-          }));
-      final responseData = json.decode(response.body);
-      if (responseData['error'] != null) {
-        throw HttpException(responseData['error']['message']);
-      }
-      _token = responseData['idToken'];
-      _userId = responseData['localId'];
-      _expiryDate = DateTime.now().add(
-        Duration(
-          seconds: int.parse(
-            responseData['expiresIn'],
-          ),
-        ),
-      );
-      notifyListeners();
-    } catch (error) {
-      return Future.error(error);
+  String get userName {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
+      return _userName;
     }
+    return null;
   }
 
-  Future<void> signUp(String email, String password) async {
+  String get userEmail {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
+      return _userEmail;
+    }
+    return null;
+  }
+
+  Future<void> signUp(String email, String password, String firstName, String lastName) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
     try {
@@ -62,9 +52,31 @@ class Auth with ChangeNotifier {
             'returnSecureToken': true,
           }));
       final responseData = json.decode(response.body);
+      print(responseData);
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
+       _token = responseData['idToken'];
+    } catch (error) {
+      return Future.error(error);
+    }
+    updateName(firstName, lastName);
+  }
+
+  Future<void> updateName(String firstName, String lastName) async {
+    final url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'idToken': _token,
+            'displayName': firstName + " " + lastName,
+            'photoUrl': "",
+            'deleteAttribute': new List(0),
+            'returnSecureToken': true,
+          }));
+      final responseData = json.decode(response.body);
+      print(responseData);
     } catch (error) {
       return Future.error(error);
     }
@@ -97,22 +109,18 @@ class Auth with ChangeNotifier {
     } catch (error) {
       return Future.error(error);
     }
+    setData(_token);
   }
 
-  Future<void> updateName(String firstName, String lastName) async {
+  Future<void> setData(String idToken) async{
     final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
-    try {
-      final response = await http.post(url,
+        'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    final response = await http.post(url,
           body: json.encode({
-            'idToken': _token,
-            'displayName': firstName + " " + lastName,
-            'photoUrl': "",
-            'deleteAttribute': null,
-            'returnSecureToken': true,
+            'idToken': idToken,
           }));
-    } catch (error) {
-      return Future.error(error);
-    }
+    final responseData = json.decode(response.body);
+    _userName = responseData['users'][0]['displayName'];
+    _userEmail = responseData['users'][0]['email'];
   }
 }

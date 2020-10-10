@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/widgets/appBars/settings_app_bar.dart';
 import '../providers/options.dart';
+import '../providers/auth.dart';
 
 //Widgets
 import 'package:glyco/widgets/shortcuts/shortcuts_summary.dart';
@@ -36,14 +37,14 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Jessica Woodard",
+                    Provider.of<Auth>(context, listen: false).userName,
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    "jess.woodard@gmail.com",
+                    Provider.of<Auth>(context, listen: false).userEmail,
                     style: TextStyle(
                       fontSize: 18,
                     ),

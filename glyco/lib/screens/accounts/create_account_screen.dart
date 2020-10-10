@@ -69,9 +69,7 @@ class InfoFormState extends State<InfoForm> {
     Future<void> _submit() async {
       try {
         await Provider.of<Auth>(context, listen: false)
-            .signUp(this.email, this.password);
-        await Provider.of<Auth>(context, listen: false)
-            .updateName(this.firstName, this.lastName);
+            .signUp(this.email, this.password, this.firstName, this.lastName);
         setState(() => createdMessage = "Account created, please verify your email!");
       } 
       on HttpException catch (error) {

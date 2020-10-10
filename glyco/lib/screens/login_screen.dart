@@ -61,7 +61,7 @@ class SignInFormState extends State<SignInForm> {
         await Provider.of<Auth>(context, listen: false)
             .signIn(this.email, this.password);
             setState(() => createdMessage = "");
-            //Navigator.pushReplacementNamed(context, '/NavScreen');
+            Navigator.pushReplacementNamed(context, '/NavScreen');
       } on HttpException catch (error) {
         var errorMessage = 'Authentication failed';
         errorMessage =
@@ -111,15 +111,6 @@ class SignInFormState extends State<SignInForm> {
             ],
           ),
           SizedBox(height: 70),
-          // successLogin
-          //     ? Text(
-          //         createdMessage,
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Theme.of(context).primaryColor,
-          //         ),
-          //       )
-          //     : Text(""),
           Text(
             createdMessage,
             style: TextStyle(
@@ -144,9 +135,6 @@ class SignInFormState extends State<SignInForm> {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     _submit();
-                    if(successLogin){
-                      Navigator.pushReplacementNamed(context, '/NavScreen');
-                    }
                   }
                 },
               ),

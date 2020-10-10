@@ -30,31 +30,57 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Options(),
         )
       ],
-      child: Consumer<Auth>(
-        builder: (context, auth, _) => MaterialApp(
-          home: auth.isAuth ? NavigationScreen() : LoginScreen(),
-          routes: <String, WidgetBuilder>{
-            '/NavScreen': (context) => NavigationScreen(),
-            '/ChangeSettings': (context) => ChangeSettingsScreen(),
-            '/EditShortcuts': (context) => EditShortcuts(),
-            '/CreateAccount': (context) => CreateAccount(),
-            '/ChangePassword': (context) => ChangePassword(),
-            '/ForgotPassword': (context) => ForgotPassword(),
-          },
-          theme: ThemeData(
-            fontFamily: 'Lato',
-            primarySwatch: Colors.cyan,
-            primaryColor: Colors.pink[300],
-            accentColor: Colors.cyanAccent[400],
-            appBarTheme: AppBarTheme(
-              color: Colors.grey[200],
-            ),
-            textTheme: TextTheme(
-              headline1: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-              headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              bodyText1: TextStyle(fontSize: 24.0),
-              bodyText2: TextStyle(fontSize: 16.0),
-            ),
+      // child: Consumer<Auth>(
+      //   builder: (context, auth, _) => MaterialApp(
+      //     home: auth.isAuth ? NavigationScreen() : LoginScreen(),
+      //     routes: <String, WidgetBuilder>{
+      //       '/NavScreen': (context) => NavigationScreen(),
+      //       '/ChangeSettings': (context) => ChangeSettingsScreen(),
+      //       '/EditShortcuts': (context) => EditShortcuts(),
+      //       '/CreateAccount': (context) => CreateAccount(),
+      //       '/ChangePassword': (context) => ChangePassword(),
+      //       '/ForgotPassword': (context) => ForgotPassword(),
+      //     },
+      //     theme: ThemeData(
+      //       fontFamily: 'Lato',
+      //       primarySwatch: Colors.cyan,
+      //       primaryColor: Colors.pink[300],
+      //       accentColor: Colors.cyanAccent[400],
+      //       appBarTheme: AppBarTheme(
+      //         color: Colors.grey[200],
+      //       ),
+      //       textTheme: TextTheme(
+      //         headline1: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+      //         headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+      //         bodyText1: TextStyle(fontSize: 24.0),
+      //         bodyText2: TextStyle(fontSize: 16.0),
+      //       ),
+      //     ),
+      //   ),
+      // ),
+      child: MaterialApp(
+        home: LoginScreen(),
+        routes: <String, WidgetBuilder>{
+          '/NavScreen': (context) => NavigationScreen(),
+          '/ChangeSettings': (context) => ChangeSettingsScreen(),
+          '/EditShortcuts': (context) => EditShortcuts(),
+          '/CreateAccount': (context) => CreateAccount(),
+          '/ChangePassword': (context) => ChangePassword(),
+          '/ForgotPassword': (context) => ForgotPassword(),
+        },
+        theme: ThemeData(
+          fontFamily: 'Lato',
+          primarySwatch: Colors.cyan,
+          primaryColor: Colors.pink[300],
+          accentColor: Colors.cyanAccent[400],
+          appBarTheme: AppBarTheme(
+            color: Colors.grey[200],
+          ),
+          textTheme: TextTheme(
+            headline1: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+            headline2: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            bodyText1: TextStyle(fontSize: 24.0),
+            bodyText2: TextStyle(fontSize: 16.0),
           ),
         ),
       ),
