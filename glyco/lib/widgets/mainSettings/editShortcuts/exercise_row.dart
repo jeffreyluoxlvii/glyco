@@ -18,11 +18,18 @@ class ExerciseRow extends StatelessWidget {
         Container(
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
           width: 235,
-          child: TextField(
-            controller: exerciseController,
+          child: TextFormField(
             decoration: InputDecoration(
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.pink),
+              ),
               hintText: minutes,
             ),
+            //initialValue: minutes,
+            controller: exerciseController,
           ),
         ),
         Container(
@@ -32,4 +39,15 @@ class ExerciseRow extends StatelessWidget {
       ],
     );
   }
+}
+
+InputDecoration formDecorator() {
+  return InputDecoration(
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink),
+    ),
+  );
 }

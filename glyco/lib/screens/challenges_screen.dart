@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:glyco/widgets/appBars/challenges_app_bar.dart';
 import '../widgets/challenge_container.dart';
 import '../widgets/progress_container.dart';
+import '../providers/auth.dart';
 
 class ChallengesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var nameList = Provider.of<Auth>(context, listen: false).userName.split(" ");
+    var firstName = nameList[0];
     return Scaffold(
       body: Scaffold(
         appBar: ChallengesAppBar(),
@@ -18,7 +22,7 @@ class ChallengesScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: 16.0, vertical: 14.0),
                 child: Text(
-                  "Good day, Jessica!",
+                  "Good day, " + firstName + "!",
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,

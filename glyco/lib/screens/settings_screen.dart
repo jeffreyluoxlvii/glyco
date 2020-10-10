@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/widgets/appBars/settings_app_bar.dart';
 import '../providers/options.dart';
+import '../providers/auth.dart';
 
 //Widgets
 import 'package:glyco/widgets/shortcuts/shortcuts_summary.dart';
@@ -36,14 +37,14 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Jessica Woodard",
+                    Provider.of<Auth>(context, listen: false).userName,
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    "jess.woodard@gmail.com",
+                    Provider.of<Auth>(context, listen: false).userEmail,
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -79,6 +80,35 @@ class SettingsScreen extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
+                  SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Spacer(),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25.0),
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          width: 250,
+                          height: 40,
+                          color: Colors.red,
+                          child: FlatButton(
+                            child: Text(
+                              "LOGOUT",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              Provider.of<Auth>(context, listen: false).logout();
+                            },
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                    ],
+                  )
                 ],
               ),
             ],
