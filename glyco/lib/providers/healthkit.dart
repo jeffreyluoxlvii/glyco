@@ -15,19 +15,11 @@ class HealthKit with ChangeNotifier {
   String pulledBackgroundDataString = "";
   String batchString = "";
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initPlatformState();
-  // }
-
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     await NanoHealthkitPlugin.initialize(updatesReceivedInBackground);
     bool _isSubscribed = await NanoHealthkitPlugin.isSubscribedToUpdates();
-    // setState(() {
     this.isSubscribed = _isSubscribed;
-    // });
   }
 
   Future<void> authorize() async {
@@ -37,9 +29,7 @@ class HealthKit with ChangeNotifier {
     request.types
         .add(HealthTypes.QUANTITY_STEP_COUNT); // Permissions to read steps
     bool isitAuthorized = await NanoHealthkitPlugin.authorize(request);
-    // setState(() {
     this.isAuthorized = isitAuthorized;
-    // });
   }
 
   Future<void> getUserBasicHealthData() async {
