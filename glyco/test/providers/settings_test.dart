@@ -19,6 +19,21 @@ void main() {
       expect(settings.drinkCalories, 10);
       expect(settings.drinkCarbs, 10);
     });
+    test('Drink calories and carbs should be set accordingly', () {
+      final settings = Settings(
+        drinkCalories: 0,
+        drinkCarbs: 0,
+        exerciseTime: 0,
+        mealCalories: 0,
+        mealCarbs: 0,
+        snackCalories: 0,
+        snackCarbs: 0,
+      );
+
+      settings.setDrinkSettings(15, 15);
+      expect(settings.drinkCalories, 15);
+      expect(settings.drinkCarbs, 15);
+    });
     test('Meal calories and carbs should be set accordingly', () {
       final settings = Settings(
         drinkCalories: 0,
@@ -34,6 +49,21 @@ void main() {
       expect(settings.mealCalories, 10);
       expect(settings.mealCarbs, 10);
     });
+    test('Meal calories and carbs should be set accordingly', () {
+      final settings = Settings(
+        drinkCalories: 0,
+        drinkCarbs: 0,
+        exerciseTime: 0,
+        mealCalories: 0,
+        mealCarbs: 0,
+        snackCalories: 0,
+        snackCarbs: 0,
+      );
+
+      settings.setMealSettings(20, 20);
+      expect(settings.mealCalories, 20);
+      expect(settings.mealCarbs, 20);
+    });
     test('Snack calories and carbs should be set accordingly', () {
       final settings = Settings(
         drinkCalories: 0,
@@ -48,6 +78,52 @@ void main() {
       settings.setSnackSettings(10, 10);
       expect(settings.snackCalories, 10);
       expect(settings.snackCarbs, 10);
+    });
+
+    test('Snack calories and carbs should be set accordingly', () {
+      final settings = Settings(
+        drinkCalories: 0,
+        drinkCarbs: 0,
+        exerciseTime: 0,
+        mealCalories: 0,
+        mealCarbs: 0,
+        snackCalories: 0,
+        snackCarbs: 0,
+      );
+
+      settings.setSnackSettings(20, 20);
+      expect(settings.snackCalories, 20);
+      expect(settings.snackCarbs, 20);
+    });
+
+    test('Exercise time should be set accordingly', () {
+      final settings = Settings(
+        drinkCalories: 0,
+        drinkCarbs: 0,
+        exerciseTime: 0,
+        mealCalories: 0,
+        mealCarbs: 0,
+        snackCalories: 0,
+        snackCarbs: 0,
+      );
+
+      settings.setExerciseTime(30);
+      expect(settings.exerciseTime, 30);
+    });
+
+    test('Exercise time should be set accordingly', () {
+      final settings = Settings(
+        drinkCalories: 0,
+        drinkCarbs: 0,
+        exerciseTime: 0,
+        mealCalories: 0,
+        mealCarbs: 0,
+        snackCalories: 0,
+        snackCarbs: 0,
+      );
+
+      settings.setExerciseTime(60);
+      expect(settings.exerciseTime, 60);
     });
   });
 }
