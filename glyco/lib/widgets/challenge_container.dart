@@ -40,7 +40,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
             child: Row(children: [
               Flexible(
                 child: Text(
-                    measurementsData.generateChallenge(selectedMeasurement),
+                    measurementsData.generateChallenge(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
