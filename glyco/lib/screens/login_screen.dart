@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         children: [
           Image.asset(
-            'assets/images/glyco_vector.jpg',
+            'assets/images/glyco_vector.png',
             height: 250,
             width: 250,
           ),

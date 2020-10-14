@@ -215,7 +215,7 @@ class Challenges with ChangeNotifier {
           " steps this week!";
     }
     // If their weekly average is less than the recommended daily amount of steps
-    if (weekSteps() < 4000) {
+    if (weekSteps() < 3000) {
       _providerChallengeGiven = 'steps';
       _providerChallengeGoal = 4000;
       return 'Your steps are below the recommended daily steps. Try to get to 4,000 steps this week! ';
@@ -254,7 +254,7 @@ class Challenges with ChangeNotifier {
           activityGoal.toString() +
           " minutes a day this week!";
     }
-    if (weekActivity() < 20) {
+    if (weekActivity() < 30) {
       _providerChallengeGiven = 'activity';
       _providerChallengeGoal = 30;
       return 'Your activity time is below the recommended daily activity. Try to get to 30 minutes a day this week! ';
@@ -292,12 +292,12 @@ class Challenges with ChangeNotifier {
             " grams of carbs this week!";
       }
     }
-    if (weekCarbs() > 100) {
+    if (weekCarbs() > 75) {
       _providerChallengeGiven = 'carbs';
       _providerChallengeGoal = 100;
       return 'Your carb intake is above the recommended daily carb intake. Try to get down to 100g of carbs this week! ';
     }
-    if (weekCarbs() <= 40) {
+    if (weekCarbs() <= 45) {
       _providerChallengeGiven = 'carbs';
       _providerChallengeGoal = roundToMultiple(weekCarbs(), 10);
       return 'Congratulations! You are around the daily recommended carb intake of 40g of carbs. Keep up the good work!';
@@ -322,6 +322,19 @@ class Challenges with ChangeNotifier {
 
   int getChallengeGoal() {
     return _providerChallengeGoal;
+  }
+
+  Image getProgressAsset() {
+    if (_providerChallengeGiven == 'steps') {
+      return Image.asset('assets/images/challenges_image1.jpg');
+    }
+    if (_providerChallengeGiven == 'activity') {
+      return Image.asset('assets/images/challenges_image2.jpg');
+    }
+    if (_providerChallengeGiven == 'carbs') {
+      return Image.asset('assets/images/challenges_image3.jpg');
+    }
+    return Image.asset('assets/images/challenges_image1.jpg');
   }
 
   String progressUpdate(

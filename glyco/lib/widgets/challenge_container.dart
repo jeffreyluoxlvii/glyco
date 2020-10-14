@@ -46,9 +46,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
                       fontSize: 14,
                     )),
               ),
-              Image.asset(
-                'assets/images/challenges_image1.jpg',
-              ),
+              measurementsData.getProgressAsset(),
             ])),
         width: 350,
         decoration: BoxDecoration(
