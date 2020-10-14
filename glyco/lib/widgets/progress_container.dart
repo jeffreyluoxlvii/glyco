@@ -1,42 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
-import '../providers/challenges.dart';
+import '../providers/measurements.dart';
 
-class ProgressContainer extends StatefulWidget {
-  @override
-  _ProgressContainerState createState() => _ProgressContainerState();
-}
-
-class _ProgressContainerState extends State<ProgressContainer> {
-  DateTime _dateTime;
-  var _isLoading = false;
-  String _challengeGiven;
-  int _challengeGoal;
-
-  @override
-  void initState() {
-    setState(() {
-      _dateTime = DateTime.now();
-      _isLoading = true;
-    });
-
-    Provider.of<Challenges>(context, listen: false)
-        .fetchAndSetMeasurements()
-        .then((_) {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-    super.initState();
-  }
+class ProgressContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final measurementsData = Provider.of<Challenges>(context);
-    final selectedMeasurement = measurementsData.findByDate(_dateTime);
-    _challengeGiven = measurementsData.getChallenge();
-    _challengeGoal = measurementsData.getChallengeGoal();
+    final progressProvider = Provider.of<Measurements>(context);
 
     return new Container(
       child: Column(
@@ -72,12 +44,21 @@ class _ProgressContainerState extends State<ProgressContainer> {
           //   ],
           // ),
           Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: Icon(
+              progressProvider.getProgressIcon(),
+              size: 30,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 0, vertical: 14.0),
-            child: Row(children: [
+            child: 
+            Row(children: [
               Flexible(
                 child: Text(
-                    measurementsData.progressUpdate(selectedMeasurement, _challengeGiven, _challengeGoal),
+                    progressProvider.progressUpdate(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,

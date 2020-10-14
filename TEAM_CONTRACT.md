@@ -8,6 +8,7 @@
 
 ### If someone on our team breaks one or more of these promises, the team may:
  * Ignore it if it's the first time or if it was an honest mistake like forgetting about a meeting. 
+ * _(updated 10/10/20)_ Always be empathetic first. Try to gather context about that person's situation by making sure we always know where we all are in terms of our schedule availability, physical and mental health, etc. 
  * Host interventions to talk about the situation and better practices for improvement.
  * Report the issue in the Team Sprint Report.
  * Bring up the issue with the CS408 instructors and ask for their guidance.
@@ -15,11 +16,14 @@
 
 ### Team Procedures:
  * As a team, meet twice a week after our regularly-scheduled CS408 class time. This will happen every Monday and Wednesday after 7:05 PM EST via Zoom, and the project manager will host the Zoom meetings.
+ * _(updated 10/10/20)_ Our team will meet with our clients once every two weeks (usually on Wednesdays after 7:05 PM EST) via zoom. The business analyst will be in charge of handling correspondence with the clients for scheduling this meeting. The project manager will be in charge of hosting this meeting and creating the agenda.
  * Preferred method of communication will be Facebook Messenger for messages and Zoom for meetings.
  * Decision-making will be by consensus, and if consensus isn't reached, the decision-making will be left to the person with the respective "role".
  * The project manager will handle setting agendas and notifying team members via Facebook Messenger. Business analyst will keep the team on track by regularly referencing the agenda and bringing our attention back if we digress.
  * The project manager will take meeting notes, as they expand off of the meeting agendas. The meeting notes will be taken during the meetings and will be immediately put into the Google Drive and disseminated to the necessary people after the meeting is over. Notes and all other documentation will be kept under the Google Drive folder (there will be a file dedicated for meeting notes).
  * Code ownership will be defined as follows: The person who wrote that code owns that code. If “necessary” (the non-owner believes modifying that code will improve the quality and responsibility of the application), they can ask for permission from the owner to modify it. They can then branch, modify the code, and document what they did and why did it under the description/merge request.
+ * _(updated 10/10/20)_ The business analyst and project manager will handle creating any Wiki or markdown pages as necessary for documentation purposes.
+ * _(updated 10/10/20)_ If there is pair programming to be done or if an individual is facing a blocker with one of their respective tasks, they will reach out to the team through Facebook Messenger. A zoom call will then be set up to walk through any issues. Help will likely be given either by another individual who has worked with that type of task or by the tech lead, who has the most experience with the Flutter framework.
 
  ### Team Expectations
  * Everyone in the team desired an A.
@@ -27,3 +31,4 @@
  * Time per week will be dependent on our deadlines as well as each member's respective schedules - can increase or decrease based on the tasks we want to complete for that week or sprint, as well as how much other work we have.
  * Regarding different work habits of individual team members, as long as everyone is on the same page about how each team member works, there should be no confusion, and thus no problem. Because of this, we would communicate what our work habits look like very early on in the semester just so everyone can get used to each other. If any situation changes, other team members should be notified immediately.
  * Regarding extra work by team members that want a better grade, it is acceptable as long as they let everyone else in the group know that they will be working on extra features. Major delegation and features will be decided on beforehand, so any changes should be brought up to the other team members and decided as a whole. If someone is slacking consistently, resulting in undesirable effects on other people’s work, then this will be reflected negatively on team evaluations. However, anything that is decided democratically is fine.
+ * _(updated 10/10/20)_ Each team member is responsible for creating their own issues as development progresses. We've split up our focus into specific facets of the application (i.e. Jeff with Measures, Herleen and Nate with Challenges, Justin with Settings, etc.), so each team member is entrusted with understanding the the development of each fact and how it will progress/roadmap as sprints continue.

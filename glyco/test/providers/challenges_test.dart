@@ -1,11 +1,11 @@
 // Import the test package and Counter class
 import 'package:flutter_test/flutter_test.dart';
-import 'package:glyco/providers/challenges.dart';
+import 'package:glyco/providers/measurements.dart';
 
 void main() {
   group('Challenges', () {
     test('Measurement calories and carbs should be incremented', () {
-      final challenges = Challenges(
+      final challenges = Measurements(
           avgMonthSteps: 8609,
           avgWeekSteps: 7809,
           avgMonthActivity: 0,
