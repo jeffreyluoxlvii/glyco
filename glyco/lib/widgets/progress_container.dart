@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurements.dart';
 

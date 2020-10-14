@@ -39,11 +39,11 @@ class Measurement with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addNutrition(int calories, int carbs) async {
+  Future<void> addNutrition(int carbs) async {
     final url = 'https://glyco-6f403.firebaseio.com/measurements/$id.json';
     final oldCalories = this.calories;
     final oldCarbs = this.carbs;
-    _addCalories(calories);
+    _addCalories(4 * carbs);
     _addCarbs(carbs);
     notifyListeners();
     try {
