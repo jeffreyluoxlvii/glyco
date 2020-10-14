@@ -47,5 +47,7 @@
 	<string>testing sharing description</string>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
 	<string>testing health records</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
 </dict>
 </plist>
