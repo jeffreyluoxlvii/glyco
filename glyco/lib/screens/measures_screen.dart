@@ -139,7 +139,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                   FontAwesomeIcons.hamburger,
                                   () {
                                     selectedMeasurement.addNutrition(
-                                      settings.mealCalories,
                                       settings.mealCarbs,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
@@ -151,7 +150,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           label: 'UNDO',
                                           onPressed: () {
                                             selectedMeasurement.addNutrition(
-                                              settings.mealCalories * -1,
                                               settings.mealCarbs * -1,
                                             );
                                           },
@@ -165,7 +163,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                   FontAwesomeIcons.cookie,
                                   () {
                                     selectedMeasurement.addNutrition(
-                                      settings.snackCalories,
                                       settings.snackCarbs,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
@@ -177,7 +174,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           label: 'UNDO',
                                           onPressed: () {
                                             selectedMeasurement.addNutrition(
-                                              settings.snackCalories * -1,
                                               settings.snackCarbs * -1,
                                             );
                                           },
@@ -191,7 +187,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                   FontAwesomeIcons.mugHot,
                                   () {
                                     selectedMeasurement.addNutrition(
-                                      settings.drinkCalories,
                                       settings.drinkCarbs,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
@@ -203,7 +198,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           label: 'UNDO',
                                           onPressed: () {
                                             selectedMeasurement.addNutrition(
-                                              settings.drinkCalories * -1,
                                               settings.drinkCarbs * -1,
                                             );
                                           },

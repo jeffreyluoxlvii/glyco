@@ -17,8 +17,8 @@ void main() {
           lastUpdate: DateTime.now(),
           steps: 0);
 
-      measurement.addNutrition(10, 10);
-      expect(measurement.calories, 10);
+      measurement.addNutrition(10);
+      expect(measurement.calories, 40);
       expect(measurement.carbs, 10);
     });
     test('Measurement exercise time should be incremented', () {
