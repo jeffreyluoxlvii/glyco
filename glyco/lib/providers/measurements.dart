@@ -15,8 +15,8 @@ class Measurements with ChangeNotifier {
   double avgMonthCarbs;
   double avgWeekCarbs;
 
-  Measurements(
-      {@required this.avgMonthSteps,
+  Measurements({
+      @required this.avgMonthSteps,
       @required this.avgWeekSteps,
       @required this.avgMonthActivity,
       @required this.avgWeekActivity,
@@ -303,8 +303,8 @@ class Measurements with ChangeNotifier {
     // If their weekly average is less than the recommended daily amount of steps
     if (weekSteps() < 3000) {
       providerChallengeGiven = 'steps';
-      providerChallengeGoal = 4000;
-      return 'Your steps are below the recommended daily steps. Try to get to 4,000 steps this week! ';
+      providerChallengeGoal = 3000;
+      return 'Your steps are below the recommended daily steps. Try to get to 3,000 steps this week! ';
     }
     // If their weekly average is greater than the recommended daily amount of steps
     if (weekSteps() >= 10000) {
@@ -345,10 +345,10 @@ class Measurements with ChangeNotifier {
       providerChallengeGoal = 30;
       return 'Your activity time is below the recommended daily activity. Try to get to 30 minutes a day this week! ';
     }
-    if (weekActivity() >= 30) {
+    if (weekActivity() >= 60) {
       providerChallengeGiven = 'activity';
       providerChallengeGoal = roundToMultiple(weekActivity(), 10);
-      return 'Congratulations! You have hit the daily recommended activity level of 30 minutes. Keep up the good work!';
+      return 'Congratulations! You have hit the daily recommended activity level of 60 minutes. Keep up the good work!';
     }
 
     // CARBS
@@ -380,13 +380,13 @@ class Measurements with ChangeNotifier {
     }
     if (weekCarbs() > 75) {
       providerChallengeGiven = 'carbs';
-      providerChallengeGoal = 100;
-      return 'Your carb intake is above the recommended daily carb intake. Try to get down to 100g of carbs this week! ';
+      providerChallengeGoal = 75;
+      return 'Your carb intake is above the recommended daily carb intake. Try to get down to 75g of carbs this week! ';
     }
     if (weekCarbs() <= 45) {
       providerChallengeGiven = 'carbs';
       providerChallengeGoal = roundToMultiple(weekCarbs(), 10);
-      return 'Congratulations! You are around the daily recommended carb intake of 40g of carbs. Keep up the good work!';
+      return 'Congratulations! You are around the daily recommended carb intake of 45g of carbs. Keep up the good work!';
     }
     if (monthCarbs() == 0 && weekCarbs() > 0) {
       providerChallengeGiven = 'carbs';
