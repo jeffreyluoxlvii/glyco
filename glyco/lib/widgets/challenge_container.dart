@@ -2,36 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/challenges.dart';
 
-class ChallengeContainer extends StatefulWidget {
-  @override
-  _ChallengeContainerState createState() => _ChallengeContainerState();
-}
-
-class _ChallengeContainerState extends State<ChallengeContainer> {
-  DateTime _dateTime;
-  var _isLoading = false;
-
-  @override
-  void initState() {
-    setState(() {
-      _dateTime = DateTime.now();
-      _isLoading = true;
-    });
-
-    Provider.of<Challenges>(context, listen: false)
-        .fetchAndSetMeasurements()
-        .then((_) {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-    super.initState();
-  }
-
+class ChallengeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final measurementsData = Provider.of<Challenges>(context);
-    final selectedMeasurement = measurementsData.findByDate(_dateTime);
 
     return Center(
       child: Container(
@@ -39,8 +13,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
             padding: const EdgeInsets.all(16),
             child: Row(children: [
               Flexible(
-                child: Text(
-                    measurementsData.generateChallenge(selectedMeasurement),
+                child: Text(measurementsData.generateChallenge(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,

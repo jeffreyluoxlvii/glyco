@@ -2,10 +2,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import './measurement.dart';
+import './measurements.dart';
 
 class Challenges with ChangeNotifier {
   String _providerChallengeGiven = 'null';
   int _providerChallengeGoal = -1;
+
+  // Measurements measurements = ;
 
   List<Measurement> _measurements = [];
 
@@ -165,7 +168,7 @@ class Challenges with ChangeNotifier {
     // return 60;
   }
 
-  String generateChallenge(Measurement measurement) {
+  String generateChallenge() {
     double stepsReduction = 0;
     int stepsReductionPercent = 0;
     double activityReduction = 0;
