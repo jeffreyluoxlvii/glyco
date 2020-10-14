@@ -12,6 +12,7 @@ void main() {
           avgWeekActivity: 0,
           avgMonthCarbs: 0,
           avgWeekCarbs: 0,
+
           providerChallengeGiven: 'null',
           providerChallengeGoal: -1);
 
