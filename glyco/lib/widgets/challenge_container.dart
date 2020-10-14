@@ -1,37 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/challenges.dart';
+import '../providers/measurements.dart';
 
-class ChallengeContainer extends StatefulWidget {
-  @override
-  _ChallengeContainerState createState() => _ChallengeContainerState();
-}
-
-class _ChallengeContainerState extends State<ChallengeContainer> {
-  DateTime _dateTime;
-  var _isLoading = false;
-
-  @override
-  void initState() {
-    setState(() {
-      _dateTime = DateTime.now();
-      _isLoading = true;
-    });
-
-    Provider.of<Challenges>(context, listen: false)
-        .fetchAndSetMeasurements()
-        .then((_) {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-    super.initState();
-  }
+class ChallengeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final measurementsData = Provider.of<Challenges>(context);
-    final selectedMeasurement = measurementsData.findByDate(_dateTime);
+    final challengesProvider = Provider.of<Measurements>(context);
 
     return Center(
       child: Container(
@@ -40,13 +15,13 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
             child: Row(children: [
               Flexible(
                 child: Text(
-                    measurementsData.generateChallenge(selectedMeasurement),
+                    challengesProvider.generateChallenge(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                     )),
               ),
-              measurementsData.getProgressAsset(),
+              challengesProvider.getProgressAsset(),
             ])),
         width: 350,
         decoration: BoxDecoration(
