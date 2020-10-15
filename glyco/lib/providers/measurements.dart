@@ -8,22 +8,22 @@ class Measurements with ChangeNotifier {
   String providerChallengeGiven = 'null';
   int providerChallengeGoal = -1;
 
-  double avgMonthSteps;
-  double avgWeekSteps;
-  double avgMonthActivity;
-  double avgWeekActivity;
-  double avgMonthCarbs;
-  double avgWeekCarbs;
+  double avgMonthSteps = -1;
+  double avgWeekSteps = -1;
+  double avgMonthActivity = -1;
+  double avgWeekActivity = -1;
+  double avgMonthCarbs = -1;
+  double avgWeekCarbs = -1;
 
-  Measurements({
-      @required this.avgMonthSteps,
-      @required this.avgWeekSteps,
-      @required this.avgMonthActivity,
-      @required this.avgWeekActivity,
-      @required this.avgMonthCarbs,
-      @required this.avgWeekCarbs,
-      @required this.providerChallengeGoal,
-      @required this.providerChallengeGiven});
+  Measurements(
+      {this.avgMonthSteps,
+      this.avgWeekSteps,
+      this.avgMonthActivity,
+      this.avgWeekActivity,
+      this.avgMonthCarbs,
+      this.avgWeekCarbs,
+      this.providerChallengeGoal,
+      this.providerChallengeGiven});
 
   List<Measurement> _measurements = [];
 
@@ -148,6 +148,10 @@ class Measurements with ChangeNotifier {
   // STEPS AVERAGES
 
   double monthSteps() {
+    if (avgMonthSteps != -1) {
+      return avgMonthSteps;
+    }
+
     int totalSteps = 0;
     int numDays = 0;
 
@@ -165,6 +169,10 @@ class Measurements with ChangeNotifier {
   }
 
   double weekSteps() {
+    if (avgWeekSteps != -1) {
+      return avgWeekSteps;
+    }
+
     int totalSteps = 0;
     int numDays = 0;
 
@@ -183,6 +191,10 @@ class Measurements with ChangeNotifier {
 
   // ACTIVITY AVERAGES
   double monthActivity() {
+    if (avgMonthActivity != -1) {
+      return avgMonthActivity;
+    }
+
     int totalActivity = 0;
     int numDays = 0;
 
@@ -200,6 +212,10 @@ class Measurements with ChangeNotifier {
   }
 
   double weekActivity() {
+    if (avgWeekActivity != -1) {
+      return avgWeekActivity;
+    }
+
     int totalActivity = 0;
     int numDays = 0;
 
@@ -218,6 +234,10 @@ class Measurements with ChangeNotifier {
 
   // CARBS AVERAGES
   double monthCarbs() {
+    if (avgMonthCarbs != -1) {
+      return avgMonthCarbs;
+    }
+
     int totalCarbs = 0;
     int numDays = 0;
 
@@ -235,6 +255,10 @@ class Measurements with ChangeNotifier {
   }
 
   double weekCarbs() {
+    if (avgWeekCarbs != -1) {
+      return avgWeekCarbs;
+    }
+
     int totalCarbs = 0;
     int numDays = 0;
 
@@ -258,39 +282,46 @@ class Measurements with ChangeNotifier {
     int activityReductionPercent = 0;
     double carbDifference = 0;
 
-    if (monthSteps() != 0) {
-      stepsReduction = 1 - (weekSteps() / monthSteps());
+    avgMonthSteps = monthSteps();
+    avgWeekSteps = weekSteps();
+    avgMonthActivity = monthActivity();
+    avgWeekActivity = weekActivity();
+    avgMonthCarbs = monthCarbs();
+    avgWeekCarbs = weekCarbs();
+
+    if (avgMonthSteps != 0) {
+      stepsReduction = 1 - (avgWeekSteps / avgMonthSteps);
       stepsReductionPercent = (stepsReduction * 100).round();
     }
-    if (monthActivity() != 0) {
-      activityReduction = 1 - (weekActivity() / monthActivity());
+    if (avgMonthActivity != 0) {
+      activityReduction = 1 - (avgWeekActivity / avgMonthActivity);
       activityReductionPercent = (activityReduction * 100).round();
     }
-    if (monthCarbs() != 0) {
-      carbDifference = (weekCarbs() / monthCarbs());
+    if (avgMonthCarbs != 0) {
+      carbDifference = (avgWeekCarbs / avgMonthCarbs);
     }
 
     // STEPS
 
     // If their weekly average has increased compared to the rest of the month
-    if (weekSteps() > monthSteps()) {
-      int stepsGoal = roundToMultiple(weekSteps(), 100);
+    if (avgWeekSteps > avgMonthSteps) {
+      int stepsGoal = roundToMultiple(avgWeekSteps, 100);
       providerChallengeGiven = 'steps';
       providerChallengeGoal = stepsGoal;
 
-      if (monthSteps() == 0) {
+      if (avgMonthSteps == 0) {
         return 'Your steps this week have been much higher than the rest of the month. Keep up the good work!';
       }
 
       int stepsIncreasePercent =
-          (((weekSteps() / monthSteps()) - 1) * 100).round();
+          (((avgWeekSteps / avgMonthSteps) - 1) * 100).round();
       return 'Your steps this week have been ' +
           stepsIncreasePercent.toString() +
           '% higher than the rest of the month. Keep up the good work!';
     }
     // If their weekly average has decreased more than 85%, generate a challenge that is 25% higher than their weekly average
     if (stepsReduction >= 0.15) {
-      int stepsGoal = roundToMultiple((weekSteps() * 1.25), 100);
+      int stepsGoal = roundToMultiple((avgWeekSteps * 1.25), 100);
       providerChallengeGiven = 'steps';
       providerChallengeGoal = stepsGoal;
 
@@ -301,36 +332,36 @@ class Measurements with ChangeNotifier {
           " steps this week!";
     }
     // If their weekly average is less than the recommended daily amount of steps
-    if (weekSteps() < 3000) {
+    if (avgWeekSteps < 3000) {
       providerChallengeGiven = 'steps';
       providerChallengeGoal = 3000;
       return 'Your steps are below the recommended daily steps. Try to get to 3,000 steps this week! ';
     }
     // If their weekly average is greater than the recommended daily amount of steps
-    if (weekSteps() >= 10000) {
+    if (avgWeekSteps >= 10000) {
       providerChallengeGiven = 'steps';
-      providerChallengeGoal = roundToMultiple(weekSteps(), 100);
+      providerChallengeGoal = roundToMultiple(avgWeekSteps, 100);
       return 'Congratulations! You have hit the daily recommended step intake of 10000 steps. Keep up the good work!';
     }
 
     // ACTIVITY
-    if (weekActivity() > monthActivity()) {
-      int activityGoal = roundToMultiple(weekActivity(), 10);
+    if (avgWeekActivity > avgMonthActivity) {
+      int activityGoal = roundToMultiple(avgWeekActivity, 10);
       providerChallengeGiven = 'activity';
       providerChallengeGoal = activityGoal;
 
-      if (monthActivity() == 0) {
+      if (avgMonthActivity == 0) {
         return 'Your activity time this week has been higher than the rest of the month. Keep up the good work!';
       }
 
       int activityIncreasePercent =
-          (((weekActivity() / monthActivity()) - 1) * 100).round();
+          (((avgWeekActivity / avgMonthActivity) - 1) * 100).round();
       return 'Your activity time this week has been ' +
           activityIncreasePercent.toString() +
           '% higher than the rest of the month. Keep up the good work!';
     }
     if (activityReduction >= 0.15) {
-      int activityGoal = roundToMultiple((weekActivity() * 1.25), 10);
+      int activityGoal = roundToMultiple((avgWeekActivity * 1.25), 10);
       providerChallengeGiven = 'activity';
       providerChallengeGoal = activityGoal;
 
@@ -340,25 +371,25 @@ class Measurements with ChangeNotifier {
           activityGoal.toString() +
           " minutes a day this week!";
     }
-    if (weekActivity() < 30) {
+    if (avgWeekActivity < 30) {
       providerChallengeGiven = 'activity';
       providerChallengeGoal = 30;
       return 'Your activity time is below the recommended daily activity. Try to get to 30 minutes a day this week! ';
     }
-    if (weekActivity() >= 60) {
+    if (avgWeekActivity >= 60) {
       providerChallengeGiven = 'activity';
-      providerChallengeGoal = roundToMultiple(weekActivity(), 10);
+      providerChallengeGoal = roundToMultiple(avgWeekActivity, 10);
       return 'Congratulations! You have hit the daily recommended activity level of 60 minutes. Keep up the good work!';
     }
 
     // CARBS
-    if (weekCarbs() < monthCarbs()) {
-      int carbGoal = roundToMultiple(weekCarbs(), 10);
+    if (avgWeekCarbs < avgMonthCarbs) {
+      int carbGoal = roundToMultiple(avgWeekCarbs, 10);
       providerChallengeGiven = 'carbs';
       providerChallengeGoal = carbGoal;
 
       int carbDecreasePercent =
-          ((1 - (weekCarbs() / monthCarbs())) * 100).round();
+          ((1 - (avgWeekCarbs / avgMonthCarbs)) * 100).round();
       return 'Your carb intake this week has been ' +
           carbDecreasePercent.toString() +
           '% lower than the rest of the month. Keep up the good work!';
@@ -368,7 +399,7 @@ class Measurements with ChangeNotifier {
       int carbIncreasePercent = ((carbDifference - 1) * 100).round();
 
       if (carbIncrease >= 0.15) {
-        int carbDecreaseGoal = (weekCarbs() * 0.85).round();
+        int carbDecreaseGoal = (avgWeekCarbs * 0.85).round();
         providerChallengeGiven = 'carbs';
         providerChallengeGoal = carbDecreaseGoal;
         return 'Your carb intake for the last week has been ' +
@@ -378,19 +409,19 @@ class Measurements with ChangeNotifier {
             " grams of carbs this week!";
       }
     }
-    if (weekCarbs() > 75) {
+    if (avgWeekCarbs > 75) {
       providerChallengeGiven = 'carbs';
       providerChallengeGoal = 75;
       return 'Your carb intake is above the recommended daily carb intake. Try to get down to 75g of carbs this week! ';
     }
-    if (weekCarbs() <= 45) {
+    if (avgWeekCarbs <= 45) {
       providerChallengeGiven = 'carbs';
-      providerChallengeGoal = roundToMultiple(weekCarbs(), 10);
+      providerChallengeGoal = roundToMultiple(avgWeekCarbs, 10);
       return 'Congratulations! You are around the daily recommended carb intake of 45g of carbs. Keep up the good work!';
     }
-    if (monthCarbs() == 0 && weekCarbs() > 0) {
+    if (avgMonthCarbs == 0 && avgWeekCarbs > 0) {
       providerChallengeGiven = 'carbs';
-      int carbDecreaseGoal = (weekCarbs() * 0.85).round();
+      int carbDecreaseGoal = (avgWeekCarbs * 0.85).round();
       providerChallengeGoal = carbDecreaseGoal;
 
       return 'Your carb intake for the last week has been higher than the rest of the month. Try to get ' +

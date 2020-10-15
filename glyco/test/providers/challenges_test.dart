@@ -1,8 +1,9 @@
 // Import the test package and Counter class
 import 'package:flutter_test/flutter_test.dart';
 import 'package:glyco/providers/measurements.dart';
+import 'package:glyco/providers/measurement.dart';
 
-void main() {
+void main() async {
   group('Challenges Steps', () {
     test('weekSteps() > monthSteps() returns congratulatory remark', () {
       final challenges = Measurements(
@@ -80,7 +81,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'steps');
-      expect(challenges.providerChallengeGoal, 10100);
+      expect(challenges.providerChallengeGoal, 10200);
     });
   });
 
@@ -98,7 +99,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'activity');
-      expect(challenges.providerChallengeGoal, 40);
+      expect(challenges.providerChallengeGoal, 50);
     });
     test(
         'weekActivity() > monthActivity() returns congratulatory remark if monthActivity() == 0',
@@ -115,7 +116,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'activity');
-      expect(challenges.providerChallengeGoal, 40);
+      expect(challenges.providerChallengeGoal, 50);
     });
     test(
         '15%+ reduction in activity returns a goal to increase activity by 25%',
@@ -162,7 +163,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'activity');
-      expect(challenges.providerChallengeGoal, 70);
+      expect(challenges.providerChallengeGoal, 80);
     });
   });
 
@@ -180,7 +181,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'carbs');
-      expect(challenges.providerChallengeGoal, 50);
+      expect(challenges.providerChallengeGoal, 60);
     });
     test(
         'weekCarbs() < monthCarbs() returns congratulatory remark if monthCarbs() == 0',
@@ -197,7 +198,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'carbs');
-      expect(challenges.providerChallengeGoal, 50);
+      expect(challenges.providerChallengeGoal, 60);
     });
     test('15%+ increase in carbs returns a goal to decrease carbs by 15%', () {
       final challenges = Measurements(
@@ -227,7 +228,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'carbs');
-      expect(challenges.providerChallengeGoal, 30);
+      expect(challenges.providerChallengeGoal, 75);
     });
     test('Below daily recommended carbs edge case', () {
       final challenges = Measurements(
@@ -242,7 +243,7 @@ void main() {
 
       challenges.generateChallenge();
       expect(challenges.providerChallengeGiven, 'carbs');
-      expect(challenges.providerChallengeGoal, 40);
+      expect(challenges.providerChallengeGoal, 50);
     });
   });
 
