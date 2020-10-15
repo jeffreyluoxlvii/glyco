@@ -14,6 +14,9 @@ class Measurements with ChangeNotifier {
   double avgWeekActivity = -1;
   double avgMonthCarbs = -1;
   double avgWeekCarbs = -1;
+  int stepsProgress;
+  int activityProgress;
+  int carbProgress;
 
   Measurements(
       {this.avgMonthSteps,
@@ -23,7 +26,10 @@ class Measurements with ChangeNotifier {
       this.avgMonthCarbs,
       this.avgWeekCarbs,
       this.providerChallengeGoal,
-      this.providerChallengeGiven});
+      this.providerChallengeGiven,
+      this.stepsProgress,
+      this.activityProgress,
+      this.carbProgress});
 
   List<Measurement> _measurements = [];
 
@@ -471,7 +477,7 @@ class Measurements with ChangeNotifier {
     Measurement measurement = findByDate(DateTime.now());
 
     if (providerChallengeGiven == 'steps') {
-      int stepsProgress = measurement.steps;
+      stepsProgress = measurement.steps;
       int stepsProgressPercent =
           ((stepsProgress / providerChallengeGoal) * 100).round();
       return 'You have completed ' +
@@ -483,7 +489,7 @@ class Measurements with ChangeNotifier {
           ' steps.';
     }
     if (providerChallengeGiven == 'activity') {
-      int activityProgress = measurement.exerciseTime;
+      activityProgress = measurement.exerciseTime;
       int activityProgressPercent =
           ((activityProgress / providerChallengeGoal) * 100).round();
       return 'You have completed ' +
@@ -495,7 +501,7 @@ class Measurements with ChangeNotifier {
           ' minutes.';
     }
     if (providerChallengeGiven == 'carbs') {
-      int carbProgress = measurement.carbs;
+      carbProgress = measurement.carbs;
       int carbProgressPercent =
           ((carbProgress / providerChallengeGoal) * 100).round();
       return 'You have completed ' +
@@ -508,5 +514,10 @@ class Measurements with ChangeNotifier {
     }
 
     return 'You currently have no progress because you have no challenges.';
+  }
+
+  // FOR TESTING
+  void setTestingMeasurements(List<Measurement> measurements) {
+    _measurements = measurements;
   }
 }
