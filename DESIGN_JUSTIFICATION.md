@@ -18,3 +18,12 @@ With our design, we hope to create clear distinctions between the various compon
 * the trade-offs evaluated
 * any assumptions that may have had an impact on the decision
 * any dependencies on the decision that impacted other issues
+
+
+- One design decision we had to make was to figure out what should happen in the use case in which a user taps on a date that has no prior measurements. 
+- We decided to simply create a new measurement at that date with all measurements initially set at 0. 
+- The justification for this choice was that for most of the measurements like exercise, carbs, and steps, starting at 0 made sense. 
+- Other alternatives that were considered was simply displaying a null measurement page, but this alternative was not chosen as that would complicate the case where a user wants to modify a past date.
+- Tradeoffs that were evaluated were that measurments like glucose did not make sense starting at 0, but we decided that since most users would have the healthkit integration, the value would be updated accordingly anyways.
+- Assumptions that we made were that most of our userbase would be utilizing the healthkit integration
+- Since this is a rather isolated issue, this design decision did not affect any other issues.
