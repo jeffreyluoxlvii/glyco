@@ -10,6 +10,13 @@ class Auth with ChangeNotifier {
   String _userId;
   String _userName;
   String _userEmail;
+  String firstName;
+  String lastName;
+
+  Auth({
+    @required this.firstName,
+    @required this.lastName,
+  });
 
   bool get isAuth {
     return token != null;

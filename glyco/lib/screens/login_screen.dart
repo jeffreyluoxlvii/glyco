@@ -10,6 +10,8 @@ import '../providers/healthkit.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
+  static const navigateToCreateAccount = Key('navigateToCreateAccount');
+  static const navigateToForgotPassword = Key('navigateToForgotPassword');
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -40,6 +42,23 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           createAccount(context),
         ],
+      ),
+    );
+  }
+
+  GestureDetector createAccount(BuildContext context) {
+    return GestureDetector(
+      key: LoginScreen.navigateToCreateAccount,
+      onTap: () {
+        HealthKit().authorize();
+        Navigator.pushNamed(context, '/CreateAccount');
+      },
+      child: new Text(
+        "or Create an Account",
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.grey[400],
+        ),
       ),
     );
   }
@@ -150,36 +169,21 @@ class SignInFormState extends State<SignInForm> {
   }
 }
 
-  GestureDetector forgotPassword(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/ForgotPassword');
-      },
-      child: new Text(
-        "Forgot Password?",
-        style: TextStyle(
-          fontStyle: FontStyle.italic,
-          color: Colors.grey[400],
+GestureDetector forgotPassword(BuildContext context) {
+      return GestureDetector(
+        key: LoginScreen.navigateToForgotPassword,
+        onTap: () {
+          Navigator.pushNamed(context, '/ForgotPassword');
+        },
+        child: new Text(
+          "Forgot Password?",
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            color: Colors.grey[400],
+          ),
         ),
-      ),
-    );
-  }
-
-  GestureDetector createAccount(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        HealthKit().authorize();
-        Navigator.pushNamed(context, '/CreateAccount');
-      },
-      child: new Text(
-        "or Create an Account",
-        style: TextStyle(
-          fontStyle: FontStyle.italic,
-          color: Colors.grey[400],
-        ),
-      ),
-    );
-  }
+      );
+    }
 
 InputDecoration formDecorator(String label) {
   return InputDecoration(
