@@ -10,8 +10,6 @@ import '../providers/healthkit.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
-  static const navigateToCreateAccount = Key('navigateToCreateAccount');
-  static const navigateToForgotPassword = Key('navigateToForgotPassword');
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -48,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   GestureDetector createAccount(BuildContext context) {
     return GestureDetector(
-      key: LoginScreen.navigateToCreateAccount,
       onTap: () {
         HealthKit().authorize();
         Navigator.pushNamed(context, '/CreateAccount');
@@ -76,7 +73,6 @@ class SignInFormState extends State<SignInForm> {
   var email;
   var password;
   var createdMessage = "";
-  bool successLogin = false;
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
@@ -171,7 +167,6 @@ class SignInFormState extends State<SignInForm> {
 
 GestureDetector forgotPassword(BuildContext context) {
       return GestureDetector(
-        key: LoginScreen.navigateToForgotPassword,
         onTap: () {
           Navigator.pushNamed(context, '/ForgotPassword');
         },

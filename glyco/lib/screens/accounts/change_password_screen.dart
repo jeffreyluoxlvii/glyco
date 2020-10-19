@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth.dart';
+import '../../models/http_exception.dart';
 
 //Widgets
 
@@ -51,44 +54,59 @@ class ChangePassForm extends StatefulWidget {
 class ChangePassFormState extends State<ChangePassForm> {
   final _formKey = GlobalKey<FormState>();
   var enteredPassword;
-  bool passwordChanged = false;
+  var newPassword;
+  var createdMessage = "";
   @override
   Widget build(BuildContext context) {
+    Future<void> _submit() async {
+      try {
+        await Provider.of<Auth>(context, listen: false)
+            .changePassword(this.newPassword);
+        setState(() => createdMessage = "Password changed successfully!");
+        //Navigator.pushReplacementNamed(context, '/NavScreen');
+      } on HttpException catch (error) {
+        //var errorMessage = 'Authentication failed';
+        var errorMessage =
+            error.toString();
+        setState(() => createdMessage = errorMessage);
+      } catch (error) {
+        print("Error");
+        const errorMessage = 'Could not authenticate. Try again later';
+        setState(() => createdMessage = errorMessage);
+      }
+    }
+
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
           TextFormField(
-              obscureText: true,
-              decoration: formDecorator("enter current password"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter your current password";
-                }
-                return null;
-              }),
+            obscureText: true,
+            decoration: formDecorator("enter new password"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter a new password";
+              } else {
+                enteredPassword = value;
+              }
+              return null;
+            },
+          ),
           TextFormField(
-              obscureText: true,
-              decoration: formDecorator("enter new password"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return "Please enter a new password";
-                } else {
-                  enteredPassword = value;
-                }
-                return null;
-              }),
-          TextFormField(
-              obscureText: true,
-              decoration: formDecorator("re-enter new password"),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please re-enter your new password';
-                } else if (value != enteredPassword) {
-                  return "Passwords don't match";
-                }
-                return null;
-              }),
+            obscureText: true,
+            decoration: formDecorator("re-enter new password"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please re-enter your new password';
+              } else if (value != enteredPassword) {
+                return "Passwords don't match";
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.newPassword = value;
+            },
+          ),
           SizedBox(height: 30),
           Row(children: [
             Spacer(),
@@ -109,7 +127,8 @@ class ChangePassFormState extends State<ChangePassForm> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      setState(() => passwordChanged = true);
+                      _formKey.currentState.save();
+                      _submit();
                     }
                   },
                 ),
@@ -118,15 +137,22 @@ class ChangePassFormState extends State<ChangePassForm> {
             Spacer(),
           ]),
           SizedBox(height: 30),
-          passwordChanged
-              ? Text(
-                  "Password changed successfully!",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                )
-              : Text(""),
+          Text(
+            createdMessage,
+            style: TextStyle(
+              fontSize: 18,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          // passwordChanged
+          //     ? Text(
+          //         "Password changed successfully!",
+          //         style: TextStyle(
+          //           fontSize: 18,
+          //           color: Theme.of(context).primaryColor,
+          //         ),
+          //       )
+          //     : Text(""),
         ],
       ),
     );

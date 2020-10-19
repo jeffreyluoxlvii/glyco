@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-          home: auth.isAuth
+          home: //LoginScreen(),
+          auth.isAuth
               ? NavigationScreen()
               : FutureBuilder(
                   future: auth.tryAutoLogin(),

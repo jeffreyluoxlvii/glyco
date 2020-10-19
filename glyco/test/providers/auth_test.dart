@@ -16,18 +16,18 @@ void main() {
     setUpAll(() {
 
     });
-    testWidgets('Created an account successfully', 
-    (WidgetTester tester) async {
-      //var currentContext;
-      await tester.pumpWidget(
-        ChangeNotifierProvider<Auth>(
-          create: (_) => Auth(firstName: firstName, lastName: lastName),
-          child: Container(),
-        ),
-      );
-      final context = tester.element(find.byType(Container));
-      await Provider.of<Auth>(context, listen:false).signUp(email, password, firstName, lastName);
-      expect(Provider.of<Auth>(context, listen:false).userEmail, email);
-    });
-  });
+  //   testWidgets('Created an account successfully', 
+  //   (WidgetTester tester) async {
+  //     //var currentContext;
+  //     await tester.pumpWidget(
+  //       ChangeNotifierProvider<Auth>(
+  //         create: (_) => Auth(firstName: firstName, lastName: lastName),
+  //         child: Container(),
+  //       ),
+  //     );
+  //     final context = tesfter.element(find.byType(Container));
+  //     await Provider.of<Auth>(context, listen:false).signUp(email, password, firstName, lastName);
+  //     expect(Provider.of<Auth>(context, listen:false).userEmail, email);
+  //   });
+  // });
 }
