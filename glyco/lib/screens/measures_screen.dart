@@ -99,12 +99,30 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
             )
           : selectedMeasurement == null
               ? RefreshIndicator(
-                  child: Center(
-                    child: ListView(
-                      children: [
-                        Text("Adding this day to your database."),
-                        Text("Swipe down to refresh"),
-                      ],
+                  child: Container(
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: Container(
+                        width: double.infinity,
+                        height: 600,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Adding this day to the database.",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                            Text(
+                              "Scroll down to refresh",
+                              style: TextStyle(fontStyle: FontStyle.italic),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   onRefresh: () => refresh(),
