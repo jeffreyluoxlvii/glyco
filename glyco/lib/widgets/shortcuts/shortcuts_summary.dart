@@ -12,30 +12,15 @@ class ShortcutsSummary extends StatelessWidget {
         Row(
           children: [
             Icon(
-              FontAwesomeIcons.heartbeat,
-              color: Theme.of(context).primaryColor,
-              size: 45,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text("Manual Input"),
-            ),
-            Spacer(),
-            Icon(
               FontAwesomeIcons.hamburger,
               color: Theme.of(context).primaryColor,
               size: 45,
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                  " ${settings.mealCalories} kcal\n ${settings.mealCarbs}g carbs"),
+              child: Text(" ${settings.mealCarbs}g carbs"),
             ),
-          ],
-        ),
-        SizedBox(height: 15),
-        Row(
-          children: [
+            Spacer(),
             Icon(
               FontAwesomeIcons.cookie,
               color: Theme.of(context).primaryColor,
@@ -43,10 +28,13 @@ class ShortcutsSummary extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                  " ${settings.snackCalories} kcal\n ${settings.snackCarbs}g carbs"),
+              child: Text(" ${settings.snackCarbs}g carbs"),
             ),
-            Spacer(),
+          ],
+        ),
+        SizedBox(height: 15),
+        Row(
+          children: [
             Icon(
               FontAwesomeIcons.mugHot,
               color: Theme.of(context).primaryColor,
@@ -55,14 +43,9 @@ class ShortcutsSummary extends StatelessWidget {
             Padding(
               // TODO: figure out what's going on with the padding (make these into containers?)
               padding: const EdgeInsets.all(10.0),
-              child: Text(
-                  " ${settings.drinkCalories} kcal\n ${settings.drinkCarbs} carbs"),
+              child: Text(" ${settings.drinkCarbs}g carbs"),
             ),
-          ],
-        ),
-        SizedBox(height: 15),
-        Row(
-          children: [
+            Spacer(),
             Icon(
               FontAwesomeIcons.running,
               color: Theme.of(context).primaryColor,
@@ -70,10 +53,11 @@ class ShortcutsSummary extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text("${settings.exerciseTime} min activity"),
+              child: Text("${settings.exerciseTime} minutes"),
             ),
           ],
         ),
+        SizedBox(height: 15),
       ],
     );
   }

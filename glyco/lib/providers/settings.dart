@@ -10,29 +10,23 @@ class Settings with ChangeNotifier {
   int exerciseTime;
 
   Settings({
-    @required this.mealCalories,
     @required this.mealCarbs,
-    @required this.snackCalories,
     @required this.snackCarbs,
-    @required this.drinkCalories,
     @required this.drinkCarbs,
     @required this.exerciseTime,
   });
 
-  void setMealSettings(int calories, int carbs) {
-    mealCalories = calories;
+  void setMealSettings(int carbs) {
     mealCarbs = carbs;
     notifyListeners();
   }
 
-  void setSnackSettings(int calories, int carbs) {
-    snackCalories = calories;
+  void setSnackSettings(int carbs) {
     snackCarbs = carbs;
     notifyListeners();
   }
 
-  void setDrinkSettings(int calories, int carbs) {
-    drinkCalories = calories;
+  void setDrinkSettings(int carbs) {
     drinkCarbs = carbs;
     notifyListeners();
   }
