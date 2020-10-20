@@ -16,6 +16,9 @@ class _PlainAppBarBackState extends State<PlainAppBarBack> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       title: Text(
         "Glyco",
         style: TextStyle(
