@@ -27,7 +27,6 @@ class EditShortcuts extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
-        kcal: '${settings.mealCalories}',
         carbs: '${settings.mealCarbs}');
     FoodRow snackRow = FoodRow(
         icon: Icon(
@@ -35,15 +34,13 @@ class EditShortcuts extends StatelessWidget {
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
-        kcal: '${settings.snackCalories}',
         carbs: '${settings.snackCarbs}');
     FoodRow drinkRow = FoodRow(
         icon: Icon(
-          FontAwesomeIcons.coffee,
+          FontAwesomeIcons.mugHot,
           color: Theme.of(context).primaryColor,
           size: 45,
         ),
-        kcal: '${settings.drinkCalories}',
         carbs: '${settings.drinkCarbs}');
     return Scaffold(
       appBar: PlainAppBar(),
@@ -91,22 +88,16 @@ class EditShortcuts extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          if (mealRow.kcalController.text.length > 0 &&
-                              mealRow.carbController.text.length > 0) {
+                          if (mealRow.carbController.text.length > 0) {
                             settings.setMealSettings(
-                                int.parse(mealRow.kcalController.text),
                                 int.parse(mealRow.carbController.text));
                           }
-                          if (snackRow.kcalController.text.length > 0 &&
-                              snackRow.carbController.text.length > 0) {
+                          if (snackRow.carbController.text.length > 0) {
                             settings.setSnackSettings(
-                                int.parse(snackRow.kcalController.text),
                                 int.parse(snackRow.carbController.text));
                           }
-                          if (drinkRow.kcalController.text.length > 0 &&
-                              drinkRow.carbController.text.length > 0) {
+                          if (drinkRow.carbController.text.length > 0) {
                             settings.setDrinkSettings(
-                                int.parse(drinkRow.kcalController.text),
                                 int.parse(drinkRow.carbController.text));
                           }
                           if (exerciseRow.exerciseController.text.length > 0) {
