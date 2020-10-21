@@ -5,9 +5,13 @@ import 'package:provider/provider.dart';
 import '../providers/measurements.dart';
 
 class ProgressContainer extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    Future<void> refresh() async {
+      await Provider.of<Measurements>(context, listen: false)
+          .fetchAndSetMeasurements();
+    }
+
     final progressProvider = Provider.of<Measurements>(context);
 
     return new Container(
@@ -52,13 +56,10 @@ class ProgressContainer extends StatelessWidget {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 0, vertical: 14.0),
-            child: 
-            Row(children: [
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 14.0),
+            child: Row(children: [
               Flexible(
-                child: Text(
-                    progressProvider.progressUpdate(),
+                child: Text(progressProvider.progressUpdate(),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
