@@ -8,7 +8,6 @@ import '../providers/options.dart';
 import '../providers/measurement.dart';
 
 import '../widgets/measurement_grid.dart';
-import '../widgets/shortcuts/glucose_shortcut.dart';
 import '../widgets/shortcuts/shortcut.dart';
 import '../widgets/exercise_form.dart';
 
@@ -152,7 +151,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                GlucoseShortcut(),
                                 Shortcut(
                                   FontAwesomeIcons.hamburger,
                                   () {
