@@ -30,6 +30,7 @@ void main() async {
           providerChallengeGiven: 'null',
           providerChallengeGoal: -1);
 
+      progress.setTestingTrue();
       progress.generateChallenge();
       expect(progress.getChallenge(), 'steps');
       expect(progress.getChallengeGoal(), 7900);
@@ -48,6 +49,7 @@ void main() async {
           providerChallengeGoal: -1);
 
       progress.setTestingMeasurements(measurements);
+      progress.setTestingTrue();
       progress.generateChallenge();
       progress.progressUpdate();
       expect(progress.providerChallengeGiven, 'steps');
@@ -65,6 +67,7 @@ void main() async {
           providerChallengeGoal: -1);
 
       progress.setTestingMeasurements(measurements);
+      progress.setTestingTrue();
       progress.generateChallenge();
       progress.progressUpdate();
       expect(progress.providerChallengeGiven, 'activity');
@@ -82,6 +85,7 @@ void main() async {
           providerChallengeGoal: -1);
 
       progress.setTestingMeasurements(measurements);
+      progress.setTestingTrue();
       progress.generateChallenge();
       progress.progressUpdate();
       expect(progress.providerChallengeGiven, 'carbs');

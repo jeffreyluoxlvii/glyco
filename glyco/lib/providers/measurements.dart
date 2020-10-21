@@ -8,15 +8,17 @@ class Measurements with ChangeNotifier {
   String providerChallengeGiven = 'null';
   int providerChallengeGoal = -1;
 
-  double avgMonthSteps = -1;
-  double avgWeekSteps = -1;
-  double avgMonthActivity = -1;
-  double avgWeekActivity = -1;
-  double avgMonthCarbs = -1;
-  double avgWeekCarbs = -1;
+  double avgMonthSteps;
+  double avgWeekSteps;
+  double avgMonthActivity;
+  double avgWeekActivity;
+  double avgMonthCarbs;
+  double avgWeekCarbs;
   int stepsProgress;
   int activityProgress;
   int carbProgress;
+
+  bool testing = false;
 
   Measurements(
       {this.avgMonthSteps,
@@ -29,7 +31,8 @@ class Measurements with ChangeNotifier {
       this.providerChallengeGiven,
       this.stepsProgress,
       this.activityProgress,
-      this.carbProgress});
+      this.carbProgress,
+      this.testing});
 
   List<Measurement> _measurements = [];
 
@@ -154,7 +157,7 @@ class Measurements with ChangeNotifier {
   // STEPS AVERAGES
 
   double monthSteps() {
-    if (avgMonthSteps != -1) {
+    if (testing == true) {
       return avgMonthSteps;
     }
 
@@ -175,7 +178,7 @@ class Measurements with ChangeNotifier {
   }
 
   double weekSteps() {
-    if (avgWeekSteps != -1) {
+    if (testing == true) {
       return avgWeekSteps;
     }
 
@@ -197,7 +200,7 @@ class Measurements with ChangeNotifier {
 
   // ACTIVITY AVERAGES
   double monthActivity() {
-    if (avgMonthActivity != -1) {
+    if (testing == true) {
       return avgMonthActivity;
     }
 
@@ -218,7 +221,7 @@ class Measurements with ChangeNotifier {
   }
 
   double weekActivity() {
-    if (avgWeekActivity != -1) {
+    if (testing == true) {
       return avgWeekActivity;
     }
 
@@ -240,7 +243,7 @@ class Measurements with ChangeNotifier {
 
   // CARBS AVERAGES
   double monthCarbs() {
-    if (avgMonthCarbs != -1) {
+    if (testing == true) {
       return avgMonthCarbs;
     }
 
@@ -261,7 +264,7 @@ class Measurements with ChangeNotifier {
   }
 
   double weekCarbs() {
-    if (avgWeekCarbs != -1) {
+    if (testing == true) {
       return avgWeekCarbs;
     }
 
@@ -520,4 +523,13 @@ class Measurements with ChangeNotifier {
   void setTestingMeasurements(List<Measurement> measurements) {
     _measurements = measurements;
   }
+
+  void setTestingTrue() {
+    testing = true;
+  }
+
+  void setTestingFalse() {
+    testing = false;
+  }
+
 }

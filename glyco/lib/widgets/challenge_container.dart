@@ -6,8 +6,7 @@ class ChallengeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> refresh() async {
-      await Provider.of<Measurements>(context, listen: false)
-          .fetchAndSetMeasurements();
+      await Provider.of<Measurements>(context, listen: false);
     }
 
     final challengesProvider = Provider.of<Measurements>(context);
