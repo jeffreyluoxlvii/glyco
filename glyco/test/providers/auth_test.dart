@@ -12,10 +12,6 @@ void main() {
   const password = "test123";
   const firstName = "First";
   const lastName = "Test";
-  group('Accounts', () {
-    setUpAll(() {
-
-    });
   //   testWidgets('Created an account successfully', 
   //   (WidgetTester tester) async {
   //     //var currentContext;

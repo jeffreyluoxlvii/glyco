@@ -126,7 +126,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/ForgotPassword');
+                  Navigator.pushNamed(context, '/ChangeEmail');
                 },
                 child: new Row(
                   children: [

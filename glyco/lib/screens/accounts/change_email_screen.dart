@@ -8,7 +8,7 @@ import '../../widgets/appBars/plain_app_bar_back.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ChangePassword extends StatelessWidget {
+class ChangeEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class ChangePassword extends StatelessWidget {
             children: [
               SizedBox(height: 15),
               Text(
-                "Change password",
+                "Change email",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class ChangePassword extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
-              ChangePassForm(),
+              ChangeEmailForm(),
               SizedBox(height: 30),
             ],
           ),
@@ -40,32 +40,31 @@ class ChangePassword extends StatelessWidget {
   }
 }
 
-class ChangePassForm extends StatefulWidget {
+class ChangeEmailForm extends StatefulWidget {
   @override
-  ChangePassFormState createState() {
-    return ChangePassFormState();
+  ChangeEmailFormState createState() {
+    return ChangeEmailFormState();
   }
 }
 
-class ChangePassFormState extends State<ChangePassForm> {
+class ChangeEmailFormState extends State<ChangeEmailForm> {
   final _formKey = GlobalKey<FormState>();
-  var enteredPassword;
-  var newPassword;
+  var enteredEmail;
+  var newEmail;
   var createdMessage = "";
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
       try {
         await Provider.of<Auth>(context, listen: false)
-            .changeProfile('password', this.newPassword);
-        setState(() => createdMessage = "Password changed successfully!");
-        //Navigator.pushReplacementNamed(context, '/NavScreen');
+            .changeProfile('email', this.newEmail);
+        setState(() => createdMessage = "Email changed successfully!");
       } on HttpException catch (error) {
         var errorMessage =
             error.toString();
         setState(() => createdMessage = errorMessage);
       } catch (error) {
-        print("Error");
+        print(error);
         const errorMessage = 'Could not authenticate. Try again later';
         setState(() => createdMessage = errorMessage);
       }
@@ -76,30 +75,28 @@ class ChangePassFormState extends State<ChangePassForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
-            obscureText: true,
-            decoration: formDecorator("enter new password"),
+            decoration: formDecorator("enter new email"),
             validator: (value) {
               if (value.isEmpty) {
-                return "Please enter a new password";
+                return "Please enter a new email";
               } else {
-                enteredPassword = value;
+                enteredEmail = value;
               }
               return null;
             },
           ),
           TextFormField(
-            obscureText: true,
-            decoration: formDecorator("re-enter new password"),
+            decoration: formDecorator("re-enter new email"),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Please re-enter your new password';
-              } else if (value != enteredPassword) {
-                return "Passwords don't match";
+                return 'Please re-enter your new email';
+              } else if (value != enteredEmail) {
+                return "Emails don't match";
               }
               return null;
             },
             onSaved: (String value) {
-              this.newPassword = value;
+              this.newEmail = value;
             },
           ),
           SizedBox(height: 30),
@@ -114,7 +111,7 @@ class ChangePassFormState extends State<ChangePassForm> {
                 color: Colors.cyanAccent[400],
                 child: FlatButton(
                   child: Text(
-                    "CHANGE PASSWORD",
+                    "CHANGE EMAIL",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -139,15 +136,6 @@ class ChangePassFormState extends State<ChangePassForm> {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          // passwordChanged
-          //     ? Text(
-          //         "Password changed successfully!",
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Theme.of(context).primaryColor,
-          //         ),
-          //       )
-          //     : Text(""),
         ],
       ),
     );

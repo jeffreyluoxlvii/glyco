@@ -51,6 +51,8 @@ class Auth with ChangeNotifier {
     return null;
   }
 
+  // Sign up and Sign in
+
   Future<void> signUp(
       String email, String password, String firstName, String lastName) async {
     final url =
@@ -71,24 +73,6 @@ class Auth with ChangeNotifier {
       return Future.error(error);
     }
     updateName(firstName, lastName);
-  }
-
-  Future<void> updateName(String firstName, String lastName) async {
-    final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
-    try {
-      final response = await http.post(url,
-          body: json.encode({
-            'idToken': _token,
-            'displayName': firstName + " " + lastName,
-            'photoUrl': "",
-            'deleteAttribute': new List(0),
-            'returnSecureToken': true,
-          }));
-      final responseData = json.decode(response.body);
-    } catch (error) {
-      return Future.error(error);
-    }
   }
 
   Future<void> signIn(String email, String password) async {
@@ -131,18 +115,6 @@ class Auth with ChangeNotifier {
     setData(_token);
   }
 
-  Future<void> setData(String idToken) async {
-    final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
-    final response = await http.post(url,
-        body: json.encode({
-          'idToken': idToken,
-        }));
-    final responseData = json.decode(response.body);
-    _userName = responseData['users'][0]['displayName'];
-    _userEmail = responseData['users'][0]['email'];
-  }
-
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
@@ -161,6 +133,38 @@ class Auth with ChangeNotifier {
     setData(_token);
     notifyListeners();
     return true;
+  }
+
+  //Change account data
+
+  Future<void> updateName(String firstName, String lastName) async {
+    final url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'idToken': _token,
+            'displayName': firstName + " " + lastName,
+            'photoUrl': "",
+            'deleteAttribute': new List(0),
+            'returnSecureToken': true,
+          }));
+      final responseData = json.decode(response.body);
+    } catch (error) {
+      return Future.error(error);
+    }
+  }
+
+  Future<void> setData(String idToken) async {
+    final url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    final response = await http.post(url,
+        body: json.encode({
+          'idToken': idToken,
+        }));
+    final responseData = json.decode(response.body);
+    _userName = responseData['users'][0]['displayName'];
+    _userEmail = responseData['users'][0]['email'];
   }
 
   Future<void> resetPassword(String email) async {
@@ -182,14 +186,14 @@ class Auth with ChangeNotifier {
     }
   }
 
-  Future<void> changePassword(String password) async {
+  Future<void> changeProfile(String type, String input) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
     try {
       final response = await http.post(url,
           body: json.encode({
             'idToken': _token,
-            'password': password,
+            '${type}': input,
             'returnSecureToken': true,
           }));
       final responseData = json.decode(response.body);
@@ -221,6 +225,8 @@ class Auth with ChangeNotifier {
     }
     setData(_token);
   }
+
+  //Logout
 
   Future<void> logout() async {
     _token = null;
