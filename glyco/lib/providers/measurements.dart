@@ -70,6 +70,17 @@ class Measurements with ChangeNotifier {
     );
   }
 
+  // Measurement findByDateAverages(DateTime date) {
+  //   return _measurements.firstWhere(
+  //       (measurement) =>
+  //           measurement.date.year == date.year &&
+  //           measurement.date.month == date.month &&
+  //           measurement.date.day == date.day, 
+  //   orElse: () {
+  //     return null;
+  //   });
+  // }
+
   Future<void> fetchAndSetMeasurements() async {
     const url = 'https://glyco-6f403.firebaseio.com/measurements.json';
     try {
@@ -167,8 +178,12 @@ class Measurements with ChangeNotifier {
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      totalSteps += findByDate(day).steps;
-      numDays++;
+      // if (findByDateAverages(day) != null) {
+        if (findByDate(day).steps != 0) {
+          totalSteps += findByDate(day).steps;
+          numDays++;
+        }
+      // }
     }
 
     avgMonthSteps = (totalSteps / numDays);
@@ -531,5 +546,4 @@ class Measurements with ChangeNotifier {
   void setTestingFalse() {
     testing = false;
   }
-
 }

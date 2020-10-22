@@ -19,6 +19,52 @@ void main() async {
         steps: (5000 - i)));
   }
 
+  List<Measurement> measurements2 = [];
+
+  for (int i = 0; i < 31; i++) {
+    measurements2.add(Measurement(
+        a1cLevel: 0,
+        avgGlucoseLevel: 0,
+        calories: 0,
+        carbs: (70 - i),
+        currGlucoseLevel: 0,
+        date: DateTime.now().subtract(Duration(days: i)),
+        exerciseTime: (50 - i),
+        id: 'progressTest',
+        lastUpdate: DateTime.now().subtract(Duration(days: i)),
+        steps: (5000 - i)));
+  }
+
+  measurements2[7] = Measurement(
+      a1cLevel: 0,
+      avgGlucoseLevel: 0,
+      calories: 0,
+      carbs: 0,
+      currGlucoseLevel: 0,
+      date: DateTime.now().subtract(Duration(days: 7)),
+      exerciseTime: 0,
+      id: 'progressTest',
+      lastUpdate: DateTime.now().subtract(Duration(days: 7)),
+      steps: 0);
+
+  List<Measurement> measurements3 = [];
+
+  for (int i = 0; i < 31; i++) {
+    measurements3.add(Measurement(
+        a1cLevel: 0,
+        avgGlucoseLevel: 0,
+        calories: 0,
+        carbs: (70 - i),
+        currGlucoseLevel: 0,
+        date: DateTime.now().subtract(Duration(days: i)),
+        exerciseTime: (50 - i),
+        id: 'progressTest',
+        lastUpdate: DateTime.now().subtract(Duration(days: i)),
+        steps: (5000 - i)));
+  }
+
+  measurements3[7] = null;
+
   group('Averages functions', () {
     test('Check monthSteps()', () {
       final progress = Measurements(
@@ -36,6 +82,39 @@ void main() async {
       progress.monthSteps();
       expect(progress.avgMonthSteps, 4981.5);
     });
+    test('Check monthSteps() with 0 value', () {
+      final progress = Measurements(
+          avgMonthSteps: -1,
+          avgWeekSteps: -1,
+          avgMonthActivity: -1,
+          avgWeekActivity: -1,
+          avgMonthCarbs: -1,
+          avgWeekCarbs: -1,
+          providerChallengeGiven: 'null',
+          providerChallengeGoal: -1);
+
+      progress.setTestingFalse();
+      progress.setTestingMeasurements(measurements2);
+      progress.monthSteps();
+      expect(progress.avgMonthSteps, 4981);
+    });
+    // test('Check monthSteps() with null value', () {
+    //   final progress = Measurements(
+    //       avgMonthSteps: -1,
+    //       avgWeekSteps: -1,
+    //       avgMonthActivity: -1,
+    //       avgWeekActivity: -1,
+    //       avgMonthCarbs: -1,
+    //       avgWeekCarbs: -1,
+    //       providerChallengeGiven: 'null',
+    //       providerChallengeGoal: -1);
+
+    //   progress.setTestingFalse();
+    //   progress.setTestingMeasurements(measurements3);
+    //   progress.monthSteps();
+    //   expect(progress.avgMonthSteps, 4981);
+    // });
+
     test('Check weekSteps()', () {
       final progress = Measurements(
           avgMonthSteps: -1,
