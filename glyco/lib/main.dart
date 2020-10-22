@@ -14,7 +14,9 @@ import 'screens/edits/edit_shortcuts_screen.dart';
 import 'screens/accounts/create_account_screen.dart';
 import 'screens/accounts/change_password_screen.dart';
 import 'screens/accounts/change_email_screen.dart';
+import 'screens/accounts/change_name_screen.dart';
 import 'screens/accounts/forgot_password_screen.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -56,6 +58,7 @@ class MyApp extends StatelessWidget {
             '/CreateAccount': (context) => CreateAccount(),
             '/ChangePassword': (context) => ChangePassword(),
             '/ChangeEmail': (context) => ChangeEmail(),
+            '/ChangeName': (context) => ChangeName(),
             '/ForgotPassword': (context) => ForgotPassword(),
           },
           theme: ThemeData(

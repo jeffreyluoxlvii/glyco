@@ -92,7 +92,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/ForgotPassword');
+                  Navigator.pushNamed(context, '/ChangeName');
                 },
                 child: new Row(
                   children: [

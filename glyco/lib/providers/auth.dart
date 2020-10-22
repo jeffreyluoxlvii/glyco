@@ -12,8 +12,8 @@ class Auth with ChangeNotifier {
   Timer _authTimer;
   String _userName;
   String _userEmail;
-  String firstName;
-  String lastName;
+  // String firstName;
+  // String lastName;
 
   // Auth({
   //   @required this.firstName,
@@ -57,6 +57,9 @@ class Auth with ChangeNotifier {
       String email, String password, String firstName, String lastName) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    email = email.trim();
+    firstName = firstName.trim();
+    lastName = lastName.trim();
     try {
       final response = await http.post(url,
           body: json.encode({
@@ -76,6 +79,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> signIn(String email, String password) async {
+    email = email.trim();
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
     try {
@@ -168,6 +172,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> resetPassword(String email) async {
+    email = email.trim();
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
     try {
@@ -187,9 +192,38 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> changeProfile(String type, String input) async {
+    if (type == 'email') {
+      input = input.trim();
+    }
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
     try {
+      // var response;
+      // if (type == 'displayName') {
+      //   response = await http.post(
+      //     url,
+      //     body: json.encode(
+      //       {
+      //         'idToken': _token,
+      //         'displayName': input,
+      //         'photoUrl': "",
+      //         'deleteAttribute': new List(0),
+      //         'returnSecureToken': true,
+      //       },
+      //     ),
+      //   );
+      // } else {
+      //   response = await http.post(
+      //     url,
+      //     body: json.encode(
+      //       {
+      //         'idToken': _token,
+      //         '$type': input,
+      //         'returnSecureToken': true,
+      //       },
+      //     ),
+      //   );
+      // }
       final response = await http.post(url,
           body: json.encode({
             'idToken': _token,
