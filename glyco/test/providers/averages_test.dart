@@ -35,6 +35,17 @@ void main() async {
         steps: (5000 - i)));
   }
 
+  measurements2[1] = Measurement(
+      a1cLevel: 0,
+      avgGlucoseLevel: 0,
+      calories: 0,
+      carbs: 0,
+      currGlucoseLevel: 0,
+      date: DateTime.now().subtract(Duration(days: 1)),
+      exerciseTime: 0,
+      id: 'progressTest',
+      lastUpdate: DateTime.now().subtract(Duration(days: 1)),
+      steps: 0);
   measurements2[7] = Measurement(
       a1cLevel: 0,
       avgGlucoseLevel: 0,
@@ -47,23 +58,23 @@ void main() async {
       lastUpdate: DateTime.now().subtract(Duration(days: 7)),
       steps: 0);
 
-  List<Measurement> measurements3 = [];
+  // List<Measurement> measurements3 = [];
 
-  for (int i = 0; i < 31; i++) {
-    measurements3.add(Measurement(
-        a1cLevel: 0,
-        avgGlucoseLevel: 0,
-        calories: 0,
-        carbs: (70 - i),
-        currGlucoseLevel: 0,
-        date: DateTime.now().subtract(Duration(days: i)),
-        exerciseTime: (50 - i),
-        id: 'progressTest',
-        lastUpdate: DateTime.now().subtract(Duration(days: i)),
-        steps: (5000 - i)));
-  }
+  // for (int i = 0; i < 31; i++) {
+  //   measurements3.add(Measurement(
+  //       a1cLevel: 0,
+  //       avgGlucoseLevel: 0,
+  //       calories: 0,
+  //       carbs: (70 - i),
+  //       currGlucoseLevel: 0,
+  //       date: DateTime.now().subtract(Duration(days: i)),
+  //       exerciseTime: (50 - i),
+  //       id: 'progressTest',
+  //       lastUpdate: DateTime.now().subtract(Duration(days: i)),
+  //       steps: (5000 - i)));
+  // }
 
-  measurements3[7] = null;
+  // measurements3[7] = null;
 
   group('Averages functions', () {
     test('Check monthSteps()', () {
@@ -131,6 +142,22 @@ void main() async {
       progress.weekSteps();
       expect(progress.avgWeekSteps, 4996.5);
     });
+    test('Check weekSteps() with 0 value', () {
+      final progress = Measurements(
+          avgMonthSteps: -1,
+          avgWeekSteps: -1,
+          avgMonthActivity: -1,
+          avgWeekActivity: -1,
+          avgMonthCarbs: -1,
+          avgWeekCarbs: -1,
+          providerChallengeGiven: 'null',
+          providerChallengeGoal: -1);
+
+      progress.setTestingFalse();
+      progress.setTestingMeasurements(measurements2);
+      progress.weekSteps();
+      expect(progress.avgWeekSteps, 4996);
+    });
     test('Check monthActivity()', () {
       final progress = Measurements(
           avgMonthSteps: -1,
@@ -146,6 +173,22 @@ void main() async {
       progress.setTestingMeasurements(measurements);
       progress.monthActivity();
       expect(progress.avgMonthActivity, 31.5);
+    });
+    test('Check monthActivity() with 0 value', () {
+      final progress = Measurements(
+          avgMonthSteps: -1,
+          avgWeekSteps: -1,
+          avgMonthActivity: -1,
+          avgWeekActivity: -1,
+          avgMonthCarbs: -1,
+          avgWeekCarbs: -1,
+          providerChallengeGiven: 'null',
+          providerChallengeGoal: -1);
+
+      progress.setTestingFalse();
+      progress.setTestingMeasurements(measurements2);
+      progress.monthActivity();
+      expect(progress.avgMonthActivity, 31);
     });
     test('Check weekActivity()', () {
       final progress = Measurements(
@@ -163,6 +206,22 @@ void main() async {
       progress.weekActivity();
       expect(progress.avgWeekActivity, 46.5);
     });
+    test('Check weekActivity() with 0 value', () {
+      final progress = Measurements(
+          avgMonthSteps: -1,
+          avgWeekSteps: -1,
+          avgMonthActivity: -1,
+          avgWeekActivity: -1,
+          avgMonthCarbs: -1,
+          avgWeekCarbs: -1,
+          providerChallengeGiven: 'null',
+          providerChallengeGoal: -1);
+
+      progress.setTestingFalse();
+      progress.setTestingMeasurements(measurements2);
+      progress.weekActivity();
+      expect(progress.avgWeekActivity, 46);
+    });
     test('Check monthCarbs()', () {
       final progress = Measurements(
           avgMonthSteps: -1,
@@ -179,6 +238,22 @@ void main() async {
       progress.monthCarbs();
       expect(progress.avgMonthCarbs, 51.5);
     });
+    test('Check monthCarbs() with 0 value', () {
+      final progress = Measurements(
+          avgMonthSteps: -1,
+          avgWeekSteps: -1,
+          avgMonthActivity: -1,
+          avgWeekActivity: -1,
+          avgMonthCarbs: -1,
+          avgWeekCarbs: -1,
+          providerChallengeGiven: 'null',
+          providerChallengeGoal: -1);
+
+      progress.setTestingFalse();
+      progress.setTestingMeasurements(measurements2);
+      progress.monthCarbs();
+      expect(progress.avgMonthCarbs, 51);
+    });
     test('Check weekCarbs()', () {
       final progress = Measurements(
           avgMonthSteps: -1,
@@ -194,6 +269,22 @@ void main() async {
       progress.setTestingMeasurements(measurements);
       progress.weekCarbs();
       expect(progress.avgWeekCarbs, 66.5);
+    });
+    test('Check weekCarbs() with 0 value', () {
+      final progress = Measurements(
+          avgMonthSteps: -1,
+          avgWeekSteps: -1,
+          avgMonthActivity: -1,
+          avgWeekActivity: -1,
+          avgMonthCarbs: -1,
+          avgWeekCarbs: -1,
+          providerChallengeGiven: 'null',
+          providerChallengeGoal: -1);
+
+      progress.setTestingFalse();
+      progress.setTestingMeasurements(measurements2);
+      progress.weekCarbs();
+      expect(progress.avgWeekCarbs, 66);
     });
   });
 }
