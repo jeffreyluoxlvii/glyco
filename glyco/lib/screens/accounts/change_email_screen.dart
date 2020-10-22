@@ -60,8 +60,7 @@ class ChangeEmailFormState extends State<ChangeEmailForm> {
             .changeProfile('email', this.newEmail);
         setState(() => createdMessage = "Email changed successfully!");
       } on HttpException catch (error) {
-        var errorMessage =
-            error.toString();
+        var errorMessage = error.toString();
         setState(() => createdMessage = errorMessage);
       } catch (error) {
         print(error);

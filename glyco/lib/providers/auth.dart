@@ -193,7 +193,7 @@ class Auth with ChangeNotifier {
       final response = await http.post(url,
           body: json.encode({
             'idToken': _token,
-            '${type}': input,
+            '$type': input,
             'returnSecureToken': true,
           }));
       final responseData = json.decode(response.body);

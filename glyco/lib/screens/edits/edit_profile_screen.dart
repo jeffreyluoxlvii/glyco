@@ -90,7 +90,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
           Container(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/ForgotPassword');
                 },
@@ -104,10 +104,12 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                       ),
                     ),
                     Spacer(),
-                    Text(firstName + " " + lastName,
-                        style: TextStyle(
-                          color: Colors.black,
-                        ))
+                    Text(
+                      firstName + " " + lastName,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -124,7 +126,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
           Container(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/ChangeEmail');
                 },
@@ -158,7 +160,7 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
           Container(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/ChangePassword');
                 },
@@ -183,33 +185,6 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
               ),
             ),
           ),
-          // TextFormField(
-          //     decoration: InputDecoration(
-          //         hintText: Provider.of<Auth>(context, listen: false).userEmail,
-          //         labelText: "Email"),
-          //     validator: (value) {
-          //       if (value.isEmpty) {
-          //         return "Please enter your email";
-          //       }
-          //       return null;
-          //     }),
-          // Row(
-          //   children: [
-          //     Spacer(),
-          //     GestureDetector(
-          //       onTap: () {
-          //         Navigator.pushNamed(context, '/ChangePassword');
-          //       },
-          //       child: new Text(
-          //         "Change Password",
-          //         style: TextStyle(
-          //           fontStyle: FontStyle.italic,
-          //           color: Colors.grey[400],
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );
