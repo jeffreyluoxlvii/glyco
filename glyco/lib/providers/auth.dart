@@ -51,6 +51,15 @@ class Auth with ChangeNotifier {
     return null;
   }
 
+  String get userId {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
+      return _userId;
+    }
+    return null;
+  }
+
   // Sign up and Sign in
 
   Future<void> signUp(
