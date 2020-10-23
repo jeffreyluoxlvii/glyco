@@ -5,7 +5,6 @@ import './measurement.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Measurements with ChangeNotifier {
-  // clean
   String _providerChallengeGiven = 'null';
   int _providerChallengeGoal = -1;
 

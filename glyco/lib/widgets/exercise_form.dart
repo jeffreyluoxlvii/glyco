@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glyco/providers/auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Define a custom Form widget.
 class ExerciseForm extends StatefulWidget {
