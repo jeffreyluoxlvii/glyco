@@ -2,6 +2,9 @@
 
 * This should be each user's direct feedback as much as possible (either their written summary or quotes from an audio recording made during the test) rather than your interpretation of their feedback.
 
+* User 1 was confused on the timing of when the health kit permissions page popped up, they said it would be better if it popped up after the account was created rather than when you first click on "create an account". They also said they had a tough time seeing the back button when navigating around. They said they had a difficult time finding the edit button when they were trying to edit a shortcut's value. In fact, all of our users had a difficult time finding the edit button on the settings page. They all said they tapped on the shortcut icon for a while and wasn't until a bit later that they found the edit button in the top right corner. One user said that we should move the edit button down to where the shortcuts are in the settings page so it's easy for the user to know where to click. Another user reported that initially the measures screen was a bit intimidating but after a little while using it said it was simple and easy to navigate. Two of the users also stated that we should try and find a different icon for the editing since the icon we had wasn't easy to tell it was for editing.
+
+
 ### Positive feedback.
 
 * Summarize the top good things about the app that you feel are important to be kept in the app. Ideally, these would be similar comments made by multiple testers.
