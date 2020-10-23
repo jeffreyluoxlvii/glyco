@@ -13,11 +13,6 @@ class Auth with ChangeNotifier {
   String firstName;
   String lastName;
 
-  Auth({
-    @required this.firstName,
-    @required this.lastName,
-  });
-
   bool get isAuth {
     return token != null;
   }
@@ -45,6 +40,15 @@ class Auth with ChangeNotifier {
         _expiryDate.isAfter(DateTime.now()) &&
         _token != null) {
       return _userEmail;
+    }
+    return null;
+  }
+
+  String get userId {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
+      return _userId;
     }
     return null;
   }
@@ -143,13 +147,14 @@ class Auth with ChangeNotifier {
 
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('userData')){
+    if (!prefs.containsKey('userData')) {
       return false;
     }
-    final extractedUserData = json.decode(prefs.getString('userData')) as Map<String, Object>;
+    final extractedUserData =
+        json.decode(prefs.getString('userData')) as Map<String, Object>;
     final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
 
-    if(expiryDate.isBefore(DateTime.now())){
+    if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
     _token = extractedUserData['token'];
@@ -179,7 +184,7 @@ class Auth with ChangeNotifier {
     }
   }
 
-  Future<void> logout() async{
+  Future<void> logout() async {
     _token = null;
     _userId = null;
     _expiryDate = null;

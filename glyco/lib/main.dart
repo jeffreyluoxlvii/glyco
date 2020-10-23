@@ -28,10 +28,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Auth, Measurements>(
           update: (ctx, auth, previousMeasurements) => Measurements(
             auth.token,
+            auth.userId,
             previousMeasurements == null
                 ? []
                 : previousMeasurements.measurements,
           ),
+          create: null,
         ),
         ChangeNotifierProvider(
           create: (ctx) => Options(),
