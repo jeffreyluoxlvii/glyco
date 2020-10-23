@@ -36,6 +36,11 @@ class Measurements with ChangeNotifier {
 
   List<Measurement> _measurements = [];
 
+  final String authToken;
+  final String userId;
+
+  Measurements(this.authToken, this.userId, this._measurements);
+
   List<Measurement> get measurements {
     return [..._measurements];
   }
@@ -64,6 +69,7 @@ class Measurements with ChangeNotifier {
           date: date,
           steps: 0,
           lastUpdate: date,
+          userId: userId,
         );
         addMeasurement(newMeasurement).then((value) => print("added"));
       },
@@ -82,7 +88,8 @@ class Measurements with ChangeNotifier {
   // }
 
   Future<void> fetchAndSetMeasurements() async {
-    const url = 'https://glyco-6f403.firebaseio.com/measurements.json';
+    final url =
+        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -103,10 +110,12 @@ class Measurements with ChangeNotifier {
             date: DateTime.parse(measurementData['date']),
             steps: measurementData['steps'],
             lastUpdate: DateTime.parse(measurementData['lastUpdate']),
+            userId: userId,
           ),
         );
       });
       _measurements = loadedMeasurements;
+      print(_measurements);
       notifyListeners();
     } catch (error) {
       throw error;
@@ -114,7 +123,8 @@ class Measurements with ChangeNotifier {
   }
 
   Future<void> addMeasurement(Measurement measurement) async {
-    const url = 'https://glyco-6f403.firebaseio.com/measurements.json';
+    final url =
+        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements.json?auth=$authToken';
     try {
       final response = await http.post(url,
           body: json.encode({
@@ -139,6 +149,7 @@ class Measurements with ChangeNotifier {
         date: measurement.date,
         steps: measurement.steps,
         lastUpdate: measurement.lastUpdate,
+        userId: userId,
       );
       _measurements.add(newMeasurement);
       notifyListeners();
