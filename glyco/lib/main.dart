@@ -4,7 +4,6 @@ import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
 import 'providers/auth.dart';
-import 'providers/healthkit.dart';
 
 //Screens
 import 'screens/splash_screen.dart';
@@ -26,8 +25,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Auth(),
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => Measurements(),
+        ChangeNotifierProxyProvider<Auth, Measurements>(
+          update: (ctx, auth, previousMeasurements) => Measurements(
+            auth.token,
+            previousMeasurements == null
+                ? []
+                : previousMeasurements.measurements,
+          ),
         ),
         ChangeNotifierProvider(
           create: (ctx) => Options(),
@@ -43,9 +47,9 @@ class MyApp extends StatelessWidget {
                       authResultSnapshot.connectionState ==
                               ConnectionState.waiting
                           ? SplashScreen()
-                          : auth.isAuth?
-                        NavigationScreen()
-                          :LoginScreen(),
+                          : auth.isAuth
+                              ? NavigationScreen()
+                              : LoginScreen(),
                 ),
           routes: <String, WidgetBuilder>{
             '/NavScreen': (context) => NavigationScreen(),

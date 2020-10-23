@@ -10,6 +10,10 @@ class Measurements with ChangeNotifier {
 
   List<Measurement> _measurements = [];
 
+  final String authToken;
+
+  Measurements(this.authToken, this._measurements);
+
   List<Measurement> get measurements {
     return [..._measurements];
   }
@@ -45,7 +49,8 @@ class Measurements with ChangeNotifier {
   }
 
   Future<void> fetchAndSetMeasurements() async {
-    const url = 'https://glyco-6f403.firebaseio.com/measurements.json';
+    final url =
+        'https://glyco-6f403.firebaseio.com/measurements.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
