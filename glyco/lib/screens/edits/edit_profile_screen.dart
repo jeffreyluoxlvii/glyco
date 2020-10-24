@@ -70,7 +70,6 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                       // refresh state of Page1
                     });
                   });
-                  //Navigator.pushNamed(context, '/ChangeName');
                 },
                 child: new Row(
                   children: [
@@ -114,7 +113,6 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                       // refresh state of Page1
                     });
                   });
-                  //Navigator.pushNamed(context, '/ChangeEmail');
                 },
                 child: new Row(
                   children: [
