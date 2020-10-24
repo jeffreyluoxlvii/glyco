@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:glyco/providers/auth.dart';
 
 // Define a custom Form widget.
 class ExerciseForm extends StatefulWidget {
@@ -30,8 +29,7 @@ class ExerciseFormState extends State<ExerciseForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false)
-        .addExercise(_minutes, Provider.of<Auth>(context, listen: false).token);
+    Provider.of<Measurement>(context, listen: false).addExercise(_minutes);
     Navigator.of(context).pop();
   }
 
