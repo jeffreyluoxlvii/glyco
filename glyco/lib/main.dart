@@ -43,9 +43,7 @@ class MyApp extends StatelessWidget {
                       authResultSnapshot.connectionState ==
                               ConnectionState.waiting
                           ? SplashScreen()
-                          : auth.isAuth?
-                        NavigationScreen()
-                          :LoginScreen(),
+                          : auth.isAuth ? NavigationScreen() : LoginScreen(),
                 ),
           routes: <String, WidgetBuilder>{
             '/NavScreen': (context) => NavigationScreen(),
