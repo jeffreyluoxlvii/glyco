@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
 import '../../screens/accounts/change_email_screen.dart';
+import '../../screens/accounts/change_name_screen.dart';
 
 //Widgets
 
@@ -13,7 +14,6 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //padding: const EdgeInsets.all(30),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,35 +29,6 @@ class EditProfile extends StatelessWidget {
           ),
           ChangeSettingsForm(),
           SizedBox(height: 30),
-          // Row(
-          //   children: [
-          //     CancelButton(),
-          //     Spacer(),
-          //     ClipRRect(
-          //       borderRadius: BorderRadius.circular(50.0),
-          //       child: Container(
-          //         padding: EdgeInsets.all(5),
-          //         width: 150,
-          //         height: 40,
-          //         color: Colors.cyanAccent[400],
-          //         child: FlatButton(
-          //           child: FittedBox(
-          //             child: Text(
-          //               "SAVE & EXIT",
-          //               style: TextStyle(
-          //                 fontSize: 20,
-          //                 color: Colors.white,
-          //               ),
-          //             ),
-          //           ),
-          //           onPressed: () {
-          //             Navigator.pop(context);
-          //           },
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );
@@ -91,7 +62,15 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/ChangeName');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChangeName())).then((value) {
+                    setState(() {
+                      // refresh state of Page1
+                    });
+                  });
+                  //Navigator.pushNamed(context, '/ChangeName');
                 },
                 child: new Row(
                   children: [

@@ -49,18 +49,16 @@ class ChangeNameForm extends StatefulWidget {
 
 class ChangeNameFormState extends State<ChangeNameForm> {
   final _formKey = GlobalKey<FormState>();
-  var enteredEmail;
   var newFirstName;
   var newLastName;
   var createdMessage = "";
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
-      String name = newFirstName.trim() + " " + newLastName.trim();
+      String name = this.newFirstName + " " + this.newLastName;
       try {
         await Provider.of<Auth>(context, listen: false)
-            //.changeProfile('displayName', name);
-            .changeName(newFirstName, newLastName);
+            .changeName(name);
         setState(() => createdMessage = "Name changed successfully!");
       } on HttpException catch (error) {
         var errorMessage = error.toString();
@@ -88,7 +86,7 @@ class ChangeNameFormState extends State<ChangeNameForm> {
                     return null;
                   },
                   onSaved: (String value) {
-                    this.newFirstName = value;
+                    this.newFirstName = value.trim();
                   },
                 ),
               ),
@@ -103,7 +101,7 @@ class ChangeNameFormState extends State<ChangeNameForm> {
                     return null;
                   },
                   onSaved: (String value) {
-                    this.newLastName = value;
+                    this.newLastName = value.trim();
                   },
                 ),
               ),
