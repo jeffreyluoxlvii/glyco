@@ -66,6 +66,7 @@ class Measurements with ChangeNotifier {
           lastUpdate: date,
         );
         addMeasurement(newMeasurement).then((value) => print("added"));
+        return null;
       },
     );
   }
@@ -75,7 +76,7 @@ class Measurements with ChangeNotifier {
   //       (measurement) =>
   //           measurement.date.year == date.year &&
   //           measurement.date.month == date.month &&
-  //           measurement.date.day == date.day, 
+  //           measurement.date.day == date.day,
   //   orElse: () {
   //     return null;
   //   });
@@ -178,12 +179,12 @@ class Measurements with ChangeNotifier {
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDateAverages(day) != null) {
-        if (findByDate(day).steps != 0) {
-          totalSteps += findByDate(day).steps;
-          numDays++;
-        }
-      // }
+      if (findByDate(day) != null) {
+      if (findByDate(day).steps != 0) {
+        totalSteps += findByDate(day).steps;
+        numDays++;
+      }
+      }
     }
 
     avgMonthSteps = (totalSteps / numDays);
@@ -204,10 +205,10 @@ class Measurements with ChangeNotifier {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       // if (findByDateAverages(day) != null) {
-        if (findByDate(day).steps != 0) {
-          totalSteps += findByDate(day).steps;
-          numDays++;
-        }
+      if (findByDate(day).steps != 0) {
+        totalSteps += findByDate(day).steps;
+        numDays++;
+      }
       // }
     }
 
@@ -230,10 +231,10 @@ class Measurements with ChangeNotifier {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       // if (findByDateAverages(day) != null) {
-        if (findByDate(day).exerciseTime != 0) {
-          totalActivity += findByDate(day).exerciseTime;
-          numDays++;
-        }
+      if (findByDate(day).exerciseTime != 0) {
+        totalActivity += findByDate(day).exerciseTime;
+        numDays++;
+      }
       // }
     }
 
@@ -255,10 +256,10 @@ class Measurements with ChangeNotifier {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       // if (findByDateAverages(day) != null) {
-        if (findByDate(day).exerciseTime != 0) {
-          totalActivity += findByDate(day).exerciseTime;
-          numDays++;
-        }
+      if (findByDate(day).exerciseTime != 0) {
+        totalActivity += findByDate(day).exerciseTime;
+        numDays++;
+      }
       // }
     }
 
@@ -281,10 +282,10 @@ class Measurements with ChangeNotifier {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       // if (findByDateAverages(day) != null) {
-        if (findByDate(day).carbs != 0) {
-          totalCarbs += findByDate(day).carbs;
-          numDays++;
-        }
+      if (findByDate(day).carbs != 0) {
+        totalCarbs += findByDate(day).carbs;
+        numDays++;
+      }
       // }
     }
 
@@ -306,10 +307,10 @@ class Measurements with ChangeNotifier {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       // if (findByDateAverages(day) != null) {
-        if (findByDate(day).carbs != 0) {
-          totalCarbs += findByDate(day).carbs;
-          numDays++;
-        }
+      if (findByDate(day).carbs != 0) {
+        totalCarbs += findByDate(day).carbs;
+        numDays++;
+      }
       // }
     }
 
