@@ -72,7 +72,7 @@ class Measurements with ChangeNotifier {
           userId: userId,
         );
         addMeasurement(newMeasurement).then((value) => print("added"));
-        return null;
+        // return null;
       },
     );
   }
@@ -190,12 +190,12 @@ class Measurements with ChangeNotifier {
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      if (findByDate(day) != null) {
+      // if (findByDate(day) != null) {
         if (findByDate(day).steps != 0) {
           totalSteps += findByDate(day).steps;
           numDays++;
         }
-      }
+      // }
     }
 
     avgMonthSteps = (totalSteps / numDays);
@@ -215,12 +215,12 @@ class Measurements with ChangeNotifier {
     for (int i = 1; i < 7; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      if (findByDate(day) != null) {
+      // if (findByDate(day) != null) {
         if (findByDate(day).steps != 0) {
           totalSteps += findByDate(day).steps;
           numDays++;
         }
-      }
+      // }
     }
 
     avgWeekSteps = (totalSteps / numDays);
@@ -241,12 +241,12 @@ class Measurements with ChangeNotifier {
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      if (findByDate(day) != null) {
+      // if (findByDate(day) != null) {
         if (findByDate(day).exerciseTime != 0) {
           totalActivity += findByDate(day).exerciseTime;
           numDays++;
         }
-      }
+      // }
     }
 
     avgMonthActivity = (totalActivity / numDays);
@@ -266,12 +266,12 @@ class Measurements with ChangeNotifier {
     for (int i = 1; i < 7; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      if (findByDate(day) != null) {
+      // if (findByDate(day) != null) {
         if (findByDate(day).exerciseTime != 0) {
           totalActivity += findByDate(day).exerciseTime;
           numDays++;
         }
-      }
+      // }
     }
 
     avgWeekActivity = (totalActivity / numDays);
@@ -292,12 +292,12 @@ class Measurements with ChangeNotifier {
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      if (findByDate(day) != null) {
+      // if (findByDate(day) != null) {
         if (findByDate(day).carbs != 0) {
           totalCarbs += findByDate(day).carbs;
           numDays++;
         }
-      }
+      // }
     }
 
     avgMonthCarbs = (totalCarbs / numDays);
@@ -317,12 +317,12 @@ class Measurements with ChangeNotifier {
     for (int i = 1; i < 7; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      if (findByDate(day) != null) {
+      // if (findByDate(day) != null) {
         if (findByDate(day).carbs != 0) {
           totalCarbs += findByDate(day).carbs;
           numDays++;
         }
-      }
+      // }
     }
 
     avgWeekCarbs = (totalCarbs / numDays);
