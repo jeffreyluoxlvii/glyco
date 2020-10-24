@@ -14,3 +14,9 @@
 ### What could be improved. 
 
 * Summarize the top things about the app that users commented critically about, regardless of whether or not you agree with the users or if they seem to contradictory. If any of these comments are made by multiple testers, make sure to note that as well.
+
+User 1 had an issue signing in because he attempted to use tab to get from the username to the password inputs on the login screen. He told us we should find a way to escape these characters so spaces or tabs at the end of the input aren't considered. He also had a hard time finding the back arrow to return to the home screen from the Create an Account screen and advised us to change the color from white to black for contrast.
+
+User 3 had a hard time realizing how to get back to the sign in screen after creating an account. She advised us to either make it automatically swipe back or to provide written instruction.
+
+All 3 users had an issue with editing their user settings to access the meal shortcuts. They all attempted to click on the shortcuts themselves and didn't see the icon to edit at the top right. We were advised to either replace the icon with the word "Edit" for visibility, or to allow users to immediately edit the shortcuts by clicking on them. User 1 also told us that we could use written instruction to assist with this ambiguity.
