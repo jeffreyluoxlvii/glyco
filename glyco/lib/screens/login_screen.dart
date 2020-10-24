@@ -29,10 +29,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Image.asset(
-            'assets/images/glyco_vector.png',
-            height: 250,
-            width: 250,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: Image.asset(
+              'assets/images/glyco_vector.png',
+              height: 250,
+              width: 250,
+            ),
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
