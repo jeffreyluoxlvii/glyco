@@ -15,7 +15,6 @@ class Measurement with ChangeNotifier {
   int calories;
   int carbs;
   double a1cLevel;
-  String userId;
 
   Measurement({
     @required this.id,
@@ -28,7 +27,6 @@ class Measurement with ChangeNotifier {
     @required this.calories,
     @required this.carbs,
     @required this.a1cLevel,
-    @required this.userId,
   });
 
   void _addCalories(int calories) {
@@ -41,9 +39,8 @@ class Measurement with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addNutrition(int carbs, String token) async {
-    final url =
-        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
+  Future<void> addNutrition(int carbs) async {
+    final url = 'https://glyco-6f403.firebaseio.com/measurements/$id.json';
     final oldCalories = this.calories;
     final oldCarbs = this.carbs;
     _addCalories(4 * carbs);
@@ -69,9 +66,8 @@ class Measurement with ChangeNotifier {
     }
   }
 
-  Future<void> addExercise(int minutes, String token) async {
-    final url =
-        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
+  Future<void> addExercise(int minutes) async {
+    final url = 'https://glyco-6f403.firebaseio.com/measurements/$id.json';
     final oldMinutes = this.exerciseTime;
     exerciseTime += minutes;
     notifyListeners();

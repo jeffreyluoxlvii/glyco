@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
-import 'package:glyco/providers/auth.dart';
 
 // Define a custom Form widget.
 class NutritionForm extends StatefulWidget {
@@ -26,8 +25,7 @@ class NutritionFormState extends State<NutritionForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false)
-        .addNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
+    Provider.of<Measurement>(context, listen: false).addNutrition(_carbs);
     Navigator.of(context).pop();
   }
 

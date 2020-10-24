@@ -5,10 +5,8 @@ import 'package:provider/provider.dart';
 import '../providers/measurements.dart';
 
 class ProgressContainer extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
-
     final progressProvider = Provider.of<Measurements>(context);
 
     return new Container(
