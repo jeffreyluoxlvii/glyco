@@ -59,8 +59,8 @@ class ChangeNameFormState extends State<ChangeNameForm> {
       String name = newFirstName.trim() + " " + newLastName.trim();
       try {
         await Provider.of<Auth>(context, listen: false)
-            .changeProfile('displayName', name);
-            //.updateNewName(this.newFirstName, this.newLastName);
+            //.changeProfile('displayName', name);
+            .changeName(newFirstName, newLastName);
         setState(() => createdMessage = "Name changed successfully!");
       } on HttpException catch (error) {
         var errorMessage = error.toString();
@@ -121,7 +121,7 @@ class ChangeNameFormState extends State<ChangeNameForm> {
                 color: Colors.cyanAccent[400],
                 child: FlatButton(
                   child: Text(
-                    "CHANGE EMAIL",
+                    "CHANGE NAME",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,

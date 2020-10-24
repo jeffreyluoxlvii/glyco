@@ -29,27 +29,14 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 15),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EditProfile())).then((value) {
-                    setState(() {
-                      // refresh state of Page1
-                    });
-                  });
-                },
-                child: new Text(
-                  "Click to Edit Profile",
+              Text("Edit Settings",
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-              CurrentProfile(),
+                  )),
+              
+              EditProfile(),
               SizedBox(height: 25),
               GestureDetector(
                 onTap: () {
@@ -101,7 +88,8 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
 class CurrentProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var nameList = Provider.of<Auth>(context, listen: false).userName.split(" ");
+    var nameList =
+        Provider.of<Auth>(context, listen: false).userName.split(" ");
     var firstName = nameList[0];
     var lastName = nameList[1];
     return Form(

@@ -1,65 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
+import '../../screens/accounts/change_email_screen.dart';
 
 //Widgets
 
-import '../../widgets/appBars/plain_app_bar.dart';
+import '../../widgets/appBars/plain_app_bar_back.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PlainAppBar(),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 15),
-            Text("Edit Profile",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                )),
-            SizedBox(height: 30),
-            ChangeSettingsForm(),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                CancelButton(),
-                Spacer(),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    width: 150,
-                    height: 40,
-                    color: Colors.cyanAccent[400],
-                    child: FlatButton(
-                      child: FittedBox(
-                        child: Text(
-                          "SAVE & EXIT",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ),
-              ],
+    return Container(
+      //padding: const EdgeInsets.all(30),
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 30),
+          Text(
+            "Profile",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
             ),
-          ],
-        ),
+          ),
+          ChangeSettingsForm(),
+          SizedBox(height: 30),
+          // Row(
+          //   children: [
+          //     CancelButton(),
+          //     Spacer(),
+          //     ClipRRect(
+          //       borderRadius: BorderRadius.circular(50.0),
+          //       child: Container(
+          //         padding: EdgeInsets.all(5),
+          //         width: 150,
+          //         height: 40,
+          //         color: Colors.cyanAccent[400],
+          //         child: FlatButton(
+          //           child: FittedBox(
+          //             child: Text(
+          //               "SAVE & EXIT",
+          //               style: TextStyle(
+          //                 fontSize: 20,
+          //                 color: Colors.white,
+          //               ),
+          //             ),
+          //           ),
+          //           onPressed: () {
+          //             Navigator.pop(context);
+          //           },
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+        ],
       ),
     );
   }
@@ -128,7 +127,15 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, '/ChangeEmail');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChangeEmail())).then((value) {
+                    setState(() {
+                      // refresh state of Page1
+                    });
+                  });
+                  //Navigator.pushNamed(context, '/ChangeEmail');
                 },
                 child: new Row(
                   children: [

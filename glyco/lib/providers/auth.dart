@@ -207,32 +207,6 @@ class Auth with ChangeNotifier {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
     try {
-      // var response;
-      // if (type == 'displayName') {
-      //   response = await http.post(
-      //     url,
-      //     body: json.encode(
-      //       {
-      //         'idToken': _token,
-      //         'displayName': input,
-      //         'photoUrl': "",
-      //         'deleteAttribute': new List(0),
-      //         'returnSecureToken': true,
-      //       },
-      //     ),
-      //   );
-      // } else {
-      //   response = await http.post(
-      //     url,
-      //     body: json.encode(
-      //       {
-      //         'idToken': _token,
-      //         '$type': input,
-      //         'returnSecureToken': true,
-      //       },
-      //     ),
-      //   );
-      // }
       final response = await http.post(url,
           body: json.encode({
             'idToken': _token,
@@ -242,6 +216,8 @@ class Auth with ChangeNotifier {
       final responseData = json.decode(response.body);
       _token = responseData['idToken'];
       _userId = responseData['localId'];
+      _userName = responseData['displayName'];
+      _userEmail = responseData['email'];
       _expiryDate = DateTime.now().add(
         Duration(
           seconds: int.parse(
@@ -266,7 +242,49 @@ class Auth with ChangeNotifier {
     } catch (error) {
       return Future.error(error);
     }
-    setData(_token);
+  }
+
+  Future<void> changeName(String firstName, String lastName) async {
+    final url =
+        'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'idToken': _token,
+            'displayName': firstName + " " + lastName,
+            'photoUrl': "",
+            'deleteAttribute': new List(0),
+            'returnSecureToken': true,
+          }));
+      final responseData = json.decode(response.body);
+      _token = responseData['idToken'];
+      _userId = responseData['localId'];
+      _userName = responseData['displayName'];
+      _userEmail = responseData['email'];
+      _expiryDate = DateTime.now().add(
+        Duration(
+          seconds: int.parse(
+            responseData['expiresIn'],
+          ),
+        ),
+      );
+      _autoLogout();
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode(
+        {
+          'token': _token,
+          'userId': _userId,
+          'expiryDate': _expiryDate.toIso8601String(),
+        },
+      );
+      prefs.setString('userData', userData);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
+    } catch (error) {
+      return Future.error(error);
+    }
   }
 
   //Logout
