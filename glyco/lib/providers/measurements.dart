@@ -8,32 +8,6 @@ class Measurements with ChangeNotifier {
   String providerChallengeGiven = 'null';
   int providerChallengeGoal = -1;
 
-  double avgMonthSteps;
-  double avgWeekSteps;
-  double avgMonthActivity;
-  double avgWeekActivity;
-  double avgMonthCarbs;
-  double avgWeekCarbs;
-  int stepsProgress;
-  int activityProgress;
-  int carbProgress;
-
-  bool testing = false;
-
-  Measurements(
-      {this.avgMonthSteps,
-      this.avgWeekSteps,
-      this.avgMonthActivity,
-      this.avgWeekActivity,
-      this.avgMonthCarbs,
-      this.avgWeekCarbs,
-      this.providerChallengeGoal,
-      this.providerChallengeGiven,
-      this.stepsProgress,
-      this.activityProgress,
-      this.carbProgress,
-      this.testing});
-
   List<Measurement> _measurements = [];
 
   final String authToken;
@@ -72,21 +46,22 @@ class Measurements with ChangeNotifier {
           userId: userId,
         );
         addMeasurement(newMeasurement).then((value) => print("added"));
-        // return null;
+        return null;
       },
     );
   }
 
-  // Measurement findByDateAverages(DateTime date) {
-  //   return _measurements.firstWhere(
-  //       (measurement) =>
-  //           measurement.date.year == date.year &&
-  //           measurement.date.month == date.month &&
-  //           measurement.date.day == date.day,
-  //   orElse: () {
-  //     return null;
-  //   });
-  // }
+  Measurement findByDateAverages(DateTime date) {
+    return _measurements.firstWhere(
+      (measurement) =>
+          measurement.date.year == date.year &&
+          measurement.date.month == date.month &&
+          measurement.date.day == date.day,
+      orElse: () {
+        return null;
+      },
+    );
+  }
 
   Future<void> fetchAndSetMeasurements() async {
     final url =
@@ -180,50 +155,50 @@ class Measurements with ChangeNotifier {
   // STEPS AVERAGES
 
   double monthSteps() {
-    if (testing == true) {
-      return avgMonthSteps;
-    }
-
     int totalSteps = 0;
     int numDays = 0;
 
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDate(day) != null) {
+      if (findByDateAverages(day) != null) {
         if (findByDate(day).steps != 0) {
           totalSteps += findByDate(day).steps;
           numDays++;
         }
-      // }
+      }
     }
 
-    avgMonthSteps = (totalSteps / numDays);
+    if (numDays == 0) {
+      return 0;
+    }
+
+    double avgMonthSteps = (totalSteps / numDays);
     return avgMonthSteps;
 
     // return 9780;
   }
 
   double weekSteps() {
-    if (testing == true) {
-      return avgWeekSteps;
-    }
-
     int totalSteps = 0;
     int numDays = 0;
 
     for (int i = 1; i < 7; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDate(day) != null) {
+      if (findByDateAverages(day) != null) {
         if (findByDate(day).steps != 0) {
           totalSteps += findByDate(day).steps;
           numDays++;
         }
-      // }
+      }
     }
 
-    avgWeekSteps = (totalSteps / numDays);
+    if (numDays == 0) {
+      return 0;
+    }
+
+    double avgWeekSteps = (totalSteps / numDays);
     return avgWeekSteps;
 
     // return 2590;
@@ -231,50 +206,50 @@ class Measurements with ChangeNotifier {
 
   // ACTIVITY AVERAGES
   double monthActivity() {
-    if (testing == true) {
-      return avgMonthActivity;
-    }
-
     int totalActivity = 0;
     int numDays = 0;
 
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDate(day) != null) {
+      if (findByDateAverages(day) != null) {
         if (findByDate(day).exerciseTime != 0) {
           totalActivity += findByDate(day).exerciseTime;
           numDays++;
         }
-      // }
+      }
     }
 
-    avgMonthActivity = (totalActivity / numDays);
+    if (numDays == 0) {
+      return 0;
+    }
+
+    double avgMonthActivity = (totalActivity / numDays);
     return avgMonthActivity;
 
     // return 30;
   }
 
   double weekActivity() {
-    if (testing == true) {
-      return avgWeekActivity;
-    }
-
     int totalActivity = 0;
     int numDays = 0;
 
     for (int i = 1; i < 7; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDate(day) != null) {
+      if (findByDateAverages(day) != null) {
         if (findByDate(day).exerciseTime != 0) {
           totalActivity += findByDate(day).exerciseTime;
           numDays++;
         }
-      // }
+      }
     }
 
-    avgWeekActivity = (totalActivity / numDays);
+    if (numDays == 0) {
+      return 0;
+    }
+
+    double avgWeekActivity = (totalActivity / numDays);
     return avgWeekActivity;
 
     // return 28;
@@ -282,50 +257,50 @@ class Measurements with ChangeNotifier {
 
   // CARBS AVERAGES
   double monthCarbs() {
-    if (testing == true) {
-      return avgMonthCarbs;
-    }
-
     int totalCarbs = 0;
     int numDays = 0;
 
     for (int i = 7; i < 31; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDate(day) != null) {
+      if (findByDateAverages(day) != null) {
         if (findByDate(day).carbs != 0) {
           totalCarbs += findByDate(day).carbs;
           numDays++;
         }
-      // }
+      }
     }
 
-    avgMonthCarbs = (totalCarbs / numDays);
+    if (numDays == 0) {
+      return 0;
+    }
+
+    double avgMonthCarbs = (totalCarbs / numDays);
     return avgMonthCarbs;
 
     // return 10;
   }
 
   double weekCarbs() {
-    if (testing == true) {
-      return avgWeekCarbs;
-    }
-
     int totalCarbs = 0;
     int numDays = 0;
 
     for (int i = 1; i < 7; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
-      // if (findByDate(day) != null) {
+      if (findByDateAverages(day) != null) {
         if (findByDate(day).carbs != 0) {
           totalCarbs += findByDate(day).carbs;
           numDays++;
         }
-      // }
+      }
     }
 
-    avgWeekCarbs = (totalCarbs / numDays);
+    if (numDays == 0) {
+      return 0;
+    }
+
+    double avgWeekCarbs = (totalCarbs / numDays);
     return avgWeekCarbs;
 
     // return 60;
@@ -338,12 +313,12 @@ class Measurements with ChangeNotifier {
     int activityReductionPercent = 0;
     double carbDifference = 0;
 
-    avgMonthSteps = monthSteps();
-    avgWeekSteps = weekSteps();
-    avgMonthActivity = monthActivity();
-    avgWeekActivity = weekActivity();
-    avgMonthCarbs = monthCarbs();
-    avgWeekCarbs = weekCarbs();
+    double avgMonthSteps = monthSteps();
+    double avgWeekSteps = weekSteps();
+    double avgMonthActivity = monthActivity();
+    double avgWeekActivity = weekActivity();
+    double avgMonthCarbs = monthCarbs();
+    double avgWeekCarbs = weekCarbs();
 
     if (avgMonthSteps != 0) {
       stepsReduction = 1 - (avgWeekSteps / avgMonthSteps);
@@ -527,7 +502,7 @@ class Measurements with ChangeNotifier {
     Measurement measurement = findByDate(DateTime.now());
 
     if (providerChallengeGiven == 'steps') {
-      stepsProgress = measurement.steps;
+      int stepsProgress = measurement.steps;
       int stepsProgressPercent =
           ((stepsProgress / providerChallengeGoal) * 100).round();
       return 'You have completed ' +
@@ -539,7 +514,7 @@ class Measurements with ChangeNotifier {
           ' steps.';
     }
     if (providerChallengeGiven == 'activity') {
-      activityProgress = measurement.exerciseTime;
+      int activityProgress = measurement.exerciseTime;
       int activityProgressPercent =
           ((activityProgress / providerChallengeGoal) * 100).round();
       return 'You have completed ' +
@@ -551,7 +526,7 @@ class Measurements with ChangeNotifier {
           ' minutes.';
     }
     if (providerChallengeGiven == 'carbs') {
-      carbProgress = measurement.carbs;
+      int carbProgress = measurement.carbs;
       int carbProgressPercent =
           ((carbProgress / providerChallengeGoal) * 100).round();
       return 'You have completed ' +
@@ -564,18 +539,5 @@ class Measurements with ChangeNotifier {
     }
 
     return 'You currently have no progress because you have no challenges.';
-  }
-
-  // FOR TESTING
-  void setTestingMeasurements(List<Measurement> measurements) {
-    _measurements = measurements;
-  }
-
-  void setTestingTrue() {
-    testing = true;
-  }
-
-  void setTestingFalse() {
-    testing = false;
   }
 }
