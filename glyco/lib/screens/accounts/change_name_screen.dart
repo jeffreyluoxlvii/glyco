@@ -8,7 +8,7 @@ import '../../widgets/appBars/plain_app_bar_back.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ChangePassword extends StatelessWidget {
+class ChangeName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class ChangePassword extends StatelessWidget {
             children: [
               SizedBox(height: 15),
               Text(
-                "Change password",
+                "Change name",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class ChangePassword extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
-              ChangePassForm(),
+              ChangeNameForm(),
               SizedBox(height: 30),
             ],
           ),
@@ -40,32 +40,31 @@ class ChangePassword extends StatelessWidget {
   }
 }
 
-class ChangePassForm extends StatefulWidget {
+class ChangeNameForm extends StatefulWidget {
   @override
-  ChangePassFormState createState() {
-    return ChangePassFormState();
+  ChangeNameFormState createState() {
+    return ChangeNameFormState();
   }
 }
 
-class ChangePassFormState extends State<ChangePassForm> {
+class ChangeNameFormState extends State<ChangeNameForm> {
   final _formKey = GlobalKey<FormState>();
-  var enteredPassword;
-  var newPassword;
+  var newFirstName;
+  var newLastName;
   var createdMessage = "";
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
+      String name = this.newFirstName + " " + this.newLastName;
       try {
         await Provider.of<Auth>(context, listen: false)
-            .changeProfile('password', this.newPassword);
-        setState(() => createdMessage = "Password changed successfully!");
-        //Navigator.pushReplacementNamed(context, '/NavScreen');
+            .changeName(name);
+        setState(() => createdMessage = "Name changed successfully!");
       } on HttpException catch (error) {
-        var errorMessage =
-            error.toString();
+        var errorMessage = error.toString();
         setState(() => createdMessage = errorMessage);
       } catch (error) {
-        print("Error");
+        print(error);
         const errorMessage = 'Could not authenticate. Try again later';
         setState(() => createdMessage = errorMessage);
       }
@@ -75,32 +74,38 @@ class ChangePassFormState extends State<ChangePassForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          TextFormField(
-            obscureText: true,
-            decoration: formDecorator("enter new password"),
-            validator: (value) {
-              if (value.isEmpty) {
-                return "Please enter a new password";
-              } else {
-                enteredPassword = value;
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            obscureText: true,
-            decoration: formDecorator("re-enter new password"),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please re-enter your new password';
-              } else if (value != enteredPassword) {
-                return "Passwords don't match";
-              }
-              return null;
-            },
-            onSaved: (String value) {
-              this.newPassword = value;
-            },
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  decoration: formDecorator("enter first name"),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "Please enter your first name";
+                    }
+                    return null;
+                  },
+                  onSaved: (String value) {
+                    this.newFirstName = value.trim();
+                  },
+                ),
+              ),
+              SizedBox(width: 50),
+              Expanded(
+                child: TextFormField(
+                  decoration: formDecorator("enter last name"),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter your last name';
+                    }
+                    return null;
+                  },
+                  onSaved: (String value) {
+                    this.newLastName = value.trim();
+                  },
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 30),
           Row(children: [
@@ -114,7 +119,7 @@ class ChangePassFormState extends State<ChangePassForm> {
                 color: Colors.cyanAccent[400],
                 child: FlatButton(
                   child: Text(
-                    "CHANGE PASSWORD",
+                    "CHANGE NAME",
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -139,15 +144,6 @@ class ChangePassFormState extends State<ChangePassForm> {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          // passwordChanged
-          //     ? Text(
-          //         "Password changed successfully!",
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Theme.of(context).primaryColor,
-          //         ),
-          //       )
-          //     : Text(""),
         ],
       ),
     );

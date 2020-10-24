@@ -12,7 +12,10 @@ import 'screens/change_settings_screen.dart';
 import 'screens/edits/edit_shortcuts_screen.dart';
 import 'screens/accounts/create_account_screen.dart';
 import 'screens/accounts/change_password_screen.dart';
+import 'screens/accounts/change_email_screen.dart';
+import 'screens/accounts/change_name_screen.dart';
 import 'screens/accounts/forgot_password_screen.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-          home: auth.isAuth
+          home: //LoginScreen(),
+          auth.isAuth
               ? NavigationScreen()
               : FutureBuilder(
                   future: auth.tryAutoLogin(),
@@ -59,6 +63,8 @@ class MyApp extends StatelessWidget {
             '/EditShortcuts': (context) => EditShortcuts(),
             '/CreateAccount': (context) => CreateAccount(),
             '/ChangePassword': (context) => ChangePassword(),
+            '/ChangeEmail': (context) => ChangeEmail(),
+            '/ChangeName': (context) => ChangeName(),
             '/ForgotPassword': (context) => ForgotPassword(),
           },
           theme: ThemeData(
