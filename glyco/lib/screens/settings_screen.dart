@@ -37,14 +37,14 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Provider.of<Auth>(context, listen: false).userName,
+                    Provider.of<Auth>(context).userName,
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    Provider.of<Auth>(context, listen: false).userEmail,
+                    Provider.of<Auth>(context).userEmail,
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -101,7 +101,8 @@ class SettingsScreen extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              Provider.of<Auth>(context, listen: false).logout();
+                              Provider.of<Auth>(context, listen: false)
+                                  .logout();
                             },
                           ),
                         ),
