@@ -12,11 +12,7 @@ void main() {
   const password = "test123";
   const firstName = "First";
   const lastName = "Test";
-  // group('Accounts', () {
-  //   setUpAll(() {
-
-  //   });
-  //   testWidgets('Created an account successfully',
+  //   testWidgets('Created an account successfully', 
   //   (WidgetTester tester) async {
   //     //var currentContext;
   //     await tester.pumpWidget(
@@ -25,7 +21,7 @@ void main() {
   //         child: Container(),
   //       ),
   //     );
-  //     final context = tester.element(find.byType(Container));
+  //     final context = tesfter.element(find.byType(Container));
   //     await Provider.of<Auth>(context, listen:false).signUp(email, password, firstName, lastName);
   //     expect(Provider.of<Auth>(context, listen:false).userEmail, email);
   //   });
