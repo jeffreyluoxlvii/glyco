@@ -41,13 +41,13 @@ class Measurement with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addNutrition(int carbs, String token) async {
+  Future<void> setNutrition(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
     final oldCalories = this.calories;
     final oldCarbs = this.carbs;
-    _addCalories(4 * carbs);
-    _addCarbs(carbs);
+    this.calories = 4 * carbs;
+    this.carbs = carbs;
     notifyListeners();
     try {
       final response = await http.patch(
@@ -67,6 +67,10 @@ class Measurement with ChangeNotifier {
       this.carbs = oldCarbs;
       notifyListeners();
     }
+  }
+
+  Future<void> addNutrition(int carbs, String token) async {
+    setNutrition(this.carbs + carbs, token);
   }
 
   Future<void> addExercise(int minutes, String token) async {
