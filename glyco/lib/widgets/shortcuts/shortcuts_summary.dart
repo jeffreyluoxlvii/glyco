@@ -11,49 +11,128 @@ class ShortcutsSummary extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
-              FontAwesomeIcons.hamburger,
-              color: Theme.of(context).primaryColor,
-              size: 45,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(" ${settings.mealCarbs}g carbs"),
+            InkWell(
+              child: Row(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.hamburger,
+                    color: Theme.of(context).primaryColor,
+                    size: 45,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "MEAL",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
+                        child: Text(" ${settings.mealCarbs}g carbs"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              onTap: () {
+                print("Burger");
+              },
             ),
             Spacer(),
-            Icon(
-              FontAwesomeIcons.cookie,
-              color: Theme.of(context).primaryColor,
-              size: 45,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(" ${settings.snackCarbs}g carbs"),
+            InkWell(
+              child: Row(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.cookie,
+                    color: Theme.of(context).primaryColor,
+                    size: 45,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "SNACK",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
+                        child: Text(" ${settings.snackCarbs}g carbs"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              onTap: () {
+                print("Cookie");
+              },
             ),
           ],
         ),
         SizedBox(height: 15),
         Row(
           children: [
-            Icon(
-              FontAwesomeIcons.mugHot,
-              color: Theme.of(context).primaryColor,
-              size: 45,
-            ),
-            Padding(
-              // TODO: figure out what's going on with the padding (make these into containers?)
-              padding: const EdgeInsets.all(10.0),
-              child: Text(" ${settings.drinkCarbs}g carbs"),
+            InkWell(
+              child: Row(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.mugHot,
+                    color: Theme.of(context).primaryColor,
+                    size: 45,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "DRINK",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
+                        child: Text(" ${settings.drinkCarbs}g carbs"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              onTap: () {
+                print("Drink");
+              },
             ),
             Spacer(),
-            Icon(
-              FontAwesomeIcons.running,
-              color: Theme.of(context).primaryColor,
-              size: 45,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text("${settings.exerciseTime} minutes"),
+            InkWell(
+              child: Row(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.running,
+                    color: Theme.of(context).primaryColor,
+                    size: 45,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        "ACTIVITY",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(11, 0, 11, 0),
+                        child: Text("${settings.exerciseTime} minutes"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              onTap: () {
+                print("Run");
+              },
             ),
           ],
         ),

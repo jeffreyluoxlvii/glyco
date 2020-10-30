@@ -79,7 +79,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   value: settings,
                   child: ShortcutsSummary(),
                 ),
-                //logoutButton(),
               ],
             ),
             Align(
