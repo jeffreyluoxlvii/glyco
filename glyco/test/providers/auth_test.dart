@@ -5,8 +5,8 @@ import '../../lib/providers/auth.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 
-class MockClient extends Mock implements http.Client {}
 
+class MockClient extends Mock implements http.Client{}
 void main() {
   const email = "test@gmail.com";
   const password = "test123";
