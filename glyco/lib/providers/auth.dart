@@ -209,7 +209,7 @@ class Auth with ChangeNotifier {
       final responseData = json.decode(response.body);
       print(responseData);
       print(responseData['idToken']);
-      if(responseData['idToken'] != null){
+      if (responseData['idToken'] != null) {
         _token = responseData['idToken'];
       }
       _userName = responseData['displayName'];
@@ -253,18 +253,18 @@ class Auth with ChangeNotifier {
       final responseData = json.decode(response.body);
       print(responseData);
       print(responseData['idToken']);
-      if(responseData['idToken'] != null){
+      if (responseData['idToken'] != null) {
         _token = responseData['idToken'];
       }
       _userName = responseData['displayName'];
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
+      notifyListeners();
     } catch (error) {
       return Future.error(error);
     }
   }
-
 
   //Logout
 
