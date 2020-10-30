@@ -28,14 +28,6 @@ class _ChangeSettingsScreenState extends State<ChangeSettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 15),
-              Text("Edit Settings",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                  )),
-              
               EditProfile(),
               SizedBox(height: 25),
               GestureDetector(
