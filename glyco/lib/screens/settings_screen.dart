@@ -22,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: SettingsAppBar(),
       body: Container(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.fromLTRB(30, 20, 30, 30),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -23,7 +23,7 @@ class ChangeEmail extends StatelessWidget {
             children: [
               SizedBox(height: 15),
               Text(
-                "Change email",
+                "Change Email",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -61,11 +61,16 @@ class ChangeEmailFormState extends State<ChangeEmailForm> {
             .changeProfile('email', this.newEmail);
         setState(() => createdMessage = "Email changed successfully!");
       } on HttpException catch (error) {
-        var errorMessage = error.toString();
+        var errorMessage;
+        if (error.toString().contains('EMAIL_EXISTS')) {
+          errorMessage = 'This email address is already in use.';
+        } else if (error.toString().contains('INVALID_EMAIL')) {
+          errorMessage = 'This is not a valid email address.';
+        }
         setState(() => createdMessage = errorMessage);
       } catch (error) {
         print(error);
-        const errorMessage = 'Could not authenticate. Try again later';
+        const errorMessage = 'Could not authenticate. Try again later.';
         setState(() => createdMessage = errorMessage);
       }
     }

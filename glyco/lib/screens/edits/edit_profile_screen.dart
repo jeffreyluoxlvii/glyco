@@ -4,12 +4,6 @@ import '../../providers/auth.dart';
 import '../../screens/accounts/change_email_screen.dart';
 import '../../screens/accounts/change_name_screen.dart';
 
-//Widgets
-
-import '../../widgets/appBars/plain_app_bar_back.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,7 +12,6 @@ class EditProfile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 30),
           Text(
             "Profile",
             style: TextStyle(

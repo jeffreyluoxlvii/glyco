@@ -22,7 +22,7 @@ class ChangePassword extends StatelessWidget {
             children: [
               SizedBox(height: 15),
               Text(
-                "Change password",
+                "Change Password",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -61,12 +61,14 @@ class ChangePassFormState extends State<ChangePassForm> {
         setState(() => createdMessage = "Password changed successfully!");
         //Navigator.pushReplacementNamed(context, '/NavScreen');
       } on HttpException catch (error) {
-        var errorMessage =
-            error.toString();
+        var errorMessage = error.toString();
+        if (error.toString().contains('WEAK_PASSWORD')) {
+          errorMessage = 'Password should have at least 6 characters.';
+        }
         setState(() => createdMessage = errorMessage);
       } catch (error) {
-        print("Error");
-        const errorMessage = 'Could not authenticate. Try again later';
+        print("There's an error");
+        const errorMessage = 'Could not authenticate. Try again later.';
         setState(() => createdMessage = errorMessage);
       }
     }

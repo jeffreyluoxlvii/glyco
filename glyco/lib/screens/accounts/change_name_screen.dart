@@ -22,7 +22,7 @@ class ChangeName extends StatelessWidget {
             children: [
               SizedBox(height: 15),
               Text(
-                "Change name",
+                "Change Name",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class ChangeNameFormState extends State<ChangeNameForm> {
         setState(() => createdMessage = errorMessage);
       } catch (error) {
         print(error);
-        const errorMessage = 'Could not authenticate. Try again later';
+        const errorMessage = 'Could not authenticate. Try again later.';
         setState(() => createdMessage = errorMessage);
       }
     }
