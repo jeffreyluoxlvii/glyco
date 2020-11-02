@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:glyco/widgets/pie_progress.dart';
 import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
-import '../providers/measurements.dart';
 import '../widgets/glucose_progress.dart';
+import "../widgets/linechart_progress.dart";
 
 class ProgressContainer extends StatelessWidget {
   @override
@@ -18,6 +19,14 @@ class ProgressContainer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: GlucoseProgressContainer(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: PieProgressContainer(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: LineChartProgressContainer(),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),

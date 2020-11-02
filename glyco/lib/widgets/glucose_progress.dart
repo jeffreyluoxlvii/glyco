@@ -15,6 +15,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
   final List<double> weeklyData = [5.0, 6.5, 5.0, 7.5, 9.0, 11.5, 6.5];
   int touchedIndex;
 
+  @override
   Widget build(BuildContext context) {
     final progressProvider = Provider.of<Measurements>(context);
 
