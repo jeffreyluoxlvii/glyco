@@ -13,7 +13,6 @@ void main() {
       );
 
       settings.setDrinkSettings(10);
-      expect(settings.drinkCalories, 10);
       expect(settings.drinkCarbs, 10);
     });
     test('Drink carbs should be set accordingly', () {

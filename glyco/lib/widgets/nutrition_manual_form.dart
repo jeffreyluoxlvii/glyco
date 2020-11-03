@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 import 'package:glyco/providers/auth.dart';
 
 // Define a custom Form widget.
-class NutritionForm extends StatefulWidget {
-  final IconData icon;
-
-  NutritionForm(this.icon);
-
+class NutritionManualForm extends StatefulWidget {
   @override
-  NutritionFormState createState() {
-    return NutritionFormState();
+  NutritionManualFormState createState() {
+    return NutritionManualFormState();
   }
 }
 
-class NutritionFormState extends State<NutritionForm> {
+class NutritionManualFormState extends State<NutritionManualForm> {
   final _form = GlobalKey<FormState>();
 
   var _carbs;
@@ -27,7 +24,7 @@ class NutritionFormState extends State<NutritionForm> {
     }
     _form.currentState.save();
     Provider.of<Measurement>(context, listen: false)
-        .addNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
+        .setNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -43,7 +40,7 @@ class NutritionFormState extends State<NutritionForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                widget.icon,
+                FontAwesomeIcons.hamburger,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),
@@ -69,7 +66,7 @@ class NutritionFormState extends State<NutritionForm> {
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Enter carbs to add',
+                  labelText: 'Edit carbs',
                   suffix: Text(
                     'g',
                     style: TextStyle(

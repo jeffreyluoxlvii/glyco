@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 import 'package:glyco/providers/auth.dart';
 
 // Define a custom Form widget.
-class NutritionForm extends StatefulWidget {
-  final IconData icon;
-
-  NutritionForm(this.icon);
-
+class GlucoseManualForm extends StatefulWidget {
   @override
-  NutritionFormState createState() {
-    return NutritionFormState();
+  GlucoseManualFormState createState() {
+    return GlucoseManualFormState();
   }
 }
 
-class NutritionFormState extends State<NutritionForm> {
+class GlucoseManualFormState extends State<GlucoseManualForm> {
   final _form = GlobalKey<FormState>();
 
-  var _carbs;
+  var _glucose;
 
   void _submitForm() {
     final isValid = _form.currentState.validate();
@@ -27,7 +24,7 @@ class NutritionFormState extends State<NutritionForm> {
     }
     _form.currentState.save();
     Provider.of<Measurement>(context, listen: false)
-        .addNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
+        .setGlucose(_glucose, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -43,7 +40,7 @@ class NutritionFormState extends State<NutritionForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                widget.icon,
+                FontAwesomeIcons.heartbeat,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),
@@ -52,26 +49,26 @@ class NutritionFormState extends State<NutritionForm> {
                   if (value.isEmpty) {
                     return 'Please enter a value';
                   }
-                  if (int.tryParse(value) == null) {
+                  if (double.tryParse(value) == null) {
                     return 'Please enter a valid number.';
                   }
-                  if (int.parse(value) <= 0) {
+                  if (double.parse(value) <= 0) {
                     return 'Please enter a value greater than 0.';
                   }
-                  if (int.parse(value) > 9999) {
+                  if (double.parse(value) > 9999) {
                     return 'Please enter a value less than 10000.';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  _carbs = int.parse(value);
+                  _glucose = double.parse(value);
                 },
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Enter carbs to add',
+                  labelText: 'Edit glucose level',
                   suffix: Text(
-                    'g',
+                    'mg/dL',
                     style: TextStyle(
                       color: Colors.black,
                     ),
