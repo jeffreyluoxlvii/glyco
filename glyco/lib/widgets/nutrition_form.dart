@@ -37,7 +37,7 @@ class NutritionFormState extends State<NutritionForm> {
     return Form(
       key: _form,
       child: Container(
-        height: 270,
+        height: 200,
         child: SingleChildScrollView(
           child: Column(
             children: [
