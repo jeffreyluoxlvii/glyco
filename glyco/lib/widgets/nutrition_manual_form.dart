@@ -66,7 +66,7 @@ class NutritionManualFormState extends State<NutritionManualForm> {
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Enter carbs',
+                  labelText: 'Edit carbs',
                   suffix: Text(
                     'g',
                     style: TextStyle(
