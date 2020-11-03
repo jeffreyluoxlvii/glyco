@@ -1,28 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glyco/providers/auth.dart';
 
 // Define a custom Form widget.
-class ExerciseForm extends StatefulWidget {
+class ExerciseManualForm extends StatefulWidget {
   @override
-  ExerciseFormState createState() {
-    return ExerciseFormState();
+  ExerciseManualFormState createState() {
+    return ExerciseManualFormState();
   }
 }
 
-class ExerciseFormState extends State<ExerciseForm> {
-  final _carbsFocusNode = FocusNode();
+class ExerciseManualFormState extends State<ExerciseManualForm> {
   final _form = GlobalKey<FormState>();
 
-  var _minutes;
-
-  @override
-  void dispose() {
-    _carbsFocusNode.dispose();
-    super.dispose();
-  }
+  var _exercise;
 
   void _submitForm() {
     final isValid = _form.currentState.validate();
@@ -30,8 +23,8 @@ class ExerciseFormState extends State<ExerciseForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false)
-        .addExercise(_minutes, Provider.of<Auth>(context, listen: false).token);
+    Provider.of<Measurement>(context, listen: false).setExercise(
+        _exercise, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -68,15 +61,12 @@ class ExerciseFormState extends State<ExerciseForm> {
                   return null;
                 },
                 onSaved: (value) {
-                  _minutes = int.parse(value);
+                  _exercise = int.parse(value);
                 },
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_carbsFocusNode);
-                },
                 decoration: InputDecoration(
-                  labelText: 'Add minutes of exercise',
+                  labelText: 'Edit minutes of exercise',
                   suffix: Text(
                     'minutes',
                     style: TextStyle(
