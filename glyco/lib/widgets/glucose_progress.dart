@@ -3,6 +3,7 @@ import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fl_chart/fl_chart.dart';
+import 'dart:math';
 
 class GlucoseProgressContainer extends StatefulWidget {
   @override
@@ -12,12 +13,67 @@ class GlucoseProgressContainer extends StatefulWidget {
 }
 
 class GlucoseProgressState extends State<GlucoseProgressContainer> {
-  final List<double> weeklyData = [5.0, 6.5, 5.0, 7.5, 9.0, 11.5, 6.5];
+  final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
+  // final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
+  final List<double> dateData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  final List<String> weekdayData = ['', '', '', '', '', '', ''];
   int touchedIndex;
+  double maxGlucoseLevel = 0;
 
   @override
   Widget build(BuildContext context) {
     final progressProvider = Provider.of<Measurements>(context);
+
+    // for (int i = 0; i < weeklyData.length; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: i));
+
+    //   if (progressProvider.findByDateAverages(day) != null) {
+    //     weeklyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+    //   }
+    // }
+
+    int daysPassed = 0;
+
+    for (int i = 0; i < dateData.length; i++) {
+      if (i == 0 || i % 2 == 0) {
+        dateData[i] = DateTime.now()
+            .subtract(Duration(days: (6 - daysPassed)))
+            .month
+            .toDouble();
+      } else {
+        dateData[i] = DateTime.now()
+            .subtract(Duration(days: (6 - daysPassed)))
+            .day
+            .toDouble();
+        int weekday =
+            DateTime.now().subtract(Duration(days: (6 - daysPassed))).weekday;
+
+        if (weekday == 1) {
+          weekdayData[daysPassed] = 'M';
+        }
+        if (weekday == 2) {
+          weekdayData[daysPassed] = 'T';
+        }
+        if (weekday == 3) {
+          weekdayData[daysPassed] = 'W';
+        }
+        if (weekday == 4) {
+          weekdayData[daysPassed] = 'Th';
+        }
+        if (weekday == 5) {
+          weekdayData[daysPassed] = 'F';
+        }
+        if (weekday == 6) {
+          weekdayData[daysPassed] = 'S';
+        }
+        if (weekday == 7) {
+          weekdayData[daysPassed] = 'Su';
+        }
+
+        daysPassed++;
+      }
+    }
+    maxGlucoseLevel = weeklyData.reduce(max);
 
     return new Container(
       height: 200,
@@ -32,7 +88,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Blood Glucose Levels',
+              'Glucose Levels (mg/dL)',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -53,6 +109,16 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
     );
   }
 
+  double _barHeight(double glucoseLevel) {
+    double barHeight = (20 * glucoseLevel) / maxGlucoseLevel;
+
+    // if (barHeight >= 20) {
+    //   return 19.0;
+    // } else {
+    return barHeight;
+    // }
+  }
+
   BarChartGroupData _buildBar(
     int x,
     double y, {
@@ -62,7 +128,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
       x: x,
       barRods: [
         BarChartRodData(
-          y: isTouched ? y + 1 : y,
+          y: isTouched ? _barHeight(y) + 1 : _barHeight(y),
           colors: [Colors.white],
           width: 22,
           backDrawRodData: BackgroundBarChartRodData(
@@ -106,19 +172,19 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
         getTitles: (double value) {
           switch (value.toInt()) {
             case 0:
-              return 'M';
+              return weekdayData[0];
             case 1:
-              return 'T';
+              return weekdayData[1];
             case 2:
-              return 'W';
+              return weekdayData[2];
             case 3:
-              return 'T';
+              return weekdayData[3];
             case 4:
-              return 'F';
+              return weekdayData[4];
             case 5:
-              return 'S';
+              return weekdayData[5];
             case 6:
-              return 'S';
+              return weekdayData[6];
             default:
               return '';
           }
@@ -141,29 +207,45 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
           String weekDay;
           switch (group.x.toInt()) {
             case 0:
-              weekDay = 'Monday';
+              weekDay = dateData[0].toInt().toString() +
+                  '/' +
+                  dateData[1].toInt().toString();
               break;
             case 1:
-              weekDay = 'Tuesday';
+              weekDay = dateData[2].toInt().toString() +
+                  '/' +
+                  dateData[3].toInt().toString();
               break;
             case 2:
-              weekDay = 'Wednesday';
+              weekDay = dateData[4].toInt().toString() +
+                  '/' +
+                  dateData[5].toInt().toString();
               break;
             case 3:
-              weekDay = 'Thursday';
+              weekDay = dateData[6].toInt().toString() +
+                  '/' +
+                  dateData[7].toInt().toString();
               break;
             case 4:
-              weekDay = 'Friday';
+              weekDay = dateData[8].toInt().toString() +
+                  '/' +
+                  dateData[9].toInt().toString();
               break;
             case 5:
-              weekDay = 'Saturday';
+              weekDay = dateData[10].toInt().toString() +
+                  '/' +
+                  dateData[11].toInt().toString();
               break;
             case 6:
-              weekDay = 'Sunday';
+              weekDay = dateData[12].toInt().toString() +
+                  '/' +
+                  dateData[13].toInt().toString();
               break;
           }
           return BarTooltipItem(
-            weekDay + '\n' + (rod.y).toString(),
+            weekDay +
+                '\n' +
+                (((rod.y - 1) * maxGlucoseLevel) / 20).toStringAsFixed(1),
             TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           );
         },
