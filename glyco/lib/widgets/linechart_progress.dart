@@ -81,7 +81,7 @@ class LineChartState extends State<LineChartProgressContainer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           const Text(
-            'Blood Glucose Levels',
+            'Glucose Levels (mg/dL)',
             style: TextStyle(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
           ),
@@ -103,8 +103,20 @@ class LineChartState extends State<LineChartProgressContainer> {
     return LineChartData(
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.white,
-        ),
+            tooltipBgColor: Colors.white,
+            getTooltipItems: (touchedSpots) {
+              return touchedSpots.map((touchedSpot) {
+                return LineTooltipItem(
+                    ((((touchedSpot.y - 1) / 3) *
+                                    (maxGlucoseLevel - minGlucoseLevel))
+                                    + minGlucoseLevel)
+                        .toString(),
+                    TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ));
+              }).toList();
+            }),
         touchCallback: (LineTouchResponse touchResponse) {},
         handleBuiltInTouches: true,
       ),
@@ -153,13 +165,11 @@ class LineChartState extends State<LineChartProgressContainer> {
               case 2:
                 return (((maxGlucoseLevel - minGlucoseLevel) * (1 / 3)) +
                         minGlucoseLevel)
-                    .toStringAsFixed(1)
-                    .toString();
+                    .toStringAsFixed(1);
               case 3:
                 return (((maxGlucoseLevel - minGlucoseLevel) * (2 / 3)) +
                         minGlucoseLevel)
-                    .round()
-                    .toString();
+                    .toStringAsFixed(1);
               case 4:
                 return maxGlucoseLevel.toString();
             }
@@ -199,10 +209,10 @@ class LineChartState extends State<LineChartProgressContainer> {
     for (int i = 0; i < 7; i++) {
       lineChartBarData.spots.add(FlSpot(
           i.toDouble(),
-          double.parse((((weeklyData[i] - minGlucoseLevel) * 3) /
-                      (maxGlucoseLevel - minGlucoseLevel) +
+          double.parse(((((weeklyData[i] - minGlucoseLevel) /
+                      (maxGlucoseLevel - minGlucoseLevel)) * 3) +
                   1)
-              .toStringAsFixed(1))));
+              .toString())));
     }
   }
 
