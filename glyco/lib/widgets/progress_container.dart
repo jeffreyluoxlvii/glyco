@@ -22,31 +22,31 @@ class ProgressContainer extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
-            child: PieProgressContainer(),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
             child: LineChartProgressContainer(),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 0),
             child: Icon(
               progressProvider.getProgressIcon(),
               size: 30,
               color: Theme.of(context).primaryColor,
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          //   child: Row(children: [
+          //     Flexible(
+          //       child: Text(progressProvider.progressUpdate(),
+          //           style: TextStyle(
+          //             color: Colors.black,
+          //             fontSize: 14,
+          //           )),
+          //     ),
+          //   ]),
+          // ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 14.0),
-            child: Row(children: [
-              Flexible(
-                child: Text(progressProvider.progressUpdate(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    )),
-              ),
-            ]),
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: PieProgressContainer(),
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
-import './indicator.dart';
+import '../providers/measurements.dart';
+import 'package:provider/provider.dart';
 
 class PieProgressContainer extends StatefulWidget {
   @override
@@ -10,20 +10,35 @@ class PieProgressContainer extends StatefulWidget {
 
 class _PieProgressState extends State<PieProgressContainer> {
   int _touchedIndex;
+  int progress = 560;
+  int goal = 3000;
+
   @override
   Widget build(BuildContext context) {
+    final progressProvider = Provider.of<Measurements>(context);
+    // if (progressProvider.getChallenge() == 'steps') {
+    //   progress = progressProvider.findByDate(DateTime.now()).steps;
+    // }
+    // if (progressProvider.getChallenge() == 'activity') {
+    //   progress = progressProvider.findByDate(DateTime.now()).exerciseTime;
+    // }
+    // if (progressProvider.getChallenge() == 'carbs') {
+    //   progress = progressProvider.findByDate(DateTime.now()).carbs;
+    // }
+    // goal = progressProvider.getChallengeGoal();
+
     return Container(
-      height: 230,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18.0),
         color: Colors.white,
       ),
-      margin: EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(5.0),
       padding: const EdgeInsets.all(0),
       child: Row(
         children: [
           Container(
-            width: 185,
+            width: 170,
             // Pie Chart is available in fl_chart package
             child: PieChart(
               PieChartData(
@@ -51,18 +66,21 @@ class _PieProgressState extends State<PieProgressContainer> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 50),
+              margin: EdgeInsets.symmetric(vertical: 40),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IndicatorWidget(
-                    title: 'RUNNING',
-                    subtitle: '10 KM',
-                  ),
-                  IndicatorWidget(
-                    title: 'CYCLING',
-                    subtitle: '10 KM',
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Row(children: [
+                      Flexible(
+                        child: Text(progressProvider.progressUpdate(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                            )),
+                      ),
+                    ]),
                   ),
                 ],
               ),
@@ -84,24 +102,34 @@ class _PieProgressState extends State<PieProgressContainer> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: Color(0xffF3BBEC),
-            value: 33.33,
-            title: '33.3', // this cannot be left blank
+            color: Colors.grey[400],
+            value: (((goal - progress) / goal) * 100),
+            title: (goal - progress).toString(), // this cannot be left blank
             radius: radius,
           );
         case 1:
-          return PieChartSectionData(
-            color: Color(0xff39439f),
-            value: 66.66,
-            title: '66.66', // this cannot be left blank
-            radius: radius,
-          );
-        case 2:
-          return PieChartSectionData(
-              color: Color(0xff39439f),
+          if (progress == 0) {
+            return PieChartSectionData(
+              color: Colors.grey[400],
               value: 0,
               title: '', // this cannot be left blank
               radius: radius,
+            );
+          } else {
+            return PieChartSectionData(
+              color: Colors.pink[300],
+              value: ((progress / goal) * 100),
+              title: progress.toString(), // this cannot be left blank
+              radius: radius,
+            );
+          }
+          return null;
+        case 2:
+          return PieChartSectionData(
+            color: Color(0xff39439f),
+            value: 0,
+            title: '', // this cannot be left blank
+            radius: radius,
           );
         default:
           return null;

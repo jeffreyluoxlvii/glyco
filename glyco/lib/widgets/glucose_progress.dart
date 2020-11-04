@@ -22,7 +22,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final progressProvider = Provider.of<Measurements>(context);
+    // final progressProvider = Provider.of<Measurements>(context);
 
     // for (int i = 0; i < weeklyData.length; i++) {
     //   DateTime day = DateTime.now().subtract(Duration(days: i));
