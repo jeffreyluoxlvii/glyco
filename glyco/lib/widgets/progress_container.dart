@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurements.dart';
-import '../widgets/glucose_progress.dart';
 
 class ProgressContainer extends StatelessWidget {
   @override
@@ -51,11 +50,6 @@ class ProgressContainer extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          // Padding(
-          //   padding:
-          //       const EdgeInsets.symmetric(horizontal: 0, vertical: 8.0),
-          //   child: GlucoseProgressContainer(),
-          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
             child: Row(children: [
