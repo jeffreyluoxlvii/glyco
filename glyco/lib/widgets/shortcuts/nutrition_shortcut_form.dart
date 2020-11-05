@@ -45,11 +45,10 @@ class ShortcutFormState extends State<ShortcutForm> {
     return Form(
       key: _form,
       child: Container(
-        height: 270,
+        height: 200,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Add TextFormFields and RaisedButton here.
               Icon(
                 widget.icon,
                 size: 50,

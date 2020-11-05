@@ -43,7 +43,9 @@ class ShortcutsSummary extends StatelessWidget {
               return AlertDialog(
                 content: SingleChildScrollView(
                   child: ChangeNotifierProvider.value(
-                    child: label == "ACTIVITY" ? ExerciseShortcutForm() : ShortcutForm(icon, label),
+                    child: label == "ACTIVITY"
+                        ? ExerciseShortcutForm()
+                        : ShortcutForm(icon, label),
                     value: options,
                   ),
                 ),
@@ -59,21 +61,69 @@ class ShortcutsSummary extends StatelessWidget {
       children: [
         Row(
           children: [
-            editShortcut(FontAwesomeIcons.hamburger, "MEAL",
-                Text(" ${settings.mealCarbs}g carbs")),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[350],
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: editShortcut(
+                  FontAwesomeIcons.hamburger,
+                  "MEAL",
+                  Text(" ${settings.mealCarbs}g carbs"),
+                ),
+              ),
+            ),
             Spacer(),
-            editShortcut(FontAwesomeIcons.cookie, "SNACK",
-                Text(" ${settings.snackCarbs}g carbs")),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[350],
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: editShortcut(
+                  FontAwesomeIcons.cookie,
+                  "SNACK",
+                  Text(" ${settings.snackCarbs}g carbs"),
+                ),
+              ),
+            ),
           ],
         ),
         SizedBox(height: 15),
         Row(
           children: [
-            editShortcut(FontAwesomeIcons.mugHot, "DRINK",
-                Text(" ${settings.drinkCarbs}g carbs")),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[350],
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: editShortcut(
+                  FontAwesomeIcons.mugHot,
+                  "DRINK",
+                  Text(" ${settings.drinkCarbs}g carbs"),
+                ),
+              ),
+            ),
             Spacer(),
-            editShortcut(FontAwesomeIcons.running, "ACTIVITY",
-                Text("${settings.exerciseTime} minutes")),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[350],
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: editShortcut(
+                  FontAwesomeIcons.running,
+                  "ACTIVITY",
+                  Text("${settings.exerciseTime} minutes"),
+                ),
+              ),
+            ),
           ],
         ),
         SizedBox(height: 15),

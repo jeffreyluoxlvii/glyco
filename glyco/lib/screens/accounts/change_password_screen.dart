@@ -141,15 +141,6 @@ class ChangePassFormState extends State<ChangePassForm> {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          // passwordChanged
-          //     ? Text(
-          //         "Password changed successfully!",
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Theme.of(context).primaryColor,
-          //         ),
-          //       )
-          //     : Text(""),
         ],
       ),
     );
