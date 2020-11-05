@@ -7,19 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthKit with ChangeNotifier {
   bool isAuthorized = false;
-  String basicHealthString = "";
+  String bloodHealthString = "";
+  String stepsHealthString = "";
   String statisticsString = "";
   String exisitngTypesString = "";
   String updateMessageString = "";
   bool isSubscribed = false;
   String pulledBackgroundDataString = "";
   String batchString = "";
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initPlatformState();
-  // }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
@@ -42,15 +37,15 @@ class HealthKit with ChangeNotifier {
     // });
   }
 
-  Future<void> getUserBasicHealthData() async {
+  Future<void> getUserBloodGlucose() async {
     var request = HealthDataRequest();
-    request.type = HealthTypes.CORRELATION_FOOD;
+    request.type = HealthTypes.QUANTITY_BLOOD_GLUCOSE;
     //request.startDate = "2019-06-19T18:58:00.000Z";
     //request.endDate = "2019-09-19T20:58:00.000Z";
     //request.limit = 2;
     //request.units.add("ft");
-    request.units.add("kcal");
-    request.units.add("km");
+    // request.units.add("kcal");
+    // request.units.add("km");
     var resultToShow = "";
     try {
       var basicHealth = await NanoHealthkitPlugin.fetchData(request);
@@ -59,37 +54,58 @@ class HealthKit with ChangeNotifier {
       resultToShow = error.toString();
     }
     // setState(() {
-    this.basicHealthString = resultToShow;
+    this.bloodHealthString = resultToShow;
     // });
   }
 
-  Future<void> getUserBatchData() async {
-    // First get the list of existing types
-    var existingTypesReq = HealthTypeList();
-    existingTypesReq.types.addAll(HealthTypes.values);
-    var existingTypes =
-        await NanoHealthkitPlugin.filterExistingTypes(existingTypesReq);
-
-    // Make the request for all types
-    var requestList = HealthDataRequestList();
-    for (var type in existingTypes.types) {
-      var typeRequest = HealthDataRequest();
-      typeRequest.type = type;
-      requestList.requests.add(typeRequest);
-    }
-
+  Future<void> getUserSteps() async {
+    var request = HealthDataRequest();
+    request.type = HealthTypes.QUANTITY_STEP_COUNT;
+    //request.startDate = "2019-06-19T18:58:00.000Z";
+    //request.endDate = "2019-09-19T20:58:00.000Z";
+    //request.limit = 2;
+    //request.units.add("ft");
+    // request.units.add("kcal");
+    // request.units.add("km");
     var resultToShow = "";
     try {
-      var batchHealth = await NanoHealthkitPlugin.fetchBatchData(requestList);
-      print(batchHealth);
-      resultToShow = batchHealth.toString();
+      var basicHealth = await NanoHealthkitPlugin.fetchData(request);
+      resultToShow = basicHealth.toString();
     } on Exception catch (error) {
       resultToShow = error.toString();
     }
     // setState(() {
-    this.batchString = resultToShow;
+    this.stepsHealthString = resultToShow;
     // });
   }
+
+  // Future<void> getUserBatchData() async {
+  //   // First get the list of existing types
+  //   var existingTypesReq = HealthTypeList();
+  //   existingTypesReq.types.addAll(HealthTypes.values);
+  //   var existingTypes =
+  //       await NanoHealthkitPlugin.filterExistingTypes(existingTypesReq);
+
+  //   // Make the request for all types
+  //   var requestList = HealthDataRequestList();
+  //   for (var type in existingTypes.types) {
+  //     var typeRequest = HealthDataRequest();
+  //     typeRequest.type = type;
+  //     requestList.requests.add(typeRequest);
+  //   }
+
+  //   var resultToShow = "";
+  //   try {
+  //     var batchHealth = await NanoHealthkitPlugin.fetchBatchData(requestList);
+  //     print(batchHealth);
+  //     resultToShow = batchHealth.toString();
+  //   } on Exception catch (error) {
+  //     resultToShow = error.toString();
+  //   }
+  //   // setState(() {
+  //   this.batchString = resultToShow;
+  //   // });
+  // }
 
   Future<void> getUserStatisticsData() async {
     var request = StatisticsRequest();
@@ -119,7 +135,7 @@ class HealthKit with ChangeNotifier {
     // });
   }
 
-  Future<void> subscribeToUpdates() {
+  Future<void> subscribeToUpdates() async {
     var request = HealthTypeList();
     request.types.addAll(HealthTypes.values); // Subscribe to everything
     NanoHealthkitPlugin.subscribeToUpdates(request, updatesReceived);

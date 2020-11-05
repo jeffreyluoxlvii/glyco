@@ -25,11 +25,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>testing health records</string>
+	<string>Allow Glyco to use your Health Records</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>testing sharing description</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Testing usage decription</string>
+	<string>Allow Glyco to use your Healthkit data</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
