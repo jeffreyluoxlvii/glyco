@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
 import '../../screens/accounts/change_email_screen.dart';
 import '../../screens/accounts/change_name_screen.dart';
+import '../../screens/accounts/change_password_screen.dart';
 
 class EditProfile extends StatelessWidget {
   @override
@@ -20,6 +21,16 @@ class EditProfile extends StatelessWidget {
               color: Theme.of(context).primaryColor,
             ),
           ),
+          SizedBox(height: 5),
+          Text(
+            "Click to edit",
+            style: TextStyle(
+              fontSize: 16,
+              fontStyle: FontStyle.italic,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(height: 15),
           ChangeSettingsForm(),
           SizedBox(height: 30),
         ],
@@ -45,43 +56,49 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
         Provider.of<Auth>(context, listen: false).userName.split(" ");
     var firstName = nameList[0];
     var lastName = nameList[1];
+
+    Row profileRow(label, content) {
+      return Row(
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              color: Colors.black,
+            ),
+          ),
+          Spacer(),
+          Text(
+            content,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ],
+      );
+    }
+
     return Form(
       key: _formKey,
       child: Column(
         children: <Widget>[
-          SizedBox(height: 15),
           Container(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
+                child: profileRow("Name ", firstName + " " + lastName),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChangeName())).then((value) {
-                    setState(() {
-                      // refresh state of Page1
-                    });
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SingleChildScrollView(
+                          child: ChangeName(),
+                        ),
+                      );
+                    },
+                  );
                 },
-                child: new Row(
-                  children: [
-                    Text(
-                      "Name ",
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      firstName + " " + lastName,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
             decoration: BoxDecoration(
@@ -97,32 +114,20 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
+                child: profileRow("Email ",
+                    Provider.of<Auth>(context, listen: false).userEmail),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChangeEmail())).then((value) {
-                    setState(() {
-                      // refresh state of Page1
-                    });
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SingleChildScrollView(
+                          child: ChangeEmail(),
+                        ),
+                      );
+                    },
+                  );
                 },
-                child: new Row(
-                  children: [
-                    Text(
-                      "Email  ",
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(Provider.of<Auth>(context, listen: false).userEmail,
-                        style: TextStyle(
-                          color: Colors.black,
-                        ))
-                  ],
-                ),
               ),
             ),
             decoration: BoxDecoration(
@@ -138,20 +143,20 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
+                child: profileRow("Change Password", ""),
                 onTap: () {
-                  Navigator.pushNamed(context, '/ChangePassword');
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: SingleChildScrollView(
+                          child: ChangePassword(),
+                        ),
+                      );
+                    },
+                  );
+                  //Navigator.pushNamed(context, '/ChangePassword');
                 },
-                child: new Row(
-                  children: [
-                    Text(
-                      "Change Password",
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
             decoration: BoxDecoration(
