@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:glyco/widgets/appBars/challenges_app_bar.dart';
 import '../providers/auth.dart';
+import '../widgets/viewAnalytics/glucose_pie.dart';
+import '../widgets/viewAnalytics/exercise_bars.dart';
+import '../widgets/viewAnalytics/glucose_line.dart';
 
 class ViewAnalyticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Scaffold(
         // appBar: ChallengesAppBar(),
@@ -15,18 +16,12 @@ class ViewAnalyticsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 14.0),
-                child: Text(
-                  "analytics tbd",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              SizedBox(height: 70),
+              GlucosePie(),
+              SizedBox(height: 15),
+              ExerciseBarChart(),
+              SizedBox(height: 15),
+              GlucoseLineChart(),
             ],
           ),
         ),

@@ -100,7 +100,7 @@ class LineChartState extends State<LineChartProgressContainer> {
                     ((((touchedSpot.y - 1) / 3) *
                                     (maxGlucoseLevel - minGlucoseLevel))
                                     + minGlucoseLevel)
-                        .toString(),
+                        .toStringAsFixed(1),
                     TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
