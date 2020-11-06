@@ -31,23 +31,36 @@ class Measurement with ChangeNotifier {
     @required this.userId,
   });
 
-  void _addCalories(int calories) {
-    this.calories += calories;
+  Future<void> setGlucose(double glucoseLevel, String token) async {
+    final url =
+        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
+    final oldGlucoseLevel = this.currGlucoseLevel;
+    this.currGlucoseLevel = glucoseLevel;
     notifyListeners();
+    try {
+      final response = await http.patch(
+        url,
+        body: json.encode({
+          'currGlucoseLevel': this.currGlucoseLevel,
+        }),
+      );
+      if (response.statusCode >= 400) {
+        this.currGlucoseLevel = oldGlucoseLevel;
+        notifyListeners();
+      }
+    } catch (error) {
+      this.currGlucoseLevel = oldGlucoseLevel;
+      notifyListeners();
+    }
   }
 
-  void _addCarbs(int carbs) {
-    this.carbs += carbs;
-    notifyListeners();
-  }
-
-  Future<void> addNutrition(int carbs, String token) async {
+  Future<void> setNutrition(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
     final oldCalories = this.calories;
     final oldCarbs = this.carbs;
-    _addCalories(4 * carbs);
-    _addCarbs(carbs);
+    this.calories = 4 * carbs;
+    this.carbs = carbs;
     notifyListeners();
     try {
       final response = await http.patch(
@@ -69,11 +82,15 @@ class Measurement with ChangeNotifier {
     }
   }
 
-  Future<void> addExercise(int minutes, String token) async {
+  Future<void> addNutrition(int carbs, String token) async {
+    setNutrition(this.carbs + carbs, token);
+  }
+
+  Future<void> setExercise(int minutes, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
     final oldMinutes = this.exerciseTime;
-    exerciseTime += minutes;
+    this.exerciseTime = minutes;
     notifyListeners();
     try {
       final response = await http.patch(
@@ -90,5 +107,9 @@ class Measurement with ChangeNotifier {
       this.exerciseTime = oldMinutes;
       notifyListeners();
     }
+  }
+
+  Future<void> addExercise(int minutes, String token) async {
+    setExercise(this.exerciseTime + minutes, token);
   }
 }
