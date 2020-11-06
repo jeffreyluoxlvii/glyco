@@ -156,7 +156,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
         showTitles: true,
         getTextStyles: (double value) {
           return TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14);
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16);
         },
         margin: 16,
         getTitles: (double value) {
