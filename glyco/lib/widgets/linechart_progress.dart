@@ -10,7 +10,7 @@ class LineChartProgressContainer extends StatefulWidget {
 class LineChartState extends State<LineChartProgressContainer> {
   final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
   // final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
-  final List<double> dateData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  final List<DateTime> dates = [null, null, null, null, null, null, null];
   final List<String> weekdayData = ['', '', '', '', '', '', ''];
   double maxGlucoseLevel = 0;
   double minGlucoseLevel = 0;
@@ -27,43 +27,33 @@ class LineChartState extends State<LineChartProgressContainer> {
     //   }
     // }
 
-    int daysPassed = 0;
+    int dayCount = 0;
 
-    for (int i = 0; i < dateData.length; i++) {
-      if (i == 0 || i % 2 == 0) {
-        dateData[i] = DateTime.now()
-            .subtract(Duration(days: (6 - daysPassed)))
-            .month
-            .toDouble();
-      } else {
-        dateData[i] = DateTime.now()
-            .subtract(Duration(days: (6 - daysPassed)))
-            .day
-            .toDouble();
-        int weekday =
-            DateTime.now().subtract(Duration(days: (6 - daysPassed))).weekday;
-        if (weekday == 1) {
-          weekdayData[daysPassed] = 'M';
-        }
-        if (weekday == 2) {
-          weekdayData[daysPassed] = 'T';
-        }
-        if (weekday == 3) {
-          weekdayData[daysPassed] = 'W';
-        }
-        if (weekday == 4) {
-          weekdayData[daysPassed] = 'Th';
-        }
-        if (weekday == 5) {
-          weekdayData[daysPassed] = 'F';
-        }
-        if (weekday == 6) {
-          weekdayData[daysPassed] = 'S';
-        }
-        if (weekday == 7) {
-          weekdayData[daysPassed] = 'Su';
-        }
-        daysPassed++;
+    for (int i = 6; i >= 0; i--) {
+      dates[i] = DateTime.now().subtract(Duration(days: dayCount));
+      dayCount++;
+      int weekday = dates[i].weekday;
+
+      if (weekday == 1) {
+        weekdayData[i] = 'M';
+      }
+      if (weekday == 2) {
+        weekdayData[i] = 'T';
+      }
+      if (weekday == 3) {
+        weekdayData[i] = 'W';
+      }
+      if (weekday == 4) {
+        weekdayData[i] = 'Th';
+      }
+      if (weekday == 5) {
+        weekdayData[i] = 'F';
+      }
+      if (weekday == 6) {
+        weekdayData[i] = 'S';
+      }
+      if (weekday == 7) {
+        weekdayData[i] = 'Su';
       }
     }
     maxGlucoseLevel = weeklyData.reduce(max);

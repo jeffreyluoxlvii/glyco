@@ -15,8 +15,8 @@ class GlucoseProgressContainer extends StatefulWidget {
 class GlucoseProgressState extends State<GlucoseProgressContainer> {
   final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
   // final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
-  final List<double> dateData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   final List<String> weekdayData = ['', '', '', '', '', '', ''];
+  final List<DateTime> dates = [null, null, null, null, null, null, null];
   int touchedIndex;
   double maxGlucoseLevel = 0;
 
@@ -29,48 +29,38 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
 
     //   if (progressProvider.findByDateAverages(day) != null) {
     //     weeklyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+    //   } else {
+    //     weeklyData[i] = 0;
     //   }
     // }
 
-    int daysPassed = 0;
+    int dayCount = 0;
 
-    for (int i = 0; i < dateData.length; i++) {
-      if (i == 0 || i % 2 == 0) {
-        dateData[i] = DateTime.now()
-            .subtract(Duration(days: (6 - daysPassed)))
-            .month
-            .toDouble();
-      } else {
-        dateData[i] = DateTime.now()
-            .subtract(Duration(days: (6 - daysPassed)))
-            .day
-            .toDouble();
-        int weekday =
-            DateTime.now().subtract(Duration(days: (6 - daysPassed))).weekday;
+    for (int i = 6; i >= 0; i--) {
+      dates[i] = DateTime.now().subtract(Duration(days: dayCount));
+      dayCount++;
+      int weekday = dates[i].weekday;
 
-        if (weekday == 1) {
-          weekdayData[daysPassed] = 'M';
-        }
-        if (weekday == 2) {
-          weekdayData[daysPassed] = 'T';
-        }
-        if (weekday == 3) {
-          weekdayData[daysPassed] = 'W';
-        }
-        if (weekday == 4) {
-          weekdayData[daysPassed] = 'Th';
-        }
-        if (weekday == 5) {
-          weekdayData[daysPassed] = 'F';
-        }
-        if (weekday == 6) {
-          weekdayData[daysPassed] = 'S';
-        }
-        if (weekday == 7) {
-          weekdayData[daysPassed] = 'Su';
-        }
-
-        daysPassed++;
+      if (weekday == 1) {
+        weekdayData[i] = 'M';
+      }
+      if (weekday == 2) {
+        weekdayData[i] = 'T';
+      }
+      if (weekday == 3) {
+        weekdayData[i] = 'W';
+      }
+      if (weekday == 4) {
+        weekdayData[i] = 'Th';
+      }
+      if (weekday == 5) {
+        weekdayData[i] = 'F';
+      }
+      if (weekday == 6) {
+        weekdayData[i] = 'S';
+      }
+      if (weekday == 7) {
+        weekdayData[i] = 'Su';
       }
     }
     maxGlucoseLevel = weeklyData.reduce(max);
@@ -128,7 +118,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
       x: x,
       barRods: [
         BarChartRodData(
-          y: isTouched ? _barHeight(y) + 1 : _barHeight(y),
+          y: _barHeight(y),
           colors: [Colors.white],
           width: 22,
           backDrawRodData: BackgroundBarChartRodData(
@@ -207,39 +197,32 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
           String weekDay;
           switch (group.x.toInt()) {
             case 0:
-              weekDay = dateData[0].toInt().toString() +
-                  '/' +
-                  dateData[1].toInt().toString();
+              weekDay =
+                  dates[0].month.toString() + '/' + dates[0].day.toString();
               break;
             case 1:
-              weekDay = dateData[2].toInt().toString() +
-                  '/' +
-                  dateData[3].toInt().toString();
+              weekDay =
+                  dates[1].month.toString() + '/' + dates[1].day.toString();
               break;
             case 2:
-              weekDay = dateData[4].toInt().toString() +
-                  '/' +
-                  dateData[5].toInt().toString();
+              weekDay =
+                  dates[2].month.toString() + '/' + dates[2].day.toString();
               break;
             case 3:
-              weekDay = dateData[6].toInt().toString() +
-                  '/' +
-                  dateData[7].toInt().toString();
+              weekDay =
+                  dates[3].month.toString() + '/' + dates[3].day.toString();
               break;
             case 4:
-              weekDay = dateData[8].toInt().toString() +
-                  '/' +
-                  dateData[9].toInt().toString();
+              weekDay =
+                  dates[4].month.toString() + '/' + dates[4].day.toString();
               break;
             case 5:
-              weekDay = dateData[10].toInt().toString() +
-                  '/' +
-                  dateData[11].toInt().toString();
+              weekDay =
+                  dates[5].month.toString() + '/' + dates[5].day.toString();
               break;
             case 6:
-              weekDay = dateData[12].toInt().toString() +
-                  '/' +
-                  dateData[13].toInt().toString();
+              weekDay =
+                  dates[6].month.toString() + '/' + dates[6].day.toString();
               break;
           }
           return BarTooltipItem(

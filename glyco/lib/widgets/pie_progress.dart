@@ -10,7 +10,7 @@ class PieProgressContainer extends StatefulWidget {
 
 class _PieProgressState extends State<PieProgressContainer> {
   int _touchedIndex;
-  int progress = 560;
+  int progress = 860;
   int goal = 3000;
 
   @override
