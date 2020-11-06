@@ -3,6 +3,8 @@ import 'package:glyco/widgets/nutrition_form.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
+import './view_analytics.dart';
+
 import '../providers/measurements.dart';
 import '../providers/options.dart';
 import '../providers/measurement.dart';
@@ -284,7 +286,13 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                           children: [
                             Spacer(),
                             RaisedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewAnalyticsScreen()));
+                              },
                               child: Text(
                                 "View Analytics",
                                 style: TextStyle(
