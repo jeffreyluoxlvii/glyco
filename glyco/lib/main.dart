@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
                     snackCarbs: 15,
                     drinkCarbs: 10,
                     exerciseTime: 30,
+                    userId: auth.userId,
                   )
                 : previousOptions.settings,
           ),
