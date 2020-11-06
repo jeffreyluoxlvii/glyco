@@ -33,6 +33,8 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
 
     Provider.of<Measurements>(context, listen: false)
         .fetchAndSetMeasurements()
+        .then(
+            (_) => Provider.of<Options>(context, listen: false).fetchSettings())
         .then((_) {
       setState(() {
         _isLoading = false;
