@@ -9,12 +9,7 @@ class Options with ChangeNotifier {
   final String userId;
 
   // default settings
-  Settings _settings = Settings(
-    mealCarbs: 35,
-    snackCarbs: 15,
-    drinkCarbs: 10,
-    exerciseTime: 30,
-  );
+  Settings _settings;
 
   Options(this.authToken, this.userId, this._settings);
 
@@ -27,10 +22,10 @@ class Options with ChangeNotifier {
         'https://glyco-6f403.firebaseio.com/userSettings/$userId/settings.json?auth=$authToken';
     try {
       final response = await http.get(url);
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final extractedData = json.decode(response.body);
       if (extractedData == null) {
         try {
-          await http.post(url,
+          await http.patch(url,
               body: json.encode({
                 'mealCarbs': 35,
                 'snackCarbs': 15,
@@ -41,14 +36,14 @@ class Options with ChangeNotifier {
           return Future.error(error);
         }
       } else {
-        extractedData.forEach((settingsId, settingsData) {
-          _settings = Settings(
-            drinkCarbs: settingsData['drinkCarbs'],
-            exerciseTime: settingsData['exerciseTime'],
-            mealCarbs: settingsData['mealCarbs'],
-            snackCarbs: settingsData['snackCarbs'],
-          );
-        });
+        print(extractedData);
+        _settings = Settings(
+          drinkCarbs: extractedData['drinkCarbs'],
+          exerciseTime: extractedData['exerciseTime'],
+          mealCarbs: extractedData['mealCarbs'],
+          snackCarbs: extractedData['snackCarbs'],
+          userId: userId,
+        );
         notifyListeners();
       }
     } catch (error) {
