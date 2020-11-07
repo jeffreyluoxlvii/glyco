@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
+import 'package:glyco/providers/auth.dart';
 
 // Define a custom Form widget.
-class NutritionForm extends StatefulWidget {
-  final IconData icon;
-
-  NutritionForm(this.icon);
-
+class ExerciseManualForm extends StatefulWidget {
   @override
-  NutritionFormState createState() {
-    return NutritionFormState();
+  ExerciseManualFormState createState() {
+    return ExerciseManualFormState();
   }
 }
 
-class NutritionFormState extends State<NutritionForm> {
+class ExerciseManualFormState extends State<ExerciseManualForm> {
   final _form = GlobalKey<FormState>();
 
-  var _carbs;
+  var _exercise;
 
   void _submitForm() {
     final isValid = _form.currentState.validate();
@@ -25,7 +23,8 @@ class NutritionFormState extends State<NutritionForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false).addNutrition(_carbs);
+    Provider.of<Measurement>(context, listen: false).setExercise(
+        _exercise, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -41,7 +40,7 @@ class NutritionFormState extends State<NutritionForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                widget.icon,
+                FontAwesomeIcons.running,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),
@@ -62,14 +61,14 @@ class NutritionFormState extends State<NutritionForm> {
                   return null;
                 },
                 onSaved: (value) {
-                  _carbs = int.parse(value);
+                  _exercise = int.parse(value);
                 },
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Enter carbs to add',
+                  labelText: 'Edit minutes of exercise',
                   suffix: Text(
-                    'g',
+                    'minutes',
                     style: TextStyle(
                       color: Colors.black,
                     ),

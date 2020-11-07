@@ -6,8 +6,9 @@ class Shortcut extends StatelessWidget {
   final IconData icon;
   final Function onTap;
   final Widget form;
+  final String title;
 
-  Shortcut(this.icon, this.onTap, this.form);
+  Shortcut(this.icon, this.onTap, this.form, this.title);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +18,20 @@ class Shortcut extends StatelessWidget {
         child: InkWell(
           child: Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Icon(
-              icon,
-              color: Theme.of(context).primaryColor,
-              size: 50,
+            child: Column(
+              children: [
+                Icon(
+                  icon,
+                  color: Theme.of(context).primaryColor,
+                  size: 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 3.0),
+                  child: Text(
+                    title,
+                  ),
+                ),
+              ],
             ),
           ),
           onTap: onTap,

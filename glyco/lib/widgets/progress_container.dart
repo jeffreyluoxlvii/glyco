@@ -43,7 +43,7 @@ class ProgressContainer extends StatelessWidget {
           //   ],
           // ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Icon(
               progressProvider.getProgressIcon(),
               size: 30,
@@ -51,7 +51,7 @@ class ProgressContainer extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 14.0),
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
             child: Row(children: [
               Flexible(
                 child: Text(progressProvider.progressUpdate(),
