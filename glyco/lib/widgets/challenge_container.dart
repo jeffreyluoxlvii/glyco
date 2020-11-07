@@ -23,7 +23,10 @@ class ChallengeContainer extends StatelessWidget {
                       fontSize: 14,
                     )),
               ),
-              challengesProvider.getProgressAsset(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                child: challengesProvider.getProgressAsset(),
+              )
             ])),
         width: 350,
         decoration: BoxDecoration(

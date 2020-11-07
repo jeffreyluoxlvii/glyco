@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthKit with ChangeNotifier {
   bool isAuthorized = false;
-  String bloodHealthString = "";
-  String stepsHealthString = "";
+  String glucoseString = "";
+  String stepsString = "";
   String statisticsString = "";
   String exisitngTypesString = "";
   String updateMessageString = "";
@@ -37,28 +37,7 @@ class HealthKit with ChangeNotifier {
     // });
   }
 
-  Future<void> getUserBloodGlucose() async {
-    var request = HealthDataRequest();
-    request.type = HealthTypes.QUANTITY_BLOOD_GLUCOSE;
-    //request.startDate = "2019-06-19T18:58:00.000Z";
-    //request.endDate = "2019-09-19T20:58:00.000Z";
-    //request.limit = 2;
-    //request.units.add("ft");
-    // request.units.add("kcal");
-    // request.units.add("km");
-    var resultToShow = "";
-    try {
-      var basicHealth = await NanoHealthkitPlugin.fetchData(request);
-      resultToShow = basicHealth.toString();
-    } on Exception catch (error) {
-      resultToShow = error.toString();
-    }
-    // setState(() {
-    this.bloodHealthString = resultToShow;
-    // });
-  }
-
-  Future<void> getUserSteps() async {
+  Future<void> getUserStepsData() async {
     var request = HealthDataRequest();
     request.type = HealthTypes.QUANTITY_STEP_COUNT;
     //request.startDate = "2019-06-19T18:58:00.000Z";
@@ -75,7 +54,28 @@ class HealthKit with ChangeNotifier {
       resultToShow = error.toString();
     }
     // setState(() {
-    this.stepsHealthString = resultToShow;
+    this.stepsString = resultToShow;
+    // });
+  }
+
+  Future<void> getUserGlucoseData() async {
+    var request = HealthDataRequest();
+    request.type = HealthTypes.QUANTITY_BLOOD_GLUCOSE;
+    //request.startDate = "2019-06-19T18:58:00.000Z";
+    //request.endDate = "2019-09-19T20:58:00.000Z";
+    //request.limit = 2;
+    //request.units.add("ft");
+    // request.units.add("kcal");
+    // request.units.add("km");
+    var resultToShow = "";
+    try {
+      var basicHealth = await NanoHealthkitPlugin.fetchData(request);
+      resultToShow = basicHealth.toString();
+    } on Exception catch (error) {
+      resultToShow = error.toString();
+    }
+    // setState(() {
+    this.glucoseString = resultToShow;
     // });
   }
 
