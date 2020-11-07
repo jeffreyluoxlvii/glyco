@@ -12,24 +12,29 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ChangeEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 15),
-            Text(
-              "Change Email",
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
+    return Scaffold(
+      appBar: PlainAppBarBack(),
+      body: Container(
+        padding: const EdgeInsets.all(30),
+        width: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              Text(
+                "Change email",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
-            ),
-            SizedBox(height: 30),
-            ChangeEmailForm(),
-            SizedBox(height: 30),
-          ],
+              SizedBox(height: 30),
+              ChangeEmailForm(),
+              SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
@@ -56,16 +61,11 @@ class ChangeEmailFormState extends State<ChangeEmailForm> {
             .changeProfile('email', this.newEmail);
         setState(() => createdMessage = "Email changed successfully!");
       } on HttpException catch (error) {
-        var errorMessage;
-        if (error.toString().contains('EMAIL_EXISTS')) {
-          errorMessage = 'This email address is already in use.';
-        } else if (error.toString().contains('INVALID_EMAIL')) {
-          errorMessage = 'This is not a valid email address.';
-        }
+        var errorMessage = error.toString();
         setState(() => createdMessage = errorMessage);
       } catch (error) {
         print(error);
-        const errorMessage = 'Could not authenticate. Try again later.';
+        const errorMessage = 'Could not authenticate. Try again later';
         setState(() => createdMessage = errorMessage);
       }
     }
@@ -106,6 +106,7 @@ class ChangeEmailFormState extends State<ChangeEmailForm> {
               borderRadius: BorderRadius.circular(50.0),
               child: Container(
                 padding: EdgeInsets.all(5),
+                width: 300,
                 height: 40,
                 color: Colors.cyanAccent[400],
                 child: FlatButton(

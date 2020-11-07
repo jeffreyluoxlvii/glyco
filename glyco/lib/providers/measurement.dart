@@ -15,6 +15,7 @@ class Measurement with ChangeNotifier {
   int calories;
   int carbs;
   double a1cLevel;
+  String userId;
 
   Measurement({
     @required this.id,
@@ -27,6 +28,7 @@ class Measurement with ChangeNotifier {
     @required this.calories,
     @required this.carbs,
     @required this.a1cLevel,
+    @required this.userId,
   });
 
   Future<void> setGlucose(double glucoseLevel, String token) async {

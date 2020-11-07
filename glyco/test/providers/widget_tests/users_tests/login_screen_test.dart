@@ -39,4 +39,10 @@ void main() {
     await tester.pumpAndSettle();
     verify(mockObserver.didPush(any, any));
   });
+  // testWidgets('Tapping forgot password should navigate to that page', (WidgetTester tester) async {
+  //   await _buildLogin(tester);
+  //   await tester.tap(find.widgetWithText(GestureDetector, "Forgot Password?"));
+  //   await tester.pumpAndSettle();
+  //   verify(mockObserver.didPush(any, any));
+  // });
 }

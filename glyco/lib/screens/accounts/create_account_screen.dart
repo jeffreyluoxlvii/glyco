@@ -77,14 +77,14 @@ class InfoFormState extends State<InfoForm> {
         if (error.toString().contains('EMAIL_EXISTS')) {
           errorMessage = 'This email address is already in use.';
         } else if (error.toString().contains('INVALID_EMAIL')) {
-          errorMessage = 'This is not a valid email address.';
+          errorMessage = 'This is not a valid email address';
         } else if (error.toString().contains('WEAK_PASSWORD')) {
-          errorMessage = 'Password should have at least 6 characters.';
+          errorMessage = 'This password is too weak.';
         }
         setState(() => createdMessage = errorMessage);
       } 
       catch (error) {
-        const errorMessage = 'Could not authenticate. Try again later.';
+        const errorMessage = 'Could not authenticate. Try again later';
         setState(() => createdMessage = errorMessage);
       }
     }
