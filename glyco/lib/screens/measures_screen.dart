@@ -42,6 +42,15 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
             .findByDate(_dateTime);
       });
     });
+
+    //trying to call functions from measurement.dart that sets
+    //the data for steps and glucose from healthkit
+
+    // Provider.of<Measurement>(context, listen: false)
+    //     .setHealthKitSteps(Provider.of<Auth>(context, listen: false).token);
+    // Provider.of<Measurement>(context, listen: false)
+    //     .setHealthKitGlucose(Provider.of<Auth>(context, listen: false).token);
+
     super.initState();
   }
 

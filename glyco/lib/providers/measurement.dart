@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'healthkit.dart';
 
 class Measurement with ChangeNotifier {
   String id;
@@ -54,26 +55,56 @@ class Measurement with ChangeNotifier {
     }
   }
 
-  Future<void> setHealthKitSteps(double glucoseLevel, String token) async {
-    final url =
-        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
-    final oldGlucoseLevel = this.currGlucoseLevel;
-    this.currGlucoseLevel = glucoseLevel;
-    notifyListeners();
-    try {
-      final response = await http.patch(
-        url,
-        body: json.encode({
-          'currGlucoseLevel': this.currGlucoseLevel,
-        }),
-      );
-      if (response.statusCode >= 400) {
-        this.currGlucoseLevel = oldGlucoseLevel;
+  Future<void> setHealthKitSteps(String token) async {
+    if (HealthKit().isAuthorized == true) {
+      final url =
+          'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
+      final oldSteps = this.steps;
+      HealthKit().getUserStepsData();
+      this.steps = HealthKit().stepsString as int;
+      notifyListeners();
+      try {
+        final response = await http.patch(
+          url,
+          body: json.encode({
+            'steps': this.steps,
+          }),
+        );
+        if (response.statusCode >= 400) {
+          this.steps = oldSteps;
+          notifyListeners();
+        }
+      } catch (error) {
+        this.steps = oldSteps;
         notifyListeners();
       }
-    } catch (error) {
-      this.currGlucoseLevel = oldGlucoseLevel;
+    }
+  }
+
+  Future<void> setHealthKitGlucose(String token) async {
+    if (HealthKit().isAuthorized == true) {
+      final url =
+          'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
+      final oldGlucose = this.currGlucoseLevel;
+      HealthKit().getUserGlucoseData();
+      this.currGlucoseLevel = HealthKit().glucoseString as double;
       notifyListeners();
+      try {
+        final response = await http.patch(
+          url,
+          body: json.encode({
+            'currGlucoseLevel':
+                this.currGlucoseLevel, //not sure what to put here for steps
+          }),
+        );
+        if (response.statusCode >= 400) {
+          this.currGlucoseLevel = oldGlucose;
+          notifyListeners();
+        }
+      } catch (error) {
+        this.currGlucoseLevel = oldGlucose;
+        notifyListeners();
+      }
     }
   }
 
