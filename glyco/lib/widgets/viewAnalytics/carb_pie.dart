@@ -5,42 +5,42 @@ import 'package:provider/provider.dart';
 import 'dart:math';
 
 class CarbPie extends StatelessWidget {
-  final int progress = 860;
-  final int goal = 1800; //calorie goal
+  final int progress = 2000;
+  final int goal = 6000; //carb goal
   final List<double> monthlyData = [
-    85.5,
-    69.0,
-    66.5,
-    54.5,
-    69.0,
-    71.5,
-    66.5,
-    60.0,
-    76.7,
-    58.0,
-    67.8,
-    86.0,
-    76.0,
-    76.8,
-    59.8,
-    79.6,
-    68.0,
-    56.5,
-    65.6,
-    78.0,
-    67.7,
-    87.6,
-    79.0,
-    67.0,
-    110.0,
-    45.8,
-    46.8,
-    100.0,
-    67.8,
-    56.9
+    155.0,
+    130.0,
+    176.0,
+    160.5,
+    120.0,
+    143.5,
+    149.5,
+    166.0,
+    186.7,
+    155.0,
+    136.8,
+    142.0,
+    121.0,
+    118.8,
+    156.8,
+    166.6,
+    190.0,
+    167.5,
+    164.6,
+    178.0,
+    137.7,
+    120.6,
+    118.0,
+    152.0,
+    151.0,
+    143.8,
+    132.8,
+    129.0,
+    169.8,
+    159.9
   ];
-  final double highRange = 90.0;
-  final double lowRange = 70.0;
+  final double highRange = 160.0;
+  final double lowRange = 120.0;
   double inRange = 0;
   double aboveRange = 0;
   double belowRange = 0;
@@ -111,7 +111,7 @@ class CarbPie extends StatelessWidget {
                     ]),
                     Row(children: [
                       Flexible(
-                        child: Text(averageCarb(monthlyData) + ' mg/dL avg',
+                        child: Text(averageCarb(monthlyData) + ' g carbs avg',
                             style: TextStyle(
                               color: Colors.green[200],
                               fontSize: 18,
@@ -122,8 +122,7 @@ class CarbPie extends StatelessWidget {
                     Row(children: [
                       Flexible(
                         child: Text(
-                            monthlyData.reduce(max).toString() +
-                                ' mg/dL HIGHEST',
+                            monthlyData.reduce(max).toString() + ' g HIGHEST',
                             style: TextStyle(
                               color: Colors.grey[500],
                               fontSize: 12,
@@ -133,8 +132,7 @@ class CarbPie extends StatelessWidget {
                     Row(children: [
                       Flexible(
                         child: Text(
-                            monthlyData.reduce(min).toString() +
-                                ' mg/dL LOWEST',
+                            monthlyData.reduce(min).toString() + ' g LOWEST',
                             style: TextStyle(
                               color: Colors.grey[500],
                               fontSize: 12,
