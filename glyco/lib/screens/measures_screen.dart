@@ -32,8 +32,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
 
     Provider.of<Measurements>(context, listen: false)
         .fetchAndSetMeasurements()
-        .then(
-            (_) => Provider.of<Options>(context, listen: false).fetchSettings())
         .then((_) {
       setState(() {
         _isLoading = false;
@@ -176,7 +174,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   NutritionForm(FontAwesomeIcons.hamburger),
-                                  "MEAL",
                                 ),
                                 Shortcut(
                                   FontAwesomeIcons.cookie,
@@ -201,7 +198,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   NutritionForm(FontAwesomeIcons.cookie),
-                                  "SNACK",
                                 ),
                                 Shortcut(
                                   FontAwesomeIcons.mugHot,
@@ -226,7 +222,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   NutritionForm(FontAwesomeIcons.mugHot),
-                                  "DRINK",
                                 ),
                                 Shortcut(
                                   FontAwesomeIcons.running,
@@ -251,7 +246,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   ExerciseForm(),
-                                  "EXERCISE",
                                 ),
                               ],
                             ),

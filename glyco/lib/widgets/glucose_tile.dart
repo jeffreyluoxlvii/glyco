@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/widgets/glucose_manual_form.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
@@ -18,21 +17,7 @@ class GlucoseTile extends StatelessWidget {
         height: 160,
         color: Theme.of(context).primaryColor,
         child: FlatButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  content: SingleChildScrollView(
-                    child: ChangeNotifierProvider.value(
-                      child: GlucoseManualForm(),
-                      value: measurement,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
+          onPressed: () {},
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

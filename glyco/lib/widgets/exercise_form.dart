@@ -74,7 +74,7 @@ class ExerciseFormState extends State<ExerciseForm> {
                   FocusScope.of(context).requestFocus(_carbsFocusNode);
                 },
                 decoration: InputDecoration(
-                  labelText: 'Add minutes of exercise',
+                  labelText: 'Enter minutes of exercise',
                   suffix: Text(
                     'minutes',
                     style: TextStyle(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/providers/settings.dart';
 import 'package:provider/provider.dart';
 import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
@@ -18,6 +17,7 @@ import 'screens/accounts/change_email_screen.dart';
 import 'screens/accounts/change_name_screen.dart';
 import 'screens/accounts/forgot_password_screen.dart';
 
+
 void main() => runApp(MyApp());
 
 /// This Widget is the main application widget.
@@ -32,38 +32,25 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Measurements(),
         ),
-        ChangeNotifierProxyProvider<Auth, Options>(
-          update: (ctx, auth, previousOptions) => Options(
-            auth.token,
-            auth.userId,
-            previousOptions == null
-                ? Settings(
-                    mealCarbs: 35,
-                    snackCarbs: 15,
-                    drinkCarbs: 10,
-                    exerciseTime: 30,
-                    userId: auth.userId,
-                  )
-                : previousOptions.settings,
-          ),
-          create: null,
+        ChangeNotifierProvider(
+          create: (ctx) => Options(),
         ),
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
           home: //LoginScreen(),
-              auth.isAuth
-                  ? NavigationScreen()
-                  : FutureBuilder(
-                      future: auth.tryAutoLogin(),
-                      builder: (ctx, authResultSnapshot) =>
-                          authResultSnapshot.connectionState ==
-                                  ConnectionState.waiting
-                              ? SplashScreen()
-                              : auth.isAuth
-                                  ? NavigationScreen()
-                                  : LoginScreen(),
-                    ),
+          auth.isAuth
+              ? NavigationScreen()
+              : FutureBuilder(
+                  future: auth.tryAutoLogin(),
+                  builder: (ctx, authResultSnapshot) =>
+                      authResultSnapshot.connectionState ==
+                              ConnectionState.waiting
+                          ? SplashScreen()
+                          : auth.isAuth?
+                        NavigationScreen()
+                          :LoginScreen(),
+                ),
           routes: <String, WidgetBuilder>{
             '/NavScreen': (context) => NavigationScreen(),
             '/ChangeSettings': (context) => ChangeSettingsScreen(),
