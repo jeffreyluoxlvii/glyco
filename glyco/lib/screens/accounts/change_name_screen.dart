@@ -11,18 +11,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ChangeName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PlainAppBarBack(),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        width: double.infinity,
+    return Container(
+      child: Container(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 15),
               Text(
-                "Change name",
+                "Change Name",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -57,15 +54,14 @@ class ChangeNameFormState extends State<ChangeNameForm> {
     Future<void> _submit() async {
       String name = this.newFirstName + " " + this.newLastName;
       try {
-        await Provider.of<Auth>(context, listen: false)
-            .changeName(name);
+        await Provider.of<Auth>(context, listen: false).changeName(name);
         setState(() => createdMessage = "Name changed successfully!");
       } on HttpException catch (error) {
         var errorMessage = error.toString();
         setState(() => createdMessage = errorMessage);
       } catch (error) {
         print(error);
-        const errorMessage = 'Could not authenticate. Try again later';
+        const errorMessage = 'Could not authenticate. Try again later.';
         setState(() => createdMessage = errorMessage);
       }
     }
@@ -74,38 +70,29 @@ class ChangeNameFormState extends State<ChangeNameForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: formDecorator("enter first name"),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return "Please enter your first name";
-                    }
-                    return null;
-                  },
-                  onSaved: (String value) {
-                    this.newFirstName = value.trim();
-                  },
-                ),
-              ),
-              SizedBox(width: 50),
-              Expanded(
-                child: TextFormField(
-                  decoration: formDecorator("enter last name"),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter your last name';
-                    }
-                    return null;
-                  },
-                  onSaved: (String value) {
-                    this.newLastName = value.trim();
-                  },
-                ),
-              ),
-            ],
+          TextFormField(
+            decoration: formDecorator("enter first name"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "Please enter your first name";
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.newFirstName = value.trim();
+            },
+          ),
+          TextFormField(
+            decoration: formDecorator("enter last name"),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter your last name';
+              }
+              return null;
+            },
+            onSaved: (String value) {
+              this.newLastName = value.trim();
+            },
           ),
           SizedBox(height: 30),
           Row(children: [
@@ -114,7 +101,6 @@ class ChangeNameFormState extends State<ChangeNameForm> {
               borderRadius: BorderRadius.circular(50.0),
               child: Container(
                 padding: EdgeInsets.all(5),
-                width: 300,
                 height: 40,
                 color: Colors.cyanAccent[400],
                 child: FlatButton(

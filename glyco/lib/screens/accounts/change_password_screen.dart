@@ -11,29 +11,24 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PlainAppBarBack(),
-      body: Container(
-        padding: const EdgeInsets.all(30),
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 15),
-              Text(
-                "Change password",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                ),
+    return Container(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 15),
+            Text(
+              "Change Password",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
               ),
-              SizedBox(height: 30),
-              ChangePassForm(),
-              SizedBox(height: 30),
-            ],
-          ),
+            ),
+            SizedBox(height: 30),
+            ChangePassForm(),
+            SizedBox(height: 30),
+          ],
         ),
       ),
     );
@@ -59,14 +54,15 @@ class ChangePassFormState extends State<ChangePassForm> {
         await Provider.of<Auth>(context, listen: false)
             .changeProfile('password', this.newPassword);
         setState(() => createdMessage = "Password changed successfully!");
-        //Navigator.pushReplacementNamed(context, '/NavScreen');
       } on HttpException catch (error) {
-        var errorMessage =
-            error.toString();
+        var errorMessage = error.toString();
+        if (error.toString().contains('WEAK_PASSWORD')) {
+          errorMessage = 'Password should have at least 6 characters.';
+        }
         setState(() => createdMessage = errorMessage);
       } catch (error) {
-        print("Error");
-        const errorMessage = 'Could not authenticate. Try again later';
+        print("There's an error");
+        const errorMessage = 'Could not authenticate. Try again later.';
         setState(() => createdMessage = errorMessage);
       }
     }
@@ -109,7 +105,6 @@ class ChangePassFormState extends State<ChangePassForm> {
               borderRadius: BorderRadius.circular(50.0),
               child: Container(
                 padding: EdgeInsets.all(5),
-                width: 300,
                 height: 40,
                 color: Colors.cyanAccent[400],
                 child: FlatButton(
@@ -139,15 +134,6 @@ class ChangePassFormState extends State<ChangePassForm> {
               color: Theme.of(context).primaryColor,
             ),
           ),
-          // passwordChanged
-          //     ? Text(
-          //         "Password changed successfully!",
-          //         style: TextStyle(
-          //           fontSize: 18,
-          //           color: Theme.of(context).primaryColor,
-          //         ),
-          //       )
-          //     : Text(""),
         ],
       ),
     );

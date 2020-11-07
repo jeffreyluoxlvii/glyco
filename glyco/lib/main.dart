@@ -5,6 +5,7 @@ import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
 import 'providers/auth.dart';
+import 'providers/healthkit.dart';
 
 //Screens
 import 'screens/splash_screen.dart';
@@ -28,15 +29,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Auth(),
         ),
-        ChangeNotifierProxyProvider<Auth, Measurements>(
-          update: (ctx, auth, previousMeasurements) => Measurements(
-            auth.token,
-            auth.userId,
-            previousMeasurements == null
-                ? []
-                : previousMeasurements.measurements,
-          ),
-          create: null,
+        ChangeNotifierProvider(
+          create: (ctx) => Measurements(),
         ),
         ChangeNotifierProxyProvider<Auth, Options>(
           update: (ctx, auth, previousOptions) => Options(

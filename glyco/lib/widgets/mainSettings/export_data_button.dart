@@ -12,7 +12,7 @@ class ExportDataButton extends StatelessWidget {
         color: Colors.cyanAccent[400],
         child: FlatButton(
           child: Text(
-            "EXPORT DATA",
+            "EXPORT MY DATA",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
