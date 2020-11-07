@@ -54,6 +54,29 @@ class Measurement with ChangeNotifier {
     }
   }
 
+  Future<void> setHealthKitSteps(double glucoseLevel, String token) async {
+    final url =
+        'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
+    final oldGlucoseLevel = this.currGlucoseLevel;
+    this.currGlucoseLevel = glucoseLevel;
+    notifyListeners();
+    try {
+      final response = await http.patch(
+        url,
+        body: json.encode({
+          'currGlucoseLevel': this.currGlucoseLevel,
+        }),
+      );
+      if (response.statusCode >= 400) {
+        this.currGlucoseLevel = oldGlucoseLevel;
+        notifyListeners();
+      }
+    } catch (error) {
+      this.currGlucoseLevel = oldGlucoseLevel;
+      notifyListeners();
+    }
+  }
+
   Future<void> setNutrition(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';

@@ -16,13 +16,14 @@ class _AnalyticsAppBarState extends State<AnalyticsAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-      "Analytics",
-      style: TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-      ),
-    ));
+          "Analytics",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ));
   }
 }

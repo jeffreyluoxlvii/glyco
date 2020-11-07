@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'dart:math';
 
 class GlucosePie extends StatelessWidget {
-  final int progress = 860;
-  final int goal = 3000;
   final List<double> monthlyData = [
     85.5,
     69.0,
@@ -60,94 +58,94 @@ class GlucosePie extends StatelessWidget {
     calculateData();
 
     return Center(
-      child:
-        Container(
-          height: 150,
-          width: 350,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(18.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          margin: EdgeInsets.all(5.0),
-          padding: const EdgeInsets.all(0),
-          child: Row(
-            children: [
-              Container(
-                width: 170,
-                // Pie Chart is available in fl_chart package
-                child: PieChart(
-                  PieChartData(
-                    borderData: FlBorderData(show: false),
-                    centerSpaceRadius: 0.0,
-                    sectionsSpace: 0.0,
-                    startDegreeOffset: 30,
-                    // actual curves and data come from this function result.
-                    sections: _buildPieChartCurves(),
-                    // This is to make chart interactive when someone touch
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(children: [
-                        Flexible(
-                          child: Text(inRange.toString() + '% in range',
-                              style: TextStyle(
-                                color: Colors.green[200],
-                                fontSize: 18,
-                              )),
-                        ),
-                      ]),
-                      Row(children: [
-                        Flexible(
-                          child: Text(
-                              averageGlucose(monthlyData) + ' mg/dL avg',
-                              style: TextStyle(
-                                color: Colors.green[200],
-                                fontSize: 18,
-                              )),
-                        ),
-                      ]),
-                      SizedBox(height: 10),
-                      Row(children: [
-                        Flexible(
-                          child: Text(
-                              monthlyData.reduce(max).toString() + ' mg/dL HIGHEST',
-                              style: TextStyle(
-                                color: Colors.grey[500],
-                                fontSize: 12,
-                              )),
-                        ),
-                      ]),
-                      Row(children: [
-                        Flexible(
-                          child: Text(
-                              monthlyData.reduce(min).toString() + ' mg/dL LOWEST',
-                              style: TextStyle(
-                                color: Colors.grey[500],
-                                fontSize: 12,
-                              )),
-                        ),
-                      ]),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+      child: Container(
+        height: 150,
+        width: 350,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
+        margin: EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(0),
+        child: Row(
+          children: [
+            Container(
+              width: 170,
+              // Pie Chart is available in fl_chart package
+              child: PieChart(
+                PieChartData(
+                  borderData: FlBorderData(show: false),
+                  centerSpaceRadius: 0.0,
+                  sectionsSpace: 0.0,
+                  startDegreeOffset: 30,
+                  // actual curves and data come from this function result.
+                  sections: _buildPieChartCurves(),
+                  // This is to make chart interactive when someone touch
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(children: [
+                      Flexible(
+                        child: Text(inRange.toString() + '% in range',
+                            style: TextStyle(
+                              color: Colors.green[200],
+                              fontSize: 18,
+                            )),
+                      ),
+                    ]),
+                    Row(children: [
+                      Flexible(
+                        child: Text(averageGlucose(monthlyData) + ' mg/dL avg',
+                            style: TextStyle(
+                              color: Colors.green[200],
+                              fontSize: 18,
+                            )),
+                      ),
+                    ]),
+                    SizedBox(height: 10),
+                    Row(children: [
+                      Flexible(
+                        child: Text(
+                            monthlyData.reduce(max).toString() +
+                                ' mg/dL HIGHEST',
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            )),
+                      ),
+                    ]),
+                    Row(children: [
+                      Flexible(
+                        child: Text(
+                            monthlyData.reduce(min).toString() +
+                                ' mg/dL LOWEST',
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 12,
+                            )),
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 

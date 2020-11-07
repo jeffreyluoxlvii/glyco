@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'dart:math';
 
 class CarbPie extends StatelessWidget {
-  final int progress = 2000;
-  final int goal = 6000; //carb goal
   final List<double> monthlyData = [
     155.0,
     130.0,
