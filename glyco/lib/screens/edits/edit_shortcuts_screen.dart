@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/providers/auth.dart';
 import 'package:glyco/providers/options.dart';
 import 'package:provider/provider.dart';
 
@@ -91,27 +90,19 @@ class EditShortcuts extends StatelessWidget {
                         onPressed: () {
                           if (mealRow.carbController.text.length > 0) {
                             settings.setMealSettings(
-                                int.parse(mealRow.carbController.text),
-                                Provider.of<Auth>(context, listen: false)
-                                    .token);
+                                int.parse(mealRow.carbController.text));
                           }
                           if (snackRow.carbController.text.length > 0) {
                             settings.setSnackSettings(
-                                int.parse(snackRow.carbController.text),
-                                Provider.of<Auth>(context, listen: false)
-                                    .token);
+                                int.parse(snackRow.carbController.text));
                           }
                           if (drinkRow.carbController.text.length > 0) {
                             settings.setDrinkSettings(
-                                int.parse(drinkRow.carbController.text),
-                                Provider.of<Auth>(context, listen: false)
-                                    .token);
+                                int.parse(drinkRow.carbController.text));
                           }
                           if (exerciseRow.exerciseController.text.length > 0) {
                             settings.setExerciseTime(
-                                int.parse(exerciseRow.exerciseController.text),
-                                Provider.of<Auth>(context, listen: false)
-                                    .token);
+                                int.parse(exerciseRow.exerciseController.text));
                           }
                           Navigator.pop(context);
                         },

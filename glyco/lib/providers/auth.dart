@@ -123,14 +123,13 @@ class Auth with ChangeNotifier {
 
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    if (!prefs.containsKey('userData')) {
+    if(!prefs.containsKey('userData')){
       return false;
     }
-    final extractedUserData =
-        json.decode(prefs.getString('userData')) as Map<String, Object>;
+    final extractedUserData = json.decode(prefs.getString('userData')) as Map<String, Object>;
     final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
 
-    if (expiryDate.isBefore(DateTime.now())) {
+    if(expiryDate.isBefore(DateTime.now())){
       return false;
     }
     _token = extractedUserData['token'];
@@ -209,7 +208,10 @@ class Auth with ChangeNotifier {
           }));
       final responseData = json.decode(response.body);
       print(responseData);
-      print(responseData['idToken']);
+      print(responseData['error']);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
       if (responseData['idToken'] != null) {
         _token = responseData['idToken'];
       }
@@ -233,9 +235,6 @@ class Auth with ChangeNotifier {
         },
       );
       prefs.setString('userData', userData);
-      if (responseData['error'] != null) {
-        throw HttpException(responseData['error']['message']);
-      }
     } catch (error) {
       return Future.error(error);
     }
@@ -253,16 +252,17 @@ class Auth with ChangeNotifier {
           }));
       final responseData = json.decode(response.body);
       print(responseData);
-      print(responseData['idToken']);
       if (responseData['idToken'] != null) {
         _token = responseData['idToken'];
       }
       _userName = responseData['displayName'];
+      //print(responseData['error']);
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
       notifyListeners();
     } catch (error) {
+      print("Whatup");
       return Future.error(error);
     }
   }

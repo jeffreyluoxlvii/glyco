@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../providers/measurements.dart';
 import '../providers/options.dart';
 import '../providers/measurement.dart';
-import '../providers/auth.dart';
 
 import '../widgets/measurement_grid.dart';
 import '../widgets/shortcuts/shortcut.dart';
@@ -33,8 +32,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
 
     Provider.of<Measurements>(context, listen: false)
         .fetchAndSetMeasurements()
-        .then(
-            (_) => Provider.of<Options>(context, listen: false).fetchSettings())
         .then((_) {
       setState(() {
         _isLoading = false;
@@ -59,7 +56,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
   Widget build(BuildContext context) {
     // final measurementsData = Provider.of<Measurements>(context);
     final settings = Provider.of<Options>(context).settings;
-    final authData = Provider.of<Auth>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -160,7 +156,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                   () {
                                     selectedMeasurement.addNutrition(
                                       settings.mealCarbs,
-                                      authData.token,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
                                     Scaffold.of(context).showSnackBar(
@@ -172,7 +167,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           onPressed: () {
                                             selectedMeasurement.addNutrition(
                                               settings.mealCarbs * -1,
-                                              authData.token,
                                             );
                                           },
                                         ),
@@ -180,14 +174,12 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   NutritionForm(FontAwesomeIcons.hamburger),
-                                  "MEAL",
                                 ),
                                 Shortcut(
                                   FontAwesomeIcons.cookie,
                                   () {
                                     selectedMeasurement.addNutrition(
                                       settings.snackCarbs,
-                                      authData.token,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
                                     Scaffold.of(context).showSnackBar(
@@ -199,7 +191,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           onPressed: () {
                                             selectedMeasurement.addNutrition(
                                               settings.snackCarbs * -1,
-                                              authData.token,
                                             );
                                           },
                                         ),
@@ -207,14 +198,12 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   NutritionForm(FontAwesomeIcons.cookie),
-                                  "SNACK",
                                 ),
                                 Shortcut(
                                   FontAwesomeIcons.mugHot,
                                   () {
                                     selectedMeasurement.addNutrition(
                                       settings.drinkCarbs,
-                                      authData.token,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
                                     Scaffold.of(context).showSnackBar(
@@ -226,7 +215,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           onPressed: () {
                                             selectedMeasurement.addNutrition(
                                               settings.drinkCarbs * -1,
-                                              authData.token,
                                             );
                                           },
                                         ),
@@ -234,14 +222,12 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   NutritionForm(FontAwesomeIcons.mugHot),
-                                  "DRINK",
                                 ),
                                 Shortcut(
                                   FontAwesomeIcons.running,
                                   () {
                                     selectedMeasurement.addExercise(
                                       settings.exerciseTime,
-                                      authData.token,
                                     );
                                     Scaffold.of(context).hideCurrentSnackBar();
                                     Scaffold.of(context).showSnackBar(
@@ -253,7 +239,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                           onPressed: () {
                                             selectedMeasurement.addExercise(
                                               settings.exerciseTime * -1,
-                                              authData.token,
                                             );
                                           },
                                         ),
@@ -261,7 +246,6 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                     );
                                   },
                                   ExerciseForm(),
-                                  "EXERCISE",
                                 ),
                               ],
                             ),
