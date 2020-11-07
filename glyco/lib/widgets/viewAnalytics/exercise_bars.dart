@@ -3,6 +3,17 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class ExerciseBarChart extends StatelessWidget {
+  //final analyticsProvider = Provider.of<Measurements>(context);
+  // if (analyticsProvider.getChallenge() == 'steps') {
+  //   analytics = analyticsProvider.findByDate(DateTime.now()).steps;
+  // }
+  // if (analyticsProvider.getChallenge() == 'activity') {
+  //   analytics = analyticsProvider.findByDate(DateTime.now()).exerciseTime;
+  // }
+  // if (analyticsProvider.getChallenge() == 'carbs') {
+  //   analytics = analyticsProvider.findByDate(DateTime.now()).carbs;
+  // }
+  // goal = analyticsProvider.getChallengeGoal();
   final List<double> exerciseData = [
     25,
     36,

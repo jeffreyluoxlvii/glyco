@@ -5,6 +5,7 @@ import '../widgets/appBars/analytics_app_bar.dart';
 import '../widgets/viewAnalytics/glucose_pie.dart';
 import '../widgets/viewAnalytics/exercise_bars.dart';
 import '../widgets/viewAnalytics/glucose_line.dart';
+import '../widgets/viewAnalytics/carb_pie.dart';
 
 class ViewAnalyticsScreen extends StatelessWidget {
   @override
@@ -23,6 +24,8 @@ class ViewAnalyticsScreen extends StatelessWidget {
               ExerciseBarChart(),
               SizedBox(height: 15),
               GlucoseLineChart(),
+              SizedBox(height: 15),
+              CarbPie(),
             ],
           ),
         ),
