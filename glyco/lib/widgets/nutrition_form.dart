@@ -35,7 +35,7 @@ class NutritionFormState extends State<NutritionForm> {
     return Form(
       key: _form,
       child: Container(
-        height: 200,
+        height: 270,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -67,7 +67,7 @@ class NutritionFormState extends State<NutritionForm> {
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Enter carbs to add',
+                  labelText: 'Enter carbs',
                   suffix: Text(
                     'g',
                     style: TextStyle(
