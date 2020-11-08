@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:glyco/widgets/pie_progress.dart';
 import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
-import '../providers/measurements.dart';
+import '../widgets/glucose_progress.dart';
+import "../widgets/linechart_progress.dart";
 
 class ProgressContainer extends StatelessWidget {
   @override
@@ -14,63 +16,38 @@ class ProgressContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(vertical: 0),
-          //   child: Icon(
-          //     FontAwesomeIcons.heartbeat,
-          //     size: 30,
-          //     color: Theme.of(context).primaryColor,
-          //   ),
-          // ),
-          // Row(children: [
-          //   Flexible(
-          //     child: Text(
-          //         'Your glucose levels today have averaged 20% less than usual!',
-          //         style: TextStyle(
-          //           color: Colors.black,
-          //           fontSize: 16,
-          //         )),
-          //   ),
-          //   Image.asset(
-          //     'assets/images/progress_glucose.jpg',
-          //   ),
-          // ]),
-          // Row(
-          //   children: [
-          //     Image.asset(
-          //       'assets/images/progress_glucosechart.jpg',
-          //     ),
-          //   ],
-          // ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: GlucoseProgressContainer(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: LineChartProgressContainer(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, bottom: 0),
             child: Icon(
               progressProvider.getProgressIcon(),
               size: 30,
               color: Theme.of(context).primaryColor,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5.0),
-            child: Row(children: [
-              Flexible(
-                child: Text(progressProvider.progressUpdate(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    )),
-              ),
-            ]),
-          ),
           // Padding(
-          //   padding:
-          //       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+          //   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
           //   child: Row(children: [
-          //     Image.asset(
-          //       'assets/images/progress_steps.jpg',
+          //     Flexible(
+          //       child: Text(progressProvider.progressUpdate(),
+          //           style: TextStyle(
+          //             color: Colors.black,
+          //             fontSize: 14,
+          //           )),
           //     ),
           //   ]),
           // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: PieProgressContainer(),
+          ),
         ],
       ),
     );
