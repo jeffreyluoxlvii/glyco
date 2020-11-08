@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
 import '../../models/http_exception.dart';
-import '../../widgets/appBars/plain_app_bar_back.dart';
 
 //Widgets
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChangePassword extends StatelessWidget {
   @override
