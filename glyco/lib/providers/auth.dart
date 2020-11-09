@@ -209,7 +209,9 @@ class Auth with ChangeNotifier {
           }));
       final responseData = json.decode(response.body);
       print(responseData);
-      print(responseData['idToken']);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
       if (responseData['idToken'] != null) {
         _token = responseData['idToken'];
       }
@@ -233,9 +235,6 @@ class Auth with ChangeNotifier {
         },
       );
       prefs.setString('userData', userData);
-      if (responseData['error'] != null) {
-        throw HttpException(responseData['error']['message']);
-      }
     } catch (error) {
       return Future.error(error);
     }
@@ -253,14 +252,13 @@ class Auth with ChangeNotifier {
           }));
       final responseData = json.decode(response.body);
       print(responseData);
-      print(responseData['idToken']);
+      if (responseData['error'] != null) {
+        throw HttpException(responseData['error']['message']);
+      }
       if (responseData['idToken'] != null) {
         _token = responseData['idToken'];
       }
       _userName = responseData['displayName'];
-      if (responseData['error'] != null) {
-        throw HttpException(responseData['error']['message']);
-      }
       notifyListeners();
     } catch (error) {
       return Future.error(error);
