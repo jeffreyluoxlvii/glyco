@@ -4,7 +4,8 @@ import '../providers/measurement.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glyco/providers/auth.dart';
 
-// Define a custom Form widget.
+// Exercise form for long pressing a shorcut
+// @author Jeffrey Luo
 class ExerciseForm extends StatefulWidget {
   @override
   ExerciseFormState createState() {
@@ -13,14 +14,14 @@ class ExerciseForm extends StatefulWidget {
 }
 
 class ExerciseFormState extends State<ExerciseForm> {
-  final _carbsFocusNode = FocusNode();
+  final _exerciseFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
 
   var _minutes;
 
   @override
   void dispose() {
-    _carbsFocusNode.dispose();
+    _exerciseFocusNode.dispose();
     super.dispose();
   }
 
@@ -73,7 +74,7 @@ class ExerciseFormState extends State<ExerciseForm> {
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_carbsFocusNode);
+                  FocusScope.of(context).requestFocus(_exerciseFocusNode);
                 },
                 decoration: InputDecoration(
                   labelText: 'Add minutes of exercise',

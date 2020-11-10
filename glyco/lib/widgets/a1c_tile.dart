@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget to display the A1C tile in the measurement grid.
+// @author Jeffrey Luo
 class A1CTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import './long_tile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget to display the measurement grid in the Measures screen.
+// @author Jeffrey Luo
 class MeasurementGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

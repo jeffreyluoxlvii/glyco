@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 import 'package:glyco/providers/auth.dart';
 
-// Define a custom Form widget.
+// Glucose form for tapping the tile
+// @author Jeffrey Luo
 class GlucoseManualForm extends StatefulWidget {
   @override
   GlucoseManualFormState createState() {

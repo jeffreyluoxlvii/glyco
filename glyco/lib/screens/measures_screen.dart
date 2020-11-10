@@ -16,6 +16,9 @@ import '../widgets/exercise_form.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Screen to display measurements of a user
+// @author Jeffrey Luo
+
 class MeasuresScreen extends StatefulWidget {
   @override
   _MeasuresScreenState createState() => _MeasuresScreenState();
@@ -33,6 +36,7 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
       _isLoading = true;
     });
 
+    // Fetches the user's data from Firebase. While waiting, display a loading symbol.
     Provider.of<Measurements>(context, listen: false)
         .fetchAndSetMeasurements()
         .then(

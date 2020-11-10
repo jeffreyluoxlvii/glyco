@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 import 'package:glyco/providers/auth.dart';
 
-// Define a custom Form widget.
+// Nutrition form for long pressing a shorcut
+// @author Jeffrey Luo
 class NutritionForm extends StatefulWidget {
   final IconData icon;
 
