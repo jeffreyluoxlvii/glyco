@@ -4,10 +4,9 @@ import '../../widgets/appBars/plain_app_bar_back.dart';
 import '../../providers/auth.dart';
 import '../../models/http_exception.dart';
 
-//Widgets
+//Author: Justin Wu
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+//This class creates the screen that is shown when a user forgets their password and wants to reset it.
 class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

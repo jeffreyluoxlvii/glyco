@@ -5,6 +5,10 @@ import '../../screens/accounts/change_email_screen.dart';
 import '../../screens/accounts/change_name_screen.dart';
 import '../../screens/accounts/change_password_screen.dart';
 
+//Author: Justin Wu
+
+//This class creates the widgets that are shown when a user wants to edit their profile.
+//It shows all of the information that they can change, such as name, email, and password.
 class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

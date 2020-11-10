@@ -4,13 +4,16 @@ import 'package:glyco/providers/options.dart';
 import 'package:provider/provider.dart';
 
 //Widgets
-
 import '../../widgets/mainSettings/editShortcuts/exercise_row.dart';
 import '../../widgets/mainSettings/editShortcuts/food_rows.dart';
 import '../../widgets/appBars/plain_app_bar.dart';
 
+//Font
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//Author: Justin Wu
+
+//This class creates the screen that is shown when a user wants to edit their shortcuts.
 class EditShortcuts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

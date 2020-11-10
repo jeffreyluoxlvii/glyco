@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
 import '../../models/http_exception.dart';
-import '../../widgets/appBars/plain_app_bar_back.dart';
 
-//Widgets
+//Author: Justin Wu
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+//This class creates the widget that is shown in the popup when a user wants to change their name.
 class ChangeName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
