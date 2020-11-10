@@ -71,7 +71,7 @@ class InfoFormState extends State<InfoForm> {
       try {
         await Provider.of<Auth>(context, listen: false)
             .signUp(this.email, this.password, this.firstName, this.lastName);
-        setState(() => createdMessage = "Account created, please verify your email!");
+        setState(() => createdMessage = "Account created!");
       } 
       on HttpException catch (error) {
         var errorMessage = 'Authentication failed';
