@@ -1,9 +1,11 @@
-// A1c = (2.59 + average_blood_glucose) / 1.59
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'healthkit.dart';
+
+// Provider class to handle singular Measurement objects.
+
+// @author Jeffrey Luo
 
 class Measurement with ChangeNotifier {
   String id;
@@ -32,6 +34,7 @@ class Measurement with ChangeNotifier {
     @required this.userId,
   });
 
+  // Sets glucose level of measurement
   Future<void> setGlucose(double glucoseLevel, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
@@ -108,6 +111,7 @@ class Measurement with ChangeNotifier {
     }
   }
 
+  // Sets carbs and calories. Calories are calculated as carbs multiplied by 4.
   Future<void> setNutrition(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements/$id.json?auth=$token';
@@ -136,6 +140,7 @@ class Measurement with ChangeNotifier {
     }
   }
 
+  // Adds carbs and calories
   Future<void> addNutrition(int carbs, String token) async {
     setNutrition(this.carbs + carbs, token);
   }
@@ -163,6 +168,7 @@ class Measurement with ChangeNotifier {
     }
   }
 
+  // Adds exercise time
   Future<void> addExercise(int minutes, String token) async {
     setExercise(this.exerciseTime + minutes, token);
   }

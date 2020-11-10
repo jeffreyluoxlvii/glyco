@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../providers/options.dart';
 import '../../providers/auth.dart';
 
-// Define a custom Form widget.
 class ShortcutForm extends StatefulWidget {
   final IconData icon;
   final String type;

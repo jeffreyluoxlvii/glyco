@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+// Provider for the shortcut settings of a user
+// @author Jeffrey Luo
+
 class Settings with ChangeNotifier {
   int mealCarbs;
   int snackCarbs;
@@ -17,6 +20,7 @@ class Settings with ChangeNotifier {
     @required this.userId,
   });
 
+  // Sets the meal shortcut settings of a user
   Future<void> setMealSettings(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userSettings/$userId/settings.json?auth=$token';
@@ -40,6 +44,7 @@ class Settings with ChangeNotifier {
     }
   }
 
+  // Sets the snack shortcut settings of a user
   Future<void> setSnackSettings(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userSettings/$userId/settings.json?auth=$token';
@@ -63,6 +68,7 @@ class Settings with ChangeNotifier {
     }
   }
 
+  // Sets the drink shortcut settings of a user
   Future<void> setDrinkSettings(int carbs, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userSettings/$userId/settings.json?auth=$token';
@@ -86,6 +92,7 @@ class Settings with ChangeNotifier {
     }
   }
 
+  // Sets the exercise shortcut settings of a user
   Future<void> setExerciseTime(int minutes, String token) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userSettings/$userId/settings.json?auth=$token';

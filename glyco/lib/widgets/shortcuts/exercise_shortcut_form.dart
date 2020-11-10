@@ -4,7 +4,6 @@ import '../../providers/options.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../providers/auth.dart';
 
-// Define a custom Form widget.
 class ExerciseShortcutForm extends StatefulWidget {
   @override
   ExerciseShortcutFormState createState() {

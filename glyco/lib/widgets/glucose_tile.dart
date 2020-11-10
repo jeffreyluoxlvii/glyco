@@ -6,6 +6,8 @@ import '../providers/measurement.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget to display the glucose tile in the measurement grid.
+// @author Jeffrey Luo
 class GlucoseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

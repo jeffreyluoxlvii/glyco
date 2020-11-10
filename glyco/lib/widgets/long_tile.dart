@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// Widget to display a long tile in the measurement grid.
+// @author Jeffrey Luo
 class LongTile extends StatelessWidget {
   final Icon icon;
   final String data;

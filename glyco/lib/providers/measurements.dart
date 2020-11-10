@@ -4,6 +4,8 @@ import 'dart:convert';
 import './measurement.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Provider for Measurements. Stores all measurements of a user as a list.
+// @author Jeffrey Luo
 class Measurements with ChangeNotifier {
   String providerChallengeGiven = 'null';
   int providerChallengeGoal = -1;
@@ -15,6 +17,7 @@ class Measurements with ChangeNotifier {
 
   Measurements(this.authToken, this.userId, this._measurements);
 
+  // getter for the list of measurements
   List<Measurement> get measurements {
     return [..._measurements];
   }
@@ -23,6 +26,10 @@ class Measurements with ChangeNotifier {
     return _measurements.last;
   }
 
+  // returns a measurement at the given date.
+  // If a measurement is not found at that date,
+  // adds a new measurement and returns null.
+
   Measurement findByDate(DateTime date) {
     return _measurements.firstWhere(
       (measurement) =>
@@ -30,7 +37,6 @@ class Measurements with ChangeNotifier {
           measurement.date.month == date.month &&
           measurement.date.day == date.day,
       orElse: () {
-        // TODO: handle this
         print('no element');
         Measurement newMeasurement = Measurement(
           id: DateTime.now().toIso8601String(),
@@ -63,6 +69,7 @@ class Measurements with ChangeNotifier {
     );
   }
 
+  // updates the list with the values in Firebase.
   Future<void> fetchAndSetMeasurements() async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements.json?auth=$authToken';
@@ -98,6 +105,7 @@ class Measurements with ChangeNotifier {
     }
   }
 
+  // Adds a new measurement with default values of 0.
   Future<void> addMeasurement(Measurement measurement) async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements.json?auth=$authToken';

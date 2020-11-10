@@ -5,6 +5,8 @@ import 'package:glyco/widgets/exercise_manual_form.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+// Widget to display the exercise tile in the measurement grid.
+// @author Jeffrey Luo
 class ExerciseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
