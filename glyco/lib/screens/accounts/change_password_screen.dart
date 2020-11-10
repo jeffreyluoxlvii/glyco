@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import '../../providers/auth.dart';
 import '../../models/http_exception.dart';
 
-//Widgets
+//Author: Justin Wu
 
-
+//This class creates the widget that is shown in the popup when a user wants to change their password.
 class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

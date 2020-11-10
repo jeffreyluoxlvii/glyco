@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//Providers
 import '../../providers/auth.dart';
+
 //Widgets
 import '../../widgets/appBars/plain_app_bar_back.dart';
 //Models
 import '../../models/http_exception.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//Author: Justin Wu
 
+//This class creates the screen that is shown when a user wants to create an account.
 class CreateAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

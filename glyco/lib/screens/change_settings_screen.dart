@@ -4,6 +4,10 @@ import '../screens/edits/edit_profile_screen.dart';
 //Widgets
 import '../widgets/appBars/plain_app_bar_back.dart';
 
+//Author: Justin Wu
+
+//This class creates the screen that is shown when a user wants to change their profile information.
+//It contains the widgets created in edit_profile_screen.dart
 class ChangeSettingsScreen extends StatefulWidget {
   @override
   _ChangeSettingsScreenState createState() => _ChangeSettingsScreenState();

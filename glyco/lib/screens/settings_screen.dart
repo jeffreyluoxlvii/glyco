@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:glyco/widgets/appBars/settings_app_bar.dart';
 import '../providers/options.dart';
 import '../providers/auth.dart';
@@ -8,8 +9,11 @@ import './change_settings_screen.dart';
 //Widgets
 import 'package:glyco/widgets/shortcuts/shortcuts_summary.dart';
 import 'package:glyco/widgets/mainSettings/export_data_button.dart';
-import 'package:provider/provider.dart';
 
+//Author: Justin Wu
+
+//This class creates the screen that shows a user all of their settings, such as their current name, current email,
+//and current shortcut values.
 class SettingsScreen extends StatefulWidget {
   @override
   _SettingsScreenState createState() => _SettingsScreenState();

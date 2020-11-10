@@ -8,6 +8,11 @@ import 'package:nano_healthkit_plugin/healthdata.pb.dart';
 import 'package:nano_healthkit_plugin/healthdata.pbenum.dart';
 import '../providers/healthkit.dart';
 
+//Author: Justin Wu
+
+//This class creates the starting screen for a user that isn't logged in. Through this screen, a user can
+//log in, create an account, and reset their forgotten password.
+
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
 

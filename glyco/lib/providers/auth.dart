@@ -5,6 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/http_exception.dart';
 import 'dart:async';
 
+//Author: Justin Wu
+
+//This class creates the Auth provider that is used to deal with user authentication in our Firebase Database.
+//Has functions dedicated to features like creating accounts, logging in, and changing profile data.
+
 class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
@@ -55,6 +60,8 @@ class Auth with ChangeNotifier {
 
   // Sign up and Sign in
 
+  //This function signs a user up if the inputs are valid (if email isn't registered yet, 
+  //if password is longer than 6 characters, etc.)
   Future<void> signUp(
       String email, String password, String firstName, String lastName) async {
     final url =
@@ -80,6 +87,7 @@ class Auth with ChangeNotifier {
     updateName(firstName, lastName);
   }
 
+  //This function signs a user into the app if the inputs are valid (if account exists and password is correct).
   Future<void> signIn(String email, String password) async {
     email = email.trim();
     final url =
@@ -121,6 +129,7 @@ class Auth with ChangeNotifier {
     setData(_token);
   }
 
+  //This function automatically logs a user in if they were already previously logged in.
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
@@ -144,6 +153,7 @@ class Auth with ChangeNotifier {
 
   //Change account data
 
+  //This function connects a newly-created account's name to its email in the database.
   Future<void> updateName(String firstName, String lastName) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
@@ -162,6 +172,7 @@ class Auth with ChangeNotifier {
     }
   }
 
+  //This function stores the user's name and email to local variables that are reset after each session.
   Future<void> setData(String idToken) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
@@ -174,6 +185,7 @@ class Auth with ChangeNotifier {
     _userEmail = responseData['users'][0]['email'];
   }
 
+  //This function sends an email containing instructions on how to reset their password, to the user's email.
   Future<void> resetPassword(String email) async {
     email = email.trim();
     final url =
@@ -194,6 +206,7 @@ class Auth with ChangeNotifier {
     }
   }
 
+  //This function updates a user's password or email when they change it in the settings screen.
   Future<void> changeProfile(String type, String input) async {
     if (type == 'email') {
       input = input.trim();
@@ -240,6 +253,8 @@ class Auth with ChangeNotifier {
     }
   }
 
+  //This function updates a user's name when they change it in the settings screen. This is a different
+  //function from "changeProfile" because when changing name, a new token is used, so we have to update it.
   Future<void> changeName(String input) async {
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCZKCqoWvymtxc4YTUfMeeFLkbSasnDm20';
@@ -267,6 +282,7 @@ class Auth with ChangeNotifier {
 
   //Logout
 
+  //This function logs a user out of our app.
   Future<void> logout() async {
     _token = null;
     _userId = null;
@@ -282,6 +298,7 @@ class Auth with ChangeNotifier {
     prefs.remove('userData');
   }
 
+  //This function automatically logs a user out of our app after a certain amount of time (this can be optional).
   void _autoLogout() {
     if (_authTimer != null) {
       _authTimer.cancel();
