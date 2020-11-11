@@ -10,8 +10,11 @@ class GlucoseLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+  
     // final progressProvider = Provider.of<Measurements>(context);
 
+  // Sets the glucose levels in monthlyData, with today being monthlyData[29], skipping null values
     // for (int i = 0; i < monthlyData.length; i++) {
     //   DateTime day = DateTime.now().subtract(Duration(days: i));
 
@@ -20,8 +23,8 @@ class GlucoseLineChart extends StatelessWidget {
     //   }
     // }
 
-    maxGlucoseLevel = monthlyData.reduce(max);
-    minGlucoseLevel = monthlyData.reduce(min);
+    maxGlucoseLevel = monthlyData.reduce(max); // Needed to define highest y value
+    minGlucoseLevel = monthlyData.reduce(min); // Needed to define lowest y value
 
     return Center(
       child: Container(
@@ -35,7 +38,7 @@ class GlucoseLineChart extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -56,7 +59,7 @@ class GlucoseLineChart extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-                child: LineChart(sampleData1()),
+                child: LineChart(glucoseData()),
               ),
             ),
           ],
@@ -66,9 +69,10 @@ class GlucoseLineChart extends StatelessWidget {
     );
   }
 
-  LineChartData sampleData1() {
+  LineChartData glucoseData() {
     return LineChartData(
       lineTouchData: LineTouchData(
+      // When spot on the chart is touched, a popup shows the glucose data from that day
         touchTooltipData: LineTouchTooltipData(
             tooltipBgColor: Colors.white,
             getTooltipItems: (touchedSpots) {
@@ -77,7 +81,7 @@ class GlucoseLineChart extends StatelessWidget {
                     ((((touchedSpot.y - 1) / 3) *
                                     (maxGlucoseLevel - minGlucoseLevel))
                                     + minGlucoseLevel)
-                        .toStringAsFixed(1),
+                        .toStringAsFixed(1), // Recalculates glucose level from position on chart
                     TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -88,7 +92,7 @@ class GlucoseLineChart extends StatelessWidget {
         handleBuiltInTouches: true,
       ),
       gridData: FlGridData(
-        show: true,
+        show: true, // Shows horizontal lines at each y axis value
       ),
       titlesData: FlTitlesData(
         bottomTitles: SideTitles(
@@ -100,7 +104,7 @@ class GlucoseLineChart extends StatelessWidget {
           },
           margin: 10,
           getTitles: (value) {
-            switch (value.toInt()) {
+            switch (value.toInt()) { // Sets the x axis with the number of day from beginning of 30 days, showing each week
               case 6:
                 return '7';
               case 13:
@@ -119,6 +123,8 @@ class GlucoseLineChart extends StatelessWidget {
             return TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14);
           },
+        // Sets the values of the y axis, with the min and max glucose levels as the first and last points
+        // Two points in between min and mix are calculated as a fraction
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
@@ -159,13 +165,14 @@ class GlucoseLineChart extends StatelessWidget {
         ),
       ),
       minX: 0,
-      maxX: 29,
-      maxY: 4,
+      maxX: 29, // How many points on the x axis
+      maxY: 4, // How many points on the y axis
       minY: 0,
-      lineBarsData: linesBarData1(),
+      lineBarsData: glucoseBarData(),
     );
   }
 
+  // Sets points on the chart
   void _fillSpots(LineChartBarData lineChartBarData) {
     for (int i = 0; i < monthlyData.length; i++) {
       lineChartBarData.spots.add(FlSpot(
@@ -173,11 +180,11 @@ class GlucoseLineChart extends StatelessWidget {
           double.parse(((((monthlyData[i] - minGlucoseLevel) /
                       (maxGlucoseLevel - minGlucoseLevel)) * 3) +
                   1)
-              .toString())));
+              .toString()))); // Calculates data points as a proportion of the graph size
     }
   }
 
-  List<LineChartBarData> linesBarData1() {
+  List<LineChartBarData> glucoseBarData() {
     final LineChartBarData lineChartBarData = LineChartBarData(
       spots: [],
       isCurved: true,
@@ -203,239 +210,3 @@ class GlucoseLineChart extends StatelessWidget {
     ];
   }
 }
-
-
-// import 'package:fl_chart/fl_chart.dart';
-// import 'package:flutter/material.dart';
-// import 'dart:math';
-
-// class LineChartProgressContainer extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() => LineChartState();
-// }
-
-// class LineChartState extends State<LineChartProgressContainer> {
-//   final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
-//   // final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
-//   final List<DateTime> dates = [null, null, null, null, null, null, null];
-//   final List<String> weekdayData = ['', '', '', '', '', '', ''];
-//   double maxGlucoseLevel = 0;
-//   double minGlucoseLevel = 0;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // final progressProvider = Provider.of<Measurements>(context);
-
-//     // for (int i = 0; i < weeklyData.length; i++) {
-//     //   DateTime day = DateTime.now().subtract(Duration(days: i));
-
-//     //   if (progressProvider.findByDateAverages(day) != null) {
-//     //     weeklyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
-//     //   }
-//     // }
-
-//     int dayCount = 0;
-
-//     for (int i = 6; i >= 0; i--) {
-//       dates[i] = DateTime.now().subtract(Duration(days: dayCount));
-//       dayCount++;
-//       int weekday = dates[i].weekday;
-
-//       if (weekday == 1) {
-//         weekdayData[i] = 'M';
-//       }
-//       if (weekday == 2) {
-//         weekdayData[i] = 'T';
-//       }
-//       if (weekday == 3) {
-//         weekdayData[i] = 'W';
-//       }
-//       if (weekday == 4) {
-//         weekdayData[i] = 'Th';
-//       }
-//       if (weekday == 5) {
-//         weekdayData[i] = 'F';
-//       }
-//       if (weekday == 6) {
-//         weekdayData[i] = 'S';
-//       }
-//       if (weekday == 7) {
-//         weekdayData[i] = 'Su';
-//       }
-//     }
-//     maxGlucoseLevel = weeklyData.reduce(max);
-//     minGlucoseLevel = weeklyData.reduce(min);
-
-//     return Container(
-//       height: 200,
-//       decoration: BoxDecoration(
-//         borderRadius: const BorderRadius.all(Radius.circular(18)),
-//         color: Colors.grey[200],
-//       ),
-//       margin: EdgeInsets.all(8.0),
-//       padding: const EdgeInsets.all(12.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: <Widget>[
-//           const Text(
-//             'Glucose Levels (mg/dL)',
-//             style: TextStyle(
-//                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-//           ),
-//           const SizedBox(
-//             height: 25,
-//           ),
-//           Expanded(
-//             child: Padding(
-//               padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-//               child: LineChart(sampleData1()),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   LineChartData sampleData1() {
-//     return LineChartData(
-//       lineTouchData: LineTouchData(
-//         touchTooltipData: LineTouchTooltipData(
-//             tooltipBgColor: Colors.white,
-//             getTooltipItems: (touchedSpots) {
-//               return touchedSpots.map((touchedSpot) {
-//                 return LineTooltipItem(
-//                     ((((touchedSpot.y - 1) / 3) *
-//                                     (maxGlucoseLevel - minGlucoseLevel))
-//                                     + minGlucoseLevel)
-//                         .toString(),
-//                     TextStyle(
-//                       color: Colors.black,
-//                       fontWeight: FontWeight.bold,
-//                     ));
-//               }).toList();
-//             }),
-//         touchCallback: (LineTouchResponse touchResponse) {},
-//         handleBuiltInTouches: true,
-//       ),
-//       gridData: FlGridData(
-//         show: false,
-//       ),
-//       titlesData: FlTitlesData(
-//         bottomTitles: SideTitles(
-//           showTitles: true,
-//           reservedSize: 22,
-//           getTextStyles: (double value) {
-//             return TextStyle(
-//                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16);
-//           },
-//           margin: 10,
-//           getTitles: (value) {
-//             switch (value.toInt()) {
-//               case 0:
-//                 return weekdayData[0];
-//               case 1:
-//                 return weekdayData[1];
-//               case 2:
-//                 return weekdayData[2];
-//               case 3:
-//                 return weekdayData[3];
-//               case 4:
-//                 return weekdayData[4];
-//               case 5:
-//                 return weekdayData[5];
-//               case 6:
-//                 return weekdayData[6];
-//             }
-//             return '';
-//           },
-//         ),
-//         leftTitles: SideTitles(
-//           showTitles: true,
-//           getTextStyles: (double value) {
-//             return TextStyle(
-//                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14);
-//           },
-//           getTitles: (value) {
-//             switch (value.toInt()) {
-//               case 1:
-//                 return minGlucoseLevel.toString();
-//               case 2:
-//                 return (((maxGlucoseLevel - minGlucoseLevel) * (1 / 3)) +
-//                         minGlucoseLevel)
-//                     .toStringAsFixed(1);
-//               case 3:
-//                 return (((maxGlucoseLevel - minGlucoseLevel) * (2 / 3)) +
-//                         minGlucoseLevel)
-//                     .toStringAsFixed(1);
-//               case 4:
-//                 return maxGlucoseLevel.toString();
-//             }
-//             return '';
-//           },
-//           margin: 8,
-//           reservedSize: 30,
-//         ),
-//       ),
-//       borderData: FlBorderData(
-//         show: true,
-//         border: const Border(
-//           bottom: BorderSide(
-//             color: Colors.black,
-//             width: 4,
-//           ),
-//           left: BorderSide(
-//             color: Colors.transparent,
-//           ),
-//           right: BorderSide(
-//             color: Colors.transparent,
-//           ),
-//           top: BorderSide(
-//             color: Colors.transparent,
-//           ),
-//         ),
-//       ),
-//       minX: 0,
-//       maxX: 6,
-//       maxY: 4,
-//       minY: 0,
-//       lineBarsData: linesBarData1(),
-//     );
-//   }
-
-//   void _fillSpots(LineChartBarData lineChartBarData) {
-//     for (int i = 0; i < 7; i++) {
-//       lineChartBarData.spots.add(FlSpot(
-//           i.toDouble(),
-//           double.parse(((((weeklyData[i] - minGlucoseLevel) /
-//                       (maxGlucoseLevel - minGlucoseLevel)) * 3) +
-//                   1)
-//               .toString())));
-//     }
-//   }
-
-//   List<LineChartBarData> linesBarData1() {
-//     final LineChartBarData lineChartBarData = LineChartBarData(
-//       spots: [],
-//       isCurved: true,
-//       colors: [
-//         Colors.pink[300],
-//       ],
-//       barWidth: 8,
-//       dotData: FlDotData(
-//         show: false,
-//       ),
-//       belowBarData: BarAreaData(
-//         show: true,
-//         colors: [
-//           Colors.pink[300].withOpacity(0.3),
-//         ],
-//       ),
-//     );
-
-//     _fillSpots(lineChartBarData);
-
-//     return [
-//       lineChartBarData,
-//     ];
-//   }
-// }

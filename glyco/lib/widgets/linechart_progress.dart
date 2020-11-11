@@ -19,9 +19,9 @@ class LineChartState extends State<LineChartProgressContainer> {
   @override
   Widget build(BuildContext context) {
 
-  // Sets the glucose levels in weeklyData, with today being weeklyData[6]
     // final progressProvider = Provider.of<Measurements>(context);
 
+  // Sets the glucose levels in weeklyData, with today being weeklyData[6], skipping null values
     // for (int i = 0; i < weeklyData.length; i++) {
     //   DateTime day = DateTime.now().subtract(Duration(days: i));
 
@@ -106,7 +106,7 @@ class LineChartState extends State<LineChartProgressContainer> {
                     ((((touchedSpot.y - 1) / 3) *
                                     (maxGlucoseLevel - minGlucoseLevel))
                                     + minGlucoseLevel)
-                        .toStringAsFixed(1),
+                        .toStringAsFixed(1), // Recalculates glucose level from position on chart
                     TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

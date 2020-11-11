@@ -23,16 +23,20 @@ class ViewAnalyticsScreen extends StatelessWidget {
             children: [
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 15.0),
                 child: Text(
-                  firstName + ", here is you health data overview!",
+                  firstName + ", here is your health data overview!",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 15),
+            
+            // Displays a pie chart showing the breakdown of the user's glucose levels over the last 30 days
+            // Green section shows what average glucose levels from each day fall into the recommended range
+            // Yellow section shows what average glucose levels from each day fall below the recommended range
+            // Red section shows what average glucose levels from each day rise above the recommended range
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40.0, vertical: 8.0),
@@ -46,19 +50,9 @@ class ViewAnalyticsScreen extends StatelessWidget {
               ),
               GlucosePie(),
               SizedBox(height: 15),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40.0, vertical: 8.0),
-                child: Text(
-                  'Activity Levels (min)',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              ExerciseBarChart(),
-              SizedBox(height: 15),
+
+
+            // Displays a bar chart showing the user's glucose levels for the last 30 days
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40.0, vertical: 8.0),
@@ -72,6 +66,26 @@ class ViewAnalyticsScreen extends StatelessWidget {
               ),
               GlucoseLineChart(),
               SizedBox(height: 15),
+            
+            // Displays a bar chart showing the user's activity levels for the last 30 days
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40.0, vertical: 8.0),
+                child: Text(
+                  'Activity Levels (min)',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              ExerciseBarChart(),
+              SizedBox(height: 15),
+
+            // Displays a pie chart showing the breakdown of the user's carb levels over the last 30 days
+            // Green section shows what average carb levels from each day fall into the recommended range
+            // Yellow section shows what average carb levels from each day fall below the recommended range
+            // Red section shows what average carb levels from each day rise above the recommended range
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40.0, vertical: 8.0),

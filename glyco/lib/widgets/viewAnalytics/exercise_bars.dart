@@ -1,19 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:glyco/providers/measurements.dart';
 import 'dart:math';
 
+import 'package:provider/provider.dart';
+
 class ExerciseBarChart extends StatelessWidget {
-  //final analyticsProvider = Provider.of<Measurements>(context);
-  // if (analyticsProvider.getChallenge() == 'steps') {
-  //   analytics = analyticsProvider.findByDate(DateTime.now()).steps;
-  // }
-  // if (analyticsProvider.getChallenge() == 'activity') {
-  //   analytics = analyticsProvider.findByDate(DateTime.now()).exerciseTime;
-  // }
-  // if (analyticsProvider.getChallenge() == 'carbs') {
-  //   analytics = analyticsProvider.findByDate(DateTime.now()).carbs;
-  // }
-  // goal = analyticsProvider.getChallengeGoal();
   final List<double> exerciseData = [
     25,
     36,
@@ -47,10 +39,24 @@ class ExerciseBarChart extends StatelessWidget {
     25
   ];
 
+  double maxExerciseTime = 0;
+  double minExerciseTime = 0;
+
   @override
   Widget build(BuildContext context) {
-    double maxExerciseTime = exerciseData.reduce(max);
-    double minExerciseTime = exerciseData.reduce(min);
+    // final progressProvider = Provider.of<Measurements>(context);
+
+    // Sets the exercise levels in exerciseData, with today being exerciseData[29], skipping null values
+    // for (int i = 0; i < exerciseData.length; i++) {
+    //   DateTime day = DateTime.now().subtract(Duration(days: i));
+
+    //   if (progressProvider.findByDateAverages(day) != null) {
+    //     exerciseData[i] = progressProvider.findByDate(day).exerciseTime.toDouble();
+    //   }
+    // }
+
+    maxExerciseTime = exerciseData.reduce(max);
+    minExerciseTime = exerciseData.reduce(min);
 
     return Center(
       child: Container(
@@ -64,7 +70,7 @@ class ExerciseBarChart extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -79,6 +85,7 @@ class ExerciseBarChart extends StatelessWidget {
               titlesData: FlTitlesData(
                 show: true,
                 bottomTitles: SideTitles(
+                  // Has labels for x axis
                   showTitles: true,
                   getTextStyles: (value) => const TextStyle(
                       color: Colors.black,
@@ -87,6 +94,7 @@ class ExerciseBarChart extends StatelessWidget {
                   margin: 10,
                   getTitles: (double value) {
                     switch (value.toInt()) {
+                      // Sets the x axis with the number of day from beginning of 30 days, showing each week
                       case 0:
                         return '';
                       case 1:
@@ -155,6 +163,7 @@ class ExerciseBarChart extends StatelessWidget {
                   },
                 ),
                 leftTitles: SideTitles(
+                  // Has labels for y axis
                   showTitles: true,
                   getTextStyles: (double value) {
                     return TextStyle(
@@ -163,6 +172,7 @@ class ExerciseBarChart extends StatelessWidget {
                         fontSize: 12);
                   },
                   getTitles: (value) {
+                    // Sets labels for y axis
                     if (value == 0) {
                       return '0';
                     } else if (value == 18) {
@@ -183,6 +193,7 @@ class ExerciseBarChart extends StatelessWidget {
                 show: false,
               ),
               barGroups: [
+                // Sets the BarChartGroupData() for each day in exerciseData(), x as day and y as value
                 BarChartGroupData(
                   x: 0,
                   barRods: [

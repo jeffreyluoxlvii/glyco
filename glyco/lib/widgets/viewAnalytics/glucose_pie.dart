@@ -37,14 +37,18 @@ class GlucosePie extends StatelessWidget {
     67.8,
     56.9
   ];
-  final double highRange = 90.0;
-  final double lowRange = 70.0;
+  final double highRange = 90.0; // Sets upper limit of recommended range
+  final double lowRange = 70.0; // Sets lower limit of recommended range
+
+  // Stores percentage of last 30 measurements fall into what category
   double inRange = 0;
   double aboveRange = 0;
   double belowRange = 0;
 
   @override
   Widget build(BuildContext context) {
+  
+  // Pulls average glucose level from the user's data for the last 30 days, skipping null values
     // final progressProvider = Provider.of<Measurements>(context);
 
     // for (int i = 0; i < monthlyData.length; i++) {
@@ -69,7 +73,7 @@ class GlucosePie extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -79,14 +83,13 @@ class GlucosePie extends StatelessWidget {
           children: [
             Container(
               width: 170,
-              // Pie Chart is available in fl_chart package
               child: PieChart(
                 PieChartData(
                   borderData: FlBorderData(show: false),
                   centerSpaceRadius: 0.0,
                   sectionsSpace: 0.0,
                   startDegreeOffset: 30,
-                  // actual curves and data come from this function result.
+                  // Actual curves and data come from this function result
                   sections: _buildPieChartCurves(),
                   // This is to make chart interactive when someone touch
                 ),
@@ -99,7 +102,7 @@ class GlucosePie extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(children: [
-                      Flexible(
+                      Flexible( // Percentage of how many measurements are within range
                         child: Text(inRange.toString() + '% in range',
                             style: TextStyle(
                               color: Colors.green[200],
@@ -108,7 +111,7 @@ class GlucosePie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible(
+                      Flexible( // Average glucose level
                         child: Text(averageGlucose(monthlyData) + ' mg/dL avg',
                             style: TextStyle(
                               color: Colors.green[200],
@@ -118,7 +121,7 @@ class GlucosePie extends StatelessWidget {
                     ]),
                     SizedBox(height: 10),
                     Row(children: [
-                      Flexible(
+                      Flexible( // Highest glucose level
                         child: Text(
                             monthlyData.reduce(max).toString() +
                                 ' mg/dL HIGHEST',
@@ -129,7 +132,7 @@ class GlucosePie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible(
+                      Flexible( // Lowest glucose level
                         child: Text(
                             monthlyData.reduce(min).toString() +
                                 ' mg/dL LOWEST',
@@ -149,16 +152,16 @@ class GlucosePie extends StatelessWidget {
     );
   }
 
-  // Here we will show different type of graph on different scenario touch and non touch
   List<PieChartSectionData> _buildPieChartCurves() {
     return List.generate(3, (i) {
-      // Increase the radius of section when touched.
+      // Radius of pie chart
       final double radius = 60;
 
-      // Ideally this data come from API and then returned, or you can modify it any way as per the data arranged in your app :)
+      // Creates pie chart sections based on the percentage of measurements in each category
       switch (i) {
+        // Pie chart section for values in range, colored green
         case 0:
-          if (inRange == 0) {
+          if (inRange == 0) { // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -174,8 +177,9 @@ class GlucosePie extends StatelessWidget {
             );
           }
           return null;
+        // Pie chart section for values below range, colored yellow
         case 1:
-          if (belowRange == 0) {
+          if (belowRange == 0) { // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -191,8 +195,9 @@ class GlucosePie extends StatelessWidget {
             );
           }
           return null;
+        // Pie chart section for values above range, colored red
         case 2:
-          if (aboveRange == 0) {
+          if (aboveRange == 0) { // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -214,11 +219,13 @@ class GlucosePie extends StatelessWidget {
     });
   }
 
+  // Calculate percentages of inRange, belowRange, and aboveRange using monthlyData
   void calculateData() {
     int highRangeNumber = 0;
     int lowRangeNumber = 0;
     int inRangeNumber = 0;
 
+    // Count how many measurements in each category
     for (int i = 0; i < monthlyData.length; i++) {
       double glucoseLevel = monthlyData[i];
 
@@ -230,12 +237,13 @@ class GlucosePie extends StatelessWidget {
         inRangeNumber++;
       }
     }
-
+    // Calculate percentages
     aboveRange = ((highRangeNumber / monthlyData.length) * 100).roundToDouble();
     belowRange = ((lowRangeNumber / monthlyData.length) * 100).roundToDouble();
     inRange = ((inRangeNumber / monthlyData.length) * 100).roundToDouble();
   }
 
+  // Find the average glucose levels from monthlyData
   String averageGlucose(List<double> monthlyData) {
     double totalGlucose = 0;
     for (int i = 0; i < monthlyData.length; i++) {

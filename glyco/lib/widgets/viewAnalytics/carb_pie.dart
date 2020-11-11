@@ -37,8 +37,10 @@ class CarbPie extends StatelessWidget {
     169.8,
     159.9
   ];
-  final double highRange = 160.0;
-  final double lowRange = 120.0;
+  final double highRange = 160.0; // Sets upper limit of recommended range
+  final double lowRange = 120.0; // Sets lower limit of recommended range
+  
+  // Stores percentage of last 30 measurements fall into what category
   double inRange = 0;
   double aboveRange = 0;
   double belowRange = 0;
@@ -47,6 +49,7 @@ class CarbPie extends StatelessWidget {
   Widget build(BuildContext context) {
     // final progressProvider = Provider.of<Measurements>(context);
 
+  // Pulls carb level from the user's data for the last 30 days, skipping null values
     // for (int i = 0; i < monthlyData.length; i++) {
     //   DateTime day = DateTime.now().subtract(Duration(days: i));
 
@@ -69,7 +72,7 @@ class CarbPie extends StatelessWidget {
               color: Colors.grey.withOpacity(0.2),
               spreadRadius: 2,
               blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: Offset(0, 3),
             ),
           ],
         ),
@@ -79,14 +82,13 @@ class CarbPie extends StatelessWidget {
           children: [
             Container(
               width: 170,
-              // Pie Chart is available in fl_chart package
               child: PieChart(
                 PieChartData(
                   borderData: FlBorderData(show: false),
                   centerSpaceRadius: 0.0,
                   sectionsSpace: 0.0,
                   startDegreeOffset: 30,
-                  // actual curves and data come from this function result.
+                  // Actual curves and data come from this function result.
                   sections: _buildPieChartCurves(),
                   // This is to make chart interactive when someone touch
                 ),
@@ -99,7 +101,7 @@ class CarbPie extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(children: [
-                      Flexible(
+                      Flexible( // Percentage of how many measurements are within range
                         child: Text(inRange.toString() + '% in range',
                             style: TextStyle(
                               color: Colors.green[200],
@@ -108,7 +110,7 @@ class CarbPie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible(
+                      Flexible( // Average carb level
                         child: Text(averageCarb(monthlyData) + ' g carbs avg',
                             style: TextStyle(
                               color: Colors.green[200],
@@ -118,7 +120,7 @@ class CarbPie extends StatelessWidget {
                     ]),
                     SizedBox(height: 10),
                     Row(children: [
-                      Flexible(
+                      Flexible( // Highest carb level
                         child: Text(
                             monthlyData.reduce(max).toString() + ' g HIGHEST',
                             style: TextStyle(
@@ -128,7 +130,7 @@ class CarbPie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible(
+                      Flexible( // Lowest carb level
                         child: Text(
                             monthlyData.reduce(min).toString() + ' g LOWEST',
                             style: TextStyle(
@@ -147,16 +149,16 @@ class CarbPie extends StatelessWidget {
     );
   }
 
-  // Here we will show different type of graph on different scenario touch and non touch
   List<PieChartSectionData> _buildPieChartCurves() {
     return List.generate(3, (i) {
-      // Increase the radius of section when touched.
+      // Radius of the pie chart
       final double radius = 60;
 
-      // Ideally this data come from API and then returned, or you can modify it any way as per the data arranged in your app :)
+      // Creates pie chart sections based on the percentage of measurements in each category
       switch (i) {
+        // Pie chart section for values in range, colored green
         case 0:
-          if (inRange == 0) {
+          if (inRange == 0) { // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -172,8 +174,9 @@ class CarbPie extends StatelessWidget {
             );
           }
           return null;
+        // Pie chart section for values below range, colored yellow
         case 1:
-          if (belowRange == 0) {
+          if (belowRange == 0) { // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -189,8 +192,9 @@ class CarbPie extends StatelessWidget {
             );
           }
           return null;
+        // Pie chart section for values above range, colored red
         case 2:
-          if (aboveRange == 0) {
+          if (aboveRange == 0) { // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -212,11 +216,13 @@ class CarbPie extends StatelessWidget {
     });
   }
 
+  // Calculate percentages of inRange, belowRange, and aboveRange using monthlyData
   void calculateData() {
     int highRangeNumber = 0;
     int lowRangeNumber = 0;
     int inRangeNumber = 0;
 
+    // Count how many measurements in each category
     for (int i = 0; i < monthlyData.length; i++) {
       double carbLevel = monthlyData[i];
 
@@ -228,12 +234,13 @@ class CarbPie extends StatelessWidget {
         inRangeNumber++;
       }
     }
-
+    // Calculate percentages
     aboveRange = ((highRangeNumber / monthlyData.length) * 100).roundToDouble();
     belowRange = ((lowRangeNumber / monthlyData.length) * 100).roundToDouble();
     inRange = ((inRangeNumber / monthlyData.length) * 100).roundToDouble();
   }
 
+  // Find the average carb levels from monthlyData
   String averageCarb(List<double> monthlyData) {
     double totalCarb = 0;
     for (int i = 0; i < monthlyData.length; i++) {
