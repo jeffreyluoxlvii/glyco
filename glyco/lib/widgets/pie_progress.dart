@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
 
+// Returns a pie chart that shows the user's progress towards the current challenge
 class PieProgressContainer extends StatefulWidget {
   @override
   _PieProgressState createState() => _PieProgressState();
@@ -16,6 +17,8 @@ class _PieProgressState extends State<PieProgressContainer> {
   @override
   Widget build(BuildContext context) {
     final progressProvider = Provider.of<Measurements>(context);
+
+  // Sets current progress and goal
     // if (progressProvider.getChallenge() == 'steps') {
     //   progress = progressProvider.findByDate(DateTime.now()).steps;
     // }
@@ -39,16 +42,15 @@ class _PieProgressState extends State<PieProgressContainer> {
         children: [
           Container(
             width: 170,
-            // Pie Chart is available in fl_chart package
             child: PieChart(
               PieChartData(
                 borderData: FlBorderData(show: false),
                 centerSpaceRadius: 30.0,
                 sectionsSpace: 0.0,
                 startDegreeOffset: 30,
-                // actual curves and data come from this function result.
+                // Actual curves and data come from this function result
                 sections: _buildPieChartCurves(),
-                // This is to make chart interactive when someone touch
+                // This is to make chart interactive when someone touches it
                 pieTouchData: PieTouchData(
                   touchCallback: (pieTouchResponse) {
                     setState(() {
@@ -73,7 +75,7 @@ class _PieProgressState extends State<PieProgressContainer> {
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
                     child: Row(children: [
-                      Flexible(
+                      Flexible( // Displays text that tells percentage of progress towards goal in remaining space
                         child: Text(progressProvider.progressUpdate(),
                             style: TextStyle(
                               color: Colors.black,
@@ -91,44 +93,47 @@ class _PieProgressState extends State<PieProgressContainer> {
     );
   }
 
-  // Here we will show different type of graph on different scenario touch and non touch
   List<PieChartSectionData> _buildPieChartCurves() {
     return List.generate(3, (i) {
       final isTouched = i == _touchedIndex;
       // Increase the radius of section when touched.
       final double radius = isTouched ? 60 : 50;
 
-      // Ideally this data come from API and then returned, or you can modify it any way as per the data arranged in your app :)
+      // Sets each section of the pie chart with the data
       switch (i) {
+        // What section of the goal has not yet been reached in grey
         case 0:
           return PieChartSectionData(
             color: Colors.grey[400],
             value: (((goal - progress) / goal) * 100),
-            title: (goal - progress).toString(), // this cannot be left blank
+            title: (goal - progress).toString(), // This cannot be left blank
             radius: radius,
           );
+        // How much progress has been made in pink 
         case 1:
+          // If there is no progress, display no text so a '0' doesn't display
           if (progress == 0) {
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
-              title: '', // this cannot be left blank
+              title: '', // This cannot be left blank
               radius: radius,
             );
           } else {
             return PieChartSectionData(
               color: Colors.pink[300],
               value: ((progress / goal) * 100),
-              title: progress.toString(), // this cannot be left blank
+              title: progress.toString(), // This cannot be left blank
               radius: radius,
             );
           }
           return null;
+        // Setting the third section of the pie chart as 0 so there are only 2 sections
         case 2:
           return PieChartSectionData(
             color: Color(0xff39439f),
             value: 0,
-            title: '', // this cannot be left blank
+            title: '', // This cannot be left blank
             radius: radius,
           );
         default:

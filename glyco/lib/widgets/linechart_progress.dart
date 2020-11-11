@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+// Returns a weekly line chart that shows the average glucose levels for the past 7 days
 class LineChartProgressContainer extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => LineChartState();
@@ -17,6 +18,8 @@ class LineChartState extends State<LineChartProgressContainer> {
 
   @override
   Widget build(BuildContext context) {
+
+  // Sets the glucose levels in weeklyData, with today being weeklyData[6]
     // final progressProvider = Provider.of<Measurements>(context);
 
     // for (int i = 0; i < weeklyData.length; i++) {
@@ -27,8 +30,8 @@ class LineChartState extends State<LineChartProgressContainer> {
     //   }
     // }
 
+  // Sets the DataTime variables and their weekdays, with today being dates[6] and weekdayData[6]
     int dayCount = 0;
-
     for (int i = 6; i >= 0; i--) {
       dates[i] = DateTime.now().subtract(Duration(days: dayCount));
       dayCount++;
@@ -56,6 +59,8 @@ class LineChartState extends State<LineChartProgressContainer> {
         weekdayData[i] = 'Su';
       }
     }
+
+  // Max and min glucose levels needed to set the lowest and highest bounds for the y axis
     maxGlucoseLevel = weeklyData.reduce(max);
     minGlucoseLevel = weeklyData.reduce(min);
 
@@ -71,7 +76,7 @@ class LineChartState extends State<LineChartProgressContainer> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           const Text(
-            'Glucose Levels (mg/dL)',
+            'Glucose Levels (mg/dL)', // Title of chart
             style: TextStyle(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
           ),
@@ -81,7 +86,7 @@ class LineChartState extends State<LineChartProgressContainer> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-              child: LineChart(sampleData1()),
+              child: LineChart(glucoseData()),
             ),
           ),
         ],
@@ -89,13 +94,14 @@ class LineChartState extends State<LineChartProgressContainer> {
     );
   }
 
-  LineChartData sampleData1() {
+  LineChartData glucoseData() {
     return LineChartData(
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
             tooltipBgColor: Colors.white,
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((touchedSpot) {
+              // When spot on the chart is touched, a popup shows the glucose data from that day
                 return LineTooltipItem(
                     ((((touchedSpot.y - 1) / 3) *
                                     (maxGlucoseLevel - minGlucoseLevel))
@@ -111,7 +117,7 @@ class LineChartState extends State<LineChartProgressContainer> {
         handleBuiltInTouches: true,
       ),
       gridData: FlGridData(
-        show: false,
+        show: false, // If true, shows horizontal lines at each y axis value
       ),
       titlesData: FlTitlesData(
         bottomTitles: SideTitles(
@@ -123,7 +129,7 @@ class LineChartState extends State<LineChartProgressContainer> {
           },
           margin: 10,
           getTitles: (value) {
-            switch (value.toInt()) {
+            switch (value.toInt()) { // Sets the x axis with the weekday of each day
               case 0:
                 return weekdayData[0];
               case 1:
@@ -148,6 +154,8 @@ class LineChartState extends State<LineChartProgressContainer> {
             return TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14);
           },
+        // Sets the values of the y axis, with the min and max glucose levels as the first and last points
+        // Two points in between min and mix are calculated as a fraction
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
@@ -188,13 +196,14 @@ class LineChartState extends State<LineChartProgressContainer> {
         ),
       ),
       minX: 0,
-      maxX: 6,
-      maxY: 4,
+      maxX: 6, // How many points on the x axis
+      maxY: 4, // How many points on the y axis
       minY: 0,
-      lineBarsData: linesBarData1(),
+      lineBarsData: glucoseBarData(),
     );
   }
 
+  // Sets points on the chart
   void _fillSpots(LineChartBarData lineChartBarData) {
     for (int i = 0; i < 7; i++) {
       lineChartBarData.spots.add(FlSpot(
@@ -202,11 +211,11 @@ class LineChartState extends State<LineChartProgressContainer> {
           double.parse(((((weeklyData[i] - minGlucoseLevel) /
                       (maxGlucoseLevel - minGlucoseLevel)) * 3) +
                   1)
-              .toString())));
+              .toString()))); // Calculates data points as a proportion of the graph size
     }
   }
 
-  List<LineChartBarData> linesBarData1() {
+  List<LineChartBarData> glucoseBarData() {
     final LineChartBarData lineChartBarData = LineChartBarData(
       spots: [],
       isCurved: true,

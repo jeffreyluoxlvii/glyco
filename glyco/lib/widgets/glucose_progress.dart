@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'dart:math';
 
+// Returns a weekly bar chart that shows the average glucose levels for the past 7 days
 class GlucoseProgressContainer extends StatefulWidget {
   @override
   GlucoseProgressState createState() {
@@ -22,6 +23,8 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
 
   @override
   Widget build(BuildContext context) {
+
+  // Sets the glucose levels in weeklyData, with today being weeklyData[6]
     // final progressProvider = Provider.of<Measurements>(context);
 
     // for (int i = 0; i < weeklyData.length; i++) {
@@ -36,6 +39,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
 
     int dayCount = 0;
 
+  // Sets the DateTime variables and their weekdays, with today being dates[6] and weekdayData[6]
     for (int i = 6; i >= 0; i--) {
       dates[i] = DateTime.now().subtract(Duration(days: dayCount));
       dayCount++;
@@ -63,6 +67,8 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
         weekdayData[i] = 'Su';
       }
     }
+  
+  // Maximum glucose is needed to set the height of the bars, with the max glucose as the tallest height
     maxGlucoseLevel = weeklyData.reduce(max);
 
     return new Container(
@@ -78,7 +84,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Glucose Levels (mg/dL)',
+              'Glucose Levels (mg/dL)', // Title of chart
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -87,7 +93,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
             const SizedBox(
               height: 12,
             ),
-            Expanded(
+            Expanded( // Bar chart takes up the rest of the space in the height-200 box
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: BarChart(
@@ -99,14 +105,10 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
     );
   }
 
+  // Returns height of each glucose level as a proportion of the bar height (20)
   double _barHeight(double glucoseLevel) {
     double barHeight = (20 * glucoseLevel) / maxGlucoseLevel;
-
-    // if (barHeight >= 20) {
-    //   return 19.0;
-    // } else {
     return barHeight;
-    // }
   }
 
   BarChartGroupData _buildBar(
@@ -119,12 +121,12 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
       barRods: [
         BarChartRodData(
           y: _barHeight(y),
-          colors: [Colors.white],
+          colors: [Colors.white], // Color of bar
           width: 22,
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
-            y: 20,
-            colors: [Colors.cyanAccent[400]],
+            y: 20, // Sets bar height as 20
+            colors: [Colors.cyanAccent[400]], // Color of value in that bar
           ),
         ),
       ],
@@ -159,7 +161,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16);
         },
         margin: 16,
-        getTitles: (double value) {
+        getTitles: (double value) { // Returns weekday of each date underneath each bar, which was set with the loop at line 43
           switch (value.toInt()) {
             case 0:
               return weekdayData[0];
@@ -180,7 +182,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
           }
         },
       ),
-      leftTitles: SideTitles(
+      leftTitles: SideTitles( // No side titles
         showTitles: false,
         getTitles: (double value) {
           return value.toString();
@@ -189,13 +191,14 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
     );
   }
 
+  // When the bar is touched, a popup shows the date and average glucose level of that day
   BarTouchData _buildBarTouchData() {
     return BarTouchData(
       touchTooltipData: BarTouchTooltipData(
         tooltipBgColor: Colors.pink[300],
         getTooltipItem: (group, groupIndex, rod, rodIndex) {
           String weekDay;
-          switch (group.x.toInt()) {
+          switch (group.x.toInt()) { // Sets the date of bar selected in the format mm/dd
             case 0:
               weekDay =
                   dates[0].month.toString() + '/' + dates[0].day.toString();
@@ -228,7 +231,7 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
           return BarTooltipItem(
             weekDay +
                 '\n' +
-                (((rod.y - 1) * maxGlucoseLevel) / 20).toStringAsFixed(1),
+                (((rod.y) * maxGlucoseLevel) / 20).toStringAsFixed(1), // Recalculates the average glucose level from bar height
             TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           );
         },

@@ -57,6 +57,7 @@ class Measurements with ChangeNotifier {
     );
   }
 
+  // Returns null if there is no measurement for that date. Used to make sure that no dates that aren't in the database are referenced
   Measurement findByDateAverages(DateTime date) {
     return _measurements.firstWhere(
       (measurement) =>
@@ -69,7 +70,7 @@ class Measurements with ChangeNotifier {
     );
   }
 
-  // updates the list with the values in Firebase.
+  // Updates the list with the values in Firebase.
   Future<void> fetchAndSetMeasurements() async {
     final url =
         'https://glyco-6f403.firebaseio.com/userMeasurements/$userId/measurements.json?auth=$authToken';
@@ -144,6 +145,9 @@ class Measurements with ChangeNotifier {
 
   // FOR CHALLENGES AND PROGRESS
 
+  // Number is rounded to whatever factor multiple is
+  // i.e. roundToMulitple(134, 100) = 200
+  // i.e. roundToMultiple(134, 10) = 140
   int roundToMultiple(double number, int multiple) {
     if (number == 0) {
       return multiple;
@@ -162,6 +166,7 @@ class Measurements with ChangeNotifier {
 
   // STEPS AVERAGES
 
+  // Find the average of steps the user has over the last 30 days. Skips any null or days with 0 steps
   double monthSteps() {
     int totalSteps = 0;
     int numDays = 0;
@@ -187,6 +192,7 @@ class Measurements with ChangeNotifier {
     // return 9780;
   }
 
+  // Find the average of steps the user has over the last 7 days. Skips any null or days with 0 steps
   double weekSteps() {
     int totalSteps = 0;
     int numDays = 0;
@@ -213,6 +219,8 @@ class Measurements with ChangeNotifier {
   }
 
   // ACTIVITY AVERAGES
+
+  // Find the average of activity the user has over the last 30 days. Skips any null or days with 0 activity
   double monthActivity() {
     int totalActivity = 0;
     int numDays = 0;
@@ -238,6 +246,7 @@ class Measurements with ChangeNotifier {
     // return 30;
   }
 
+  // Find the average of activity the user has over the last 7 days. Skips any null or days with 0 activity
   double weekActivity() {
     int totalActivity = 0;
     int numDays = 0;
@@ -264,6 +273,8 @@ class Measurements with ChangeNotifier {
   }
 
   // CARBS AVERAGES
+
+  // Find the average of carbs the user has over the last 30 days. Skips any null or days with 0 carbs
   double monthCarbs() {
     int totalCarbs = 0;
     int numDays = 0;
@@ -289,6 +300,7 @@ class Measurements with ChangeNotifier {
     // return 10;
   }
 
+  // Find the average of carbs the user has over the last 7 days. Skips any null or days with 0 carbs
   double weekCarbs() {
     int totalCarbs = 0;
     int numDays = 0;
@@ -328,6 +340,7 @@ class Measurements with ChangeNotifier {
     double avgMonthCarbs = monthCarbs();
     double avgWeekCarbs = weekCarbs();
 
+    // Calculates changes in measurements to be used later
     if (avgMonthSteps != 0) {
       stepsReduction = 1 - (avgWeekSteps / avgMonthSteps);
       stepsReductionPercent = (stepsReduction * 100).round();
@@ -342,7 +355,7 @@ class Measurements with ChangeNotifier {
 
     // STEPS
 
-    // If their weekly average has increased compared to the rest of the month
+    // If their weekly average has increased compared to the rest of the month, congratulate them
     if (avgWeekSteps > avgMonthSteps) {
       int stepsGoal = roundToMultiple(avgWeekSteps, 100);
       providerChallengeGiven = 'steps';
@@ -370,13 +383,13 @@ class Measurements with ChangeNotifier {
           stepsGoal.toString() +
           " steps this week!";
     }
-    // If their weekly average is less than the recommended daily amount of steps
+    // If their weekly average is less than the recommended daily amount of steps, generate a challenge with the recommended daily steps
     if (avgWeekSteps < 3000) {
       providerChallengeGiven = 'steps';
       providerChallengeGoal = 3000;
       return 'Your steps are below the recommended daily steps. Try to get to 3,000 steps this week! ';
     }
-    // If their weekly average is greater than the recommended daily amount of steps
+    // If their weekly average is greater than the recommended daily amount of steps, congratulate them
     if (avgWeekSteps >= 10000) {
       providerChallengeGiven = 'steps';
       providerChallengeGoal = roundToMultiple(avgWeekSteps, 100);
@@ -384,6 +397,8 @@ class Measurements with ChangeNotifier {
     }
 
     // ACTIVITY
+
+    // If their weekly activity has increased compared to the rest of the month, congratulate them
     if (avgWeekActivity > avgMonthActivity) {
       int activityGoal = roundToMultiple(avgWeekActivity, 10);
       providerChallengeGiven = 'activity';
@@ -399,6 +414,7 @@ class Measurements with ChangeNotifier {
           activityIncreasePercent.toString() +
           '% higher than the rest of the month. Keep up the good work!';
     }
+    // If their weekly average has decreased more than 85%, generate a challenge that is 25% higher than their weekly average
     if (activityReduction >= 0.15) {
       int activityGoal = roundToMultiple((avgWeekActivity * 1.25), 10);
       providerChallengeGiven = 'activity';
@@ -410,11 +426,13 @@ class Measurements with ChangeNotifier {
           activityGoal.toString() +
           " minutes a day this week!";
     }
+    // If their weekly average is less than the recommended daily amount of activity, generate a challenge with the recommended daily activity
     if (avgWeekActivity < 30) {
       providerChallengeGiven = 'activity';
       providerChallengeGoal = 30;
       return 'Your activity time is below the recommended daily activity. Try to get to 30 minutes a day this week! ';
     }
+    // If their weekly average is greater than the recommended daily amount of activity, congratulate them
     if (avgWeekActivity >= 60) {
       providerChallengeGiven = 'activity';
       providerChallengeGoal = roundToMultiple(avgWeekActivity, 10);
@@ -422,6 +440,8 @@ class Measurements with ChangeNotifier {
     }
 
     // CARBS
+
+    // If their weekly carbs has decreased compared to the rest of the month, congratulate them
     if (avgWeekCarbs < avgMonthCarbs) {
       int carbGoal = roundToMultiple(avgWeekCarbs, 10);
       providerChallengeGiven = 'carbs';
@@ -437,6 +457,7 @@ class Measurements with ChangeNotifier {
       double carbIncrease = carbDifference - 1;
       int carbIncreasePercent = ((carbDifference - 1) * 100).round();
 
+      // If their weekly average has increased more than 15%, generate a challenge that is 15% less than their weekly average
       if (carbIncrease >= 0.15) {
         int carbDecreaseGoal = (avgWeekCarbs * 0.85).round();
         providerChallengeGiven = 'carbs';
@@ -448,16 +469,19 @@ class Measurements with ChangeNotifier {
             " grams of carbs this week!";
       }
     }
+    // If their weekly average is higher than the recommended daily amount of carbs, generate a challenge with the recommended daily carbs
     if (avgWeekCarbs > 75) {
       providerChallengeGiven = 'carbs';
       providerChallengeGoal = 75;
       return 'Your carb intake is above the recommended daily carb intake. Try to get down to 75g of carbs this week! ';
     }
+    // If their weekly average is less than the recommended daily amount of carbs, congratulate them
     if (avgWeekCarbs <= 45) {
       providerChallengeGiven = 'carbs';
       providerChallengeGoal = roundToMultiple(avgWeekCarbs, 10);
       return 'Congratulations! You are around the daily recommended carb intake of 45g of carbs. Keep up the good work!';
     }
+    // In case there is no data for the rest of the month
     if (avgMonthCarbs == 0 && avgWeekCarbs > 0) {
       providerChallengeGiven = 'carbs';
       int carbDecreaseGoal = (avgWeekCarbs * 0.85).round();
@@ -472,6 +496,7 @@ class Measurements with ChangeNotifier {
     return 'There are currently no challenges. Come back later!';
   }
 
+  // Returns challenge and goal to reference for the Progress widget
   String getChallenge() {
     return providerChallengeGiven;
   }
@@ -480,6 +505,7 @@ class Measurements with ChangeNotifier {
     return providerChallengeGoal;
   }
 
+  // Changes image shown next to the given Challenge in the Challenge widget
   Image getProgressAsset() {
     if (providerChallengeGiven == 'steps') {
       return Image.asset('assets/images/challenges_image1.jpg');
@@ -493,6 +519,7 @@ class Measurements with ChangeNotifier {
     return Image.asset('assets/images/challenges_image1.jpg');
   }
 
+  // Changes the icon shown in the Progress widget
   IconData getProgressIcon() {
     if (providerChallengeGiven == 'steps') {
       return FontAwesomeIcons.shoePrints;
@@ -506,6 +533,7 @@ class Measurements with ChangeNotifier {
     return FontAwesomeIcons.spinner;
   }
 
+  // Changes what progress is shown based on what challenge was given
   String progressUpdate() {
     Measurement measurement = findByDate(DateTime.now());
 

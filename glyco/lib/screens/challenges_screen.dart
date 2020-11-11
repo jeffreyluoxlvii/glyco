@@ -8,8 +8,11 @@ import '../providers/auth.dart';
 class ChallengesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var nameList = Provider.of<Auth>(context, listen: false).userName.split(" ");
+    // Set first name of user so we can address them with "Good day, ___!"
+    var nameList =
+        Provider.of<Auth>(context, listen: false).userName.split(" ");
     var firstName = nameList[0];
+
     return Scaffold(
       body: Scaffold(
         appBar: ChallengesAppBar(),
@@ -41,11 +44,14 @@ class ChallengesScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // Container that holds Challenges widget generated for users
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: ChallengeContainer(),
               ),
+
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -59,6 +65,8 @@ class ChallengesScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              // Container that holds Progress widget. Displays progress towards generated challenges
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

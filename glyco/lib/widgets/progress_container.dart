@@ -16,34 +16,28 @@ class ProgressContainer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
+        // Bar chart that displays the glucose levels for the last 7 days
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: GlucoseProgressContainer(),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0),
-            child: LineChartProgressContainer(),
-          ),
+        // Same as the bar chart but in the form of a line chart
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(vertical: 0),
+          //   child: LineChartProgressContainer(),
+          // ),
+
           Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 0),
             child: Icon(
-              progressProvider.getProgressIcon(),
+              progressProvider.getProgressIcon(), // Icon changes based on what type of progress is showing
               size: 30,
               color: Theme.of(context).primaryColor,
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-          //   child: Row(children: [
-          //     Flexible(
-          //       child: Text(progressProvider.progressUpdate(),
-          //           style: TextStyle(
-          //             color: Colors.black,
-          //             fontSize: 14,
-          //           )),
-          //     ),
-          //   ]),
-          // ),
+
+        // Shows progress towards goal in the form of a pie chart
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: PieProgressContainer(),
