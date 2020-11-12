@@ -1,8 +1,14 @@
 ## License Justification
 
 ### Open Source Licenses. 
-* if your app makes includes any code you did not write (i.e., from GitHub, examples or tutorials, non-standard libraries you depend on, etc.), list them and their licenses
-You may be able to use this software to help discover those dependencies.
+- Flutter: BSD License
+- Provider: MIT License
+- Intl: BSD License
+- Http: BSD License
+- font_awesome_flutter: MIT License
+- integration_test: BSD License
+- nano_healthkit_plugin: MIT License
+- shared_preferences: BSD License
 
 ### Team Preference. 
 * which license does the team want to use and why
