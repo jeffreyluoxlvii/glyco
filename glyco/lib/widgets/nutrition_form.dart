@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
+import 'package:glyco/providers/auth.dart';
 
-// Define a custom Form widget.
+// Nutrition form for long pressing a shorcut
+// @author Jeffrey Luo
 class NutritionForm extends StatefulWidget {
   final IconData icon;
 
@@ -25,7 +27,8 @@ class NutritionFormState extends State<NutritionForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false).addNutrition(_carbs);
+    Provider.of<Measurement>(context, listen: false)
+        .addNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -35,7 +38,7 @@ class NutritionFormState extends State<NutritionForm> {
     return Form(
       key: _form,
       child: Container(
-        height: 270,
+        height: 200,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -67,7 +70,7 @@ class NutritionFormState extends State<NutritionForm> {
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Enter carbs',
+                  labelText: 'Enter carbs to add',
                   suffix: Text(
                     'g',
                     style: TextStyle(

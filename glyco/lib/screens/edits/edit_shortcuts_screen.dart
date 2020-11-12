@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/providers/auth.dart';
 import 'package:glyco/providers/options.dart';
 import 'package:provider/provider.dart';
 
 //Widgets
-
 import '../../widgets/mainSettings/editShortcuts/exercise_row.dart';
 import '../../widgets/mainSettings/editShortcuts/food_rows.dart';
 import '../../widgets/appBars/plain_app_bar.dart';
 
+//Font
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//Author: Justin Wu
+
+//This class creates the screen that is shown when a user wants to edit their shortcuts.
 class EditShortcuts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -90,19 +94,27 @@ class EditShortcuts extends StatelessWidget {
                         onPressed: () {
                           if (mealRow.carbController.text.length > 0) {
                             settings.setMealSettings(
-                                int.parse(mealRow.carbController.text));
+                                int.parse(mealRow.carbController.text),
+                                Provider.of<Auth>(context, listen: false)
+                                    .token);
                           }
                           if (snackRow.carbController.text.length > 0) {
                             settings.setSnackSettings(
-                                int.parse(snackRow.carbController.text));
+                                int.parse(snackRow.carbController.text),
+                                Provider.of<Auth>(context, listen: false)
+                                    .token);
                           }
                           if (drinkRow.carbController.text.length > 0) {
                             settings.setDrinkSettings(
-                                int.parse(drinkRow.carbController.text));
+                                int.parse(drinkRow.carbController.text),
+                                Provider.of<Auth>(context, listen: false)
+                                    .token);
                           }
                           if (exerciseRow.exerciseController.text.length > 0) {
                             settings.setExerciseTime(
-                                int.parse(exerciseRow.exerciseController.text));
+                                int.parse(exerciseRow.exerciseController.text),
+                                Provider.of<Auth>(context, listen: false)
+                                    .token);
                           }
                           Navigator.pop(context);
                         },

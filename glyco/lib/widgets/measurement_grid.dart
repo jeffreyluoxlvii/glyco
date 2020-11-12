@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/widgets/a1c_tile.dart';
+import 'package:glyco/widgets/exercise_tile.dart';
 import 'package:glyco/widgets/glucose_tile.dart';
 import '../widgets/calories_tile.dart';
 import '../providers/measurement.dart';
@@ -7,6 +8,8 @@ import 'package:provider/provider.dart';
 import './long_tile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget to display the measurement grid in the Measures screen.
+// @author Jeffrey Luo
 class MeasurementGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,16 +32,7 @@ class MeasurementGrid extends StatelessWidget {
                   ),
                   updateTime: measurement.lastUpdate,
                 ),
-                LongTile(
-                  data: measurement.exerciseTime.toString(),
-                  unit: "min",
-                  icon: Icon(
-                    FontAwesomeIcons.running,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                  updateTime: measurement.lastUpdate,
-                ),
+                ExerciseTile(),
               ],
             )
           ],

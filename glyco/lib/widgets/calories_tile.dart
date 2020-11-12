@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:glyco/widgets/nutrition_manual_form.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget to display the nutrition tile in the measurement grid.
+// @author Jeffrey Luo
 class CaloriesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -92,7 +95,21 @@ class CaloriesTile extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: SingleChildScrollView(
+                    child: ChangeNotifierProvider.value(
+                      child: NutritionManualForm(),
+                      value: measurement,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );

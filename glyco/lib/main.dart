@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/providers/settings.dart';
 import 'package:provider/provider.dart';
 import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
 import 'providers/options.dart';
 import 'providers/auth.dart';
-import 'providers/healthkit.dart';
 
 //Screens
 import 'screens/splash_screen.dart';
@@ -13,6 +13,8 @@ import 'screens/change_settings_screen.dart';
 import 'screens/edits/edit_shortcuts_screen.dart';
 import 'screens/accounts/create_account_screen.dart';
 import 'screens/accounts/change_password_screen.dart';
+import 'screens/accounts/change_email_screen.dart';
+import 'screens/accounts/change_name_screen.dart';
 import 'screens/accounts/forgot_password_screen.dart';
 
 void main() => runApp(MyApp());
@@ -26,33 +28,56 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Auth(),
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => Measurements(),
+        ChangeNotifierProxyProvider<Auth, Measurements>(
+          update: (ctx, auth, previousMeasurements) => Measurements(
+            auth.token,
+            auth.userId,
+            previousMeasurements == null
+                ? []
+                : previousMeasurements.measurements,
+          ),
+          create: null,
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => Options(),
+        ChangeNotifierProxyProvider<Auth, Options>(
+          update: (ctx, auth, previousOptions) => Options(
+            auth.token,
+            auth.userId,
+            previousOptions == null
+                ? Settings(
+                    mealCarbs: 35,
+                    snackCarbs: 15,
+                    drinkCarbs: 10,
+                    exerciseTime: 30,
+                    userId: auth.userId,
+                  )
+                : previousOptions.settings,
+          ),
+          create: null,
         ),
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-          home: auth.isAuth
-              ? NavigationScreen()
-              : FutureBuilder(
-                  future: auth.tryAutoLogin(),
-                  builder: (ctx, authResultSnapshot) =>
-                      authResultSnapshot.connectionState ==
-                              ConnectionState.waiting
-                          ? SplashScreen()
-                          : auth.isAuth?
-                        NavigationScreen()
-                          :LoginScreen(),
-                ),
+          home: //LoginScreen(),
+              auth.isAuth
+                  ? NavigationScreen()
+                  : FutureBuilder(
+                      future: auth.tryAutoLogin(),
+                      builder: (ctx, authResultSnapshot) =>
+                          authResultSnapshot.connectionState ==
+                                  ConnectionState.waiting
+                              ? SplashScreen()
+                              : auth.isAuth
+                                  ? NavigationScreen()
+                                  : LoginScreen(),
+                    ),
           routes: <String, WidgetBuilder>{
             '/NavScreen': (context) => NavigationScreen(),
             '/ChangeSettings': (context) => ChangeSettingsScreen(),
             '/EditShortcuts': (context) => EditShortcuts(),
             '/CreateAccount': (context) => CreateAccount(),
             '/ChangePassword': (context) => ChangePassword(),
+            '/ChangeEmail': (context) => ChangeEmail(),
+            '/ChangeName': (context) => ChangeName(),
             '/ForgotPassword': (context) => ForgotPassword(),
           },
           theme: ThemeData(

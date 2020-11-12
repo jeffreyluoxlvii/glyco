@@ -8,10 +8,13 @@ import 'package:nano_healthkit_plugin/healthdata.pb.dart';
 import 'package:nano_healthkit_plugin/healthdata.pbenum.dart';
 import '../providers/healthkit.dart';
 
+//Author: Justin Wu
+
+//This class creates the starting screen for a user that isn't logged in. Through this screen, a user can
+//log in, create an account, and reset their forgotten password.
+
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
-  static const navigateToCreateAccount = Key('navigateToCreateAccount');
-  static const navigateToForgotPassword = Key('navigateToForgotPassword');
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -51,7 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   GestureDetector createAccount(BuildContext context) {
     return GestureDetector(
-      key: LoginScreen.navigateToCreateAccount,
       onTap: () {
         HealthKit().authorize();
         Navigator.pushNamed(context, '/CreateAccount');
@@ -79,7 +81,6 @@ class SignInFormState extends State<SignInForm> {
   var email;
   var password;
   var createdMessage = "";
-  bool successLogin = false;
   @override
   Widget build(BuildContext context) {
     Future<void> _submit() async {
@@ -173,20 +174,19 @@ class SignInFormState extends State<SignInForm> {
 }
 
 GestureDetector forgotPassword(BuildContext context) {
-  return GestureDetector(
-    key: LoginScreen.navigateToForgotPassword,
-    onTap: () {
-      Navigator.pushNamed(context, '/ForgotPassword');
-    },
-    child: new Text(
-      "Forgot Password?",
-      style: TextStyle(
-        fontStyle: FontStyle.italic,
-        color: Colors.grey[400],
-      ),
-    ),
-  );
-}
+      return GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/ForgotPassword');
+        },
+        child: new Text(
+          "Forgot Password?",
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+            color: Colors.grey[400],
+          ),
+        ),
+      );
+    }
 
 InputDecoration formDecorator(String label) {
   return InputDecoration(

@@ -5,6 +5,8 @@ import './settings_screen.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Wrapper screen to handle navigation between the screens using the bottom nav.
+// @author Jeffrey Luo
 class NavigationScreen extends StatefulWidget {
   @override
   _NavigationScreenState createState() => _NavigationScreenState();

@@ -7,7 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HealthKit with ChangeNotifier {
   bool isAuthorized = false;
-  String basicHealthString = "";
+  String glucoseString = "";
+  String stepsString = "";
   String statisticsString = "";
   String exisitngTypesString = "";
   String updateMessageString = "";
@@ -15,21 +16,21 @@ class HealthKit with ChangeNotifier {
   String pulledBackgroundDataString = "";
   String batchString = "";
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initPlatformState();
-  // }
+//author: Nathaniel Hartley
 
+//This code was based off the code you can find for the nano healthkit plugin for flutter
+//More in depth explanations about each function can be found in their wiki in their git repo
+//If you search nano healthkit flutter you will be able to find the code i got this from
+
+//didnt use
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     await NanoHealthkitPlugin.initialize(updatesReceivedInBackground);
     bool _isSubscribed = await NanoHealthkitPlugin.isSubscribedToUpdates();
-    // setState(() {
     this.isSubscribed = _isSubscribed;
-    // });
   }
 
+// this is the code that makes the pop up for permissions come up when a user first accesses the app
   Future<void> authorize() async {
     var request = HealthTypeList();
     request.types.add(
@@ -37,20 +38,13 @@ class HealthKit with ChangeNotifier {
     request.types
         .add(HealthTypes.QUANTITY_STEP_COUNT); // Permissions to read steps
     bool isitAuthorized = await NanoHealthkitPlugin.authorize(request);
-    // setState(() {
     this.isAuthorized = isitAuthorized;
-    // });
   }
 
-  Future<void> getUserBasicHealthData() async {
+//this code fetches the steps froom the users health app
+  Future<void> getUserStepsData() async {
     var request = HealthDataRequest();
-    request.type = HealthTypes.CORRELATION_FOOD;
-    //request.startDate = "2019-06-19T18:58:00.000Z";
-    //request.endDate = "2019-09-19T20:58:00.000Z";
-    //request.limit = 2;
-    //request.units.add("ft");
-    request.units.add("kcal");
-    request.units.add("km");
+    request.type = HealthTypes.QUANTITY_STEP_COUNT;
     var resultToShow = "";
     try {
       var basicHealth = await NanoHealthkitPlugin.fetchData(request);
@@ -58,11 +52,24 @@ class HealthKit with ChangeNotifier {
     } on Exception catch (error) {
       resultToShow = error.toString();
     }
-    // setState(() {
-    this.basicHealthString = resultToShow;
-    // });
+    this.stepsString = resultToShow;
   }
 
+//this code fetched the blood glucose reading from the users health app
+  Future<void> getUserGlucoseData() async {
+    var request = HealthDataRequest();
+    request.type = HealthTypes.QUANTITY_BLOOD_GLUCOSE;
+    var resultToShow = "";
+    try {
+      var basicHealth = await NanoHealthkitPlugin.fetchData(request);
+      resultToShow = basicHealth.toString();
+    } on Exception catch (error) {
+      resultToShow = error.toString();
+    }
+    this.glucoseString = resultToShow;
+  }
+
+//didn't use this function for the app
   Future<void> getUserBatchData() async {
     // First get the list of existing types
     var existingTypesReq = HealthTypeList();
@@ -86,11 +93,10 @@ class HealthKit with ChangeNotifier {
     } on Exception catch (error) {
       resultToShow = error.toString();
     }
-    // setState(() {
     this.batchString = resultToShow;
-    // });
   }
 
+//didn't use this function either
   Future<void> getUserStatisticsData() async {
     var request = StatisticsRequest();
     request.type = HealthTypes.QUANTITY_HEART_RATE;
@@ -105,49 +111,46 @@ class HealthKit with ChangeNotifier {
     } on Exception catch (error) {
       resultToShow = error.toString();
     }
-    // setState(() {
     this.statisticsString = resultToShow;
-    // });
   }
 
+//this can be used to fetch all the types of data available to pull from
+//didnt use
   Future<void> filterExistingTypes() async {
     var request = HealthTypeList();
     request.types.addAll(HealthTypes.values);
     var filtered = await NanoHealthkitPlugin.filterExistingTypes(request);
-    // setState(() {
     this.exisitngTypesString = filtered.toString();
-    // });
   }
 
+//didnt use
   Future<void> subscribeToUpdates() {
     var request = HealthTypeList();
     request.types.addAll(HealthTypes.values); // Subscribe to everything
     NanoHealthkitPlugin.subscribeToUpdates(request, updatesReceived);
-    // setState(() {
     this.isSubscribed = true;
     this.updateMessageString = "";
-    // });
   }
 
+//didnt use
   Future<void> unsubscribeToUpdates() {
     NanoHealthkitPlugin.unsubscribeToUpdates();
-    // setState(() {
     this.isSubscribed = false;
     this.updateMessageString = "";
-    // });
   }
 
+//didnt use
   Future<void> updatesReceived(HealthDataList updates) {
     saveUpdateData(updates);
-    // setState(() {
     this.updateMessageString = updates.toString();
-    // });
   }
 
+//didnt use
   Future<void> updatesReceivedInBackground(HealthDataList updates) {
     saveUpdateData(updates);
   }
 
+//didnt use
   Future<void> saveUpdateData(HealthDataList updates) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> saves = prefs.getStringList("savedUpdates") ?? List<String>();
@@ -155,12 +158,11 @@ class HealthKit with ChangeNotifier {
     prefs.setStringList("savedUpdates", saves);
   }
 
+//didnt use
   Future<void> pullSavedData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> saves = prefs.getStringList("savedUpdates") ?? List<String>();
-    // setState(() {
     this.pulledBackgroundDataString = saves.toString();
-    // });
     saves.clear();
     prefs.setStringList("savedUpdates", List<String>());
   }

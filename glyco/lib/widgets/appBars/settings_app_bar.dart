@@ -26,25 +26,6 @@ class _SettingsAppBarState extends State<SettingsAppBar> {
           fontSize: 20,
         ),
       ),
-      actions: [
-        IconButton(
-          icon: Icon(
-            FontAwesomeIcons.edit,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ChangeSettingsScreen()))
-                .then((value) {
-              setState(() {
-                // refresh state of Page1
-              });
-            });
-          },
-        ),
-      ],
     );
   }
 }

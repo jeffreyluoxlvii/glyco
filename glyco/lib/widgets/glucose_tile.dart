@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/widgets/glucose_manual_form.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../providers/measurement.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// Widget to display the glucose tile in the measurement grid.
+// @author Jeffrey Luo
 class GlucoseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,21 @@ class GlucoseTile extends StatelessWidget {
         height: 160,
         color: Theme.of(context).primaryColor,
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: SingleChildScrollView(
+                    child: ChangeNotifierProvider.value(
+                      child: GlucoseManualForm(),
+                      value: measurement,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

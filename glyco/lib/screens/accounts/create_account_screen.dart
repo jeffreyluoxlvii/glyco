@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//Providers
 import '../../providers/auth.dart';
+
 //Widgets
 import '../../widgets/appBars/plain_app_bar_back.dart';
 //Models
 import '../../models/http_exception.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//Author: Justin Wu
 
+//This class creates the screen that is shown when a user wants to create an account.
 class CreateAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -70,21 +71,21 @@ class InfoFormState extends State<InfoForm> {
       try {
         await Provider.of<Auth>(context, listen: false)
             .signUp(this.email, this.password, this.firstName, this.lastName);
-        setState(() => createdMessage = "Account created, please verify your email!");
+        setState(() => createdMessage = "Account created!");
       } 
       on HttpException catch (error) {
         var errorMessage = 'Authentication failed';
         if (error.toString().contains('EMAIL_EXISTS')) {
           errorMessage = 'This email address is already in use.';
         } else if (error.toString().contains('INVALID_EMAIL')) {
-          errorMessage = 'This is not a valid email address';
+          errorMessage = 'This is not a valid email address.';
         } else if (error.toString().contains('WEAK_PASSWORD')) {
-          errorMessage = 'This password is too weak.';
+          errorMessage = 'Password should have at least 6 characters.';
         }
         setState(() => createdMessage = errorMessage);
       } 
       catch (error) {
-        const errorMessage = 'Could not authenticate. Try again later';
+        const errorMessage = 'Could not authenticate. Try again later.';
         setState(() => createdMessage = errorMessage);
       }
     }

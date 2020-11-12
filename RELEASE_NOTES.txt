@@ -1,0 +1,29 @@
+Glyco Release Notes
+
+Current Release Number: 1.0
+Release Date: 11/16
+
+Note: Though the Flutter framework allows for developing for both iOS and Android apps, this application was exclusively designed for and tested on the iPhone 11. This application also requires that the iOS deployment versions have to exclusively be in the range between 9.0 to 14.1.99.
+
+Features: 
+
+1) Users can create accounts and sign into existing accounts. These features are supported by the 'Forgot Password' feature, which sends the users an email to resolve this issue.
+
+2) Glyco integrates with and pulls data from the Apple Health app. Users allow permissions upon creating an account so that Glyco can pull values of glucose levels and/or steps from Apple Health. These values are pulled into the application and updated on the database and, subsequently, the user's measurements.
+
+3) Measurement tracking - The application tracks singular values for glucose levels, activity time, steps, carb intake, and A1C levels for each day. A calendar feature allows the user to switch back to previous days in order to view past measurements or add measurements to past days. Users may edit these values by clicking on any of the measurement tiles except steps amount and directly editing them.
+
+4) The shortcuts feature, which distinguishes the user experience of Glyco from other applications. There are icons representing specific values that are either set by default or edited by the user to reflect their usual lifestyle. By clicking on these icons, their daily measurements are automatically updated. A banner that displays immediately after clicking the shortcuts will provide the option to undo an added measurement. Shortcuts can be edited in the Settings screen.
+
+5) Glyco analyzes the user's past data and generates challenges that encourages the user to improve their health habits, either through studying steps, activity time, or carb intake. For example, if a user has been walking less on average this week than they have been during the rest of the month, Glyco will generate a challenge encouraging the user to increase the current average step amount to 25% higher than it currently is.
+
+6) Glyco's challenge generation is supplemented by the progress feature that lives on the Challenges screen. Glyco will track the user's progress towards that goal and visualize a pie chart with that progress. This progress feature also includes a weekly chart visualizing how the user's glucose levels for the last 7 days. Both of these charts are interactive - holding onto the glucose chart will display the date and glucose level of that day, while holding onto the pie chart sections will animate them to grow in size.
+
+7) Glyco has features to edit the user's account settings. Users are allowed to change their name, email address, and passsword after creating their account. As mentioned earlier, they can also edit their shortcut values to better reflect their lifestyle.
+
+8) Glyco's 'View Monthly Data' feature allows user's to see Glyco's analysis and visualization of their past data. This feature takes the user's past 30 days worth of data and visualizes several charts. These include a pie chart displaying the range and percentage of glucose measurements in relation to the daily recommended glucose levels, a line chart displaying individual glucose measurements every day, a bar chart displaying individual exercise times every day, and a pie chart displaying the range and percentage of carb intake measurements in relation to the daily recommended carb intake.
+
+Known Bugs or Limitations:
+- Glyco is currently limited because it only takes singular values for each of the measurements (glucose levels, steps, activity time, carb intake, and A1C levels). This reduces the accuracy of our analysis - for example, glucose levels are analyzed by the most recently updated value, rather than their average value for that day. This is elaborated on in BACKLOG.txt.
+- Glyco fetches to the database every time the user navigates to the Measures screen. This is inefficient because they are unnecessary calls happening, while standard practice would be to call once at the opening of the app and using the data collected then. (There could then be a refresh button that intentionally fetches from the database if needed.)
+- Currently, Glyco asks the user to refresh any time they navigate to a day that has not yet been created for that user. This isn't user friendly and should be addressed by having the application automatically refresh itself after making a call to the database to create an additional date.
