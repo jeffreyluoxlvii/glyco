@@ -7,6 +7,8 @@ import '../widgets/viewAnalytics/exercise_bars.dart';
 import '../widgets/viewAnalytics/glucose_line.dart';
 import '../widgets/viewAnalytics/carb_pie.dart';
 
+// @author Herleen Kaur
+
 class ViewAnalyticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

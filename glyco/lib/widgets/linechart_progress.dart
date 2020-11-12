@@ -2,6 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+// @author Herleen Kaur
+
 // Returns a weekly line chart that shows the average glucose levels for the past 7 days
 class LineChartProgressContainer extends StatefulWidget {
   @override

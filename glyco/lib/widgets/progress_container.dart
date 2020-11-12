@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../widgets/glucose_progress.dart';
 import "../widgets/linechart_progress.dart";
 
+// @author Herleen Kaur
+
 class ProgressContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

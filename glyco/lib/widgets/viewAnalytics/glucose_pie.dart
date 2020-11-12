@@ -4,6 +4,8 @@ import '../../providers/measurements.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
+// @author Herleen Kaur
+
 class GlucosePie extends StatelessWidget {
   final List<double> monthlyData = [
     85.5,

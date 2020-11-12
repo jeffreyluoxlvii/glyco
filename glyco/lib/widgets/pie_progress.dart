@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../providers/measurements.dart';
 import 'package:provider/provider.dart';
 
+// @author Herleen Kaur
+
 // Returns a pie chart that shows the user's progress towards the current challenge
 class PieProgressContainer extends StatefulWidget {
   @override

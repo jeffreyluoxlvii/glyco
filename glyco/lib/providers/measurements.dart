@@ -144,6 +144,7 @@ class Measurements with ChangeNotifier {
   }
 
   // FOR CHALLENGES AND PROGRESS
+  // @author Herleen Kaur
 
   // Number is rounded to whatever factor multiple is
   // i.e. roundToMulitple(134, 100) = 200

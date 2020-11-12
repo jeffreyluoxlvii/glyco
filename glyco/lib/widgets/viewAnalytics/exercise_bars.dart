@@ -5,6 +5,8 @@ import 'dart:math';
 
 import 'package:provider/provider.dart';
 
+// @author Herleen Kaur
+
 class ExerciseBarChart extends StatelessWidget {
   final List<double> exerciseData = [
     25,

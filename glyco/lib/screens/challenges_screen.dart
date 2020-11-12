@@ -5,6 +5,8 @@ import '../widgets/challenge_container.dart';
 import '../widgets/progress_container.dart';
 import '../providers/auth.dart';
 
+// @author Herleen Kaur
+
 class ChallengesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

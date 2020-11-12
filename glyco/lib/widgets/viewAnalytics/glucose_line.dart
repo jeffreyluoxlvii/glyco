@@ -2,6 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+// @author Herleen Kaur
+
 // ignore: must_be_immutable
 class GlucoseLineChart extends StatelessWidget {
   final List<double> monthlyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5, 46.7, 89.8, 58.7, 97.0, 58.0, 85.7, 84.6, 58.7, 68.6, 95.0, 75.6, 57.7, 86.7, 67.7, 86.0, 76.7, 67.5, 57.6, 86.7, 57.6, 46.0, 68.0, 65.0];
