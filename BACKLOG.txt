@@ -1,0 +1,19 @@
+Glyco's future direction: features to improve the functionality and experience of the application. This list is in the order of what our team suggests to implement them.
+
+1) Update the glucose variable so that it takes in a list of glucose measurements instead of just one measurement. This can be used to not only find the average glucose level (rather than the most recently updated glucose level), but to also provide more information about the high and low ranges (i.e. glycemic variability) of the patient on each day. The glucose measurement tile would need to be updated to display this list, with functionality to add measurements or edit past measurements in that list.
+
+2) Glucose can be represented in two different types of units: mg/dL or mmol/L. Currently, Glyco displays everything with the mg/dL unit. The user should be able to select their preferred unit upon creating their account and the ability to change that preference in account settings.
+
+3) Since the recommended values for various health-related measures (activity time, carb intake, glucose levels, etc.) differs from individual to individual, users should be allowed to specify their preferred recommended values for these measurements. Currently, Glyco uses the daily recommended values for steps, activity time, carb intake, and glucose levels to generate challenges in the Challenges screen and to analyze what glucose and carb intake measurements are in/below/above range in 'View Analytics.'
+
+4) The current algorithm that generates challenges can be optimized in several ways. Firstly, it generates challenges sequentially by analyzing steps then activity time then carb intake. Variability in the challenges that are generated can be achieved by randomly generated this order before beginning the analysis needed to generate the challenge. Secondly, challenges are generated on a daily basis. It would be easier to motivate and encourage the user over a longer period of time by generating these challenges for one week at a time, so they can more closely monitor their progress over the 7 days and see results.
+
+5) In accordance with adding a list to the glucose measurement variable, the glucose line chart in 'View Monthly Data' can be updated to include that glycemic variability. This means showing the highest and lowest glucose levels for each date, on top of showing the average glucose level for each date.
+
+6) To improve the communication between a patient and their doctor, create an 'Export Data' feature that exports all of the data and analysis for a user-specified period of time - either by creating a pdf file or by sending information through email. 
+
+7) Integrate the Glooko API or another glucose-related data visualization and analysis API. This will improve the analysis made with past measurements and will also improve the quality and standardization of the data that is exported.
+
+8) Increase the amount of integrations that are possible with Glyco. Currently, the application integrates with Apple Health. Possible future integrations include: Calorie King, MyFitnessPal, and Dexcom. This would need to be supported through onboarding and an ability to edit integrations in account settings.
+
+9) In the future, Glyco could be coupled with a matching web application made for the patients' physicians. Their physicians could sign into a platform with a specific user ID made for each patient to view the patient's measurements, similarly to the patient through the mobile application. Physicians may also manually input a challenge they would like the patient to complete, which would show up on the user's application as a challenge from their doctor. The 'Export Data' feature could be replaced by the ability to view analytics for any specific period of time through the web application.
