@@ -103,41 +103,43 @@ class CarbPie extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
-                        child: Text(inRange.toString() + '% in range',
-                            style: TextStyle(
-                              color: Colors.green[200],
-                              fontSize: 18,
-                            )),
-                      ),
-                    ]),
-                    Row(children: [
-                      Flexible( // Average carb level
+                      Flexible( // Average glucose level
                         child: Text(averageCarb(monthlyData) + ' g carbs avg',
                             style: TextStyle(
-                              color: Colors.green[200],
+                              color: Colors.black,
                               fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             )),
                       ),
                     ]),
                     SizedBox(height: 10),
                     Row(children: [
-                      Flexible( // Highest carb level
-                        child: Text(
-                            monthlyData.reduce(max).toString() + ' g HIGHEST',
+                      Flexible( // Percentage of how many measurements are within range
+                        child: Text(inRange.toString() + '% in range',
                             style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
+                              color: Colors.green[300],
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
                             )),
                       ),
                     ]),
                     Row(children: [
-                      Flexible( // Lowest carb level
-                        child: Text(
-                            monthlyData.reduce(min).toString() + ' g LOWEST',
+                      Flexible( // Percentage of how many measurements are within range
+                        child: Text(belowRange.toString() + '% below range',
                             style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
+                              color: Colors.lightBlueAccent,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ]),
+                    Row(children: [
+                      Flexible( // Percentage of how many measurements are within range
+                        child: Text(aboveRange.toString() + '% above range',
+                            style: TextStyle(
+                              color: Colors.indigo,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
                             )),
                       ),
                     ]),
@@ -169,7 +171,7 @@ class CarbPie extends StatelessWidget {
             );
           } else {
             return PieChartSectionData(
-              color: Colors.green[200],
+              color: Colors.greenAccent,
               value: inRange,
               title: '',
               radius: radius,
@@ -187,7 +189,7 @@ class CarbPie extends StatelessWidget {
             );
           } else {
             return PieChartSectionData(
-              color: Colors.yellow[300],
+              color: Colors.lightBlueAccent,
               value: belowRange,
               title: '',
               radius: radius,
@@ -205,7 +207,7 @@ class CarbPie extends StatelessWidget {
             );
           } else {
             return PieChartSectionData(
-              color: Colors.pink[300],
+              color: Colors.indigo,
               value: aboveRange,
               title: '',
               radius: radius,

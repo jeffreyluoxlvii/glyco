@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glyco/screens/view_analytics.dart';
 import 'package:provider/provider.dart';
 import 'package:glyco/widgets/appBars/challenges_app_bar.dart';
 import '../widgets/challenge_container.dart';
@@ -53,19 +54,46 @@ class ChallengesScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: ChallengeContainer(),
               ),
-
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
-                  "Your progress:",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.pink[300],
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Text(
+                      "Your progress:",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.pink[300],
+                      ),
+                    ),
                   ),
-                ),
+                   Row(
+                    children: [
+                      FlatButton(
+                        padding: const EdgeInsets.only(top: 5.0, right: 16.0),
+                        color: Colors.transparent,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ViewAnalyticsScreen()));
+                        },
+                        child: Text(
+                          "Or View Monthly Data",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.grey[500]
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ]
               ),
 
               // Container that holds Progress widget. Displays progress towards generated challenges

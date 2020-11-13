@@ -104,43 +104,43 @@ class GlucosePie extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
-                        child: Text(inRange.toString() + '% in range',
-                            style: TextStyle(
-                              color: Colors.green[200],
-                              fontSize: 18,
-                            )),
-                      ),
-                    ]),
-                    Row(children: [
                       Flexible( // Average glucose level
                         child: Text(averageGlucose(monthlyData) + ' mg/dL avg',
                             style: TextStyle(
-                              color: Colors.green[200],
+                              color: Colors.black,
                               fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             )),
                       ),
                     ]),
                     SizedBox(height: 10),
                     Row(children: [
-                      Flexible( // Highest glucose level
-                        child: Text(
-                            monthlyData.reduce(max).toString() +
-                                ' mg/dL HIGHEST',
+                      Flexible( // Percentage of how many measurements are within range
+                        child: Text(inRange.toString() + '% in range',
                             style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
+                              color: Colors.green[300],
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
                             )),
                       ),
                     ]),
                     Row(children: [
-                      Flexible( // Lowest glucose level
-                        child: Text(
-                            monthlyData.reduce(min).toString() +
-                                ' mg/dL LOWEST',
+                      Flexible( // Percentage of how many measurements are within range
+                        child: Text(belowRange.toString() + '% below range',
                             style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 12,
+                              color: Colors.lightBlueAccent,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ]),
+                    Row(children: [
+                      Flexible( // Percentage of how many measurements are within range
+                        child: Text(aboveRange.toString() + '% above range',
+                            style: TextStyle(
+                              color: Colors.indigo,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
                             )),
                       ),
                     ]),
@@ -172,7 +172,7 @@ class GlucosePie extends StatelessWidget {
             );
           } else {
             return PieChartSectionData(
-              color: Colors.green[200],
+              color: Colors.greenAccent,
               value: inRange,
               title: '',
               radius: radius,
@@ -183,14 +183,14 @@ class GlucosePie extends StatelessWidget {
         case 1:
           if (belowRange == 0) { // If 0, show nothing
             return PieChartSectionData(
-              color: Colors.grey[400],
+              color: Colors.grey[300],
               value: 0,
               title: '',
               radius: radius,
             );
           } else {
             return PieChartSectionData(
-              color: Colors.yellow[300],
+              color: Colors.lightBlueAccent,
               value: belowRange,
               title: '',
               radius: radius,
@@ -208,7 +208,7 @@ class GlucosePie extends StatelessWidget {
             );
           } else {
             return PieChartSectionData(
-              color: Colors.pink[300],
+              color: Colors.indigo,
               value: aboveRange,
               title: '',
               radius: radius,

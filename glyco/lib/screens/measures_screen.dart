@@ -309,7 +309,7 @@ class _MeasuresScreenState extends State<MeasuresScreen> {
                                             ViewAnalyticsScreen()));
                               },
                               child: Text(
-                                "View Analytics",
+                                "View Monthly Data",
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
