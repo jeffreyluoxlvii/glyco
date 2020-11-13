@@ -13,24 +13,27 @@ class PieProgressContainer extends StatefulWidget {
 
 class _PieProgressState extends State<PieProgressContainer> {
   int _touchedIndex;
-  int progress = 860;
-  int goal = 3000;
+  int progress = 0;
+  int goal = 0;
 
   @override
   Widget build(BuildContext context) {
     final progressProvider = Provider.of<Measurements>(context);
 
   // Sets current progress and goal
-    // if (progressProvider.getChallenge() == 'steps') {
-    //   progress = progressProvider.findByDate(DateTime.now()).steps;
-    // }
-    // if (progressProvider.getChallenge() == 'activity') {
-    //   progress = progressProvider.findByDate(DateTime.now()).exerciseTime;
-    // }
-    // if (progressProvider.getChallenge() == 'carbs') {
-    //   progress = progressProvider.findByDate(DateTime.now()).carbs;
-    // }
-    // goal = progressProvider.getChallengeGoal();
+    if (progressProvider.getChallenge() == 'steps') {
+      progress = progressProvider.findByDate(DateTime.now()).steps;
+    }
+    if (progressProvider.getChallenge() == 'activity') {
+      progress = progressProvider.findByDate(DateTime.now()).exerciseTime;
+    }
+    if (progressProvider.getChallenge() == 'carbs') {
+      progress = progressProvider.findByDate(DateTime.now()).carbs;
+    }
+    if (progressProvider.getChallenge() == 'none') {
+      progress = 0;
+    }
+    goal = progressProvider.getChallengeGoal();
 
     return Container(
       height: 200,
@@ -105,6 +108,15 @@ class _PieProgressState extends State<PieProgressContainer> {
       switch (i) {
         // What section of the goal has not yet been reached in grey
         case 0:
+          // If there is no goal, return a full grey circle
+          if (goal == -1) {
+            return PieChartSectionData(
+              color: Colors.grey[400],
+              value: 100,
+              title: '', // This cannot be left blank
+              radius: radius,
+            );            
+          } 
           return PieChartSectionData(
             color: Colors.grey[400],
             value: (((goal - progress) / goal) * 100),
@@ -113,7 +125,7 @@ class _PieProgressState extends State<PieProgressContainer> {
           );
         // How much progress has been made in pink 
         case 1:
-          // If there is no progress, display no text so a '0' doesn't display
+          // If there is no progress or no goal, display no text so a '0' doesn't display
           if (progress == 0) {
             return PieChartSectionData(
               color: Colors.grey[400],

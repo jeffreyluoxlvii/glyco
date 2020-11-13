@@ -16,8 +16,8 @@ class GlucoseProgressContainer extends StatefulWidget {
 }
 
 class GlucoseProgressState extends State<GlucoseProgressContainer> {
-  final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
-  // final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
+  // final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
+  final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
   final List<String> weekdayData = ['', '', '', '', '', '', ''];
   final List<DateTime> dates = [null, null, null, null, null, null, null];
   int touchedIndex;
@@ -25,18 +25,18 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
 
   @override
   Widget build(BuildContext context) {
+    final progressProvider = Provider.of<Measurements>(context);
+
     // Sets the glucose levels in weeklyData, with today being weeklyData[6]
-    // final progressProvider = Provider.of<Measurements>(context);
+    for (int i = 0; i < weeklyData.length; i++) {
+      DateTime day = DateTime.now().subtract(Duration(days: i));
 
-    // for (int i = 0; i < weeklyData.length; i++) {
-    //   DateTime day = DateTime.now().subtract(Duration(days: i));
-
-    //   if (progressProvider.findByDateAverages(day) != null) {
-    //     weeklyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
-    //   } else {
-    //     weeklyData[i] = 0;
-    //   }
-    // }
+      if (progressProvider.findByDateAverages(day) != null) {
+        weeklyData[i] = progressProvider.findByDate(day).currGlucoseLevel;
+      } else {
+        weeklyData[i] = 0;
+      }
+    }
 
     int dayCount = 0;
 
@@ -109,6 +109,9 @@ class GlucoseProgressState extends State<GlucoseProgressContainer> {
 
   // Returns height of each glucose level as a proportion of the bar height (20)
   double _barHeight(double glucoseLevel) {
+    if (maxGlucoseLevel == 0) {
+      return 0;
+    }
     double barHeight = (20 * glucoseLevel) / maxGlucoseLevel;
     return barHeight;
   }

@@ -1,6 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:glyco/providers/measurements.dart';
 import 'dart:math';
+
+import 'package:provider/provider.dart';
 
 // @author Herleen Kaur
 
@@ -11,8 +14,8 @@ class LineChartProgressContainer extends StatefulWidget {
 }
 
 class LineChartState extends State<LineChartProgressContainer> {
-  final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
-  // final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
+  // final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
+  final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
   final List<DateTime> dates = [null, null, null, null, null, null, null];
   final List<String> weekdayData = ['', '', '', '', '', '', ''];
   double maxGlucoseLevel = 0;
@@ -20,19 +23,18 @@ class LineChartState extends State<LineChartProgressContainer> {
 
   @override
   Widget build(BuildContext context) {
+    final progressProvider = Provider.of<Measurements>(context);
 
-    // final progressProvider = Provider.of<Measurements>(context);
+    // Sets the glucose levels in weeklyData, with today being weeklyData[6], skipping null values
+    for (int i = 0; i < weeklyData.length; i++) {
+      DateTime day = DateTime.now().subtract(Duration(days: i));
 
-  // Sets the glucose levels in weeklyData, with today being weeklyData[6], skipping null values
-    // for (int i = 0; i < weeklyData.length; i++) {
-    //   DateTime day = DateTime.now().subtract(Duration(days: i));
+      if (progressProvider.findByDateAverages(day) != null) {
+        weeklyData[i] = progressProvider.findByDate(day).currGlucoseLevel;
+      }
+    }
 
-    //   if (progressProvider.findByDateAverages(day) != null) {
-    //     weeklyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
-    //   }
-    // }
-
-  // Sets the DataTime variables and their weekdays, with today being dates[6] and weekdayData[6]
+    // Sets the DataTime variables and their weekdays, with today being dates[6] and weekdayData[6]
     int dayCount = 0;
     for (int i = 6; i >= 0; i--) {
       dates[i] = DateTime.now().subtract(Duration(days: dayCount));
@@ -62,9 +64,13 @@ class LineChartState extends State<LineChartProgressContainer> {
       }
     }
 
-  // Max and min glucose levels needed to set the lowest and highest bounds for the y axis
+    // Max and min glucose levels needed to set the lowest and highest bounds for the y axis
     maxGlucoseLevel = weeklyData.reduce(max);
     minGlucoseLevel = weeklyData.reduce(min);
+    // Makes sure there is no error shown by dividing by 0 if there are no values
+    if (maxGlucoseLevel == 0) {
+      maxGlucoseLevel = 80;
+    }
 
     return Container(
       height: 200,
@@ -103,16 +109,25 @@ class LineChartState extends State<LineChartProgressContainer> {
             tooltipBgColor: Colors.white,
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((touchedSpot) {
-              // When spot on the chart is touched, a popup shows the glucose data from that day
-                return LineTooltipItem(
-                    ((((touchedSpot.y - 1) / 3) *
-                                    (maxGlucoseLevel - minGlucoseLevel))
-                                    + minGlucoseLevel)
-                        .toStringAsFixed(1), // Recalculates glucose level from position on chart
+                // When spot on the chart is touched, a popup shows the glucose data from that day
+                if ((touchedSpot.y - 1) == 0) {
+                  return LineTooltipItem(
+                    '0',
                     TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ));
+                } else return LineTooltipItem(
+                    ((((touchedSpot.y - 1) / 3) *
+                                (maxGlucoseLevel - minGlucoseLevel)) +
+                            minGlucoseLevel)
+                        .toStringAsFixed(
+                            1), // Recalculates glucose level from position on chart
+                    TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    )
+                  );
               }).toList();
             }),
         touchCallback: (LineTouchResponse touchResponse) {},
@@ -131,7 +146,8 @@ class LineChartState extends State<LineChartProgressContainer> {
           },
           margin: 10,
           getTitles: (value) {
-            switch (value.toInt()) { // Sets the x axis with the weekday of each day
+            switch (value.toInt()) {
+              // Sets the x axis with the weekday of each day
               case 0:
                 return weekdayData[0];
               case 1:
@@ -156,8 +172,8 @@ class LineChartState extends State<LineChartProgressContainer> {
             return TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14);
           },
-        // Sets the values of the y axis, with the min and max glucose levels as the first and last points
-        // Two points in between min and mix are calculated as a fraction
+          // Sets the values of the y axis, with the min and max glucose levels as the first and last points
+          // Two points in between min and mix are calculated as a fraction
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
@@ -211,7 +227,8 @@ class LineChartState extends State<LineChartProgressContainer> {
       lineChartBarData.spots.add(FlSpot(
           i.toDouble(),
           double.parse(((((weeklyData[i] - minGlucoseLevel) /
-                      (maxGlucoseLevel - minGlucoseLevel)) * 3) +
+                          (maxGlucoseLevel - minGlucoseLevel)) *
+                      3) +
                   1)
               .toString()))); // Calculates data points as a proportion of the graph size
     }

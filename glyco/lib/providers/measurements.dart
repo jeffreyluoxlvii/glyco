@@ -494,6 +494,7 @@ class Measurements with ChangeNotifier {
     }
 
     providerChallengeGiven = 'none';
+    providerChallengeGoal = -1;
     return 'There are currently no challenges. Come back later!';
   }
 
