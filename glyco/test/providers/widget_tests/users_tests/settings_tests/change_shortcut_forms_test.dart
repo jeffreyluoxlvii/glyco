@@ -12,14 +12,19 @@ class MockOptions extends Mock implements Options {}
 
 class MockSettings extends Mock implements Settings {}
 
-void main() {
-  //final mockOptions = MockOptions();
+void main() async{
 
-  // Widget widgetForTesting({Widget child}) {
-  //   return MaterialApp(
-  //     home: child,
-  //   );
-  // }
+  Options mockOptions;
+  Settings mockSettings;
+  setUp((){
+    mockOptions = MockOptions();
+    mockSettings = MockSettings();
+    mockSettings.drinkCarbs = 20;
+    mockSettings.exerciseTime = 20;
+    mockSettings.mealCarbs = 20;
+    mockSettings.snackCarbs = 20;
+
+  });
 
   Future<void> _buildExerciseForm(WidgetTester tester) async {
     // await tester.pumpWidget(
@@ -40,10 +45,10 @@ void main() {
       MultiProvider(
         providers: [
           ChangeNotifierProvider<Options>(
-            create: (_) => MockOptions(),
+            create: (_) => mockOptions,
           ),
           ChangeNotifierProvider<Settings>(
-            create: (_) => MockSettings(),
+            create: (_) => mockSettings,
           ),
         ],
         child: Builder(
@@ -54,6 +59,7 @@ void main() {
   }
 
   testWidgets('Forgot password screen has a form', (WidgetTester tester) async {
+    print(mockSettings.mealCarbs);
     await _buildExerciseForm(tester);
   });
 }
