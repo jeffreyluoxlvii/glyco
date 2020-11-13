@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glyco/providers/settings.dart';
+import 'package:glyco/screens/about_screen.dart';
 import 'package:provider/provider.dart';
 import 'screens/navigation_screen.dart';
 import 'providers/measurements.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
             '/ChangeEmail': (context) => ChangeEmail(),
             '/ChangeName': (context) => ChangeName(),
             '/ForgotPassword': (context) => ForgotPassword(),
+            '/About': (context) => AboutScreen(),
           },
           theme: ThemeData(
             fontFamily: 'Lato',
