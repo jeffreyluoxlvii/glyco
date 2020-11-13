@@ -85,9 +85,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: logoutButton(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: aboutButton(),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: logoutButton(),
+              ),
             ),
           ],
         ),
@@ -111,6 +121,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
           });
         });
       },
+    );
+  }
+
+  Row aboutButton() {
+    return Row(
+      children: [
+        Spacer(),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(25.0),
+          child: Container(
+            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            width: 200,
+            height: 40,
+            color: Colors.grey,
+            child: FlatButton(
+              child: Text(
+                "ABOUT US",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/About');
+              },
+            ),
+          ),
+        ),
+        Spacer(),
+      ],
     );
   }
 
