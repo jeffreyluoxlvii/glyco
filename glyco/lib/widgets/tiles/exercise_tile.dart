@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glyco/providers/measurement.dart';
-import 'package:glyco/widgets/exercise_manual_form.dart';
+import 'package:glyco/widgets/forms/exercise_manual_form.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

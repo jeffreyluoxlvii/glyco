@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../providers/measurement.dart';
+import '../../providers/measurement.dart';
 import 'package:glyco/providers/auth.dart';
 
-// Exercise form for tapping the tile.
+// Nutrition form for long pressing a shorcut
 // @author Jeffrey Luo
-class ExerciseManualForm extends StatefulWidget {
+class NutritionForm extends StatefulWidget {
+  final IconData icon;
+
+  NutritionForm(this.icon);
+
   @override
-  ExerciseManualFormState createState() {
-    return ExerciseManualFormState();
+  NutritionFormState createState() {
+    return NutritionFormState();
   }
 }
 
-class ExerciseManualFormState extends State<ExerciseManualForm> {
+class NutritionFormState extends State<NutritionForm> {
   final _form = GlobalKey<FormState>();
 
-  var _exercise;
+  var _carbs;
 
   void _submitForm() {
     final isValid = _form.currentState.validate();
@@ -24,8 +27,8 @@ class ExerciseManualFormState extends State<ExerciseManualForm> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Measurement>(context, listen: false).setExercise(
-        _exercise, Provider.of<Auth>(context, listen: false).token);
+    Provider.of<Measurement>(context, listen: false)
+        .addNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -41,7 +44,7 @@ class ExerciseManualFormState extends State<ExerciseManualForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                FontAwesomeIcons.running,
+                widget.icon,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),
@@ -62,14 +65,14 @@ class ExerciseManualFormState extends State<ExerciseManualForm> {
                   return null;
                 },
                 onSaved: (value) {
-                  _exercise = int.parse(value);
+                  _carbs = int.parse(value);
                 },
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Edit minutes of exercise',
+                  labelText: 'Enter carbs to add',
                   suffix: Text(
-                    'minutes',
+                    'g',
                     style: TextStyle(
                       color: Colors.black,
                     ),

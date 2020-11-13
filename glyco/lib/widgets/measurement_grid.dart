@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/widgets/a1c_tile.dart';
-import 'package:glyco/widgets/exercise_tile.dart';
-import 'package:glyco/widgets/glucose_tile.dart';
-import '../widgets/calories_tile.dart';
+import 'package:glyco/widgets/tiles/a1c_tile.dart';
+import 'package:glyco/widgets/tiles/exercise_tile.dart';
+import 'package:glyco/widgets/tiles/glucose_tile.dart';
+import '../widgets/tiles/calories_tile.dart';
 import '../providers/measurement.dart';
 import 'package:provider/provider.dart';
-import './long_tile.dart';
+import './tiles/long_tile.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Widget to display the measurement grid in the Measures screen.
