@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:glyco/providers/measurement.dart';
 import 'package:provider/provider.dart';
-import '../providers/measurement.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glyco/providers/auth.dart';
 
-// Nutrition form for tapping a tile
+// Exercise form for long pressing a shorcut
 // @author Jeffrey Luo
-class NutritionManualForm extends StatefulWidget {
+class ExerciseForm extends StatefulWidget {
   @override
-  NutritionManualFormState createState() {
-    return NutritionManualFormState();
+  ExerciseFormState createState() {
+    return ExerciseFormState();
   }
 }
 
-class NutritionManualFormState extends State<NutritionManualForm> {
+class ExerciseFormState extends State<ExerciseForm> {
+  final _exerciseFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
 
-  var _carbs;
+  var _minutes;
+
+  @override
+  void dispose() {
+    _exerciseFocusNode.dispose();
+    super.dispose();
+  }
 
   void _submitForm() {
     final isValid = _form.currentState.validate();
@@ -25,7 +32,7 @@ class NutritionManualFormState extends State<NutritionManualForm> {
     }
     _form.currentState.save();
     Provider.of<Measurement>(context, listen: false)
-        .setNutrition(_carbs, Provider.of<Auth>(context, listen: false).token);
+        .addExercise(_minutes, Provider.of<Auth>(context, listen: false).token);
     Navigator.of(context).pop();
   }
 
@@ -41,7 +48,7 @@ class NutritionManualFormState extends State<NutritionManualForm> {
             children: [
               // Add TextFormFields and RaisedButton here.
               Icon(
-                FontAwesomeIcons.hamburger,
+                FontAwesomeIcons.running,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),
@@ -62,14 +69,17 @@ class NutritionManualFormState extends State<NutritionManualForm> {
                   return null;
                 },
                 onSaved: (value) {
-                  _carbs = int.parse(value);
+                  _minutes = int.parse(value);
                 },
-                textInputAction: TextInputAction.done,
+                textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_exerciseFocusNode);
+                },
                 decoration: InputDecoration(
-                  labelText: 'Edit carbs',
+                  labelText: 'Add minutes of exercise',
                   suffix: Text(
-                    'g',
+                    'minutes',
                     style: TextStyle(
                       color: Colors.black,
                     ),

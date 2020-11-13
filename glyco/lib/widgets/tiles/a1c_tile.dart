@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/widgets/glucose_manual_form.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../providers/measurement.dart';
+import '../../providers/measurement.dart';
+import 'package:intl/intl.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-// Widget to display the glucose tile in the measurement grid.
+// Widget to display the A1C tile in the measurement grid.
 // @author Jeffrey Luo
-class GlucoseTile extends StatelessWidget {
+class A1CTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final measurement = Provider.of<Measurement>(context);
@@ -20,27 +19,13 @@ class GlucoseTile extends StatelessWidget {
         height: 160,
         color: Theme.of(context).primaryColor,
         child: FlatButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  content: SingleChildScrollView(
-                    child: ChangeNotifierProvider.value(
-                      child: GlucoseManualForm(),
-                      value: measurement,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
+          onPressed: () {},
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "GLUCOSE LEVELS",
+                "A1C Levels",
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white,
@@ -54,7 +39,7 @@ class GlucoseTile extends StatelessWidget {
                   children: [
                     Spacer(),
                     Icon(
-                      FontAwesomeIcons.heartbeat,
+                      FontAwesomeIcons.signal,
                       size: 60,
                       color: Colors.white,
                     ),
@@ -67,7 +52,7 @@ class GlucoseTile extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
-                    measurement.currGlucoseLevel.toString(),
+                    measurement.a1cLevel.toString(),
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -76,7 +61,7 @@ class GlucoseTile extends StatelessWidget {
                   ),
                   FittedBox(
                     child: Text(
-                      " mg/dL",
+                      ' mmol/L',
                       style: TextStyle(
                         color: Colors.white,
                       ),

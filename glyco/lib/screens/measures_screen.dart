@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/widgets/nutrition_form.dart';
+import 'package:glyco/widgets/forms/nutrition_form.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +12,7 @@ import '../providers/auth.dart';
 
 import '../widgets/measurement_grid.dart';
 import '../widgets/shortcuts/shortcut.dart';
-import '../widgets/exercise_form.dart';
+import '../widgets/forms/exercise_form.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
