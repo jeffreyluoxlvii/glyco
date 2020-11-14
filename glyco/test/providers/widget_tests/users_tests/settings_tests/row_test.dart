@@ -42,30 +42,21 @@ void main() async {
 
   testWidgets('Exercise Row is built correctly', (WidgetTester tester) async {
     await _buildExerciseRow(tester);
-    // expect(find.byType(Container), findsNWidgets(3));
-    // expect(find.byType(SingleChildScrollView), findsOneWidget);
-    // expect(find.byType(Column), findsNWidgets(2));
-    // expect(find.byType(Text), findsNWidgets(5));
-    // expect(find.byType(TextFormField), findsNWidgets(2));
-    // expect(find.byType(Padding), findsNWidgets(2));
-    // expect(find.byType(Spacer), findsNWidgets(2));
-    // expect(find.byType(FlatButton), findsOneWidget);
-    // expect(find.byType(SizedBox), findsNWidgets(9));
-    // expect(find.byType(ClipRRect), findsOneWidget);
+    expect(find.byType(Row), findsOneWidget);
+    expect(find.byType(Container), findsOneWidget);
+    expect(find.byType(Text), findsNWidgets(2));
+    expect(find.byType(TextFormField), findsOneWidget);
+    expect(find.byType(Expanded), findsOneWidget);
+    expect(find.byType(SizedBox), findsNWidgets(3));
   });
 
   testWidgets('Food Row is built correctly', (WidgetTester tester) async {
     await _buildFoodRow(tester);
-    // expect(find.byType(Container), findsNWidgets(3));
-    // expect(find.byType(SingleChildScrollView), findsOneWidget);
-    // expect(find.byType(Column), findsNWidgets(2));
-    // expect(find.byType(Text), findsNWidgets(5));
-    // expect(find.byType(TextFormField), findsNWidgets(2));
-    // expect(find.byType(Padding), findsNWidgets(2));
-    // expect(find.byType(Spacer), findsNWidgets(2));
-    // expect(find.byType(FlatButton), findsOneWidget);
-    // expect(find.byType(SizedBox), findsNWidgets(9));
-    // expect(find.byType(ClipRRect), findsOneWidget);
+    expect(find.byType(Row), findsOneWidget);
+    expect(find.byType(Container), findsOneWidget);
+    expect(find.byType(Text), findsNWidgets(2));
+    expect(find.byType(Expanded), findsOneWidget);
+    expect(find.byType(SizedBox), findsNWidgets(3));
   });
 
 
