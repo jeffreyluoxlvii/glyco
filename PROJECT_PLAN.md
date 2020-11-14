@@ -1,19 +1,21 @@
 ### User Stories Backlog
 - As a current member of Glyco, I sign into the application on a new phone to see my data.
-- As a member of Glyco who is really forgetful, I click "Forgot password?" so I can reset my password and sign in.
+- As a member of Glyco who is really forgetful, I click "Forgot password?" so I can receive an email to reset my password and sign in.
 - As someone who recently downloaded the application, I click "Create an Account" on Glyco so I can track my data.
-- As someone who recently created an account, I click to integrate Glyco with two other apps I use, Dexcom and Apple Health, to make data input easier.
+- As someone who recently created an account, I click to integrate Glyco with Apple Health so that I don't have to input my glucose and step values.
 - As someone with diabetes, I wish to go into the app to view my current levels of steps, calories, and glucose levels.
 - As someone who just ate, I press the shortcut icons to quickly input that I've eaten a snack, meal, and drink to update my data.
+- As someone who just ate an unusually high-carb drink, I hold down on the drink shortcut to input the correct amount of carbs.
+- As someone who accidentally pressed the meal shortcut twice, I quickly press the 'Undo' button.
+- As someone who wants to quickly update my total activity time, I press on the activity tile to change the value.
 - As somone who wants to look back on my measurements yesterday, I click on the arrows near the data so I can switch to yesterday.
 - As someone who wants to challenge myself to improve my condition, I switch to the Challenges screen and view the goals Glyco has set up for me.
-- As someone who wants to improve my condition by following Glyco's challenges, I scroll down on the Challenges screen to view my progress towards the goals,
+- As someone who wants to improve my condition by following Glyco's challenges, I scroll down on the Challenges screen to view my progress towards the goals.
 - As someone who mistyped my name, email, and/or password, I navigate to the Settings screen to change one of these.
-- As someone who recently switched their diet and exercise routine to be more strict, I press "Click to Edit Shortcuts" in Settings to update my usual calorie intakes.
-- As somone who recently switch from using Dexcom to Glooko, I press "Click to Edit Integrations" in Settings to update my integrations.
-- As someone who is stuck at home due to COVID-19 but wants to send my data to my doctor, I press "Export Data" in Settings to email my analytics to my doctor.
-- As someone who wants to view how my blood glucose levels and overall condition has varied over the last month, I press "View Analytics" in the Measures screen so I can view my data analytics.
-- As someone who is done viewing my analytics, I press "View Measures" to switch back to my usual daily measurements.
+- As someone who recently switched their diet and exercise routine to be more strict, I press the Meal shortcut in Settings to update my usual carb intake.
+- As someone who wants to view how my blood glucose levels and overall condition has varied over the last month, I press "View Monthly Data" in the Measures screen so I can view my data analytics.
+- As someone who is looking at my weekly glucose levels on the Challenges screen, I am reminded to press "View Monthly Data" next to "Your Progress" so I can see how my glucose levels have improved over the last month.
+- As someone who is done viewing my analytics, I press the back button to switch back to my usual daily measurements.
 
 ### Feature Deliverables for each Sprint
 
