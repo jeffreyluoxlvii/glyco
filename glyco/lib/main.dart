@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
           routes: <String, WidgetBuilder>{
             '/NavScreen': (context) => NavigationScreen(),
             '/ChangeSettings': (context) => ChangeSettingsScreen(),
-            '/EditShortcuts': (context) => EditShortcuts(),
             '/CreateAccount': (context) => CreateAccount(),
             '/ChangePassword': (context) => ChangePassword(),
             '/ChangeEmail': (context) => ChangeEmail(),
