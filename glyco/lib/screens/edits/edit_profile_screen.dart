@@ -159,7 +159,6 @@ class ChangeSettingsFormState extends State<ChangeSettingsForm> {
                       );
                     },
                   );
-                  //Navigator.pushNamed(context, '/ChangePassword');
                 },
               ),
             ),
@@ -187,31 +186,4 @@ InputDecoration formDecorator(String label) {
       borderSide: BorderSide(color: Colors.pink),
     ),
   );
-}
-
-class CancelButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50.0),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        width: 150,
-        height: 40,
-        color: Colors.grey[400],
-        child: FlatButton(
-          child: Text(
-            "CANCEL",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-    );
-  }
 }

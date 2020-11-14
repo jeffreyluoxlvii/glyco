@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
 import '../../../../lib/screens/login_screen.dart';
+import '../../../../lib/widgets/mainSettings/editShortcuts/exercise_row.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../lib/screens/accounts/create_account_screen.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
@@ -32,17 +34,13 @@ void main() {
     expect(find.text(""), findsNWidgets(3));
     expect(find.byType(ClipRRect), findsOneWidget);
   });
+
   testWidgets('Tapping create account button should navigate to that page',
       (WidgetTester tester) async {
     await _buildLogin(tester);
-    await tester.tap(find.widgetWithText(GestureDetector, "or Create an Account"));
+    await tester
+        .tap(find.widgetWithText(GestureDetector, "or Create an Account"));
     await tester.pumpAndSettle();
     verify(mockObserver.didPush(any, any));
   });
-  // testWidgets('Tapping forgot password should navigate to that page', (WidgetTester tester) async {
-  //   await _buildLogin(tester);
-  //   await tester.tap(find.widgetWithText(GestureDetector, "Forgot Password?"));
-  //   await tester.pumpAndSettle();
-  //   verify(mockObserver.didPush(any, any));
-  // });
 }
