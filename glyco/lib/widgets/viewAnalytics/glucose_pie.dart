@@ -7,39 +7,42 @@ import 'dart:math';
 // @author Herleen Kaur
 
 class GlucosePie extends StatelessWidget {
-  final List<double> monthlyData = [
-    85.5,
-    69.0,
-    66.5,
-    54.5,
-    69.0,
-    71.5,
-    66.5,
-    60.0,
-    76.7,
-    58.0,
-    67.8,
-    86.0,
-    76.0,
-    76.8,
-    59.8,
-    79.6,
-    68.0,
-    56.5,
-    65.6,
-    78.0,
-    67.7,
-    87.6,
-    79.0,
-    67.0,
-    110.0,
-    45.8,
-    46.8,
-    100.0,
-    67.8,
-    56.9
+  // Fake data to test the values with:
+  // final List<double> monthlyData = [
+  //   85.5,
+  //   69.0,
+  //   66.5,
+  //   54.5,
+  //   69.0,
+  //   71.5,
+  //   66.5,
+  //   60.0,
+  //   76.7,
+  //   58.0,
+  //   67.8,
+  //   86.0,
+  //   76.0,
+  //   76.8,
+  //   59.8,
+  //   79.6,
+  //   68.0,
+  //   56.5,
+  //   65.6,
+  //   78.0,
+  //   67.7,
+  //   87.6,
+  //   79.0,
+  //   67.0,
+  //   110.0,
+  //   45.8,
+  //   46.8,
+  //   100.0,
+  //   67.8,
+  //   56.9
+  // ];
+  final List<double> monthlyData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ];
-  final double highRange = 90.0; // Sets upper limit of recommended range
+  final double highRange = 100.0; // Sets upper limit of recommended range
   final double lowRange = 70.0; // Sets lower limit of recommended range
 
   // Stores percentage of last 30 measurements fall into what category
@@ -50,16 +53,16 @@ class GlucosePie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
+    final progressProvider = Provider.of<Measurements>(context);
+
   // Pulls average glucose level from the user's data for the last 30 days, skipping null values
-    // final progressProvider = Provider.of<Measurements>(context);
+    for (int i = 0; i < monthlyData.length; i++) {
+      DateTime day = DateTime.now().subtract(Duration(days: i));
 
-    // for (int i = 0; i < monthlyData.length; i++) {
-    //   DateTime day = DateTime.now().subtract(Duration(days: i));
-
-    //   if (progressProvider.findByDateAverages(day) != null) {
-    //     monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
-    //   }
-    // }
+      if (progressProvider.findByDateAverages(day) != null) {
+        monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+      }
+    }
 
     calculateData();
 

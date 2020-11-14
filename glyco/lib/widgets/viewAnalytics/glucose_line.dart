@@ -1,32 +1,39 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:glyco/providers/measurements.dart';
 import 'dart:math';
+
+import 'package:provider/provider.dart';
 
 // @author Herleen Kaur
 
 // ignore: must_be_immutable
 class GlucoseLineChart extends StatelessWidget {
-  final List<double> monthlyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5, 46.7, 89.8, 58.7, 97.0, 58.0, 85.7, 84.6, 58.7, 68.6, 95.0, 75.6, 57.7, 86.7, 67.7, 86.0, 76.7, 67.5, 57.6, 86.7, 57.6, 46.0, 68.0, 65.0];
+  // Fake data to test the values with:
+  // final List<double> monthlyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5, 46.7, 89.8, 58.7, 97.0, 58.0, 85.7, 84.6, 58.7, 68.6, 95.0, 75.6, 57.7, 86.7, 67.7, 86.0, 76.7, 67.5, 57.6, 86.7, 57.6, 46.0, 68.0, 65.0];
+  final List<double> monthlyData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   double maxGlucoseLevel = 0;
   double minGlucoseLevel = 0;
 
   @override
   Widget build(BuildContext context) {
-
-  
-    // final progressProvider = Provider.of<Measurements>(context);
+    final progressProvider = Provider.of<Measurements>(context);
 
   // Sets the glucose levels in monthlyData, with today being monthlyData[29], skipping null values
-    // for (int i = 0; i < monthlyData.length; i++) {
-    //   DateTime day = DateTime.now().subtract(Duration(days: i));
+    for (int i = 0; i < monthlyData.length; i++) {
+      DateTime day = DateTime.now().subtract(Duration(days: i));
 
-    //   if (progressProvider.findByDateAverages(day) != null) {
-    //     monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
-    //   }
-    // }
+      if (progressProvider.findByDateAverages(day) != null) {
+        monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+      }
+    }
 
     maxGlucoseLevel = monthlyData.reduce(max); // Needed to define highest y value
     minGlucoseLevel = monthlyData.reduce(min); // Needed to define lowest y value
+    // Makes sure there is no error shown by dividing by 0 if there are no values
+    if (maxGlucoseLevel == 0) {
+      maxGlucoseLevel = 80;
+    }
 
     return Center(
       child: Container(
@@ -79,15 +86,26 @@ class GlucoseLineChart extends StatelessWidget {
             tooltipBgColor: Colors.white,
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((touchedSpot) {
-                return LineTooltipItem(
-                    ((((touchedSpot.y - 1) / 3) *
-                                    (maxGlucoseLevel - minGlucoseLevel))
-                                    + minGlucoseLevel)
-                        .toStringAsFixed(1), // Recalculates glucose level from position on chart
+                // When spot on the chart is touched, a popup shows the glucose data from that day
+                // If value is 0, returns 0
+                if ((touchedSpot.y - 1) == 0) {
+                  return LineTooltipItem(
+                    '0',
                     TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ));
+                } else return LineTooltipItem(
+                    ((((touchedSpot.y - 1) / 3) *
+                                (maxGlucoseLevel - minGlucoseLevel)) +
+                            minGlucoseLevel)
+                        .toStringAsFixed(
+                            1), // Recalculates glucose level from position on chart
+                    TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    )
+                  );
               }).toList();
             }),
         touchCallback: (LineTouchResponse touchResponse) {},

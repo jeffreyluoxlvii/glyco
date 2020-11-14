@@ -14,6 +14,7 @@ class LineChartProgressContainer extends StatefulWidget {
 }
 
 class LineChartState extends State<LineChartProgressContainer> {
+  // Fake data to test the values with:
   // final List<double> weeklyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5];
   final List<double> weeklyData = [0, 0, 0, 0, 0, 0, 0];
   final List<DateTime> dates = [null, null, null, null, null, null, null];
@@ -110,6 +111,7 @@ class LineChartState extends State<LineChartProgressContainer> {
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((touchedSpot) {
                 // When spot on the chart is touched, a popup shows the glucose data from that day
+                // If value is 0, returns 0
                 if ((touchedSpot.y - 1) == 0) {
                   return LineTooltipItem(
                     '0',
