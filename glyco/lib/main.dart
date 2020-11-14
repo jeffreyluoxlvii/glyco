@@ -10,7 +10,6 @@ import 'providers/auth.dart';
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/change_settings_screen.dart';
-import 'screens/edits/edit_shortcuts_screen.dart';
 import 'screens/accounts/create_account_screen.dart';
 import 'screens/accounts/change_password_screen.dart';
 import 'screens/accounts/change_email_screen.dart';
