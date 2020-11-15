@@ -65,14 +65,14 @@ void main() {
     );
   }
 
-  // testWidgets('Settings screen has all of its widgets',
-  //     (WidgetTester tester) async {
-  //   await _buildSettingsScreen(tester);
-  //   // expect(find.byType(TextFormField), findsNWidgets(5));
-  //   // expect(find.widgetWithText(Container, "Forgot password?"),
-  //   //     findsOneWidget);
-  //   // expect(find.byType(TextFormField), findsNWidgets(1));
-  //   // expect(find.byType(ClipRRect), findsOneWidget);
-  //   // expect(find.text(""), findsNWidgets(2));
-  // });
+  testWidgets('Settings screen has all of its widgets',
+      (WidgetTester tester) async {
+    await _buildSettingsScreen(tester);
+    // expect(find.byType(TextFormField), findsNWidgets(5));
+    // expect(find.widgetWithText(Container, "Forgot password?"),
+    //     findsOneWidget);
+    // expect(find.byType(TextFormField), findsNWidgets(1));
+    // expect(find.byType(ClipRRect), findsOneWidget);
+    // expect(find.text(""), findsNWidgets(2));
+  });
 }
