@@ -2,11 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:glyco/providers/measurement.dart';
 import 'package:glyco/providers/measurements.dart';
-import 'package:glyco/widgets/forms/exercise_form.dart';
-import 'package:glyco/widgets/forms/exercise_manual_form.dart';
-import 'package:glyco/widgets/forms/glucose_manual_form.dart';
-import 'package:glyco/widgets/forms/nutrition_form.dart';
-import 'package:glyco/widgets/forms/nutrition_manual_form.dart';
 import 'package:glyco/widgets/measurement_grid.dart';
 import 'package:glyco/widgets/tiles/a1c_tile.dart';
 import 'package:glyco/widgets/tiles/calories_tile.dart';
@@ -14,7 +9,6 @@ import 'package:glyco/widgets/tiles/exercise_tile.dart';
 import 'package:glyco/widgets/tiles/glucose_tile.dart';
 import 'package:glyco/widgets/tiles/long_tile.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mockito/mockito.dart';
 
 class MockMeasurements extends Mock implements Measurements {}
