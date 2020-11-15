@@ -2,9 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
 import '../../../../lib/screens/login_screen.dart';
-import '../../../../lib/widgets/mainSettings/editShortcuts/exercise_row.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../lib/screens/accounts/create_account_screen.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
