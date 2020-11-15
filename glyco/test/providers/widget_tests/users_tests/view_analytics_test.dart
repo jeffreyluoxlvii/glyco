@@ -5,10 +5,8 @@ import '../../../../lib/widgets/viewAnalytics/exercise_bars.dart';
 import '../../../../lib/widgets/viewAnalytics/carb_pie.dart';
 import '../../../../lib/widgets/viewAnalytics/glucose_line.dart';
 import '../../../../lib/widgets/viewAnalytics/glucose_pie.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() async {
-
   Future<void> _buildExerciseBars(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -84,6 +82,4 @@ void main() async {
     expect(find.byType(Expanded), findsOneWidget);
     expect(find.byType(SizedBox), findsOneWidget);
   });
-
-
 }

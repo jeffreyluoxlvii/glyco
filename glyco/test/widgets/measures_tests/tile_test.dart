@@ -7,7 +7,6 @@ import 'package:glyco/widgets/tiles/calories_tile.dart';
 import 'package:glyco/widgets/tiles/exercise_tile.dart';
 import 'package:glyco/widgets/tiles/glucose_tile.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mockito/mockito.dart';
 
 class MockMeasurements extends Mock implements Measurements {}
