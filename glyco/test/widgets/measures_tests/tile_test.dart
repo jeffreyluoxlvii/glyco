@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:glyco/providers/measurement.dart';
 import 'package:glyco/providers/measurements.dart';
-import 'package:glyco/screens/measures_screen.dart';
 import 'package:glyco/widgets/tiles/a1c_tile.dart';
 import 'package:glyco/widgets/tiles/calories_tile.dart';
 import 'package:glyco/widgets/tiles/exercise_tile.dart';
