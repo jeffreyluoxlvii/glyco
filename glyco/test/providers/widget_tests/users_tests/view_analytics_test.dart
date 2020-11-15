@@ -49,7 +49,7 @@ void main() async {
     );
   }
 
-  testWidgets('Exercise Row is built correctly', (WidgetTester tester) async {
+  testWidgets('Exercise Bars is built correctly', (WidgetTester tester) async {
     await _buildExerciseBars(tester);
     expect(find.byType(Center), findsOneWidget);
     expect(find.byType(Container), findsOneWidget);
@@ -57,7 +57,7 @@ void main() async {
     expect(find.byType(BarChart), findsOneWidget);
   });
 
-  testWidgets('Food Row is built correctly', (WidgetTester tester) async {
+  testWidgets('Carb Pieis built correctly', (WidgetTester tester) async {
     await _buildCarbPie(tester);
     expect(find.byType(Center), findsOneWidget);
     expect(find.byType(Container), findsNWidgets(3));
@@ -66,7 +66,7 @@ void main() async {
     expect(find.byType(SizedBox), findsOneWidget);
   });
 
-  testWidgets('Food Row is built correctly', (WidgetTester tester) async {
+  testWidgets('Glucose Line is built correctly', (WidgetTester tester) async {
     await _buildGlucoseLine(tester);
     expect(find.byType(Center), findsOneWidget);
     expect(find.byType(Container), findsNWidgets(2));
@@ -74,7 +74,7 @@ void main() async {
     expect(find.byType(Column), findsOneWidget);
   });
 
-  testWidgets('Food Row is built correctly', (WidgetTester tester) async {
+  testWidgets('Glucose Pie', (WidgetTester tester) async {
     await _buildGlucosePie(tester);
     expect(find.byType(Center), findsOneWidget);
     expect(find.byType(Container), findsNWidgets(3));
