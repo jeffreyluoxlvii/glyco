@@ -60,7 +60,7 @@ class Auth with ChangeNotifier {
 
   // Sign up and Sign in
 
-  //This function signs a user up if the inputs are valid (if email isn't registered yet, 
+  //This function signs a user up if the inputs are valid (if email isn't registered yet,
   //if password is longer than 6 characters, etc.)
   Future<void> signUp(
       String email, String password, String firstName, String lastName) async {
@@ -76,11 +76,13 @@ class Auth with ChangeNotifier {
             'password': password,
             'returnSecureToken': true,
           }));
-      final responseData = json.decode(response.body);
-      if (responseData['error'] != null) {
-        throw HttpException(responseData['error']['message']);
+      if (response.body.isNotEmpty) {
+        final responseData = json.decode(response.body);
+        if (responseData['error'] != null) {
+          throw HttpException(responseData['error']['message']);
+        }
+        _token = responseData['idToken'];
       }
-      _token = responseData['idToken'];
     } catch (error) {
       return Future.error(error);
     }
@@ -166,7 +168,6 @@ class Auth with ChangeNotifier {
             'deleteAttribute': new List(0),
             'returnSecureToken': true,
           }));
-      final responseData = json.decode(response.body);
     } catch (error) {
       return Future.error(error);
     }

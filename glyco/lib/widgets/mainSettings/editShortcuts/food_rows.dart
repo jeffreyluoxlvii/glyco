@@ -15,7 +15,6 @@ class FoodRow extends StatelessWidget {
     return Row(
       children: [
         icon,
-        //Spacer(),
         SizedBox(width: 30),
         Expanded(
           child: TextField(

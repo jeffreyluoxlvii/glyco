@@ -30,22 +30,6 @@ class ExerciseRow extends StatelessWidget {
             controller: exerciseController,
           ),
         ),
-        // Container(
-        //   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-        //   width: 235,
-        //   child: TextFormField(
-        //     decoration: InputDecoration(
-        //       enabledBorder: UnderlineInputBorder(
-        //         borderSide: BorderSide(color: Colors.pink),
-        //       ),
-        //       focusedBorder: UnderlineInputBorder(
-        //         borderSide: BorderSide(color: Colors.pink),
-        //       ),
-        //       hintText: minutes,
-        //     ),
-        //     controller: exerciseController,
-        //   ),
-        // ),
         Container(
           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
           child: Text('minutes'),

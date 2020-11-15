@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:glyco/providers/settings.dart';
 import 'package:provider/provider.dart';
 import '../../providers/options.dart';
+import '../../providers/settings.dart';
 import '../../widgets/shortcuts/nutrition_shortcut_form.dart';
 import '../../widgets/shortcuts/exercise_shortcut_form.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
