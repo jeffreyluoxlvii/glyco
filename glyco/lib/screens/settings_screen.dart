@@ -54,13 +54,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
                 SizedBox(height: 15),
-                Row(
-                  children: [
-                    Spacer(),
-                    ExportDataButton(),
-                    Spacer(),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Spacer(),
+                //     ExportDataButton(),
+                //     Spacer(),
+                //   ],
+                // ),
                 SizedBox(height: 15),
                 Text(
                   "Shortcuts",

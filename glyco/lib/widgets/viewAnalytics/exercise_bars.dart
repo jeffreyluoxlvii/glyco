@@ -8,57 +8,101 @@ import 'package:provider/provider.dart';
 // @author Herleen Kaur
 
 class ExerciseBarChart extends StatelessWidget {
+  // Fake values to test the data with
+  // final List<double> exerciseData = [
+  //   25,
+  //   36,
+  //   41,
+  //   23,
+  //   25,
+  //   48,
+  //   26,
+  //   36,
+  //   53,
+  //   34,
+  //   33,
+  //   25,
+  //   28,
+  //   27,
+  //   38,
+  //   52,
+  //   24,
+  //   13,
+  //   12,
+  //   15,
+  //   36,
+  //   47,
+  //   24,
+  //   43,
+  //   24,
+  //   53,
+  //   24,
+  //   25,
+  //   46,
+  //   25
+  // ];
   final List<double> exerciseData = [
-    25,
-    36,
-    41,
-    23,
-    25,
-    48,
-    26,
-    36,
-    53,
-    34,
-    33,
-    25,
-    28,
-    27,
-    38,
-    52,
-    24,
-    13,
-    12,
-    15,
-    36,
-    47,
-    24,
-    43,
-    24,
-    53,
-    24,
-    25,
-    46,
-    25
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
   ];
 
   double maxExerciseTime = 0;
   double minExerciseTime = 0;
+  // Makes sure there is no error shown by dividing by 0 if there are no values
 
   @override
   Widget build(BuildContext context) {
-    // final progressProvider = Provider.of<Measurements>(context);
+    final progressProvider = Provider.of<Measurements>(context);
 
     // Sets the exercise levels in exerciseData, with today being exerciseData[29], skipping null values
-    // for (int i = 0; i < exerciseData.length; i++) {
-    //   DateTime day = DateTime.now().subtract(Duration(days: i));
+    for (int i = 0; i < exerciseData.length; i++) {
+      DateTime day = DateTime.now().subtract(Duration(days: i));
 
-    //   if (progressProvider.findByDateAverages(day) != null) {
-    //     exerciseData[i] = progressProvider.findByDate(day).exerciseTime.toDouble();
-    //   }
-    // }
+      if (progressProvider.findByDateAverages(day) != null) {
+        if (progressProvider.findByDate(day).exerciseTime == 0) {
+          exerciseData[i] = 0;
+        } else {
+          exerciseData[i] =
+              progressProvider.findByDate(day).exerciseTime.toDouble();
+        }
+      } else {
+        exerciseData[i] = 0;
+      }
+    }
 
     maxExerciseTime = exerciseData.reduce(max);
     minExerciseTime = exerciseData.reduce(min);
+    if (maxExerciseTime == 0) {
+      maxExerciseTime = 20;
+    }
 
     return Center(
       child: Container(
@@ -177,15 +221,17 @@ class ExerciseBarChart extends StatelessWidget {
                     // Sets labels for y axis
                     if (value == 0) {
                       return '0';
-                    } else if (value == 18) {
-                      return '18';
-                    } else if (value == 36) {
-                      return '36';
-                    } else if (value == 50) {
-                      return '50';
-                    } else {
-                      return '';
                     }
+                    if (value == (maxExerciseTime * (1 / 3)).round()) {
+                      return (maxExerciseTime * (1 / 3)).round().toString();
+                    }
+                    if (value == (maxExerciseTime * (2 / 3)).round()) {
+                      return (maxExerciseTime * (2 / 3)).round().toString();
+                    }
+                    if (value == maxExerciseTime) {
+                      return maxExerciseTime.round().toString();
+                    }
+                    return '';
                   },
                   margin: 8,
                   reservedSize: 30,
@@ -200,7 +246,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 0,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[0],
+                        y: returnHeight(exerciseData[0]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -208,7 +254,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 1,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[1],
+                        y: returnHeight(exerciseData[1]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -216,7 +262,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 2,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[2],
+                        y: returnHeight(exerciseData[2]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -224,7 +270,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 3,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[3],
+                        y: returnHeight(exerciseData[3]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -232,7 +278,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 4,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[4],
+                        y: returnHeight(exerciseData[4]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -240,7 +286,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 5,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[5],
+                        y: returnHeight(exerciseData[5]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -248,7 +294,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 6,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[6],
+                        y: returnHeight(exerciseData[6]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -256,7 +302,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 7,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[7],
+                        y: returnHeight(exerciseData[7]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -264,7 +310,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 8,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[8],
+                        y: returnHeight(exerciseData[8]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -272,7 +318,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 9,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[9],
+                        y: returnHeight(exerciseData[9]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -280,7 +326,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 10,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[10],
+                        y: returnHeight(exerciseData[10]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -288,7 +334,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 11,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[11],
+                        y: returnHeight(exerciseData[11]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -296,7 +342,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 12,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[12],
+                        y: returnHeight(exerciseData[12]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -304,7 +350,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 13,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[13],
+                        y: returnHeight(exerciseData[13]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -312,7 +358,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 14,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[14],
+                        y: returnHeight(exerciseData[14]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -320,7 +366,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 15,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[15],
+                        y: returnHeight(exerciseData[15]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -328,7 +374,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 16,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[16],
+                        y: returnHeight(exerciseData[16]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -336,7 +382,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 17,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[17],
+                        y: returnHeight(exerciseData[17]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -344,7 +390,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 18,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[18],
+                        y: returnHeight(exerciseData[18]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -352,7 +398,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 19,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[19],
+                        y: returnHeight(exerciseData[19]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -360,7 +406,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 20,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[20],
+                        y: returnHeight(exerciseData[20]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -368,7 +414,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 21,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[21],
+                        y: returnHeight(exerciseData[21]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -376,7 +422,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 22,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[22],
+                        y: returnHeight(exerciseData[22]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -384,7 +430,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 23,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[23],
+                        y: returnHeight(exerciseData[23]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -392,7 +438,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 24,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[24],
+                        y: returnHeight(exerciseData[24]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -400,7 +446,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 25,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[25],
+                        y: returnHeight(exerciseData[25]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -408,7 +454,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 26,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[26],
+                        y: returnHeight(exerciseData[26]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -416,7 +462,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 27,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[27],
+                        y: returnHeight(exerciseData[27]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -424,7 +470,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 28,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[28],
+                        y: returnHeight(exerciseData[28]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -432,7 +478,7 @@ class ExerciseBarChart extends StatelessWidget {
                   x: 29,
                   barRods: [
                     BarChartRodData(
-                        y: exerciseData[29],
+                        y: returnHeight(exerciseData[29]),
                         colors: [Colors.lightBlueAccent, Colors.greenAccent])
                   ],
                 ),
@@ -443,4 +489,11 @@ class ExerciseBarChart extends StatelessWidget {
       ),
     );
   }
+}
+
+returnHeight(double exerciseData) {
+  if (exerciseData == 0) {
+    return 1.0;
+  }
+  return exerciseData;
 }

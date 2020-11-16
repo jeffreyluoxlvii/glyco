@@ -25,10 +25,10 @@ class ProgressContainer extends StatelessWidget {
             child: GlucoseProgressContainer(),
           ),
         // Same as the bar chart but in the form of a line chart
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(vertical: 0),
-          //   child: LineChartProgressContainer(),
-          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: LineChartProgressContainer(),
+          ),
 
           Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 0),
