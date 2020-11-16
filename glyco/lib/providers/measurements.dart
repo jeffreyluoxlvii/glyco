@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import './measurement.dart';
+import './healthkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Provider for Measurements. Stores all measurements of a user as a list.
