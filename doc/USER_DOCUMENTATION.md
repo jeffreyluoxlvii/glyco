@@ -2,6 +2,9 @@
 
 ### FAQs
 
+* How do I integrate the Health app to Glyco?
+* When creating an account for the first time, the app will prompt you with a window that will ask you whether or not you would like to integrate Apple's Health App with Glyco. Regardless of what is chosen, after creating an account, you can go to your phone's Settings, and then to Health, and then to Data Access & Devices, and there you can click on Glyco and choose to turn the permission on or off. 
+
 * How do I change my measurements?
 * For all of the measurements except A1C and steps, you can click on the corresponding value's tile and manually update the value. You can also click on the shortcuts that are located above the measurements, which change your measurements depending on what they are. For instance, the "EXERCISE" shortcut adds a set value of minutes to your exercise measurement. The values for these shortcuts can be changed.
 
