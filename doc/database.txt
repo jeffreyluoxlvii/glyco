@@ -34,7 +34,7 @@ Here is an example JSON output from the database:
     }
   },
   "userSettings" : {
-    Òuser1idÓ : {
+    "user1id" : {
       "settings" : {
         "drinkCarbs" : 10,
         "exerciseTime" : 30,
