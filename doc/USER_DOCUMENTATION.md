@@ -1,4 +1,4 @@
-# User Dcomunetation
+# User Documentation
 
 ### FAQs
 
