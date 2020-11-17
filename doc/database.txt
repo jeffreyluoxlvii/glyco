@@ -49,6 +49,6 @@ The database is split up into two parts: userMeasurements and userSettings.
 
 The reasoning behind this splitting up of measurements and settings is that user settings are going to 
 be expanded upon in future iterations, for example by allowing users to have multiple different integrations. 
-Having this split also means that every time we want to fetch a userÕs measurements, the settings do not need 
+Having this split also means that every time we want to fetch a user's measurements, the settings do not need 
 to be fetched, making a more efficient asynchronous call. Similarly, fetching settings would mean not needing 
 to also fetch measurements. 
