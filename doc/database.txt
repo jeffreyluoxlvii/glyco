@@ -6,9 +6,9 @@ Here is an example JSON output from the database:
 
 {
   "userMeasurements" : {
-    Òuser1idÓ : {
+    "user1id" : {
       "measurements" : {
-        Òmeasurement1idÓ : {
+        "measurement1id" : {
           "a1cLevel" : 0.0,
           "avgGlucoseLevel" : 0.0,
           "calories" : 240,
@@ -19,7 +19,7 @@ Here is an example JSON output from the database:
           "lastUpdate" : "2020-11-11T16:32:11.104176",
           "steps" : 0
         },
-        Òmeasurement2idÓ : {
+        "measurement2id" : {
           "a1cLevel" : 0.0,
           "avgGlucoseLevel" : 0.0,
           "calories" : 240,
@@ -47,4 +47,8 @@ Here is an example JSON output from the database:
 
 The database is split up into two parts: userMeasurements and userSettings. 
 
-The reasoning behind this splitting up of measurements and settings is that user settings are going to be expanded upon in future iterations, for example by allowing users to have multiple different integrations. Having this split also means that every time we want to fetch a userÕs measurements, the settings donÕt need to be fetched, making a more efficient asynchronous call. Similarly, fetching settings would mean not needing to also fetch measurements. 
+The reasoning behind this splitting up of measurements and settings is that user settings are going to 
+be expanded upon in future iterations, for example by allowing users to have multiple different integrations. 
+Having this split also means that every time we want to fetch a userÕs measurements, the settings do not need 
+to be fetched, making a more efficient asynchronous call. Similarly, fetching settings would mean not needing 
+to also fetch measurements. 
