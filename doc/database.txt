@@ -1,1 +1,50 @@
-The database is a Firebase Realtime Database at https://glyco-6f403.firebaseio.com/. You can view the structure of the database at that link.Here is an example JSON output from the database: {  "userMeasurements" : {    “user1id” : {      "measurements" : {        “measurement1id” : {          "a1cLevel" : 0.0,          "avgGlucoseLevel" : 0.0,          "calories" : 240,          "carbs" : 60,          "currGlucoseLevel" : 0.0,          "date" : "2020-11-11T16:32:11.104176",          "exerciseTime" : 0,          "lastUpdate" : "2020-11-11T16:32:11.104176",          "steps" : 0        },        “measurement2id” : {          "a1cLevel" : 0.0,          "avgGlucoseLevel" : 0.0,          "calories" : 240,          "carbs" : 60,          "currGlucoseLevel" : 0.0,          "date" : "2020-11-10T00:00:00.000",          "exerciseTime" : 0,          "lastUpdate" : "2020-11-10T00:00:00.000",          "steps" : 0        }      }    }  },  "userSettings" : {    “user1id” : {      "settings" : {        "drinkCarbs" : 10,        "exerciseTime" : 30,        "mealCarbs" : 60,        "snackCarbs" : 15      }    }  }}The database is split up into two parts: userMeasurements and userSettings. The reasoning behind this splitting up of measurements and settings is that user settings are going to be expanded upon in future iterations, for example by allowing users to have multiple different integrations. Having this split also means that every time we want to fetch a user’s measurements, the settings don’t need to be fetched, making a more efficient asynchronous call. Similarly, fetching settings would mean not needing to also fetch measurements. 
+The database is a Firebase Realtime Database at https://glyco-6f403.firebaseio.com/. 
+
+You can view the structure of the database at that link.
+
+Here is an example JSON output from the database: 
+
+{
+  "userMeasurements" : {
+    √íuser1id√ì : {
+      "measurements" : {
+        √ímeasurement1id√ì : {
+          "a1cLevel" : 0.0,
+          "avgGlucoseLevel" : 0.0,
+          "calories" : 240,
+          "carbs" : 60,
+          "currGlucoseLevel" : 0.0,
+          "date" : "2020-11-11T16:32:11.104176",
+          "exerciseTime" : 0,
+          "lastUpdate" : "2020-11-11T16:32:11.104176",
+          "steps" : 0
+        },
+        √ímeasurement2id√ì : {
+          "a1cLevel" : 0.0,
+          "avgGlucoseLevel" : 0.0,
+          "calories" : 240,
+          "carbs" : 60,
+          "currGlucoseLevel" : 0.0,
+          "date" : "2020-11-10T00:00:00.000",
+          "exerciseTime" : 0,
+          "lastUpdate" : "2020-11-10T00:00:00.000",
+          "steps" : 0
+        }
+      }
+    }
+  },
+  "userSettings" : {
+    √íuser1id√ì : {
+      "settings" : {
+        "drinkCarbs" : 10,
+        "exerciseTime" : 30,
+        "mealCarbs" : 60,
+        "snackCarbs" : 15
+      }
+    }
+  }
+}
+
+The database is split up into two parts: userMeasurements and userSettings. 
+
+The reasoning behind this splitting up of measurements and settings is that user settings are going to be expanded upon in future iterations, for example by allowing users to have multiple different integrations. Having this split also means that every time we want to fetch a user√ïs measurements, the settings don√ït need to be fetched, making a more efficient asynchronous call. Similarly, fetching settings would mean not needing to also fetch measurements. 
