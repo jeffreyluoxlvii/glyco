@@ -40,10 +40,41 @@ class CarbPie extends StatelessWidget {
   //   169.8,
   //   159.9
   // ];
-  final List<double> monthlyData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  final List<double> monthlyData = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
   final double highRange = 160.0; // Sets upper limit of recommended range
   final double lowRange = 120.0; // Sets lower limit of recommended range
-  
+
   // Stores percentage of last 30 measurements fall into what category
   double inRange = 0;
   double aboveRange = 0;
@@ -53,12 +84,12 @@ class CarbPie extends StatelessWidget {
   Widget build(BuildContext context) {
     final progressProvider = Provider.of<Measurements>(context);
 
-  // Pulls carb level from the user's data for the last 30 days, skipping null values
+    // Pulls carb level from the user's data for the last 30 days, skipping null values
     for (int i = 0; i < monthlyData.length; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       if (progressProvider.findByDateAverages(day) != null) {
-        monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+        monthlyData[i] = progressProvider.findByDate(day).carbs as double;
       }
     }
 
@@ -105,7 +136,8 @@ class CarbPie extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(children: [
-                      Flexible( // Average glucose level
+                      Flexible(
+                        // Average glucose level
                         child: Text(averageCarb(monthlyData) + ' g carbs avg',
                             style: TextStyle(
                               color: Colors.black,
@@ -116,7 +148,8 @@ class CarbPie extends StatelessWidget {
                     ]),
                     SizedBox(height: 10),
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
+                      Flexible(
+                        // Percentage of how many measurements are within range
                         child: Text(inRange.toString() + '% in range',
                             style: TextStyle(
                               color: Colors.green[300],
@@ -126,7 +159,8 @@ class CarbPie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
+                      Flexible(
+                        // Percentage of how many measurements are within range
                         child: Text(belowRange.toString() + '% below range',
                             style: TextStyle(
                               color: Colors.lightBlueAccent,
@@ -136,7 +170,8 @@ class CarbPie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
+                      Flexible(
+                        // Percentage of how many measurements are within range
                         child: Text(aboveRange.toString() + '% above range',
                             style: TextStyle(
                               color: Colors.indigo,
@@ -164,7 +199,8 @@ class CarbPie extends StatelessWidget {
       switch (i) {
         // Pie chart section for values in range, colored green
         case 0:
-          if (inRange == 0) { // If 0, show nothing
+          if (inRange == 0) {
+            // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -182,7 +218,8 @@ class CarbPie extends StatelessWidget {
           return null;
         // Pie chart section for values below range, colored yellow
         case 1:
-          if (belowRange == 0) { // If 0, show nothing
+          if (belowRange == 0) {
+            // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -200,7 +237,8 @@ class CarbPie extends StatelessWidget {
           return null;
         // Pie chart section for values above range, colored red
         case 2:
-          if (aboveRange == 0) { // If 0, show nothing
+          if (aboveRange == 0) {
+            // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,

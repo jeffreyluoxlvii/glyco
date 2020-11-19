@@ -40,7 +40,37 @@ class GlucosePie extends StatelessWidget {
   //   67.8,
   //   56.9
   // ];
-  final List<double> monthlyData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  final List<double> monthlyData = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
   ];
   final double highRange = 100.0; // Sets upper limit of recommended range
   final double lowRange = 70.0; // Sets lower limit of recommended range
@@ -52,15 +82,14 @@ class GlucosePie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     final progressProvider = Provider.of<Measurements>(context);
 
-  // Pulls average glucose level from the user's data for the last 30 days, skipping null values
+    // Pulls average glucose level from the user's data for the last 30 days, skipping null values
     for (int i = 0; i < monthlyData.length; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       if (progressProvider.findByDateAverages(day) != null) {
-        monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+        monthlyData[i] = progressProvider.findByDate(day).currGlucoseLevel;
       }
     }
 
@@ -107,7 +136,8 @@ class GlucosePie extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(children: [
-                      Flexible( // Average glucose level
+                      Flexible(
+                        // Average glucose level
                         child: Text(averageGlucose(monthlyData) + ' mg/dL avg',
                             style: TextStyle(
                               color: Colors.black,
@@ -118,7 +148,8 @@ class GlucosePie extends StatelessWidget {
                     ]),
                     SizedBox(height: 10),
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
+                      Flexible(
+                        // Percentage of how many measurements are within range
                         child: Text(inRange.toString() + '% in range',
                             style: TextStyle(
                               color: Colors.green[300],
@@ -128,7 +159,8 @@ class GlucosePie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
+                      Flexible(
+                        // Percentage of how many measurements are within range
                         child: Text(belowRange.toString() + '% below range',
                             style: TextStyle(
                               color: Colors.lightBlueAccent,
@@ -138,7 +170,8 @@ class GlucosePie extends StatelessWidget {
                       ),
                     ]),
                     Row(children: [
-                      Flexible( // Percentage of how many measurements are within range
+                      Flexible(
+                        // Percentage of how many measurements are within range
                         child: Text(aboveRange.toString() + '% above range',
                             style: TextStyle(
                               color: Colors.indigo,
@@ -166,7 +199,8 @@ class GlucosePie extends StatelessWidget {
       switch (i) {
         // Pie chart section for values in range, colored green
         case 0:
-          if (inRange == 0) { // If 0, show nothing
+          if (inRange == 0) {
+            // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,
@@ -184,7 +218,8 @@ class GlucosePie extends StatelessWidget {
           return null;
         // Pie chart section for values below range, colored yellow
         case 1:
-          if (belowRange == 0) { // If 0, show nothing
+          if (belowRange == 0) {
+            // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[300],
               value: 0,
@@ -202,7 +237,8 @@ class GlucosePie extends StatelessWidget {
           return null;
         // Pie chart section for values above range, colored red
         case 2:
-          if (aboveRange == 0) { // If 0, show nothing
+          if (aboveRange == 0) {
+            // If 0, show nothing
             return PieChartSectionData(
               color: Colors.grey[400],
               value: 0,

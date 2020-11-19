@@ -11,7 +11,38 @@ import 'package:provider/provider.dart';
 class GlucoseLineChart extends StatelessWidget {
   // Fake data to test the values with:
   // final List<double> monthlyData = [85.5, 69.0, 66.5, 54.5, 69.0, 71.5, 66.5, 46.7, 89.8, 58.7, 97.0, 58.0, 85.7, 84.6, 58.7, 68.6, 95.0, 75.6, 57.7, 86.7, 67.7, 86.0, 76.7, 67.5, 57.6, 86.7, 57.6, 46.0, 68.0, 65.0];
-  final List<double> monthlyData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  final List<double> monthlyData = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
   double maxGlucoseLevel = 0;
   double minGlucoseLevel = 0;
 
@@ -19,17 +50,19 @@ class GlucoseLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     final progressProvider = Provider.of<Measurements>(context);
 
-  // Sets the glucose levels in monthlyData, with today being monthlyData[29], skipping null values
+    // Sets the glucose levels in monthlyData, with today being monthlyData[29], skipping null values
     for (int i = 0; i < monthlyData.length; i++) {
       DateTime day = DateTime.now().subtract(Duration(days: i));
 
       if (progressProvider.findByDateAverages(day) != null) {
-        monthlyData[i] = progressProvider.findByDate(day).avgGlucoseLevel;
+        monthlyData[i] = progressProvider.findByDate(day).currGlucoseLevel;
       }
     }
 
-    maxGlucoseLevel = monthlyData.reduce(max); // Needed to define highest y value
-    minGlucoseLevel = monthlyData.reduce(min); // Needed to define lowest y value
+    maxGlucoseLevel =
+        monthlyData.reduce(max); // Needed to define highest y value
+    minGlucoseLevel =
+        monthlyData.reduce(min); // Needed to define lowest y value
     // Makes sure there is no error shown by dividing by 0 if there are no values
     if (maxGlucoseLevel == 0) {
       maxGlucoseLevel = 80;
@@ -53,27 +86,26 @@ class GlucoseLineChart extends StatelessWidget {
         ),
         margin: EdgeInsets.all(5.0),
         padding: const EdgeInsets.only(left: 8, right: 8, top: 14),
-        child:
-      Container(
-        height: 200,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(18)),
-          color: Colors.white,
-        ),
-        margin: EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-                child: LineChart(glucoseData()),
+        child: Container(
+          height: 200,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(18)),
+            color: Colors.white,
+          ),
+          margin: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                  child: LineChart(glucoseData()),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
@@ -81,7 +113,7 @@ class GlucoseLineChart extends StatelessWidget {
   LineChartData glucoseData() {
     return LineChartData(
       lineTouchData: LineTouchData(
-      // When spot on the chart is touched, a popup shows the glucose data from that day
+        // When spot on the chart is touched, a popup shows the glucose data from that day
         touchTooltipData: LineTouchTooltipData(
             tooltipBgColor: Colors.white,
             getTooltipItems: (touchedSpots) {
@@ -90,22 +122,22 @@ class GlucoseLineChart extends StatelessWidget {
                 // If value is 0, returns 0
                 if ((touchedSpot.y - 1) == 0) {
                   return LineTooltipItem(
-                    '0',
-                    TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ));
-                } else return LineTooltipItem(
-                    ((((touchedSpot.y - 1) / 3) *
-                                (maxGlucoseLevel - minGlucoseLevel)) +
-                            minGlucoseLevel)
-                        .toStringAsFixed(
-                            1), // Recalculates glucose level from position on chart
-                    TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    )
-                  );
+                      '0',
+                      TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ));
+                } else
+                  return LineTooltipItem(
+                      ((((touchedSpot.y - 1) / 3) *
+                                  (maxGlucoseLevel - minGlucoseLevel)) +
+                              minGlucoseLevel)
+                          .toStringAsFixed(
+                              1), // Recalculates glucose level from position on chart
+                      TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ));
               }).toList();
             }),
         touchCallback: (LineTouchResponse touchResponse) {},
@@ -124,15 +156,16 @@ class GlucoseLineChart extends StatelessWidget {
           },
           margin: 10,
           getTitles: (value) {
-            switch (value.toInt()) { // Sets the x axis with the number of day from beginning of 30 days, showing each week
+            switch (value.toInt()) {
+              // Sets the x axis with the number of day from beginning of 30 days, showing each week
               case 6:
                 return '7';
               case 13:
                 return '14';
               case 20:
-                  return '21';
+                return '21';
               case 27:
-                  return '28';
+                return '28';
             }
             return '';
           },
@@ -143,8 +176,8 @@ class GlucoseLineChart extends StatelessWidget {
             return TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14);
           },
-        // Sets the values of the y axis, with the min and max glucose levels as the first and last points
-        // Two points in between min and mix are calculated as a fraction
+          // Sets the values of the y axis, with the min and max glucose levels as the first and last points
+          // Two points in between min and mix are calculated as a fraction
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
@@ -198,7 +231,8 @@ class GlucoseLineChart extends StatelessWidget {
       lineChartBarData.spots.add(FlSpot(
           i.toDouble(),
           double.parse(((((monthlyData[i] - minGlucoseLevel) /
-                      (maxGlucoseLevel - minGlucoseLevel)) * 3) +
+                          (maxGlucoseLevel - minGlucoseLevel)) *
+                      3) +
                   1)
               .toString()))); // Calculates data points as a proportion of the graph size
     }
